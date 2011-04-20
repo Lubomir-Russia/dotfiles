@@ -1,0 +1,43 @@
+# This is the local screenrc file. It overrides settings in global /etc/screenrc
+# Link this file to ~/.screenrc
+# ln -nfs ~/bin/dotfiles/screen/screenrc ~/.screenrc
+
+# This two encriptic lines are from global /etc/screenrc
+termcapinfo xterm* G0:is=\E[?4l\E>:ti@:te@
+termcapinfo linux me=\E[m:AX
+
+# No welcome message
+startup_message off
+
+# detach on hangup
+autodetach on
+
+# caption always
+# caption string "%{rk} %c %{wk} %n  %{wk}%-w%{gk}%n %t%{-}%+w%<"
+caption always "%0c %-Lw %{.g} %n%f* %t %{-}%+Lw"
+hardstatus off
+
+# Let some programms to use theire own temp screen
+# that is after less or vim is terminated the current screen is cleaned
+altscreen on
+
+# This scrollback can be reached in copy mode ^a^[
+defscrollback 20000
+
+#remove some stupid / dangerous key bindings
+bind ^k
+#bind L
+bind ^\
+#make them better
+bind \\ quit
+bind K kill
+bind I login on
+bind O login off
+bind } history
+
+# Yet another hack (from screencr example):
+# Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent mode in vi.
+register [ "\033:se noai\015a"
+register ] "\033:se ai\015a"
+bind ^] paste [.]
