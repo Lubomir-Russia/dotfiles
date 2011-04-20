@@ -1,7 +1,11 @@
-" Example Vim configuration.
-" Copy or symlink to ~/.vimrc or ~/_vimrc.
+" Vim configuration by Lubomir-Russia
+" Settings are gathered from different books, sites, and people
+"
+" Installation :
+" Copy or symlink to ~/.vimrc or ~/_vimrc. and make dir for swap files
 " ln -nfs ~/bin/dotfiles/vim/vimrc ~/.vimrc
 " ln -nfs ~/bin/dotfiles/vim ~/.vim
+" mkdir -p ~/.bak/swap
 
 set nocompatible                  " Must come first because it changes other options.
 
@@ -15,9 +19,12 @@ nmap <F3> /<<< ------<CR>zz
 nmap <F4> /START<CR>zt
 
 " Mappings useful for Perl view
-nmap <F7> :set wrap!<Cr>
 nmap <F5> :set number!<Cr>
 nmap <F6> :set list!<Cr>
+nmap <F8> :set wrap!<Cr>
+
+" Mapping F7 for spell check (use ]s, z=, zg, zb)
+nmap <F7> :set spell!<Cr>
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
