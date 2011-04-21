@@ -193,3 +193,7 @@ manual # select ranges to fold (default)
 ^WT    	# move window to the new tab
 ^Wc	# close window
 ^Wo	# only this window
+
+15 Text formating
+If in vim knows the comment style of the file than if the next line in insert mode gets comment automaticly
+gq  # formates selected lines to the same lenght, sensetive to comments. Very usefull

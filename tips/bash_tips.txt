@@ -1,3 +1,8 @@
 1 Find
 find foo -name bar | xargs rm -r
 find . -type f -name "*.bak" -exec rm -i {} \;
+
+2 Path in a better way
+echo -e ${PATH//:/\\n}
+
+

@@ -1,0 +1,43 @@
+# Local bashrc by Lubomir
+#
+# Link this file to your home directory:
+# ln -nfs ~/bin/dotfiles/bashrc/bashrc ~/.bashrc
+#
+# The shell reads one or more startup files. Some of the files are read only when a shell is a
+# login shell. Bash reads these files:
+# 1. /etc/profile. Executed automatically at login.
+# 2. The first file found from this list: ~/.bash_profile, ~/.bash_login, or ~/.profile.
+# executed automatically at login.
+# 3. /etc/bash.bashrc (which calls inside itself /etc/bash.bashrc.local) and
+# the last ~/.bashrc are read by EVERY NONLOGIN shell, so do not put here
+# anything that should not go to the not interactive shell. However, if invoked
+# as sh, Bash instead reads $ENV, for POSIX compatibility.
+# 
+# So if any aliases are defined in profile or in bash_profile they will not be
+# available in screen session, since screen start a new nonlogin shell.
+#
+# The getpwnam() and getpwuid() functions are the sources of home directories for ~name
+# abbreviations. (On single-user systems, the user database is stored in /etc/passwd.
+# Ho wever, on networked systems, this information may come from NIS, NIS+, or LDAP, not
+# your workstation password file.)
+# 
+ 
+alias cd706='cd /home/c4/testcases/Flare_706/'
+alias cdr706='cd /home/c4/testcases/Flare_706/test_results'
+alias cd741='cd /home/c4/testcases/Flare_741/'
+alias cdr741='cd /home/c4/testcases/Flare_741/test_results'
+alias cd743='cd /home/c4/testcases/Flare_743/'
+alias cdr743='cd /home/c4/testcases/Flare_743/test_results'
+alias cd740='cd /home/c4/testcases/Flare_740/'
+alias cdr740='cd /home/c4/testcases/Flare_740/test_results'
+alias cd558='cd /home/c4/testcases/Flare_558/'
+alias cdr558='cd /home/c4/testcases/Flare_558/test_results'
+alias cd578='cd /home/c4/testcases/Flare_578/'
+alias cdr578='cd /home/c4/testcases/Flare_578/test_results'
+alias cdf='cd /home/c4/testcases/Flare/'
+alias cdr='cd /home/c4/testcases/Flare/test_results'
+alias v='vim'
+alias vi='vim'
+alias r='perl ./run_flare_tests_REVIZED.pl '
+
+# 
