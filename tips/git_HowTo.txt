@@ -1,0 +1,10 @@
+1 Pull
+# from another locol dir
+bob$ git clone /home/alice/project myrepo
+# from remote ssh server
+$ git clone 10.64.74.71:/root/bin/dotfiles
+bob$ git clone alice.org:/home/alice/project myrepo
+# from remote git server
+$ git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
+# from remote git server over http/https
+$ git clone http://git.gitorious.org/piston/mainline.git piston
