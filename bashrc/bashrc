@@ -40,4 +40,5 @@ alias v='vim'
 alias vi='vim'
 alias r='perl ./run_flare_tests_REVIZED.pl '
 
+alias dot='cd ~/bin/dotfiles/'
 # 
