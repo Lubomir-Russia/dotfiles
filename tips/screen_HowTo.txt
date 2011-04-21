@@ -1,0 +1,6 @@
+howto move windows in gnu screen
+    change to the window you want to move
+    type (for example) ^x:number 1
+    ^x is the host key (usually ^a on most machines)
+    :number (typed literally) is the command
+    1 the number to move the current screen to
