@@ -18,7 +18,7 @@
 #
 # The getpwnam() and getpwuid() functions are the sources of home directories for ~name
 # abbreviations. (On single-user systems, the user database is stored in /etc/passwd.
-# Ho wever, on networked systems, this information may come from NIS, NIS+, or LDAP, not
+# However, on networked systems, this information may come from NIS, NIS+, or LDAP, not
 # your workstation password file.)
 # 
  
