@@ -1,0 +1,1 @@
+sed -i 's/IO.ClientHost = root\/c4dev!@10.64.74.83/IO.ClientHost = root\/c4dev!@10.64.74.71/' `find .  -maxdepth 2  -name Neo_settin*`
