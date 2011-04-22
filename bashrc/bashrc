@@ -70,12 +70,12 @@ fi
 # The argument to __git_ps1 will be displayed only if you are currently in a
 # git repository.  The %s token will be the name of the current branch.
 
- export PS1='\[$_red\]\D{%F %T} \W $(__git_ps1 "(%s)")\$ \[$_reset\]'
+# export PS1='\[$_red\]\D{%F %T} \W $(__git_ps1 "(%s)")\$ \[$_reset\]'
 # The \[ and \] symbols allow bash to understand which parts of the prompt cause no cursor movement; without them, lines will wrap incorrectly. 
 
 # As above but in three lines
 
-# export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
+export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
 
 # Prompt with indicator :) or :( depending on result of prev. command
 # export PS1='\u@\h `smiley` \w\n\$ '
