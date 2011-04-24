@@ -20,6 +20,7 @@ hardstatus off
 # Let some programms to use theire own temp screen
 # that is after less or vim is terminated the current screen is cleaned
 altscreen on
+# TODO add binding to altscreen on/off
 
 # This scrollback can be reached in copy mode ^a^[
 defscrollback 20000

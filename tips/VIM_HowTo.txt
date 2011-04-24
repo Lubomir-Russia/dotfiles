@@ -198,3 +198,8 @@ manual # select ranges to fold (default)
 15 Text formating
 If in vim knows the comment style of the file than if the next line in insert mode gets comment automaticly
 gq  # formates selected lines to the same lenght, sensetive to comments. Very usefull
+
+Often pasting text into vim from an external source screws up the formatting (especially tabs). To prevent this, do:
+:set paste
+Keeping this setting on screws up auto indentation while in insert mode, though. So to turn off, use
+:set nopaste
