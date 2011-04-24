@@ -1,0 +1,2084 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<title>Vim for Perl developers – Blog of Leonid Mamchenkov</title>
+	
+	<link rel="alternate" type="application/rss+xml" href="http://mamchenkov.net/wordpress/feed/" title="Blog of Leonid Mamchenkov latest posts">
+	<link rel="alternate" type="application/rss+xml" href="http://mamchenkov.net/wordpress/comments/feed/" title="Blog of Leonid Mamchenkov latest comments">
+	<link rel="pingback" href="http://mamchenkov.net/wordpress/xmlrpc.php">
+		<link rel="archives" title="April 2011" href="http://mamchenkov.net/wordpress/2011/04/">
+	<link rel="archives" title="March 2011" href="http://mamchenkov.net/wordpress/2011/03/">
+	<link rel="archives" title="February 2011" href="http://mamchenkov.net/wordpress/2011/02/">
+	<link rel="archives" title="January 2011" href="http://mamchenkov.net/wordpress/2011/01/">
+	<link rel="archives" title="December 2010" href="http://mamchenkov.net/wordpress/2010/12/">
+	<link rel="archives" title="November 2010" href="http://mamchenkov.net/wordpress/2010/11/">
+	<link rel="archives" title="October 2010" href="http://mamchenkov.net/wordpress/2010/10/">
+	<link rel="archives" title="September 2010" href="http://mamchenkov.net/wordpress/2010/09/">
+	<link rel="archives" title="August 2010" href="http://mamchenkov.net/wordpress/2010/08/">
+	<link rel="archives" title="July 2010" href="http://mamchenkov.net/wordpress/2010/07/">
+	<link rel="archives" title="June 2010" href="http://mamchenkov.net/wordpress/2010/06/">
+	<link rel="archives" title="May 2010" href="http://mamchenkov.net/wordpress/2010/05/">
+	<link rel="archives" title="April 2010" href="http://mamchenkov.net/wordpress/2010/04/">
+	<link rel="archives" title="March 2010" href="http://mamchenkov.net/wordpress/2010/03/">
+	<link rel="archives" title="February 2010" href="http://mamchenkov.net/wordpress/2010/02/">
+	<link rel="archives" title="January 2010" href="http://mamchenkov.net/wordpress/2010/01/">
+	<link rel="archives" title="December 2009" href="http://mamchenkov.net/wordpress/2009/12/">
+	<link rel="archives" title="November 2009" href="http://mamchenkov.net/wordpress/2009/11/">
+	<link rel="archives" title="October 2009" href="http://mamchenkov.net/wordpress/2009/10/">
+	<link rel="archives" title="September 2009" href="http://mamchenkov.net/wordpress/2009/09/">
+	<link rel="archives" title="August 2009" href="http://mamchenkov.net/wordpress/2009/08/">
+	<link rel="archives" title="July 2009" href="http://mamchenkov.net/wordpress/2009/07/">
+	<link rel="archives" title="June 2009" href="http://mamchenkov.net/wordpress/2009/06/">
+	<link rel="archives" title="March 2009" href="http://mamchenkov.net/wordpress/2009/03/">
+	<link rel="archives" title="February 2009" href="http://mamchenkov.net/wordpress/2009/02/">
+	<link rel="archives" title="January 2009" href="http://mamchenkov.net/wordpress/2009/01/">
+	<link rel="archives" title="December 2008" href="http://mamchenkov.net/wordpress/2008/12/">
+	<link rel="archives" title="November 2008" href="http://mamchenkov.net/wordpress/2008/11/">
+	<link rel="archives" title="October 2008" href="http://mamchenkov.net/wordpress/2008/10/">
+	<link rel="archives" title="September 2008" href="http://mamchenkov.net/wordpress/2008/09/">
+	<link rel="archives" title="August 2008" href="http://mamchenkov.net/wordpress/2008/08/">
+	<link rel="archives" title="July 2008" href="http://mamchenkov.net/wordpress/2008/07/">
+	<link rel="archives" title="June 2008" href="http://mamchenkov.net/wordpress/2008/06/">
+	<link rel="archives" title="May 2008" href="http://mamchenkov.net/wordpress/2008/05/">
+	<link rel="archives" title="April 2008" href="http://mamchenkov.net/wordpress/2008/04/">
+	<link rel="archives" title="March 2008" href="http://mamchenkov.net/wordpress/2008/03/">
+	<link rel="archives" title="February 2008" href="http://mamchenkov.net/wordpress/2008/02/">
+	<link rel="archives" title="January 2008" href="http://mamchenkov.net/wordpress/2008/01/">
+	<link rel="archives" title="December 2007" href="http://mamchenkov.net/wordpress/2007/12/">
+	<link rel="archives" title="November 2007" href="http://mamchenkov.net/wordpress/2007/11/">
+	<link rel="archives" title="October 2007" href="http://mamchenkov.net/wordpress/2007/10/">
+	<link rel="archives" title="September 2007" href="http://mamchenkov.net/wordpress/2007/09/">
+	<link rel="archives" title="August 2007" href="http://mamchenkov.net/wordpress/2007/08/">
+	<link rel="archives" title="July 2007" href="http://mamchenkov.net/wordpress/2007/07/">
+	<link rel="archives" title="June 2007" href="http://mamchenkov.net/wordpress/2007/06/">
+	<link rel="archives" title="May 2007" href="http://mamchenkov.net/wordpress/2007/05/">
+	<link rel="archives" title="April 2007" href="http://mamchenkov.net/wordpress/2007/04/">
+	<link rel="archives" title="March 2007" href="http://mamchenkov.net/wordpress/2007/03/">
+	<link rel="archives" title="February 2007" href="http://mamchenkov.net/wordpress/2007/02/">
+	<link rel="archives" title="January 2007" href="http://mamchenkov.net/wordpress/2007/01/">
+	<link rel="archives" title="December 2006" href="http://mamchenkov.net/wordpress/2006/12/">
+	<link rel="archives" title="November 2006" href="http://mamchenkov.net/wordpress/2006/11/">
+	<link rel="archives" title="October 2006" href="http://mamchenkov.net/wordpress/2006/10/">
+	<link rel="archives" title="September 2006" href="http://mamchenkov.net/wordpress/2006/09/">
+	<link rel="archives" title="August 2006" href="http://mamchenkov.net/wordpress/2006/08/">
+	<link rel="archives" title="July 2006" href="http://mamchenkov.net/wordpress/2006/07/">
+	<link rel="archives" title="June 2006" href="http://mamchenkov.net/wordpress/2006/06/">
+	<link rel="archives" title="May 2006" href="http://mamchenkov.net/wordpress/2006/05/">
+	<link rel="archives" title="April 2006" href="http://mamchenkov.net/wordpress/2006/04/">
+	<link rel="archives" title="March 2006" href="http://mamchenkov.net/wordpress/2006/03/">
+	<link rel="archives" title="February 2006" href="http://mamchenkov.net/wordpress/2006/02/">
+	<link rel="archives" title="January 2006" href="http://mamchenkov.net/wordpress/2006/01/">
+	<link rel="archives" title="December 2005" href="http://mamchenkov.net/wordpress/2005/12/">
+	<link rel="archives" title="November 2005" href="http://mamchenkov.net/wordpress/2005/11/">
+	<link rel="archives" title="October 2005" href="http://mamchenkov.net/wordpress/2005/10/">
+	<link rel="archives" title="September 2005" href="http://mamchenkov.net/wordpress/2005/09/">
+	<link rel="archives" title="August 2005" href="http://mamchenkov.net/wordpress/2005/08/">
+	<link rel="archives" title="July 2005" href="http://mamchenkov.net/wordpress/2005/07/">
+	<link rel="archives" title="June 2005" href="http://mamchenkov.net/wordpress/2005/06/">
+	<link rel="archives" title="May 2005" href="http://mamchenkov.net/wordpress/2005/05/">
+	<link rel="archives" title="April 2005" href="http://mamchenkov.net/wordpress/2005/04/">
+	<link rel="archives" title="March 2005" href="http://mamchenkov.net/wordpress/2005/03/">
+	<link rel="archives" title="February 2005" href="http://mamchenkov.net/wordpress/2005/02/">
+	<link rel="archives" title="January 2005" href="http://mamchenkov.net/wordpress/2005/01/">
+	<link rel="archives" title="December 2004" href="http://mamchenkov.net/wordpress/2004/12/">
+	<link rel="archives" title="November 2004" href="http://mamchenkov.net/wordpress/2004/11/">
+	<link rel="archives" title="October 2004" href="http://mamchenkov.net/wordpress/2004/10/">
+	<link rel="archives" title="September 2004" href="http://mamchenkov.net/wordpress/2004/09/">
+	<link rel="archives" title="August 2004" href="http://mamchenkov.net/wordpress/2004/08/">
+	<link rel="archives" title="July 2004" href="http://mamchenkov.net/wordpress/2004/07/">
+	<link rel="archives" title="June 2004" href="http://mamchenkov.net/wordpress/2004/06/">
+	<link rel="archives" title="May 2004" href="http://mamchenkov.net/wordpress/2004/05/">
+	<link rel="archives" title="April 2004" href="http://mamchenkov.net/wordpress/2004/04/">
+	<link rel="archives" title="March 2004" href="http://mamchenkov.net/wordpress/2004/03/">
+	<link rel="archives" title="February 2004" href="http://mamchenkov.net/wordpress/2004/02/">
+	<link rel="archives" title="January 2004" href="http://mamchenkov.net/wordpress/2004/01/">
+	<link rel="archives" title="December 2003" href="http://mamchenkov.net/wordpress/2003/12/">
+	<link rel="archives" title="November 2003" href="http://mamchenkov.net/wordpress/2003/11/">
+	<link rel="archives" title="October 2003" href="http://mamchenkov.net/wordpress/2003/10/">
+	<link rel="archives" title="September 2003" href="http://mamchenkov.net/wordpress/2003/09/">
+	<link rel="archives" title="August 2003" href="http://mamchenkov.net/wordpress/2003/08/">
+	<link rel="archives" title="July 2003" href="http://mamchenkov.net/wordpress/2003/07/">
+	<link rel="archives" title="June 2003" href="http://mamchenkov.net/wordpress/2003/06/">
+	<link rel="archives" title="May 2003" href="http://mamchenkov.net/wordpress/2003/05/">
+	<link rel="archives" title="April 2003" href="http://mamchenkov.net/wordpress/2003/04/">
+	<link rel="archives" title="March 2003" href="http://mamchenkov.net/wordpress/2003/03/">
+	<link rel="archives" title="February 2003" href="http://mamchenkov.net/wordpress/2003/02/">
+	<link rel="archives" title="January 2003" href="http://mamchenkov.net/wordpress/2003/01/">
+	<link rel="archives" title="December 2002" href="http://mamchenkov.net/wordpress/2002/12/">
+	<link rel="archives" title="November 2002" href="http://mamchenkov.net/wordpress/2002/11/">
+	<link rel="archives" title="October 2002" href="http://mamchenkov.net/wordpress/2002/10/">
+	<link rel="archives" title="September 2002" href="http://mamchenkov.net/wordpress/2002/09/">
+	<link rel="archives" title="August 2002" href="http://mamchenkov.net/wordpress/2002/08/">
+	<link rel="archives" title="July 2002" href="http://mamchenkov.net/wordpress/2002/07/">
+	<link rel="archives" title="June 2002" href="http://mamchenkov.net/wordpress/2002/06/">
+	<link rel="archives" title="May 2002" href="http://mamchenkov.net/wordpress/2002/05/">
+	<link rel="archives" title="April 2002" href="http://mamchenkov.net/wordpress/2002/04/">
+	<link rel="archives" title="March 2002" href="http://mamchenkov.net/wordpress/2002/03/">
+	<link rel="archives" title="February 2002" href="http://mamchenkov.net/wordpress/2002/02/">
+	<link rel="archives" title="January 2002" href="http://mamchenkov.net/wordpress/2002/01/">
+	<link rel="archives" title="December 2001" href="http://mamchenkov.net/wordpress/2001/12/">
+	<link rel="archives" title="November 2001" href="http://mamchenkov.net/wordpress/2001/11/">
+	<link rel="archives" title="October 2001" href="http://mamchenkov.net/wordpress/2001/10/">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/css.css">
+
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" href="http://mamchenkov.net/wordpress/wp-content/themes/carrington-blog/css/ie.css" type="text/css" media="screen" />
+	<![endif]-->
+	
+	<!--[if lte IE 6]>
+		<link rel="stylesheet" href="http://mamchenkov.net/wordpress/wp-content/themes/carrington-blog/css/ie6.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="http://mamchenkov.net/wordpress/wp-content/themes/carrington-blog/js/DD_belatedPNG.js"></script>
+		<script type="text/javascript">
+			DD_belatedPNG.fix('img, #header, #footer, #header .wrapper, #footer .wrapper, #TB_title, #developer-link a');
+		</script>
+	<![endif]-->
+	
+	<script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+	window.google_analytics_uacct = "UA-151426-1";
+</script>
+				
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.0.13 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-151426-1']);
+</script><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/custom_se_async.js" type="text/javascript"></script>
+<script type="text/javascript">	_gaq.push(['_setCustomVar',1,'tags','perl vim',3],['_setCustomVar',2,'year','2004',3],['_setCustomVar',3,'categories','general programming technology',3],['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	//]]></script>
+<link rel="alternate" type="application/rss+xml" title="Blog of Leonid Mamchenkov » Vim for Perl developers Comments Feed" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/feed/">
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/l10n.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/prototype.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/wp-scriptaculous.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/effects.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/lightbox-resize.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/jquery.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/carrington.js"></script>
+<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thickbox.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://mamchenkov.net/wordpress/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://mamchenkov.net/wordpress/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="Blog of Leonid Mamchenkov" href="http://mamchenkov.net/wordpress/">
+<link rel="start" title="Migration from Windows to Linux" href="http://mamchenkov.net/wordpress/2001/10/26/migration-from-windows-to-linux/">
+<link rel="prev" title="Propaganda Posters" href="http://mamchenkov.net/wordpress/2004/05/09/propaganda-posters/">
+<link rel="next" title="The lens is here!!!" href="http://mamchenkov.net/wordpress/2004/05/10/the-lens-is-here/">
+<meta name="generator" content="WordPress 3.1.1, fitted with the WordPress Mobile Pack 1.2.4">
+<link rel="canonical" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/">
+<link rel="shortlink" href="http://wp.me/p6Jfm-1WS">
+
+<title>Vim for Perl developers - Blog of Leonid Mamchenkov</title>
+<meta name="description" content="This is my attempt to provide a clear and simple instructions on adopting Vim text editor for programming needs. I">
+
+<script type="text/javascript">
+//<![CDATA[
+function searchDate(form) {
+	var URI = "http://mamchenkov.net/wordpress/%year%/%monthnum%/%day%";
+	URI = URI.replace("%year%", form.dateSearchYear.value);
+	URI = URI.replace("%monthnum%", form.dateSearchMonth.value);
+	URI = URI.replace("%day%", form.dateSearchDay.value);
+	window.open(URI, "_self");
+	}
+//]]>
+</script>
+
+	<!-- begin lightbox scripts -->
+	<script type="text/javascript">
+    //<![CDATA[
+    document.write('<link rel="stylesheet" href="http://mamchenkov.net/wordpress/wp-content/plugins/lightbox-2/Themes/Black/lightbox.css" type="text/css" media="screen" />');
+    //]]>
+    </script><link rel="stylesheet" href="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/lightbox.css" type="text/css" media="screen">
+	<!-- end lightbox scripts -->
+<link rel="hub" href="http://pubsubhubbub.appspot.com/"><link rel="hub" href="http://superfeedr.com/hubbub"><style type="text/css" media="screen">
+
+/* Begin Contact Form CSS */
+.contactform {
+	position: static;
+	overflow: hidden;
+	width: 95%;
+}
+
+.contactleft {
+	width: 25%;
+	white-space: pre;
+	text-align: right;
+	clear: both;
+	float: left;
+	display: inline;
+	padding: 4px;
+	margin: 5px 0;
+}
+
+.contactright {
+	width: 70%;
+	text-align: left;
+	float: right;
+	display: inline;
+	padding: 4px;
+	margin: 5px 0;
+}
+
+.contacterror {
+	border: 1px solid #ff0000;
+}
+
+.contactsubmit {
+}
+/* End Contact Form CSS */
+
+	</style>
+
+<meta name="twitpic" content="twitpic/0.3">
+<link rel="stylesheet" href="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/twitpic.css" type="text/css" media="screen">
+<style>#twitpic {width: 160px imporant!;}</style>
+<link rel="stylesheet" type="text/css" media="screen" href="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thickbox.css">
+		
+<script type="text/javascript">
+var CFCT_URL = "http://mamchenkov.net/wordpress";
+var CFCT_AJAX_LOAD = false;
+</script>
+	
+<script type="text/javascript">
+tb_pathToImage = "http://mamchenkov.net/wordpress/wp-content/themes/carrington-blog/carrington-core/lightbox/img/loadingAnimation.gif";
+jQuery(function($) {
+	$("a.thickbox").each(function() {
+		var url = $(this).attr("rel");
+		var post_id = $(this).parents("div.post, div.page").attr("id");
+		$(this).attr("href", url).attr("rel", post_id);
+	});
+});
+</script>
+			<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css">.removed_link, a.removed_link {
+	text-decoration: line-through;
+}</style><meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.1">
+</head>
+
+<body>
+	<div id="page">
+		<div id="top"><a class="accessibility" href="#content">Skip to content</a></div>
+		<hr class="lofi">
+		<div id="header" class="section">
+			<div class="wrapper">
+				<img id="blog-logo" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/leonid.jpg" alt="Leonid Mamchenkov" title="Leonid Mamchenkov">
+				<div>
+					<strong id="blog-title"><a href="http://mamchenkov.net/wordpress/" rel="home">Blog of Leonid Mamchenkov</a></strong>
+					<p id="blog-description">Thoughts on technology, movies, and everything else</p>
+				</div>
+				<div id="navigation" class="menu-top-container"><ul id="menu-top" class="nav clearfix"><li id="menu-item-13687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13687 first-child"><a href="http://mamchenkov.net/">Home</a></li>
+<li id="menu-item-13691" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13691"><a href="http://mamchenkov.net/wordpress/about/">About</a></li>
+<li id="menu-item-13689" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13689"><a href="http://mamchenkov.net/wordpress/archives/">Archives</a></li>
+<li id="menu-item-13693" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13693"><a href="http://flickr.com/photos/mamchenkov/">Photos</a></li>
+<li id="menu-item-13692" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13692"><a href="http://cy.linkedin.com/in/mamchenkov">Resume</a></li>
+<li id="menu-item-13688" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13688"><a href="http://www.amazon.co.uk/registry/wishlist/2HDSGWJFDBWKG/">Wishlist</a></li>
+<li id="menu-item-13690" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13690"><a href="http://mamchenkov.net/wordpress/contact-me/">Contact me</a></li>
+</ul></div>			</div><!-- .wrapper -->
+		</div><!-- #header -->
+		<div id="sub-header" class="section">
+			<div class="wrapper">
+				
+<form method="get" id="cfct-search" action="http://mamchenkov.net/wordpress/" onsubmit="location.href=this.action+'search/'+encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;">
+	<div>
+		<input id="cfct-search-input" name="s" size="15" type="text">
+		<input name="submit_button" value="Search" type="submit">
+	</div>
+</form>				<div id="all-categories">
+					<strong id="all-categories-title">Categories:</strong>
+					<ul class="nav clearfix">
+							<li class="cat-item cat-item-1 first-child"><a href="http://mamchenkov.net/wordpress/category/general/">All</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://mamchenkov.net/wordpress/category/cyprus/">Cyprus</a>
+<ul class="children">
+	<li class="cat-item cat-item-2391 first-child"><a href="http://mamchenkov.net/wordpress/category/cyprus/larnaca/">Larnaca</a>
+</li>
+	<li class="cat-item cat-item-109"><a href="http://mamchenkov.net/wordpress/category/cyprus/limassol/">Limassol</a>
+</li>
+	<li class="cat-item cat-item-106"><a href="http://mamchenkov.net/wordpress/category/cyprus/nicosia/">Nicosia</a>
+</li>
+	<li class="cat-item cat-item-686"><a href="http://mamchenkov.net/wordpress/category/cyprus/pafos/">Pafos</a>
+</li>
+	<li class="cat-item cat-item-1853"><a href="http://mamchenkov.net/wordpress/category/cyprus/paralimni/">Paralimni</a>
+</li>
+	<li class="cat-item cat-item-643"><a href="http://mamchenkov.net/wordpress/category/cyprus/troodos/">Troodos</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://mamchenkov.net/wordpress/category/games/">Games</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://mamchenkov.net/wordpress/category/movies/">Movies</a>
+<ul class="children">
+	<li class="cat-item cat-item-2478 first-child"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/">Reviews</a>
+	<ul class="children">
+	<li class="cat-item cat-item-1704 first-child"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/1-star/">1 star</a>
+</li>
+	<li class="cat-item cat-item-1705"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/2-stars/">2 stars</a>
+</li>
+	<li class="cat-item cat-item-1706"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/3-stars/">3 stars</a>
+</li>
+	<li class="cat-item cat-item-1707"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/4-stars/">4 stars</a>
+</li>
+	<li class="cat-item cat-item-1708"><a href="http://mamchenkov.net/wordpress/category/movies/movie-reviews/5-stars/">5 stars</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-1702"><a href="http://mamchenkov.net/wordpress/category/movies/trailers/">Trailers</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-31"><a href="http://mamchenkov.net/wordpress/category/music/">Music</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="http://mamchenkov.net/wordpress/category/personal/">Personal</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="http://mamchenkov.net/wordpress/category/photography/">Photography</a>
+</li>
+	<li class="cat-item cat-item-1335"><a href="http://mamchenkov.net/wordpress/category/site-news/">Site News</a>
+</li>
+	<li class="cat-item cat-item-62"><a href="http://mamchenkov.net/wordpress/category/technology/">Technology</a>
+<ul class="children">
+	<li class="cat-item cat-item-6 first-child"><a href="http://mamchenkov.net/wordpress/category/technology/linux/">Linux</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://mamchenkov.net/wordpress/category/technology/programming/">Programming</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="http://mamchenkov.net/wordpress/category/technology/sysadmin/">Sysadmin</a>
+</li>
+	<li class="cat-item cat-item-1334"><a href="http://mamchenkov.net/wordpress/category/technology/web-work/">Web work</a>
+</li>
+	<li class="cat-item cat-item-60"><a href="http://mamchenkov.net/wordpress/category/technology/wordpress/">WordPress</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-2368"><a href="http://mamchenkov.net/wordpress/category/in-russian/">Русский</a>
+</li>
+					</ul>
+				</div><!-- #list-categories -->
+			</div><!-- .wrapper -->
+		</div><!--#sub-header-->
+		<hr class="lofi">
+		<div id="main" class="section">
+			<div class="wrapper">
+
+<div id="content">
+<div id="post-content-7494" class="post-7494 post type-post status-publish format-standard hentry category-general category-programming category-technology tag-perl tag-vim full">
+	
+	<h1 class="entry-title full-title"><a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/" title="Permanent link to Vim for Perl developers" rel="bookmark" rev="post-7494">Vim for Perl developers</a></h1>
+
+	<p class="by-line">
+		<span class="date full-date"><abbr class="published" title="2004-05-10T04:27">May 10, 2004</abbr></span>
+	</p><!--/by-line-->
+
+
+	<div class="entry-content full-content">
+<p><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/20040421-vim.png" alt="">This
+ is my attempt to provide a clear and simple instructions on adopting 
+Vim text editor for programming needs. I am using Perl as the 
+programming language in the examples, but most of this document will 
+apply equally for any other programming language.</p>
+<p><ins datetime="2005-10-21T18:07:47+00:00">Update:</ins> This post was translated into <a href="http://sao-paulo.pm.org/papers/alceu/vim4perl/index.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','sao-paulo.pm.org/papers/alceu/vim4perl/index.html']);">Portuguese</a> by Alceu Rodrigues de Freitas Junior.</p>
+<p><span id="more-7494"></span></p>
+<p><a name="introduction"></a></p><a name="introduction">
+<h2>Introduction</h2>
+</a><p><a name="introduction"></a></p>
+<p><a name="what_is_this_document"></a></p><a name="what_is_this_document">
+<h3>What is this document?</h3>
+</a><p><a name="what_is_this_document"></a></p>
+<p>This document is my attempt to provide a clear and simple 
+instructions on adopting Vim text editor for programming needs. I am 
+using Perl programming language as specific example, although most of 
+this document will apply equally for any other programming language.</p>
+<p>Some people may argue that Vim does not need any additional 
+configuration to cover programming needs, while others will say it will 
+never be as good as some Integrated Development Environments (IDEs). I 
+am not going to argue about these two points of view, but rather provide
+ several tips on how to bring a simple text editor, as seen by some, 
+closer to look and feel of an IDE, as needed by others.</p>
+<p><a name="who_should_read_this_document"></a></p><a name="who_should_read_this_document">
+<h3>Who should read this document?</h3>
+</a><p><a name="who_should_read_this_document"></a></p>
+<p>First of all, this document is for people who are already using Vim 
+for their programming tasks. Those people who feel that there is 
+something missing in Vim should definitely read this document. People 
+who recently stopped using Vim due to the reason that something was not 
+there should also read this document.</p>
+<p><a name="prerequisites"></a></p><a name="prerequisites">
+<h3>Prerequisites</h3>
+</a><p><a name="prerequisites"></a></p>
+<p>I assume that the reader has Vim installed on the system and is comfortable with simple text editing in Vim.</p>
+<p>Another assumption is that the reader has at least basic experience in configuring Vim by means of the <code>.vimrc</code> configuration file.</p>
+<p>I assume that the reader is using a UNIX/Linux machine for Vim 
+editing sessions. Otherwise, shell command line examples should be taken
+ as a pseudo code for algorithm. :)</p>
+<p>The last but the least assumption is that the reader has access to 
+the Internet and knows how to browse web sites and download files.</p>
+<p><a name="structure_of_the_document"></a></p><a name="structure_of_the_document">
+<h3>Structure of the document</h3>
+</a><p><a name="structure_of_the_document"></a></p>
+<p>Document is separated into two parts: “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#basic_configuration">Basic Configuration</a>” and “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration">Advanced Configuration</a>“. “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration">Advanced Configuration</a>”  is further split into “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration_common">Common Configuration</a>” and “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration_perl">Perl-Specific Configuration</a>“.</p>
+<p>“<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#basic_configuration">Basic Configuration</a>”
+ contains examples of simplest Vim configuration that does not even 
+require Internet connectivity. These are usually plain Vim configuration
+ options which are built-in.</p>
+<p>“<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration">Advanced Configuration</a>” contains examples Vim plug-in installation and configuration. You will need Internet connectivity to follow this section.</p>
+<p>If you use Vim for your programming tasks, but do not use Perl programming language, then “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration_common">Common Configuration</a>” section is for you. Examples in “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#advanced_configuration_perl">Perl-Specific Configuration</a>” section can be used for extending Vim support for other programming languages.</p>
+<p><a name="methodology"></a></p><a name="methodology">
+<h3>Methodology</h3>
+</a><p><a name="methodology"></a></p>
+<p>In order to provide a guaranteed working examples, I have created a 
+new user “codemonkey” on my fully updated RedHat Linux 7.3 home server. 
+This user has no prior <code>.vimrc</code> configuration file and uses 
+only the system-wide default file, which was not modified by me in any 
+way. RedHat’s vim-6.1 version is installed on the server with no changes
+ what-so-ever.</p>
+<p>I have created an empty <code>.vimrc</code> in <code>/home/codemonkey/</code>
+ directory, which is a home directory for the “codemonkey” user. I have 
+also created user specific Vim directory structure as follows:</p>
+<pre>[codemonkey@gucho codemonkey]$ # Which version of Vim is installed?
+[codemonkey@gucho codemonkey]$ rpm -qa | grep -i vim
+vim-minimal-6.1-18.7x.2
+vim-common-6.1-18.7x.2
+vim-enhanced-6.1-18.7x.2
+[codemonkey@gucho codemonkey]$ # In which directory am I now?
+[codemonkey@gucho codemonkey]$ pwd
+/home/codemonkey
+[codemonkey@gucho codemonkey]$ # User-specific Vim configuration
+[codemonkey@gucho codemonkey]$ touch .vimrc
+[codemonkey@gucho codemonkey]$ mkdir .vim
+[codemonkey@gucho codemonkey]$ mkdir .vim/colors
+[codemonkey@gucho codemonkey]$ mkdir .vim/compiler
+[codemonkey@gucho codemonkey]$ mkdir .vim/doc
+[codemonkey@gucho codemonkey]$ mkdir .vim/ftplugin
+[codemonkey@gucho codemonkey]$ mkdir .vim/plugin
+[codemonkey@gucho codemonkey]$ mkdir .vim/syntax</pre>
+<p>Each feature installation and/or configuration is explained 
+separately and can be done independently of the others. Screenshots are 
+provided, where appropriate.</p>
+<p><a name="additional_help_resources"></a></p><a name="additional_help_resources">
+<h3>Additional help resources</h3>
+</a><p><a name="additional_help_resources"></a></p>
+<p>Vim has a large community with a lot of friendly and supportive 
+members. If you are using Vim or just planning to do so, I suggest that 
+you subscribe to Vim mailing list at <a href="http://www.vim.org/community.php" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/community.php']);">http://www.vim.org/community.php</a>.</p>
+<p>Visit the Vim website for a collection of Tips and Plug-ins at <a href="http://www.vim.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/']);">http://www.vim.org/</a>.</p>
+<p>Vim is shipped with an extensive documentation which you can find in <code>/usr/share/doc/vim-common-6.1/docs/directory</code> (you path may vary slightly). I have put mentioned documentation files from this directory where appropriate.</p>
+<p><a name="basic_configuration"></a></p><a name="basic_configuration">
+<h2>Basic Configuration</h2>
+</a><p><a name="basic_configuration"></a></p>
+<p><a name="basic_configuration"></a></p><a name="basic_configuration">
+<h3>Text wrapping</h3>
+</a><p><a name="basic_configuration"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040720-vim_text_wrapping.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040720-vim_text_wrapping.png" alt="Text wrapping"></a>As
+ you code, sometimes text flows further than the width of the editor 
+window. Some people like long lines to be wrapped (in other words, 
+continued on the other line), while others prefer them unwrapped. You 
+can configure Vim to behave according to your liking by adding “<code>set wrap</code>” or “<code>set nowrap</code>” to your <code>.vimrc</code> configuration file.</p>
+<p><a name="flexible_tabs"></a></p><a name="flexible_tabs">
+<h3>Flexible tabs</h3>
+</a><p><a name="flexible_tabs"></a></p>
+<p>Tabulation is one of the hottest topics in programmers discussions 
+when it comes to style. A very nice explanation of what is the problem 
+with tabulations and spaces can be read at <a href="http://www.jwz.org/doc/tabs-vs-spaces.html" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.jwz.org/doc/tabs-vs-spaces.html']);">http://www.jwz.org/doc/tabs-vs-spaces.html</a>. I must say though, that I don’t agree with author’s position on the subject.</p>
+<p>The article does provide you with several options for vi/Vim 
+configuration to control the behavior of the tabs. I will just 
+add/repeat the ones I consider important.</p>
+<p>Add “<code>set tabstop=4</code>” to your <code>.vimrc</code> to 
+display all occurrences of Tab character (ASCII #9) as 4 spaces. This 
+option will not change the text, it will only change the displaying of 
+the text.</p>
+<p>Add “<code>set autoindent</code>” to your <code>.vimrc</code> for Vim
+ to automatically position the cursor with appropriate indentation level
+ when you press Enter and want to write the next line of code. This is 
+very useful when you are indenting your code in structures like loops 
+and procedures.</p>
+<p>Vim allows you to select a block of code and change it’s indentation 
+level (either increase or decrease the level). Control the width of the 
+indentation level with “<code>set shiftwidth=4</code>” in your <code>.vimrc</code> configuration file.</p>
+<p>While you are in the command mode, Vim can complete the names of 
+files and directories in case you want to open or save a file. In order 
+to complete a file or a directory name you should start typing it’s name
+ on the command prompt and then press the completion key. You can change
+ the completion key to be almost anything you want with “<code>set wildchar=</code>” line in your <code>.vimrc</code> file.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/indent.txt</code>.</p>
+<p><a name="line_numbering"></a></p><a name="line_numbering">
+<h3>Line numbering</h3>
+</a><p><a name="line_numbering"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_line_numbers.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_line_numbers.png" alt="Line numbering"></a>While
+ Vim always displays your current position in the status line, you might
+ also want to see all lines numbered. To do that, you will need to add “<code>set number</code>” to your <code>.vimrc</code>.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_03.txt</code>.</p>
+<p><a name="syntax_highlighting"></a></p><a name="syntax_highlighting">
+<h3>Syntax highlighting</h3>
+</a><p><a name="syntax_highlighting"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_syntax_light_bg.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_syntax_light_bg.png" alt="Highlighting for light background"></a>The
+ first thing any developer will notice in Vim is excellent syntax 
+highlighting. All popular languages are supported. Syntax files for less
+ popular are available from Vim web site. Perl is supported out of the 
+box.</p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_syntax_dark_bg.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_syntax_dark_bg.png" alt="Highlighting for dark background"></a>Vim
+ identifies keywords, comments, variables, strings, in-line POD and 
+other standard parts of the program and highlights them. Vim supports 
+two color modes: one for terminals with dark background color and 
+another one for terminals with light background color. You can control 
+these modes by specifying command “<code>set bg=dark</code>” and “<code>set bg=light</code>” in your <code>.vimrc</code>.</p>
+<p>If you still don’t like the appearance of the code, stay tuned until “<a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#color_schemes">Color schemes</a>” discussion.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/syntax.txt</code>.</p>
+<p><a name="text_completion"></a></p><a name="text_completion">
+<h3>Text completion</h3>
+</a><p><a name="text_completion"></a></p>
+<p>One of Vim’s features I cannot live without is text completion. When editing, press <code>Ctrl-n</code> / <code>Ctrl-p</code>
+ to cycle through the current word completion suggestions. Vim generates
+ suggest list based on the words in the current file. If you need key 
+completion to make suggestions from other files, then Vim by default 
+understand the <code>ctags</code> file. Simply run “<code>ctags *.p?</code>” to generate ctags for all Perl files and modules in the current directory (assuming you are using “<code>.pl</code>” extension for Perl scripts and “<code>.pm</code>”
+ extension for Perl modules). This Vim’s feature not only saves a tonne 
+of time on typing, but greatly decreases the error rate, especially with
+ long variable and procedure names in the code.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_24.txt</code>.</p>
+<p><a name="window_splitting"></a></p><a name="window_splitting">
+<h3>Window splitting</h3>
+</a><p><a name="window_splitting"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_window_split.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_window_split.png" alt="Split windows"></a>Sometimes
+ I need to see two or more files simultaneously. While I can always 
+start another Vim session in a separate terminal, it is not as 
+comfortable at times as Vim’s window splitting feature.</p>
+<p>Vim supports both vertical and horizontal window splitting. To split current window horizontally execute “<code>:split</code>” while in the normal mode. To split current window vertically, use “<code>:vsplit</code>”
+ instead. If you don’t provide any filename as argument to split/vsplit 
+then current filename is used. You further split resulting windows as 
+much as you like. Use <code>Ctrl-w w</code> to cycle through the windows. “<code>:close</code>” will close the current windows. “<code>:only</code>” will close all windows except the current one.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_08.txt</code>.</p>
+<p><a name="diff_mode"></a></p><a name="diff_mode">
+<h3>Diff mode</h3>
+</a><p><a name="diff_mode"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_diff_mode.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_diff_mode.png" alt="Diff mode"></a>Vim provides excellent facilities for checking and editing differences between two or more files. Execute “<code>vimdiff main.pl main2.pl</code>”  (or “<code>vim -d main.pl main2.pl</code>“) from the command line to see difference made to file main.pl in file main2.pl.</p>
+<p>Vim will show both files in vertical split window mode.  When you 
+will scroll in one window, Vim will automatically scroll another window 
+for you.  You can patch the individual differences using <code>do</code> and <code>dp</code> commands.  <code>do</code> will get the patch from the neighbor window and apply it to the current buffer, while <code>dp</code> will apply the difference from the current buffer to the neighbor window.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/diff.txt</code>.</p>
+<p><a name="text_folding"></a></p><a name="text_folding">
+<h3>Text folding</h3>
+</a><p><a name="text_folding"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_folding_before.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_folding_before.png" alt="Before folding"></a><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_folding_after.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_folding_after.png" alt="After folding"></a>Yet
+ another popular feature found in popular editors and IDEs is text 
+folding. I think that folding is easier shown then explained.</p>
+<p>Vim supports six folding methods: by indent, by expression, by 
+syntax, by changes in the text, by marker, and manual folding. It is up 
+to you which method to use. For the sake of the example, I will show how
+ to configure folding by marker.</p>
+<p>In order to tell Vim to use folding by marker add the following lines to your <code>.vimrc</code>:</p>
+<pre>" Folding configuration
+set foldmethod=marker
+" Edit and uncomment next line if you want non-default marker
+"set foldmarker="{{{,}}}"</pre>
+<p>If you need more information on this topic, read files <code>/usr/share/doc/vim-common-6.1/docs/usr_28.txt</code> and <code>/usr/share/doc/vim-common-6.1/docs/fold.txt</code>.</p>
+<p><a name="marks"></a></p><a name="marks">
+<h3>Marks</h3>
+</a><p><a name="marks"></a></p>
+<p>One of Vim’s features that speeds up navigation is – marks. You can 
+set a mark anywhere in the text and then quickly jump back to it. You 
+can set several marks. You can set marks in several files and then 
+quickly switch between them. I find myself set mark on the place I am 
+currently working at with <code>mc</code> (<code>m</code> is for “mark”, <code>c</code> I use for “current”) and then quickly returning to the same place with <code>'c</code>.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/motion.txt</code>.</p>
+<p><a name="vertical_ident_display"></a></p><a name="vertical_ident_display">
+<h3>Vertical Indent Display</h3>
+</a><p><a name="vertical_ident_display"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_vertical_indent.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_vertical_indent.png" alt="Vertical indent"></a>For
+ some people indenting text horizontally is not enough. They need some 
+kind of vertical indentation to help them see corresponding parts of the
+ code. While I am not one of those people, I’ve seen this feature around
+ so often that I decided to add it codemonkey’s <code>.vimrc</code>.</p>
+<p>All you need to do to have vertical indent display with pipe (“|”) character is to add the following two lines to your <code>.vimrc</code>.</p>
+<pre>" This is for vertical indenting
+set list
+set listchars=tab:|
+" NOTE the space char after last backslash.</pre>
+<p>“<code>:set list</code>” forces Vim to show hidden characters like tabulations, ends of lines, and ends of files. “<code>:set listchars=tab:| </code>”
+ asks Vim to show only tab characters and use a pipe (“|”) with a space 
+(” “) to do so, instead of usual “^I” thing that Vim likes to show.</p>
+<p><a name="advanced_configuration"></a></p><a name="advanced_configuration">
+<h2>Advanced Configuration</h2>
+</a><p><a name="advanced_configuration"></a></p>
+<p><a name="advanced_configuration_common"></a></p><a name="advanced_configuration_common">
+<h3>Common Configuration</h3>
+</a><p><a name="advanced_configuration_common"></a></p>
+<p><a name="color_schemes"></a></p><a name="color_schemes">
+<h4>Color schemes</h4>
+</a><p><a name="color_schemes"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_colorscheme_dante.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_colorscheme_dante.png" alt="Colorscheme Dante"></a>Let’s
+ start simple. Vim website offers a handful of color schemes for all 
+tastes and preferences. Finding and downloading these color schemes one 
+by one can be a pain though. Luckily, world is not without kind people. 
+Someone named Robert (MetaCosm) downloaded all color schemes and put 
+them into a single archive file which he uploaded back to Vim’s web 
+site. Let’s download it from <a href="http://www.vim.org/scripts/script.php?script_id=625" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=625']);">http://www.vim.org/scripts/script.php?script_id=625</a>.</p>
+<p>Save <code>colors.zip</code> in your <code>.vim/</code> directory and <code>unzip</code> it. Making sure that all the files in UNIX format is also a good idea.</p>
+<pre>[codemonkey@gucho .vim]$ ls
+colors.zip
+[codemonkey@gucho .vim]$ unzip colors.zip
+Archive:  colors.zip
+   creating: colors/
+  inflating: colors/adaryn.vim
+  inflating: colors/adrian.vim
+  inflating: colors/aqua.vim
+  inflating: colors/astronaut.vim
+  inflating: colors/asu1dark.vim
+  inflating: colors/autumn.vim
+  inflating: colors/biogoo.vim
+  inflating: colors/blackdust.vim
+  inflating: colors/BlackSea.vim
+  inflating: colors/blue.vim
+  inflating: colors/bluegreen.vim
+  inflating: colors/bog.vim
+  inflating: colors/borland.vim
+  inflating: colors/breeze.vim
+  inflating: colors/brookstream.vim
+  inflating: colors/brown.vim
+  inflating: colors/bw.vim
+  inflating: colors/c.vim
+  inflating: colors/camo.vim
+  inflating: colors/candy.vim
+  inflating: colors/caramel.vim
+  inflating: colors/ChocolateLiquor.vim
+  inflating: colors/coffee.vim
+  inflating: colors/colorer.vim
+  inflating: colors/colorscheme_template.vim
+  inflating: colors/cool.vim
+  inflating: colors/dante.vim
+  inflating: colors/darkblue.vim
+  inflating: colors/darkdot.vim
+  inflating: colors/darkocean.vim
+  inflating: colors/darkslategray.vim
+  inflating: colors/dawn.vim
+  inflating: colors/default.vim
+  inflating: colors/denim.vim
+  inflating: colors/desert.vim
+  inflating: colors/elflord.vim
+  inflating: colors/emacs.vim
+  inflating: colors/evening.vim
+  inflating: colors/fine_blue.vim
+  inflating: colors/fnaqevan.vim
+  inflating: colors/fog.vim
+  inflating: colors/golden.vim
+  inflating: colors/ibmedit.vim
+  inflating: colors/ironman.vim
+  inflating: colors/koehler.vim
+  inflating: colors/lanzarotta.vim
+  inflating: colors/lilac.vim
+  inflating: colors/manxome.vim
+  inflating: colors/midnight.vim
+  inflating: colors/midnight2.vim
+  inflating: colors/morning.vim
+  inflating: colors/murphy.vim
+  inflating: colors/navajo-night.vim
+  inflating: colors/navajo.vim
+  inflating: colors/night.vim
+  inflating: colors/nightshimmer-theme.vim
+  inflating: colors/nightwish.vim
+  inflating: colors/northsky.vim
+  inflating: colors/oceanblack.vim
+  inflating: colors/oceandeep.vim
+  inflating: colors/pablo.vim
+  inflating: colors/PapayaWhip.vim
+  inflating: colors/peachpuff.vim
+  inflating: colors/potts.vim
+  inflating: colors/print_bw.vim
+  inflating: colors/rainbow_autumn.vim
+  inflating: colors/rainbow_breeze.vim
+  inflating: colors/rainbow_fine_blue.vim
+  inflating: colors/rainbow_fruit.vim
+  inflating: colors/rainbow_neon.vim
+  inflating: colors/rainbow_night.vim
+  inflating: colors/rainbow_sea.vim
+  inflating: colors/redblack.vim
+  inflating: colors/ron.vim
+  inflating: colors/sand.vim
+  inflating: colors/scite.vim
+  inflating: colors/sean.vim
+  inflating: colors/seashell.vim
+  inflating: colors/shine.vim
+  inflating: colors/taqua.vim
+  inflating: colors/tomatosoup.vim
+  inflating: colors/toothpik.vim
+  inflating: colors/torte.vim
+  inflating: colors/transparent.vim
+  inflating: colors/whitedust.vim
+  inflating: colors/wintersday.vim
+  inflating: colors/xemacs.vim
+  inflating: colors/xian.vim
+  inflating: colors/zellner.vim
+  inflating: colors/zenburn.vim
+[codemonkey@gucho .vim]$ dos2unix colors/*
+dos2unix: converting file colors/BlackSea.vim to UNIX format ...
+dos2unix: converting file colors/ChocolateLiquor.vim to UNIX format ...
+dos2unix: converting file colors/PapayaWhip.vim to UNIX format ...
+dos2unix: converting file colors/adaryn.vim to UNIX format ...
+dos2unix: converting file colors/adrian.vim to UNIX format ...
+dos2unix: converting file colors/aqua.vim to UNIX format ...
+dos2unix: converting file colors/astronaut.vim to UNIX format ...
+dos2unix: converting file colors/asu1dark.vim to UNIX format ...
+dos2unix: converting file colors/autumn.vim to UNIX format ...
+dos2unix: converting file colors/biogoo.vim to UNIX format ...
+dos2unix: converting file colors/blackdust.vim to UNIX format ...
+dos2unix: converting file colors/blue.vim to UNIX format ...
+dos2unix: converting file colors/bluegreen.vim to UNIX format ...
+dos2unix: converting file colors/bog.vim to UNIX format ...
+dos2unix: converting file colors/borland.vim to UNIX format ...
+dos2unix: converting file colors/breeze.vim to UNIX format ...
+dos2unix: converting file colors/brookstream.vim to UNIX format ...
+dos2unix: converting file colors/brown.vim to UNIX format ...
+dos2unix: converting file colors/bw.vim to UNIX format ...
+dos2unix: converting file colors/c.vim to UNIX format ...
+dos2unix: converting file colors/camo.vim to UNIX format ...
+dos2unix: converting file colors/candy.vim to UNIX format ...
+dos2unix: converting file colors/caramel.vim to UNIX format ...
+dos2unix: converting file colors/coffee.vim to UNIX format ...
+dos2unix: converting file colors/colorer.vim to UNIX format ...
+dos2unix: converting file colors/colorscheme_template.vim to UNIX format ...
+dos2unix: converting file colors/cool.vim to UNIX format ...
+dos2unix: converting file colors/dante.vim to UNIX format ...
+dos2unix: converting file colors/darkblue.vim to UNIX format ...
+dos2unix: converting file colors/darkdot.vim to UNIX format ...
+dos2unix: converting file colors/darkocean.vim to UNIX format ...
+dos2unix: converting file colors/darkslategray.vim to UNIX format ...
+dos2unix: converting file colors/dawn.vim to UNIX format ...
+dos2unix: converting file colors/default.vim to UNIX format ...
+dos2unix: converting file colors/denim.vim to UNIX format ...
+dos2unix: converting file colors/desert.vim to UNIX format ...
+dos2unix: converting file colors/elflord.vim to UNIX format ...
+dos2unix: converting file colors/emacs.vim to UNIX format ...
+dos2unix: converting file colors/evening.vim to UNIX format ...
+dos2unix: converting file colors/fine_blue.vim to UNIX format ...
+dos2unix: converting file colors/fnaqevan.vim to UNIX format ...
+dos2unix: converting file colors/fog.vim to UNIX format ...
+dos2unix: converting file colors/golden.vim to UNIX format ...
+dos2unix: converting file colors/ibmedit.vim to UNIX format ...
+dos2unix: converting file colors/ironman.vim to UNIX format ...
+dos2unix: converting file colors/koehler.vim to UNIX format ...
+dos2unix: converting file colors/lanzarotta.vim to UNIX format ...
+dos2unix: converting file colors/lilac.vim to UNIX format ...
+dos2unix: converting file colors/manxome.vim to UNIX format ...
+dos2unix: converting file colors/midnight.vim to UNIX format ...
+dos2unix: converting file colors/midnight2.vim to UNIX format ...
+dos2unix: converting file colors/morning.vim to UNIX format ...
+dos2unix: converting file colors/murphy.vim to UNIX format ...
+dos2unix: converting file colors/navajo-night.vim to UNIX format ...
+dos2unix: converting file colors/navajo.vim to UNIX format ...
+dos2unix: converting file colors/night.vim to UNIX format ...
+dos2unix: converting file colors/nightshimmer-theme.vim to UNIX format ...
+dos2unix: converting file colors/nightwish.vim to UNIX format ...
+dos2unix: converting file colors/northsky.vim to UNIX format ...
+dos2unix: converting file colors/oceanblack.vim to UNIX format ...
+dos2unix: converting file colors/oceandeep.vim to UNIX format ...
+dos2unix: converting file colors/pablo.vim to UNIX format ...
+dos2unix: converting file colors/peachpuff.vim to UNIX format ...
+dos2unix: converting file colors/potts.vim to UNIX format ...
+dos2unix: converting file colors/print_bw.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_autumn.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_breeze.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_fine_blue.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_fruit.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_neon.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_night.vim to UNIX format ...
+dos2unix: converting file colors/rainbow_sea.vim to UNIX format ...
+dos2unix: converting file colors/redblack.vim to UNIX format ...
+dos2unix: converting file colors/ron.vim to UNIX format ...
+dos2unix: converting file colors/sand.vim to UNIX format ...
+dos2unix: converting file colors/scite.vim to UNIX format ...
+dos2unix: converting file colors/sean.vim to UNIX format ...
+dos2unix: converting file colors/seashell.vim to UNIX format ...
+dos2unix: converting file colors/shine.vim to UNIX format ...
+dos2unix: converting file colors/taqua.vim to UNIX format ...
+dos2unix: converting file colors/tomatosoup.vim to UNIX format ...
+dos2unix: converting file colors/toothpik.vim to UNIX format ...
+dos2unix: converting file colors/torte.vim to UNIX format ...
+dos2unix: converting file colors/transparent.vim to UNIX format ...
+dos2unix: converting file colors/whitedust.vim to UNIX format ...
+dos2unix: converting file colors/wintersday.vim to UNIX format ...
+dos2unix: converting file colors/xemacs.vim to UNIX format ...
+dos2unix: converting file colors/xian.vim to UNIX format ...
+dos2unix: converting file colors/zellner.vim to UNIX format ...
+dos2unix: converting file colors/zenburn.vim to UNIX format ...
+[codemonkey@gucho .vim]$</pre>
+<blockquote>
+<h3>vim and gvim color schemes</h3>
+<p>You will most likely notice that some color schemes do not change much colors in your console <code>vim</code>. That is because they are most probably designed for GUI version of Vim, called <code>gvim</code>.</p>
+<p>Try executing “<code>gvim +'colorscheme peachpuff' main.pl</code>” to see how gvim looks with selected color scheme.</p></blockquote>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_colorscheme_nightwish.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_colorscheme_nightwish.png" alt="Colorscheme Nightwish"></a>Now you can try all those color schemes one by one with “<code>:colorscheme something</code>”  and choose the one you like best. When you are done choosing, add line “<code>colorscheme something</code>” to your <code>.vimrc</code>.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_06.txt</code>.</p>
+<p><a name="block_commenting"></a></p><a name="block_commenting">
+<h3>Block commenting</h3>
+</a><p><a name="block_commenting"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_blockcomment.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_blockcomment.png" alt="Block comments"></a>It
+ is an often need to comment or uncomment blocks of code during the 
+development cycle. While there is a way to do it in Vim without any 
+additional configuration, I try to make life as easy as possible and 
+install the BlockComment plug-in by Chris Russell.</p>
+<p>Let’s download BlockComment.vim from <a href="http://www.vim.org/scripts/script.php?script_id=473" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=473']);">http://www.vim.org/scripts/script.php?script_id=473</a> and copy it into <code>.vim/plugin/</code> directory. This plug-in automatically provides us with two mappings: “<code>.c</code>” for commenting code and “<code>.C</code>” for uncommenting code back.</p>
+<p><a name="file_and_buffer_browser"></a></p><a name="file_and_buffer_browser">
+<h3>File and buffer browser</h3>
+</a><p><a name="file_and_buffer_browser"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_winmanager.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_winmanager.png" alt="Winmanager"></a>Vim supports editing of several files simultaneously. One can start Vim as “<code>vim main.pl main2.pl</code>” and then use “<code>:next</code>” and “<code>:previous</code>”
+ to navigate through open files (called “buffers”). It is also possible 
+to open files for editing without quiting Vim every time. For that, one 
+should use simple “<code>:e main2.pl</code>” command, where main2.pl is the name of needed file.</p>
+<p>There are, as usual, better (more convenient) ways to work with files
+ and buffers. Vim website lists few plug-ins which can handle only 
+files, or only buffers, or both at the same time. One of those plug-ins 
+is winmanager by Srinath Avadhanula. Let’s grab winmanager from <a href="http://www.vim.org/scripts/script.php?script_id=95" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=95']);">http://www.vim.org/scripts/script.php?script_id=95</a>.</p>
+<p>Vim’s winmanager plug-in can make use of bufexplorer plug-in by jeff lanzarotta availalbe from <a href="http://www.vim.org/scripts/script.php?script_id=42" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=42']);">http://www.vim.org/scripts/script.php?script_id=42</a>.</p>
+<p>Installation is as usual – saving, unziping, and dos2unixing. Since 
+we don’t want to always have file/directory browser turned on, lets add a
+ mapping line to our <code>.vimrc</code> to “<code>:WMToggle</code>” by <code>F2</code>.</p>
+<pre>" This is for winmanager
+map &lt;F2&gt; :WMToggle&lt;CR&gt;</pre>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_23.txt</code>.</p>
+<p><a name="tag_explorer"></a></p><a name="tag_explorer">
+<h2>Tag explorer</h2>
+</a><p><a name="tag_explorer"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_taglist.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_taglist.png" alt="Tag explorer"></a>If
+ you ask me, I am almost happy. The last thing that I am missing is 
+something that will ease up my code browsing. I need a fast way of 
+switching between different parts of my code and hierarchical view of 
+it. Once again I go fishing to Vim web site and get myself a nice 
+looking taglist plug-in by Yegappan Lakshmanan from <a href="http://www.vim.org/scripts/script.php?script_id=273" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=273']);">http://www.vim.org/scripts/script.php?script_id=273</a>. This one is not even an archive! You just need to copy it into your <code>.vim/plug-in</code> directory. Let’s map “<code>:Tlist</code>” command to <code>F3</code> key.</p>
+<pre>" This is for taglist
+map &lt;F3&gt; :Tlist&lt;CR&gt;</pre>
+<p>One annoying thing that I find about taglist is that it resizes the 
+terminal window when possible. I prefer to switch this feature off by 
+add modifying my <code>.vimrc</code> in the following way.</p>
+<pre>" This is for taglist
+let Tlist_Inc_Winwidth = 0
+map &lt;F3&gt; :Tlist&lt;CR&gt;</pre>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/tagsrch.txt</code>.</p>
+<p><a name="advanced_configuration_perl"></a></p><a name="advanced_configuration_perl">
+<h2>Perl-Specific Configuration</h2>
+</a><p><a name="advanced_configuration_perl"></a></p>
+<p><a name="embperl_syntax_highlighting"></a></p><a name="embperl_syntax_highlighting">
+<h3>Embperl syntax highlighting</h3>
+</a><p><a name="embperl_syntax_highlighting"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_syntax_embperl.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_syntax_embperl.png" alt="Highlighting Embperl"></a>If
+ you use Embperl perl module for developing dynamic content websites, 
+then you will need to download Embperl syntax highlighting plug-in 
+developed by Lukas Zapletal. These steps are similar for setting up 
+highlighting for any other programming language that you might use and 
+which is not supported out of the box.</p>
+<p>Embperl syntax highlighting plug-in is located at <a href="http://www.vim.org/scripts/script.php?script_id=61" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=61']);">http://www.vim.org/scripts/script.php?script_id=61</a>. Download it and unzip it in your <code>.vim/</code> directory. Again, passing all new files through dos2unix is a good idea, if you are on a UNIX/Linux box as I am. <code>vimrc_example</code> shipped with the archive contains the example of configuration that you’ll need to put into your <code>.vimrc</code>.</p>
+<pre>[codemonkey@gucho .vim]$ ls
+colors  colors.zip  Embperl_Syntax.zip
+[codemonkey@gucho .vim]$ unzip Embperl_Syntax.zip
+Archive:  Embperl_Syntax.zip
+  inflating: colors/embperl_yellow.vim
+   creating: syntax/
+  inflating: syntax/embperl.vim
+  inflating: vimrc_example
+[codemonkey@gucho .vim]$ cat vimrc_example
+"let perl_fold=1
+augroup filetypedetect
+autocmd! BufNewFile,BufRead *.epl,*.phtml setf embperl
+augroup END
+autocmd BufNewFile,BufRead *.epl,*.phtml colorscheme embperl_yellow</pre>
+<blockquote>
+<h3>Embperl color scheme</h3>
+<p>Embperl syntax highlighting plug-in uses it’s own color scheme, so 
+don’t worry if you see colors different from the ones that you have 
+expected.</p></blockquote>
+<p><a name="perl_syntax_compiler"></a></p><a name="perl_syntax_compiler">
+<h3>Perl syntax compiler</h3>
+</a><p><a name="perl_syntax_compiler"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_perl_compiler.png" rel="lightbox[7494]"><img class="alignright" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_perl_compiler.png" alt="Perl syntax compiler"></a>
+ Most of Integrated Development Environments (IDE) try to simplify 
+write-compile-debug cycle. One of the things which can make the cycle 
+easier is automatic cursor positioning to the place in the code where 
+error occurred. Vim can do this for almost any language and compiler. If
+ you know the format that your compiler spits out, then you can 
+configure Vim to parse those errors and position the cursor for you. 
+Since I am not the first Perl developer who uses Vim, I assumed that 
+someone already wrote the compiler error syntax parser (sounds 
+horrifying, isn’t it?).</p>
+<p>Let’s once again download it from Vim web site – <a href="http://www.vim.org/scripts/script.php?script_id=56" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=56']);">http://www.vim.org/scripts/script.php?script_id=56</a>. Installation instructions are simple: just copy <code>perl.vim</code> (developed by Lukas Zapletal) into your <code>.vim/compiler/</code>
+ directory. Now we need to specify for which files we want Vim to use 
+our new perl compiler scripts. This is easily done by adding the 
+following lines to <code>.vimrc</code>.</p>
+<pre>" Use perl compiler for all *.pl and *.pm files.
+autocmd BufNewFile,BufRead *.p? compiler perl</pre>
+<p>Now you can use “<code>:make</code>” to check your code for errors. 
+If you do have problems in your code, then Vim will position the cursor 
+on the line with the first problem. You can use “<code>:cnext</code>” and “<code>:cprevious</code>” to go through other error messages. “<code>:clist</code>” will show a list of all errors.</p>
+<p>If you need more information on this topic, read file <code>/usr/share/doc/vim-common-6.1/docs/usr_30.txt</code>.</p>
+<p><a name="perldoc_integration"></a></p><a name="perldoc_integration">
+<h3>Perldoc integration</h3>
+</a><p><a name="perldoc_integration"></a></p>
+<p><a href="http://mamchenkov.net/wordpress/wp-content/20040510-vim_perldoc.png" rel="lightbox[7494]"><img class="alignleft" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/thumb-20040510-vim_perldoc.png" alt="Perldoc integration"></a>Yet
+ another feature provided in most IDEs is on-line documentation. Vim 
+helps developers even with that. By default, Vim comes with system 
+manual support on all UNIX boxes. This comes very handy when you use 
+system commands in your scripts and need to check command line 
+parameters. Just position the cursor on the word that you are interested
+ in and press <code>K</code>. Vim will execute “<code>man word</code>“, where “word” is the word under the cursor. This is helpful but not as much as we need it.</p>
+<p>Let’s visit Vim site again and download Perldoc plug-in (developed by Colin Keith) from <a href="http://www.vim.org/scripts/script.php?script_id=209" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','www.vim.org/scripts/script.php?script_id=209']);">http://www.vim.org/scripts/script.php?script_id=209</a>. <code>unzip perldoc.zip</code> and run all extracted files through <code>dos2unix</code>. It’s a good idea to add a <code>F1</code> mapping to “<code>:Perldoc</code>” in your <code>.vimrc</code>.</p>
+<pre>" This is for perldoc.vim
+autocmd BufNewFile,BufRead *.p? map &lt;F1&gt; :Perldoc&lt;cword&gt;&lt;CR&gt;
+autocmd BufNewFile,BufRead *.p? setf perl
+autocmd BufNewFile,BufRead *.p? let g:perldoc_program='/usr/bin/perldoc'
+autocmd BufNewFile,BufRead *.p? source /home/codemonkey/.vim/ftplugin/perl_doc.vim</pre>
+<p>If you are using a newer version then I do, then you skip the last line.</p>
+<p>Now, whenever you hit <code>F1</code> while in the perl file, “<code>:Perldoc</code>”
+ will get executed for the word that you have under the cursor, your 
+current window will split horizontally and you’ll see appropriate 
+perldoc page.</p>
+<p>After installation of this plug-in I have noticed that syntax 
+highlighting in few of my programs broke. After a quick look, I 
+understood that that happened because of my extensive usage of 
+underscore (“_”) character in procedure names. I had to fix it by simply
+ adding underscore (“_”) character to the list of keyword characters on 
+line 14 in file <code>.vim/ftplugin/perl_doc.vim</code>.</p>
+<pre>" Adds / and . as used in requires.
+" setlocal iskeyword=a-z,A-Z,48-57,:,/,.
+" Adds / and . as used in requires. Also adds _ as used in procedure names.
+setlocal iskeyword=a-z,A-Z,48-57,:,/,.,_</pre>
+<p><a name="conclusion"></a></p><a name="conclusion">
+<h2>Conclusion</h2>
+</a><p><a name="conclusion"></a></p>
+<p>As can easily be seen above, Vim is a powerful and flexible text 
+editor with a lot of features that can be easily added to the default 
+distribution. Vim website contains much more plug-ins than I have 
+demonstrated. Some of those plug-ins provided alternative solutions for 
+the needs showed in this document.</p>
+<p>If you will ever again feel that something is missing while using 
+Vim, or if you would just think that there might be an easier and/or 
+faster way to do so, then browse through Tips and Scripts on Vim web 
+site and ask for help in the mailing list.</p>
+<p><strong>:wq</strong></p>
+		<div class="clear"></div>
+	</div><!-- .entry-content-->
+	
+	<p class="filed categories alt-font tight">Posted in <a href="http://mamchenkov.net/wordpress/category/general/" title="View all posts in All" rel="category tag">All</a>, <a href="http://mamchenkov.net/wordpress/category/technology/programming/" title="View all posts in Programming" rel="category tag">Programming</a>, <a href="http://mamchenkov.net/wordpress/category/technology/" title="View all posts in Technology" rel="category tag">Technology</a>.</p>
+	<p class="filed tags alt-font tight">Tagged with <a href="http://mamchenkov.net/wordpress/tag/perl/" rel="tag">Perl</a>, <a href="http://mamchenkov.net/wordpress/tag/vim/" rel="tag">vim</a>.</p>	
+	<p class="comments-link"><a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comments" rev="post-7494" title="Comment on Vim for Perl developers">45 comments</a></p>
+
+	<div id="post-comments-7494-target"></div>
+	<div class="clear"></div>
+	
+	</div><!-- .post -->
+	<div id="comments">
+<div class="rule-major"><hr></div>
+<h2 class="h1 comments-title" id="comments">45 Responses</h2>
+
+<p>Stay in touch with the conversation, subscribe to the <a class="feed" rel="alternate" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/feed/"><acronym title="Really Simple Syndication">RSS</acronym> feed for comments on this post</a>.</p>
+
+<ol class="commentlist hfeed">
+<li class="li-comment" id="li-comment-34">
+	<div class="div-comment" id="div-comment-34">
+
+<div id="comment-34" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">oleg</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">great article. thanks!</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-05-12T18:26">May 12, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-34">6:26 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=34#respond-p7494" onclick='return addComment.moveForm("comment-34", "34", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-35">
+	<div class="div-comment" id="div-comment-35">
+
+<div id="comment-35" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">SR</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Really Great Article.<br>Easy to understand and with complete information and links. Thanks  8)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-05-13T22:14">May 13, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-35">10:14 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=35#respond-p7494" onclick='return addComment.moveForm("comment-35", "35", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-36">
+	<div class="div-comment" id="div-comment-36">
+
+<div id="comment-36" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn"><a href="http://pied.mine.nu/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://pied.mine.nu']);" rel="external nofollow" class="url">Axioplase</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Yes!<br>thanks you!<br>Though i wouldn’t spit on a more detailed index, neither on some more blank lines, to have the reading of this article easier.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-05-14T00:24">May 14, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-36">12:24 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=36#respond-p7494" onclick='return addComment.moveForm("comment-36", "36", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-48">
+	<div class="div-comment" id="div-comment-48">
+
+<div id="comment-48" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn"><a href="http://www.go-getters.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.go-getters.com']);" rel="external nofollow" class="url">noahpb</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Very informative. Thanks for taking the time to write this up.</p>
+<p class="last-child">It’s great to see explanations of Vim features I wasn’t aware of.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-06-09T23:57">June 9, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-48">11:57 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=48#respond-p7494" onclick='return addComment.moveForm("comment-48", "48", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-49">
+	<div class="div-comment" id="div-comment-49">
+
+<div id="comment-49" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">fo0</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">great thanks  :lol:</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-06-12T00:04">June 12, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-49">12:04 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=49#respond-p7494" onclick='return addComment.moveForm("comment-49", "49", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-47">
+	<div class="div-comment" id="div-comment-47">
+
+<div id="comment-47" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/1dd9591337deb263ebf50e3f2b15563a.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">HoRai</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Great!<br>
+This turns me into a vim killer!  :twisted: </p>
+<p class="last-child">I only disagree on the fact that it’s easy to browse on the vim website.<br>
+I’ve been searching for this block commenting tip and had to read you article to succeed.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-06-26T22:43">June 26, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-47">10:43 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=47#respond-p7494" onclick='return addComment.moveForm("comment-47", "47", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-66">
+	<div class="div-comment" id="div-comment-66">
+
+<div id="comment-66" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">Alex</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Your article was the sole reason I had the courage to start using VIM. I have never looked back. Thanks!</p>
+<p class="last-child">Now if I could only stop hitting escape on the command line out of habit… ;)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-08-01T11:00">August 1, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-66">11:00 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=66#respond-p7494" onclick='return addComment.moveForm("comment-66", "66", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-96">
+	<div class="div-comment" id="div-comment-96">
+
+<div id="comment-96" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">nothingmuch</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Alex – try bash’s Vi editing mode.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-08-18T00:32">August 18, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-96">12:32 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=96#respond-p7494" onclick='return addComment.moveForm("comment-96", "96", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-135">
+	<div class="div-comment" id="div-comment-135">
+
+<div id="comment-135" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn"><a href="http://www.jbware.net/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.jbware.net']);" rel="external nofollow" class="url">jbWare</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Great article (++)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-09-16T04:00">September 16, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-135">4:00 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=135#respond-p7494" onclick='return addComment.moveForm("comment-135", "135", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-211">
+	<div class="div-comment" id="div-comment-211">
+
+<div id="comment-211" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/3d756f62bb993d487cbd6fd43a255135.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Venkatraman.D</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">it is superb article… Whenever i thought of reading VIM , usually it will end up in mishap… but this tutorial is ultimate….</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-10-21T12:50">October 21, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-211">12:50 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=211#respond-p7494" onclick='return addComment.moveForm("comment-211", "211", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-248">
+	<div class="div-comment" id="div-comment-248">
+
+<div id="comment-248" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/39ec55267de3f9a2b1c8d7947f4cf64e.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Nicola Worthington</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Can I marry you? You’re wonderful.</p>
+<p class="last-child">**licks you for wonderful vim and perl niceness**</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2004-10-28T18:29">October 28, 2004, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-248">6:29 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=248#respond-p7494" onclick='return addComment.moveForm("comment-248", "248", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-368">
+	<div class="div-comment" id="div-comment-368">
+
+<div id="comment-368" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/c435128d516e3cd2b8fa27ae41c18b93.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Ben Prew</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>What about adding support for automatically recognizing .t files as perl test files?</p>
+<p>1. create a directory called ftdetect in .vim<br>
+2. create a file with a .vim extension (I named mine perl_test.vim)<br>
+3. Put this line in it:<br>
+au BufRead,BufNewFile *.t setfiletype=perl</p>
+<p class="last-child">Now, whenever I enter a .t file, Vim assumes it a perl file.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-01-06T07:42">January 6, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-368">7:42 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=368#respond-p7494" onclick='return addComment.moveForm("comment-368", "368", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-437">
+	<div class="div-comment" id="div-comment-437">
+
+<div id="comment-437" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">chocolateboy</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>What Nicola Worthington said + a lazier version of the above:</p>
+<p class="last-child">au BufRead,BufNewFile *.t set syntax=perl</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-03-05T20:52">March 5, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-437">8:52 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=437#respond-p7494" onclick='return addComment.moveForm("comment-437", "437", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-441">
+	<div class="div-comment" id="div-comment-441">
+
+<div id="comment-441" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/e78f7e29a1df9a91ca9c5ec1f7023fc0.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Bert</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">How do i switch between the taglist pane and the 
+main editor without using a mouse, is there a keyboard shortcut so i can
+ togle between them?</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-03-08T18:55">March 8, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-441">6:55 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=441#respond-p7494" onclick='return addComment.moveForm("comment-441", "441", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-442">
+	<div class="div-comment" id="div-comment-442">
+
+<div id="comment-442" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/54bfadc28c22bf76402608db646cd031.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">[14] The shortcut for switching between windows is "Ctrl+W W".  You might want to read ":help split" and ":help CTRL-W".</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-03-09T17:44">March 9, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-442">5:44 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=442#respond-p7494" onclick='return addComment.moveForm("comment-442", "442", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-456">
+	<div class="div-comment" id="div-comment-456">
+
+<div id="comment-456" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/a.png" class="avatar avatar-48 photo avatar-default" height="48" width="48"></span>
+<cite class="fn">adong</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">‘za’ and ‘za’ again to folding and unfolding.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-03-19T14:27">March 19, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-456">2:27 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=456#respond-p7494" onclick='return addComment.moveForm("comment-456", "456", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-694">
+	<div class="div-comment" id="div-comment-694">
+
+<div id="comment-694" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/6f556dc2c8c7dd51811a701852a6c810.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://www.tu-berlin.de/zrz/mitarbeiter/anno4000" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.tu-berlin.de/zrz/mitarbeiter/anno4000']);" rel="external nofollow" class="url">Anno Siegel</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Concerning “Perl syntax compiler”, there is an alternative that takes things from the Perl side.</p>
+<p>If you <code>use Vi::QuickFix</code> (from CPAN) somewhere, Perl will write a file errors.err for Vim. The commands “:cf”, “:cn”, etc. are immediately available.</p>
+<p class="last-child">Anno (Author of Vi::QuickFix, in case you wonder why I care)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-05-12T20:39">May 12, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-694">8:39 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=694#respond-p7494" onclick='return addComment.moveForm("comment-694", "694", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-4036">
+	<div class="div-comment" id="div-comment-4036">
+
+<div id="comment-4036" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/0c7cd0ec91182624501a14bbb2880fcd.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Edward WIJAYA</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Have you considered “perl-support” by Fritz Mehner? As a more complete version from C.Keith’s.</p>
+<p class="last-child"><a href="http://www.vim.org/scripts/script.php?script_id=556" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','www.vim.org/scripts/script.php?script_id=556']);" rel="nofollow"></a><a href="http://www.vim.org/scripts/script.php?script_id=556">http://www.vim.org/script.../s.....ipt_id=556</a></p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-11-06T10:37">November 6, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-4036">10:37 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=4036#respond-p7494" onclick='return addComment.moveForm("comment-4036", "4036", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-4101">
+	<div class="div-comment" id="div-comment-4101">
+
+<div id="comment-4101" class="comment byuser comment-author-leonid bypostauthor even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/54bfadc28c22bf76402608db646cd031.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Thanks for the link Edward.  I missed that one. ;)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2005-11-07T11:51">November 7, 2005, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-4101">11:51 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=4101#respond-p7494" onclick='return addComment.moveForm("comment-4101", "4101", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-6967">
+	<div class="div-comment" id="div-comment-6967">
+
+<div id="comment-6967" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Greate help for perl developpers……..</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-01-21T13:48">January 21, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-6967">1:48 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=6967#respond-p7494" onclick='return addComment.moveForm("comment-6967", "6967", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-7476">
+	<div class="div-comment" id="div-comment-7476">
+
+<div id="comment-7476" class="comment byuser comment-author-marc even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/5f11d38d1d4c120b5ff45bf607276527.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">marc</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hi, your links don’t work anymore. I’d love to try. Can you fix them?</p>
+<p class="last-child">Marc</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-02-01T00:24">February 1, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-7476">12:24 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=7476#respond-p7494" onclick='return addComment.moveForm("comment-7476", "7476", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-7477">
+	<div class="div-comment" id="div-comment-7477">
+
+<div id="comment-7477" class="comment byuser comment-author-leonid bypostauthor odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/54bfadc28c22bf76402608db646cd031.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hi Marc,</p>
+<p class="last-child">Thanks for letting me know.  I’ll fix them 
+shortly.  In the mean time, please use page navigation to go around.  
+You can find page links just after the article and above the comments – 
+they look like this “Pages: 1 2 3 4″.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-02-01T00:55">February 1, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-7477">12:55 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=7477#respond-p7494" onclick='return addComment.moveForm("comment-7477", "7477", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-37471">
+	<div class="div-comment" id="div-comment-37471">
+
+<div id="comment-37471" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ca446edd75e87c48db5dd850d9f394a9.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://ivanatora.shacknet.nu/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://ivanatora.shacknet.nu']);" rel="external nofollow" class="url">ivan</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Pretty good! I just now realized the beauty of VIM. Another pico fan converted *sigh*</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-08-13T20:17">August 13, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-37471">8:17 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=37471#respond-p7494" onclick='return addComment.moveForm("comment-37471", "37471", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-43245">
+	<div class="div-comment" id="div-comment-43245">
+
+<div id="comment-43245" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/9f5b633277817c7cc12e949a6af5331c.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">naboj</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Very good article. This was the final reason to convert me to vim</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-08-29T01:18">August 29, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-43245">1:18 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=43245#respond-p7494" onclick='return addComment.moveForm("comment-43245", "43245", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-57843">
+	<div class="div-comment" id="div-comment-57843">
+
+<div id="comment-57843" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/b354fcaee552e9d6367cf7b69c1282e0.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Luca</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Very useful. Thank you.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-10-18T11:40">October 18, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-57843">11:40 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=57843#respond-p7494" onclick='return addComment.moveForm("comment-57843", "57843", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-67540">
+	<div class="div-comment" id="div-comment-67540">
+
+<div id="comment-67540" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/db0abc893b34e6697eed6d732412d77f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">miguel</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>great article.</p>
+<p>here are a few features that I can’t live without,</p>
+<p>:let &amp;backspace=2 # when you go into insert mode you can 
+backspace over anything even if you move the cursor around to other 
+lines</p>
+<p class="last-child">:au BufReadPost * if line(“‘\”") &gt; 0 &amp;&amp; line(“‘\”")</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-11-14T20:32">November 14, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-67540">8:32 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=67540#respond-p7494" onclick='return addComment.moveForm("comment-67540", "67540", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-69411">
+	<div class="div-comment" id="div-comment-69411">
+
+<div id="comment-69411" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/851ef58d179c024cbdf2d385217f7041.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Anonymous</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Great article, you\’ve really done a lot of hard work. Thanks for sharing.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2006-11-22T09:00">November 22, 2006, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-69411">9:00 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=69411#respond-p7494" onclick='return addComment.moveForm("comment-69411", "69411", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-137264">
+	<div class="div-comment" id="div-comment-137264">
+
+<div id="comment-137264" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Can we have something like, on saving file [ on using :w] it should sople source code.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2008-02-21T08:02">February 21, 2008, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-137264">8:02 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=137264#respond-p7494" onclick='return addComment.moveForm("comment-137264", "137264", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-137265">
+	<div class="div-comment" id="div-comment-137265">
+
+<div id="comment-137265" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Can we have something like, on saving file [ on using :w] it should compile source code.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2008-02-21T08:02">February 21, 2008, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-137265">8:02 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=137265#respond-p7494" onclick='return addComment.moveForm("comment-137265", "137265", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-137266">
+	<div class="div-comment" id="div-comment-137266">
+
+<div id="comment-137266" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hey,</p>
+<p>I got something like this. just append following line to .vimrc file</p>
+<p>autocmd BufWritePost   *.pl             !perl -c %</p>
+<p class="last-child">when you save your perl file, syntax will be verified :)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2008-02-21T08:14">February 21, 2008, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-137266">8:14 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=137266#respond-p7494" onclick='return addComment.moveForm("comment-137266", "137266", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-138960">
+	<div class="div-comment" id="div-comment-138960">
+
+<div id="comment-138960" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/3d27729c27e9b670c2916785fecad8dc.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Talipov Marat</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Thank’s a lot! It was exactly what I need</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-01-02T12:01">January 2, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-138960">12:01 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=138960#respond-p7494" onclick='return addComment.moveForm("comment-138960", "138960", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-138996">
+	<div class="div-comment" id="div-comment-138996">
+
+<div id="comment-138996" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/756aee7214b1276646969e832365e2d7.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://perlmonks.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://perlmonks.org']);" rel="external nofollow" class="url">Ben Petering</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>In the vertical indenting bit, your backslash doesn’t display, and 
+this is confusing because the example doesn’t work without it.</p>
+<p>set listchars=tab:|</p>
+<p>should be</p>
+<p>set listchars=tab:|\ </p>
+<p class="last-child">(space on end)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-01-16T10:01">January 16, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-138996">10:01 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=138996#respond-p7494" onclick='return addComment.moveForm("comment-138996", "138996", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-138997">
+	<div class="div-comment" id="div-comment-138997">
+
+<div id="comment-138997" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/756aee7214b1276646969e832365e2d7.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://perlmonks.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://perlmonks.org']);" rel="external nofollow" class="url">Ben Petering</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Oops, posted too soon… In my version of vim (7.2), you need to escape the vertical bar character as well:</p>
+<p>set listchars=tab:\|\</p>
+<p class="last-child">(and remember that line has a space at the end)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-01-16T10:07">January 16, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-138997">10:07 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=138997#respond-p7494" onclick='return addComment.moveForm("comment-138997", "138997", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-139005">
+	<div class="div-comment" id="div-comment-139005">
+
+<div id="comment-139005" class="comment byuser comment-author-leonid bypostauthor odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/54bfadc28c22bf76402608db646cd031.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Thanks Ben.  The article was written a long time 
+and survived a few migrations from one blog software to another, from 
+database to database, and from host to host.  Also, a few versions of 
+Vim came out which might have changed/fixed something.  Chances are, 
+there are now a few inconsistencies in what is written above with what 
+works in real life.  I need to go over this one day and post an update. 
+ All I need is just a bit of time to catch up :)</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-01-18T14:01">January 18, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-139005">2:01 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=139005#respond-p7494" onclick='return addComment.moveForm("comment-139005", "139005", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-141248">
+	<div class="div-comment" id="div-comment-141248">
+
+<div id="comment-141248" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hey,</p>
+<p class="last-child">how do I edit remove file using VIM? Intent of this</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-03-08T08:43">March 8, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-141248">8:43 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=141248#respond-p7494" onclick='return addComment.moveForm("comment-141248", "141248", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-141249">
+	<div class="div-comment" id="div-comment-141249">
+
+<div id="comment-141249" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ad911dd48003ce79e04880d4f643e47f.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Jagadeesh</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hey,</p>
+<p class="last-child">how do I edit remove file using VIM? Intent of this question is not to carry<br>
+.vimrc wherever I go.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-03-08T08:44">March 8, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-141249">8:44 am</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=141249#respond-p7494" onclick='return addComment.moveForm("comment-141249", "141249", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-141309">
+	<div class="div-comment" id="div-comment-141309">
+
+<div id="comment-141309" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ab1ff6b6c1561f978afcab58bff46625.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">makkk</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p>Hey great work.</p>
+<p>i used vim for administration for years and was very happy with.<br>
+now it came that i needed to do a lot of perl programming for a bigger 
+project and i tried lots of smaller and bigger IDEs but none could 
+provide me with what i needed: fast developing with a lightwight but 
+functional environment..</p>
+<p>as exploring vims capabillities i stumbled over your article and now i finally have what i need.</p>
+<p class="last-child">Thanks!</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2009-03-14T23:49">March 14, 2009, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-141309">11:49 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=141309#respond-p7494" onclick='return addComment.moveForm("comment-141309", "141309", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-156641">
+	<div class="div-comment" id="div-comment-156641">
+
+<div id="comment-156641" class="comment odd alt thread-odd thread-alt depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/605442f85418d858e2ce1e1aea2092bb.jpeg" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn"><a href="http://www.evancarroll.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.evancarroll.com']);" rel="external nofollow" class="url">Evan Carroll</a></cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">The folding section never explicitly mentions 
+perl_fold. I actually think perl_fold which you mentioned in passing is a
+ better way to enable perl folding then the foldmarker method described 
+under your Folding section.</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2011-01-14T22:37">January 14, 2011, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-156641">10:37 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=156641#respond-p7494" onclick='return addComment.moveForm("comment-156641", "156641", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-157536">
+	<div class="div-comment" id="div-comment-157536">
+
+<div id="comment-157536" class="comment even thread-even depth-1 hentry">
+	<address class="vcard author entry-title comment-author">
+		<span class="photo avatar"><img alt="" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/7888fca998a89887664e92c6b48c1e49.png" class="avatar avatar-48 photo" height="48" width="48"></span>
+<cite class="fn">Will</cite> <span class="says">says</span>	</address><!--.vcard-->
+
+	<div class="entry-content comment-content">
+<p class="last-child">Thank you so much!! I’ve been writing Perl in Vim for 10 years and this just blew my mind…</p>
+	</div><!--.entry-content-->
+	<div class="clear"></div>
+	<div class="comment-meta commentmetadata small">
+		<span class="date comment-date">
+			<abbr class="published" title="2011-03-03T13:58">March 3, 2011, <a title="Permanent link to this comment" rel="bookmark" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#comment-157536">1:58 pm</a></abbr>
+		</span><!--.date-->
+<a class="comment-reply-link" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/?replytocom=157536#respond-p7494" onclick='return addComment.moveForm("comment-157536", "157536", "respond-p7494", "7494")'>Reply</a>	</div>
+</div><!--.comment-->	</div>
+</li>
+</ol><h3 class="pings">Continuing the Discussion</h3>
+<ol class="pinglist commentlist hfeed">
+<li class="li-comment" id="li-comment-506">
+	<div class="div-comment" id="div-comment-506">
+<div id="div-ping-506" class="pingback even thread-even depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://mamchenkov.net/wordpress/2004/10/07/fixed-vim-for-perl-developers-for-konqueror/" rel="external nofollow" class="url">Blog of Leonid Mamchenkov  » Blog Archive   » Fixed ‘Vim for perl developers’ for Konqueror</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2005-04-12T22:15:41+0000">April 12, 2005</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://mamchenkov.net/wordpress/2004/10/07/fixed-vim-for-perl-developers-for-konqueror/"><p>[...]
+  » 		       		 			Fixed ‘Vim for perl developers’ for Konqueror 		  			
+		Vim for perl developers was terrible broken when viewed with 
+Konqueror.  I gu [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-922">
+	<div class="div-comment" id="div-comment-922">
+<div id="div-ping-922" class="pingback odd alt thread-odd thread-alt depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://sugare79.homeip.net:8080/%7Esugare/wordpress/?p=2" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://sugare79.homeip.net:8080/~sugare/wordpress/?p=2']);" rel="external nofollow" class="url">ëª¨ê¿ˆì?˜ ì¿µë”±ì¿µë”± ìž¥ë‚œê°? ê³µìž‘ì‹¤ » Blog of Leonid Mamchenkov Â» Blog Archive Â» Vim for Perl developers</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2005-06-17T03:34:49+0000">June 17, 2005</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://sugare79.homeip.net:8080/~sugare/wordpress/?p=2"><p>[...]
+ 	  			 6ì›” 17, 2005 at 9:34 am  			· Filed under development,  perl			
+			 		 			 				Blog of Leonid Mamchenkov Â» Blog Archive Â» Vim for Perl
+ developers Leonid M [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-5387">
+	<div class="div-comment" id="div-comment-5387">
+<div id="div-ping-5387" class="pingback even thread-even depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://www.3g888.com/blog/?p=58" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.3g888.com/blog/?p=58']);" rel="external nofollow" class="url">éª‘é©¬æ‰‡é£Ž » vi é¢œè‰²æ­é…</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2005-12-06T11:44:53+0000">December 6, 2005</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://www.3g888.com/blog/?p=58"><p>[...] vim for perl developers <a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/" rel="nofollow"></a><a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/">http://mamchenkov.net/wor.../v.....evelopers/</a>   &nbsp; [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-136849">
+	<div class="div-comment" id="div-comment-136849">
+<div id="div-ping-136849" class="pingback odd alt thread-odd thread-alt depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://blogs.cognifide.com/prozz/2008/02/04/vim-zen/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://blogs.cognifide.com/prozz/2008/02/04/vim-zen/']);" rel="external nofollow" class="url">prozz’s blog » Blog Archive » Vim Zen</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2008-02-04T14:42:42+0000">February 4, 2008</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://blogs.cognifide.com/prozz/2008/02/04/vim-zen/"><p>[...] Here you can find great article about Vim editing in practice. Recommended for nonbelievers. [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-138785">
+	<div class="div-comment" id="div-comment-138785">
+<div id="div-ping-138785" class="pingback even thread-even depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://khaidoan.wikidot.com/vim" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://khaidoan.wikidot.com/vim']);" rel="external nofollow" class="url">Personal Wiki for Khai: Vim</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2008-11-08T21:03:28+0000">November 8, 2008</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://khaidoan.wikidot.com/vim"><p>[...] perl-support <a href="http://www.linuxjournal.com/article/7581" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','www.linuxjournal.com/article/7581']);" rel="nofollow"></a><a href="http://www.linuxjournal.com/article/7581">http://www.linuxjournal.com/article/7581</a> <a href="http://www.perlmonks.org/index.pl?node_id=257782" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','www.perlmonks.org/index.pl?node_id=257782']);" rel="nofollow"></a><a href="http://www.perlmonks.org/index.pl?node_id=257782">http://www.perlmonks.org/index.pl?node_id=257782</a> <a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/" rel="nofollow"></a><a href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/">http://mamchenkov.net/wor.../v.....evelopers/</a> [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+
+<li class="li-comment" id="li-comment-138936">
+	<div class="div-comment" id="div-comment-138936">
+<div id="div-ping-138936" class="pingback odd alt thread-odd thread-alt depth-1 ping hentry">
+<cite class="vcard author fn entry-title"><a href="http://www.gudasoft.com/uncategorized/06/24/76/vim-vim-vim/2008" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.gudasoft.com/uncategorized/06/24/76/vim-vim-vim/2008']);" rel="external nofollow" class="url">Gudasoft » Blog Archive » Vim vim vim</a></cite> <span class="linked-to-this-post alt-font">linked to this post</span> 
+	<span class="date alt-font">
+		<span class="on">on</span> <abbr class="published" title="2008-12-22T13:03:14+0000">December 22, 2008</abbr>
+	</span>
+	<blockquote class="entry-summary" cite="http://www.gudasoft.com/uncategorized/06/24/76/vim-vim-vim/2008"><p>[...] configuring vim and nice screenshots tutorial [...]</p>
+</blockquote> 
+	</div><!--.ping-->	</div>
+</li>
+</ol>
+<div id="respond-p7494">
+	<form action="http://mamchenkov.net/wordpress/wp-comments-post.php" method="post" class="comment-form">
+		<p class="comment-form-comment tight">
+		<label class="h3" for="comment-p7494">Leave a Reply <em id="cancel-comment-reply"><a rel="nofollow" id="cancel-comment-reply-link-p7494" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/#respond-p7494" style="display: none;">Cancel</a></em></label>
+			<br class="lofi">
+			<span class="comment-form-comment-area">
+				<textarea id="comment-p7494" name="comment" rows="8" cols="40"></textarea><br>
+				<em class="some-html-is-ok"><abbr title="You can use: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; ">Some HTML is OK</abbr></em>
+			</span>
+		</p>
+		<p class="comment-form-user-info tight">
+			<input id="author-p7494" name="author" size="22" type="text">
+			<label for="author-p7494">Name <em>(required)</em></label>
+		</p><!--/name-->
+		<p class="comment-form-user-info tight">
+			<input id="email-p7494" name="email" size="22" type="text">
+			<label for="email-p7494">Email  <em>(required, but never shared)</em></label>
+		</p><!--/email-->
+		<p class="comment-form-user-info tight">
+			<input id="url-p7494" name="url" size="22" type="text">
+			<label title="Your website address" for="url-p7494">Web</label>
+		</p><!--/url-->
+		<p class="tight">
+			<input name="submit" value="Post comment" type="submit">
+			<span class="comment-form-trackback">or, reply to this post via <a rel="trackback" href="http://mamchenkov.net/wordpress/2004/05/10/vim-for-perl-developers/trackback/">trackback</a>.</span>
+		</p>
+<input name="comment_post_ID" value="7494" id="comment_post_ID_p7494" type="hidden">
+<input name="comment_parent" id="comment_parent_p7494" value="0" type="hidden">
+<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="6011b4ecfb" type="hidden"></p>
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" type="checkbox">
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+	</form>
+</div>
+	</div><!--#comments-->
+
+	<div class="pagination-single">
+		<span class="previous">« <a href="http://mamchenkov.net/wordpress/2004/05/09/propaganda-posters/" rel="prev">Propaganda Posters</a></span>
+		<span class="next"><a href="http://mamchenkov.net/wordpress/2004/05/10/the-lens-is-here/" rel="next">The lens is here!!!</a> »</span>
+	</div>
+
+</div><!--#content-->
+
+<hr class="lofi">
+<div id="sidebar">
+	<div id="carrington-subscribe" class="widget">
+		<h2 class="widget-title">Subscribe</h2>
+		<a class="feed alignright" title="RSS 2.0 feed for posts" rel="alternate" href="http://mamchenkov.net/wordpress/feed/">
+			<img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/rss-button.gif" alt="Blog of Leonid Mamchenkov latest posts" title="Blog of Leonid Mamchenkov latest posts">
+		</a>
+	</div><!--.widget-->
+
+	<div id="adsense-sidebar" class="widget" style="text-align: center;">
+	<!-- Insert your adsense code for a 336x280 rectangle right under here -->
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-5154089190398877";
+	/* 336x280, created 7/17/09, mamchenkov.net */
+	google_ad_slot = "0157766196";
+	google_ad_width = 336;
+	google_ad_height = 280;
+	//-->
+	</script>
+	<script type="text/javascript" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/show_ads.js">
+	</script><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/show_ads_impl.js"></script><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/expansion_embed.js"></script><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/test_domain.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><ins id="google_ads_frame1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px"><iframe allowtransparency="true" hspace="0" id="google_ads_frame1" marginheight="0" marginwidth="0" name="google_ads_frame" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/ads.html" style="left: 0pt; position: absolute; top: 0pt;" vspace="0" frameborder="0" height="280" scrolling="no" width="336"></iframe></ins></ins>
+	</div>
+
+	<div id="picasa-photo" class="widget">
+		<h2 class="widget-title">Mobile photos</h2>
+		<p>These are a few latest photos from the <a href="https://picasaweb.google.com/leonid.mamchenkov/DropBox#">Drop Box</a> folder at my <a href="https://picasaweb.google.com/leonid.mamchenkov/">Google Picasa Web Albums</a>. Mostly I take these pictures with my phone camera and upload as soon as I get a chance.</p>
+
+		<style>
+		#picasaStream {text-align: center;}
+		#picasaStream img {border: 1px solid #000; margin: 0 5px 5px 0;}
+		</style>
+		<script type="text/javascript">
+			$j = jQuery.noConflict();
+			$j(document).ready(function(){
+			$j.getJSON("http://picasaweb.google.com/data/feed/base/user/leonid.mamchenkov/album/DropBox/?kind=photo&thumbsize=72c&access=public&alt=json&callback=?",
+					function(data){
+					  var thumbCount = 8;
+					  var smallThumb = 0;
+					  var mediumThumb = 1;
+					  var largeThumb = 2;
+					  var picsCount = data.feed.entry.length - 1;
+					  for (var i = picsCount; i > picsCount - thumbCount; i--) {
+							var pic = data.feed.entry[i];
+							$j("<img/>").attr("src", pic.media$group.media$thumbnail[smallThumb].url).appendTo("#picasaStream");
+					  }
+					  });
+					});
+		</script>
+		<div id="picasaStream"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1303039397835.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1303037997944.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302708441359.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302707564658.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302707234655.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302633201402.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302545312924.jpg"><img src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/shot_1302445561797.jpg"></div>	
+	</div>
+
+	<div id="primary-sidebar">
+<div id="recent-comments-3" class="widget widget_recent_comments"><h2 class="widget-title">Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a> on <a href="http://mamchenkov.net/wordpress/2011/04/21/no-more-cyprus-id-cards-for-foreigners-whats-the-problem/comment-page-1/#comment-157998">No more Cyprus ID cards for foreigners. What’s the problem?</a></li><li class="recentcomments">habib on <a href="http://mamchenkov.net/wordpress/2011/04/21/no-more-cyprus-id-cards-for-foreigners-whats-the-problem/comment-page-1/#comment-157997">No more Cyprus ID cards for foreigners. What’s the problem?</a></li><li class="recentcomments">Dario Fumagalli on <a href="http://mamchenkov.net/wordpress/2008/06/05/follow-up-to-where-did-all-the-php-programmers-go/comment-page-1/#comment-157993">Follow-up to “Where did all the PHP programmers go?”</a></li><li class="recentcomments">Ivan on <a href="http://mamchenkov.net/wordpress/2011/03/02/gmail-glitch-an-example-to-follow/comment-page-1/#comment-157991">Gmail glitch – an example to follow</a></li><li class="recentcomments"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a> on <a href="http://mamchenkov.net/wordpress/2011/04/15/amazon-bloopers-the-end-of-printed-media/comment-page-1/#comment-157983">Amazon Bloopers : The end of printed media</a></li><li class="recentcomments"><a href="http://www.fasolaki.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.fasolaki.com']);" rel="external nofollow" class="url">chrys</a> on <a href="http://mamchenkov.net/wordpress/2011/04/15/amazon-bloopers-the-end-of-printed-media/comment-page-1/#comment-157982">Amazon Bloopers : The end of printed media</a></li><li class="recentcomments"><a href="http://mamchenkov.net/" rel="external nofollow" class="url">Leonid Mamchenkov</a> on <a href="http://mamchenkov.net/wordpress/2011/04/15/33-down-66-to-go/comment-page-1/#comment-157981">33 down, 66 to go</a></li><li class="recentcomments"><a href="http://www.singeridis.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.singeridis.com']);" rel="external nofollow" class="url">Sergios Singeridis</a> on <a href="http://mamchenkov.net/wordpress/2011/04/15/33-down-66-to-go/comment-page-1/#comment-157980">33 down, 66 to go</a></li><li class="recentcomments"><a href="http://www.cypruswebcraze.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-commentauthor','http://www.cypruswebcraze.com']);" rel="external nofollow" class="url">Roman</a> on <a href="http://mamchenkov.net/wordpress/2011/04/15/33-down-66-to-go/comment-page-1/#comment-157979">33 down, 66 to go</a></li><li class="recentcomments">Alexey on <a href="http://mamchenkov.net/wordpress/2011/04/15/33-down-66-to-go/comment-page-1/#comment-157978">33 down, 66 to go</a></li></ul><div class="clear"></div></div><div id="on-this-day" class="widget OTDRenderWidget"><h2 class="widget-title">
+On this day...</h2><ul>
+<li>2010: <a href="http://mamchenkov.net/wordpress/2010/05/10/day-in-brief/">Day in brief</a></li>
+<li>2010: <a href="http://mamchenkov.net/wordpress/2010/05/10/date-night/">Date Night</a></li>
+<li>2006: <a href="http://mamchenkov.net/wordpress/2006/05/10/certificate-of-naturalization/">Certificate of Naturalization</a></li>
+<li>2006: <a href="http://mamchenkov.net/wordpress/2006/05/10/flickr-is-getting-even-sweeter/">Flickr is getting even sweeter</a></li>
+<li>2006: <a href="http://mamchenkov.net/wordpress/2006/05/10/daily-del-icio-us-bookmarks/">Daily del.icio.us bookmarks</a></li>
+<li>2005: <a href="http://mamchenkov.net/wordpress/2005/05/10/new-tyres/">New tyres</a></li>
+<li>2005: <a href="http://mamchenkov.net/wordpress/2005/05/10/parking-lot/">Parking lot</a></li>
+<li>2005: <a href="http://mamchenkov.net/wordpress/2005/05/10/wordpress-151-is-out/">WordPress 1.5.1 is out!</a></li>
+<li>2004: <a href="http://mamchenkov.net/wordpress/2004/05/10/quote-of-the-day/">Quote of the day</a></li>
+<li>2004: <a href="http://mamchenkov.net/wordpress/2004/05/10/photojournalism/">Photojournalism</a></li>
+<li>2004: <a href="http://mamchenkov.net/wordpress/2004/05/10/the-lens-is-here/">The lens is here!!!</a></li>
+<li>2003: <a href="http://mamchenkov.net/wordpress/2003/05/10/high-school-flashback/">High school flashback</a></li>
+
+</ul><div class="clear"></div></div><div id="linkcat-5" class="widget widget_links"><h2 class="widget-title">On the web</h2>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.google.com/profiles/leonid.mamchenkov" rel="me" title="Google Profile for Leonid Mamchenkov : links to my web personalities, latest photos, updates, and more." target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.google.com/profiles/leonid.mamchenkov']);">Google Profile</a></li>
+<li><a href="http://en.gravatar.com/mamchenkov" rel="me" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://en.gravatar.com/mamchenkov']);">Gravatar Profile</a></li>
+
+	</ul>
+<div class="clear"></div></div>
+<div id="linkcat-2" class="widget widget_links"><h2 class="widget-title">Personal</h2>
+	<ul class="xoxo blogroll">
+<li><a href="http://alex.mamchenkov.net/" rel="friend met co-worker colleague sibling" title="My brother" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://alex.mamchenkov.net']);">Alexander Mamchenkov</a></li>
+<li><a href="http://blog.yudichev.net/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://blog.yudichev.net/']);">Alexey Yudichev</a></li>
+<li><a href="http://shvach.livejournal.com/" rel="acquaintance met" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://shvach.livejournal.com/']);">Andrey Shvachko</a></li>
+<li><a href="http://j4vk.com/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://j4vk.com']);">Andrey Vystavkin</a></li>
+<li><a href="http://blog.ergatides.com/" rel="friend met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://blog.ergatides.com/']);">Christakis Ergatides</a></li>
+<li><a href="http://kouloumbris.com/weblog" rel="acquaintance met" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://kouloumbris.com/weblog']);">Constantinos Kouloumbris</a></li>
+<li><a href="http://dimonf.com/" rel="friend met" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://dimonf.com/']);">Dmitry Kurbatsky</a></li>
+<li><a href="http://www.g1978.com/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.g1978.com/']);">George Stylianou</a></li>
+<li><a href="http://sabletooth.com/" rel="friend met" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://sabletooth.com/']);">Lana Kurbatsky</a></li>
+<li><a href="http://www.shuvalov.com/blog/" rel="friend met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.shuvalov.com/blog/']);">Lev Shuvalov</a></li>
+<li><a href="http://lock-stock-rock.com/" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://lock-stock-rock.com']);">Lock Stock rock band</a></li>
+<li><a href="http://abssssent.livejournal.com/" rel="acquaintance met" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://abssssent.livejournal.com/']);">Maria Stepanova</a></li>
+<li><a href="http://www.stepanoff.org/wordpress/" rel="friend met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.stepanoff.org/wordpress/']);">Michael Stepanov</a></li>
+<li><a href="http://na-talie.livejournal.com/" rel="acquaintance met" title="My cousine-in-law" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://na-talie.livejournal.com/']);">Nataly Babenko</a></li>
+<li><a href="http://roger.polish-programmers.com/" rel="contact met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://roger.polish-programmers.com/']);">Roger Obeid</a></li>
+<li><a href="http://www.cypruswebcraze.com/" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.cypruswebcraze.com/']);">Roman Horwarth</a></li>
+<li><a href="http://svyatogor.livejournal.com/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://svyatogor.livejournal.com']);">Sergey Kuleshov</a></li>
+<li><a href="http://dyrdine.com/blog/" rel="friend met co-worker" title="Personal blog of Slava Dyrdine" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://dyrdine.com/blog/']);">Slava Dyrdine</a></li>
+<li><a href="http://asaliev.com/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://asaliev.com']);">Timur Asaliev</a></li>
+<li><a href="http://www.economide.com/" rel="acquaintance met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.economide.com/']);">Titos Economides</a></li>
+<li><a href="http://hazardous-area.org/" rel="friend met co-worker colleague" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://hazardous-area.org/']);">Vladimir Ivaschenko</a></li>
+<li><a href="http://zinaida.mamchenkov.net/" rel="friend met parent" title="My mother" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://zinaida.mamchenkov.net']);">Zinaida Mamchenkova</a></li>
+
+	</ul>
+<div class="clear"></div></div>
+<div id="linkcat-2273" class="widget widget_links"><h2 class="widget-title">Worked for</h2>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.fxcc.com/" title="FX Central Clearing Ltd is a young ECN Forex broker" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.fxcc.com']);">FXCC</a></li>
+<li><a href="https://www.fxpro.com/" title="Fxpro is one of the worldwide leaders in Forex industry" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','https://www.fxpro.com/']);">FxPro</a></li>
+<li><a href="http://infinity.com.cy/" title="Infinity Creations Ltd is a part of Tototheo Group of Comanies. It provides IT solutions to maritime industry." target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://infinity.com.cy']);">Infinity Creations Ltd</a></li>
+<li><a href="http://www.virtualict.com/" title="mmVirtual is one of the leading companies in Cyprus for web design and development" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.virtualict.com']);">mmVirtual</a></li>
+<li><a href="http://www.prime-tel.com/" title="PrimeTel is one of the two biggest Internet Service Providers (ISP) in Cyprus" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://www.prime-tel.com/']);">PrimeTel</a></li>
+<li><a href="http://tototheo.com/" title="Tototheo Group offers a number of services in maritime industry – IT, technical support, hardware, certification, etc" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://tototheo.com']);">Tototheo Group</a></li>
+<li><a href="http://traders-trust.com/" title="A young company offering brokerage services in Forex trading" target="" onclick="javascript:_gaq.push(['_trackEvent','outbound-blogroll','http://traders-trust.com']);">Traders Trust</a></li>
+
+	</ul>
+<div class="clear"></div></div>
+	</div><!-- #primary-sidebar-->
+	<div id="secondary-sidebar">
+<div id="text-2" class="widget widget_text"><h2 class="widget-title">Where am I?</h2>			<div class="textwidget"><!-- Google Public Location Badge -->
+<iframe src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/api.html" frameborder="0" height="300" width="180"></iframe>
+<!-- To disable location sharing, you *must* visit https://www.google.com/latitude/apps/badge and disable the Google Public Location badge. Removing this code snippet is not enough! --></div>
+		<div class="clear"></div></div><div id="google-reader" class="widget widget_googlereader"><h2 class="widget-title">What am I reading?</h2><ul><li style="list-style-type: none;"><a href="http://feedproxy.google.com/%7Er/OfficialGmailBlog/%7E3/Y0yi1OTnRcI/long-label-names-in-gmail.html">Long label names in Gmail</a> (<a href="http://gmailblog.blogspot.com/">Gmail Blog</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/cyprus/i-needed-18000-firecrackers-train-my-dogs-your-honour/20110421">‘I needed 18,000 firecrackers to train my dogs Your Honour’</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/veterinary-services/more-chickens-and-eggs-destroyed/20110421">More chickens and eggs destroyed</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/butchers/our-view-bloody-mark/20110421">Our View: A bloody mark-up</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/cyprus/cyprus-id-cards-axed-non-cypriots/20110421">Cyprus ID cards axed for non-Cypriots</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/cyprus/temperatures-fall-week/20110419">Temperatures to fall this week</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://blog.cheapvps.co.uk/index.php/2011/04/19/ipv6/">IPv6</a> (<a href="http://blog.cheapvps.co.uk/">CheapVPS Blog</a>)</li><li style="list-style-type: none;"><a href="http://beta.cyprus-mail.com/cyprus/mystery-over-why-id-cards-stopped-non-cypriots/20110417">Mystery over why ID cards stopped for non Cypriots</a> (<a href="http://beta.cyprus-mail.com/">Cyprus Mail</a>)</li><li style="list-style-type: none;"><a href="http://feedproxy.google.com/%7Er/FavoriteBrowser/%7E3/_xAtN5-afcQ/">The History of Web Browsers (Picture)</a> (<a href="http://www.favbrowser.com/">Web Browser News and Reviews</a>)</li><li style="list-style-type: none;"><a href="http://gnu.wildebeest.org/blog/mjw/2011/04/15/apnic-ipv4-address-pool-reaches-final-8/">Mark J. Wielaard: APNIC IPv4 Address Pool Reaches Final /8</a> (<a href="http://fedoraproject.org/people/">Fedora People</a>)</li><li><a href="http://www.google.com/reader/shared/07999229136931587254">more...</a></li>
+</ul>
+<div class="clear"></div></div><div id="lastfm-1" class="widget widget_lastfm"><h2 class="widget-title"><a href="http://last.fm/user/mamchenkov" class="lastfm_title_link">What am I listening to?</a></h2><ul class="lastfm"><li class="lastfm-item"><a href="http://www.last.fm/music/Powerman+5000/_/Automatic" class="lastfm-link">Powerman 5000 – Automatic</a> <span class="lastfm-timestamp"><abbr title="2011/04/17 21:41:14">2011/04/17</abbr></span></li><li class="lastfm-item"><a href="http://www.last.fm/music/One+Minute+Silence/_/Fistful+of+Nothing" class="lastfm-link">One Minute Silence – Fistful of Nothing</a> <span class="lastfm-timestamp"><abbr title="2011/04/17 21:36:34">2011/04/17</abbr></span></li><li class="lastfm-item"><a href="http://www.last.fm/music/%D0%9D%D0%BE%D0%B3%D1%83+%D0%A1%D0%B2%D0%B5%D0%BB%D0%BE%21/_/280+Days" class="lastfm-link">Ногу Свело! – 280 Days</a> <span class="lastfm-timestamp"><abbr title="2011/04/17 21:33:00">2011/04/17</abbr></span></li><li class="lastfm-item"><a href="http://www.last.fm/music/Microwave+Dave+And+The+Nukes/_/Road+Runner" class="lastfm-link">Microwave Dave And The Nukes – Road Runner</a> <span class="lastfm-timestamp"><abbr title="2011/04/17 21:28:25">2011/04/17</abbr></span></li><li class="lastfm-item"><a href="http://www.last.fm/music/Marilyn+Manson/_/Ka-Boom+Ka-Boom" class="lastfm-link">Marilyn Manson – Ka-Boom Ka-Boom</a> <span class="lastfm-timestamp"><abbr title="2011/04/17 21:22:49">2011/04/17</abbr></span></li></ul><div class="clear"></div></div><div id="search-3" class="widget widget_search"><form role="search" method="get" id="searchform" action="http://mamchenkov.net/wordpress/">
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input name="s" id="s" type="text">
+	<input id="searchsubmit" value="Search" type="submit">
+	</div>
+	</form><div class="clear"></div></div>	</div><!-- #secondary-sidebar-->
+	<div class="clear"></div>
+</div><!-- #sidebar-->
+			<div class="clear"></div>
+			</div><!-- .wrapper -->
+		</div><!-- #main -->
+		<hr class="lofi">
+		<div id="footer" class="section">
+			<div class="wrapper">		
+				<p id="generator-link">Proudly powered by <a href="http://wordpress.org/" rel="generator">WordPress</a> and <a href="http://carringtontheme.com/" title="Carrington theme for WordPress">Carrington</a>.</p>
+				<p id="developer-link"><a href="http://crowdfavorite.com/" title="Custom WordPress development, design and backup services." rel="developer designer">Carrington Theme by Crowd Favorite</a></p>
+			</div><!--.wrapper-->
+		</div><!--#footer -->
+	</div><!--#page-->
+	<!--stats_footer_test--><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/e-201116.js" type="text/javascript"></script><script src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/quant.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({blog:'1603900',v:'ext',post:'7494'});
+var load_cmc = function(){linktracker_init(1603900,7494,2);};
+if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+else load_cmc();
+</script><img id="wpstats" src="Vim%20for%20Perl%20developers%20%E2%80%93%20Blog%20of%20Leonid%20Mamchenkov_files/g.gif" alt="">
+
+
+<div style="display: none;" id="stimuli_overlay"></div><div style="display: none;" id="stimuli_lightbox"><div style="width: 250px; height: 250px;" id="stimuli_outerImageContainer"><div id="stimuli_imageContainer"><img id="stimuli_lightboxImage"><div id="stimuli_hoverNav"><a href="#" id="stimuli_prevLink"></a><a href="#" id="stimuli_nextLink"></a></div><div id="stimuli_loading"><a href="#" id="stimuli_loadingLink"></a></div></div></div><div id="stimuli_imageDataContainer"><div id="stimuli_imageData"><div id="stimuli_imageDetails"><span id="stimuli_caption"></span><span id="stimuli_numberDisplay"></span></div><div id="stimuli_bottomNav"><a href="#" id="stimuli_bottomNavClose"></a></div></div></div></div></body></html>

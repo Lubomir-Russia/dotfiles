@@ -49,6 +49,9 @@ map <leader>tm :tabmove
 "vnoremap ; :
 "vnoremap : ;
 
+" Use perl compiler for all *.pl and *.pm files.
+autocmd BufNewFile,BufRead *.p? compiler perl
+
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
 

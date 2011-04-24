@@ -1,0 +1,63 @@
+/**
+ * wrapper
+ * IMPORTANT: Do NOT add _width_ here, they are defined dynmically by the plugin!
+ */
+#twitpic {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/* follow me button */
+#twitpic strong {
+  display: block;
+  padding: 0;
+  text-align: center;
+}
+#twitpic strong a.twitter {
+  background: #fff url(../img/twitter.gif) left no-repeat;
+  padding-left: 24px !important;
+  font-family: Arial;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #666;
+  font-weight: bold;
+  font-size: 16px;
+}
+#twitpic strong a.twitpic {
+  background: #fff url(../img/twitpic.gif) left no-repeat;
+  padding-left: 24px !important;
+  font-family: Arial;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #666;
+  font-weight: bold;
+  font-size: 16px;
+}
+/* footer */
+.twitpic-footer, .twitpic-footer a:link, .twitpic-footer a:active, .twitpic-footer a:visited, .twitpic-footer a:hover {
+  text-decoration: none !important;
+  background: none !important;
+  color: #aaa !important;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 9px;
+}
+
+/* embedded images */
+.twitpic {
+  border: 10px solid #fff;
+}
+.twitpic img {
+  border: 0;
+}
+.twitpic small, .twitpic small a {
+  color: #ccc;
+  text-decoration: none;
+  border-bottom: 1px dashed #ccc;
+}
