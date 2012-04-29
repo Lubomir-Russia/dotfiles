@@ -75,7 +75,7 @@ fi
 
 # As above but in three lines
 
-export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
+# export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
 
 # Prompt with indicator :) or :( depending on result of prev. command
 # export PS1='\u@\h `smiley` \w\n\$ '
@@ -97,3 +97,14 @@ export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
 # reset=$(tput sgr0)
 # PS1=’\[$red\]\u\[$reset\]@\[$green\]\h\[$reset\]:\[$blue\]\w\[$reset\]\$ ‘
 #    
+
+# FROM COOL bashrc
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+PATH=/usr/class/cs143/cool/bin:$PATH
