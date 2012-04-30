@@ -1,0 +1,15 @@
+Welcome to Tips and Hints
+
+= Howto and Tips =
+
+* [[VIM_HowTo|Vim Howto]]
+* [[GIT_HowTo|Git Howto]]
+* [[Bash_Tips|Bash Tips]]
+* [[Screen_tips|Screen Tips]]
+
+= Configuration files =
+
+* [[ini_files/vimrc|.vimrc]]
+
+
+

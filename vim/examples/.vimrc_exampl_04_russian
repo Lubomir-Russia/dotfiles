@@ -1,0 +1,230 @@
+"Copyed from http://www.dimio.org/fajl-nastrojki-vim-vimrc-dlya-linux-i-windows.html
+"НАСТРОЙКИ ВНЕШНЕГО ВИДА И БАЗОВЫЕ НАСТРОЙКИ РЕДАКТОРА
+set nocompatible " отключить режим совместимости с классическим Vi
+syntax on " включить подсветку синтаксиа
+filetype plugin indent on " определять подсветку на основе кода файла
+set scrolloff=3 " сколько строк внизу и вверху экрана показывать при скроллинге
+set background=dark " установить цвет фона
+colorscheme af " цветовая схемо по умолчанию (при вводе в режиме команд по табуляции доступно автодополнение имён схем)
+set wrap " перенос длинных строк
+set lbr " переносить целые слова
+set hidden " не выгружать буфер когда переключаешься на другой
+set mouse=a " включает поддержку мыши при работе в терминале (без GUI)
+set mousehide " скрывать мышь в режиме ввода текста
+set showcmd " показывать незавершенные команды в статусбаре (автодополнение ввода)
+set matchpairs+=<:> " показывать совпадающие скобки для HTML-тегов
+set showmatch " показывать первую парную скобку после ввода второй
+set autoread " перечитывать изменённые файлы автоматически
+set t_Co=256 " использовать больше цветов в терминале
+set confirm " использовать диалоги вместо сообщений об ошибках
+"" Автоматически перечитывать конфигурацию VIM после сохранения
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+"" Формат строки состояния
+set statusline=%F%m%r%h%w\ [FORM,ENC=%{&amp;amp;ff},%{&amp;amp;encoding}\]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set laststatus=2 " всегда показывать строку состояния
+"" Подсвечивать табы и пробелы в конце строки
+set list " включить подсветку
+set listchars=tab:>-,trail:- " установить символы, которыми будет осуществляться подсветка
+"" Прыгать на последнюю позицию при открытии буфера
+autocmd! bufreadpost * call LastPosition()
+    function! LastPosition()
+        if line("'\"") && line("'\"")<=line('$')
+            normal! `"
+        endif
+    endfunction
+set backspace=indent,eol,start " backspace обрабатывает отступы, концы строк
+set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущию директорию, использовать буферы и табы
+set noswapfile " не использовать своп-файл (в него скидываются открытые буферы)
+set browsedir=current
+set visualbell " вместо писка бипером показывать это на экране
+" При вставке фрагмента сохраняет отступы
+set pastetoggle=
+
+"НАСТРОЙКИ ПОИСКА
+set ignorecase " ics - поиск без учёта регистра символов
+set smartcase " - если искомое выражения содержит символы в верхнем регистре - ищет с учётом регистра, иначе - без учёта
+set hls " подсветка результатов поиска
+set incsearch " поиск фрагмента по мере его набора
+
+"НАСТРОЙКИ СВОРАЧИВАНИЯ БЛОКОВ КОДА (фолдинг)
+set foldenable " включить фолдинг
+set foldmethod=syntax " определять блоки на основе синтаксиса файла
+set foldcolumn=3 " показать полосу для управления сворачиванием
+set foldlevel=1 " Первый уровень вложенности открыт, остальные закрыты
+let perl_folding=1 " правильное сворачивание классов и функций Perl
+let php_folding=1 " правильное сворачивание классов и функций PHP
+set foldopen=all " автоматическое открытие сверток при заходе в них
+
+"НАСТРОЙКИ ОТСТУПА
+set shiftwidth=4 " размер отступов
+set tabstop=3 " ширина табуляции
+set softtabstop=3 " ширина 'мягкого' таба
+set autoindent " ai - включить автоотступы
+set cindent " ci - отступы в стиле С
+set expandtab " Преобразовать табуляцию в пробелы
+set smartindent " Умные отступы (например, автоотступ после {)
+" Для указанных типов файлов отключает замену табов пробелами и меняет ширину отступа
+au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
+
+"НАСТРОЙКИ РАБОТЫ С ФАЙЛАМИ
+"Кодировка редактора по умолчанию (при открывании все файлы приводятся к этой кодировке)
+if has('win32')
+    set encoding=cp1251
+else
+    set encoding=utf-8
+    set termencoding=utf-8
+endif
+set ffs=unix,dos,mac " формат файла по умолчанию (влияет на окончания строк) - будет перебираться в указанном порядке
+set fencs=utf-8,cp1251,koi8-r,cp866 " варианты кодировки файла по умолчанию (все файлы по умолчанию сохраняются в этой кодировке)
+"" Применять типы файлов
+filetype on
+filetype plugin on
+filetype indent on
+"" Если сохраняемый файл является файлом скрипта - сделать его исполняемым
+"" au BufWritePost * if getline(1) =~ "^#!.*/bin/"|silent !chmod a+x %|endif
+"" При открытии файла задавать для него соответствующий 'компилятор'
+autocmd! BufEnter *.pl compiler perl
+
+"НАСТРОЙКИ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
+if has('win32')
+    let $VIMRUNTIME = $HOME.'\Programs\Vim\vim72'
+    source $VIMRUNTIME/mswin.vim
+else
+    let $VIMRUNTIME = $HOME.'/.vim'
+endif
+
+"НАСТРОЙКИ ВНЕШНЕГО ВИДА
+"" Установка шрифта (для Windows и Linux)
+if has('gui')
+   if has('win32')
+    set guifont=Lucida_Console:h10:cRUSSIAN::
+   else
+    set guifont=Terminus\ 10
+   endif
+endif
+"" Разворачивать окно редактора на весь экран
+if has('gui')
+    set guioptions-=T " отключить меню в GUI
+    au GUIEnter * :set lines=99999 columns=99999
+endif
+
+"НАСТРОЙКИ РЕЗЕРВНОГО КОПИРОВАНИЯ
+set backup " включить сохранение резервных копий
+autocmd! bufwritepre * call BackupDir() " сделаем резервную копию перед записью буффера на диск
+"" Сохранять умные резервные копии ежедневно
+function! BackupDir()
+   " определим каталог для сохранения резервной копии
+   if has('win32')
+        let l:backupdir = $VIMRUNTIME.'\backup'
+    else
+        let l:backupdir = $VIMRUNTIME.'/backup/'.
+            \substitute(expand('%:p:h'), '^'.$HOME, '~', '')
+    endif
+   " если каталог не существует, создадим его рекурсивно
+   if !isdirectory(l:backupdir)
+      call mkdir(l:backupdir, 'p', 0700)
+   endif
+   " переопределим каталог для резервных копий
+   let &amp;amp;backupdir=l:backupdir
+   " переопределим расширение файла резервной копии
+   let &amp;amp;backupext=strftime('~%Y-%m-%d~')
+endfunction
+
+"НАСТРОЙКИ ПЕРЕКЛЮЧЕНИЯ РАСКЛАДОК КЛАВИАТУРЫ
+"" Взято у konishchevdmitry
+set keymap=russian-jcukenwin " настраиваем переключение раскладок клавиатуры по <C-^>
+set iminsert=0 " раскладка по умолчанию - английская
+function! MyKeyMapHighlight()
+    if &amp;amp;iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
+        hi StatusLine ctermfg=Gray guifg=Gray
+    else " а при русской - зеленого.
+        hi StatusLine ctermfg=DarkGreen guifg=DarkGreen
+    endif
+endfunction
+call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
+au WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
+cmap <silent> <C-F> <C-^> " использовать Ctrl+F для переключения раскладок
+imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+
+"ВКЛЮЧЕНИЕ АВТОДОПЛНЕНИЯ ВВОДА (omnifunct)
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType tt2html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+
+"НАСТРОЙКИ ГОРЯЧИХ КЛАВИШ
+" F2 - сохранить файл
+nmap <F2> :w<cr>
+vmap <F2> <esc>:w<cr>i
+imap <F2> <esc>:w<cr>i
+" F5 - просмотр списка буферов
+nmap <F5> <Esc>:buffers<cr>
+vmap <F5> <esc>:buffers<cr>
+imap <F5> <esc><esc>:buffers<cr>
+" F6 - предыдущий буфер
+map <F6> :bp<cr>
+vmap <F6> <esc>:bp<cr>i
+imap <F6> <esc>:bp<cr>i
+" F7 - следующий буфер
+map <F7> :bn<cr>
+vmap <F7> <esc>:bn<cr>i
+imap <F7> <esc>:bn<cr>i
+" F9 - сохранение файла и запуск компиляции (make)
+map <F9> :w<cr>:make<cr>
+vmap <F9> <esc>:w<cr>:make<cr>i
+imap <F9> <esc>:w<cr>:make<cr>i
+" F10 - включить-выключить браузер структуры документа (TagList)
+map <F10> :TlistToggle<cr>
+vmap <F10> <esc>:TlistToggle<cr>
+imap <F10> <esc>:TlistToggle<cr>
+" F11 - включить-выключить нумерацию строк
+imap <F11> <Esc>:set<Space>nu!<CR>a
+nmap <F11> :set<Space>nu!<CR>
+" F12 - обозреватель файлов (:Ex для стандартного обозревателя, плагин NERDTree -
+" дерево каталогов)
+map <F12> :NERDTreeToggle<cr>
+vmap <F12> <esc>:NERDTreeToggle<cr>i
+imap <F12> <esc>:NERDTreeToggle<cr>i
+"" Переключение табов (вкладок)
+map <S-tab> :tabprevious<cr>
+nmap <S-tab> :tabprevious<cr>
+imap <S-tab> <ESC>:tabprevious<cr>i
+map <C-tab> :tabnext<cr>
+nmap <C-tab> :tabnext<cr>
+imap <C-tab> <ESC>:tabnext<cr>i
+nmap <C-t> :tabnew<cr>
+imap <C-t> <ESC>:tabnew<cr>
+nmap <C-w> :tabclose<cr>
+imap <C-w> <ESC>:tabclose<cr>
+"" Переключение кодировок файла
+set wildmenu
+set wcm=<Tab>
+menu Encoding.CP1251   :e ++enc=cp1251<CR>
+menu Encoding.CP866    :e ++enc=cp866<CR>
+menu Encoding.KOI8-U   :e ++enc=koi8-u<CR>
+menu Encoding.UTF-8    :e ++enc=utf-8<CR>
+map <F8> :emenu Encoding.<TAB>
+" C(trl)+d - дублирование текущей строки
+imap <C-d> <esc>yypi
+" Ctrl-пробел для автодополнения
+inoremap <C-space> <C-x><C-o>
+" C-e - комментировать/раскомментировать (при помощи NERD_Comment)
+map <C-e> ,ci
+nmap <C-e> ,ci
+imap <C-e> <ESC>,cii
+"" Вырезать-копировать-вставить через Ctrl
+vnoremap <C-X> "+x " CTRL-X - вырезать
+vnoremap <C-C> "+y  " CTRL-C - копировать
+map <C-V>      "+gP " CTRL-V вставить под курсором
+"" Отменить-вернуть через Ctrl
+noremap <C-Z> u " отмена действия
+inoremap <C-Z> <C-O>u
+noremap <C-Y> <C-R> " вернуть отменённое назад
+inoremap <C-Y> <C-O><C-R>
+

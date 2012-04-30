@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Git Howto</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+<strong>Git Howto</strong>
+<div class="toc">
+<ul>
+<li><a href="#toc_1">Pull and Clone</a>
+<ul>
+<li><a href="#toc_1.1">from another locol dir</a>
+<li><a href="#toc_1.2">from remote/local ssh server</a>
+<li><a href="#toc_1.3">from remote git server</a>
+<li><a href="#toc_1.4">from remote public git server over http</a>
+<li><a href="#toc_1.5">from remote private git server or with push access over https</a>
+</ul>
+<li><a href="#toc_2">Nice PS1</a>
+</ul>
+</div>
+</p>
+
+<h1 id="toc_1">Pull and Clone</h1>
+
+<h2 id="toc_1.1">from another locol dir</h2>
+<blockquote>
+bob$ git clone /home/alice/project myrepo
+</blockquote>
+<h2 id="toc_1.2">from remote/local ssh server</h2>
+<blockquote>
+bob$ git clone 10.64.74.71:/root/bin/dotfiles
+</blockquote>
+<blockquote>
+bob$ git clone root@127.0.0.1:/root/bin/dotfiles
+</blockquote>
+<blockquote>
+bob$ git clone alice.org:/home/alice/project myrepo
+</blockquote>
+<h2 id="toc_1.3">from remote git server</h2>
+<blockquote>
+$ git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
+</blockquote>
+<h2 id="toc_1.4">from remote public git server over http</h2>
+<blockquote>
+$ git clone <a href="http://github.com/schacon/grack.git">http://github.com/schacon/grack.git</a>
+</blockquote>
+<h2 id="toc_1.5">from remote private git server or with push access over https</h2>
+<blockquote>
+$ git clone <a href="https://username@github.com/username/project.git">https://username@github.com/username/project.git</a>
+</blockquote>
+
+<hr />
+<h1 id="toc_2">Nice PS1</h1>
+<p>
+Consider changing your PS1 to also show the current branch:
+</p>
+<blockquote>
+PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+</blockquote>
+
+<p>
+The argument to __git_ps1 will be displayed only if you
+are currently in a git repository.  The %s token will be
+the name of the current branch. (Taken from /etc/bash_completion.d/git.sh)
+</p>
+
+</body>
+</html>
