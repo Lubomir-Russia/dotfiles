@@ -1,8 +1,12 @@
 1 Find
 find foo -name bar | xargs rm -r
 find . -type f -name "*.bak" -exec rm -i {} \;
+find $HOME/.bak/vim/ -name "*" -type f -mtime +60 -exec rm -f {} \;
 
 2 Path in a better way
 echo -e ${PATH//:/\\n}
 
-
+3 tar withour svn
+In order to exclude version control related files and directories while archiving use the
+--exclude-vcs option along with tar. For example:
+$ tar --exclude-vcs -czvf source_code.tar.gz eye_of_gnome_svn

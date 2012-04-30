@@ -25,45 +25,57 @@ ack.vim : Plugin for the Perl module / CLI script 'ack'
 2 Saving
 
 :w
-:w! #only if permissions allow
-:w !sudo tee % # write as a root
+:w!             # only if permissions allow
+:w !sudo tee %  # write as a root
+:update         # write only if changed
+ZZ              # save file, if modified, and quit (same as ":x")
+ZQ              # quit without saving (same as ":q!")
 
 3 Syntax
+
 :syntax enable
 :set syntax=perl #force perl syntax on any file type
 
 4 Searching
+
 :set hlsearch
 :set incsearch
 :set number
-# 12G same as 12gg  
 
-5 Open files
-:e filename
-:e . #browse dir
-:ls #buffers
-<Ctr>^ #alternative buffer (previous or useful file from plugin)
-:b name #switch to buffer (try TAB and arrows as well)
-:b3 #switch to buffer number 3
-:bp #previous buffer
-:bn #next buffer
-:bd #delete (close) buffer
-:bf #goes to the first buffer, and 
-:bl #the last
-:ba #open a window for every buffer (buffer all)
-:set wildmode=list,full #see :h wildmode for details
-:set hidden #lets hide buffer without saving
+5 Open files and buffers
+
+:e filename  # open file in current window
+:e .         # browse dir
+:ls          # buffers
+:bd          # delete (close) buffer
+<Ctr>^       # alternative buffer (previous or useful file from plugin)
+:b name      # switch to buffer (try TAB and arrows as well)
+:b3          # switch to buffer number 3
+:bp          # previous buffer
+:bn          # next buffer
+:bf          # first buffer 
+:bl          # last buffer
+:ba          # open a window for every buffer (buffer all)
+:tab ba      # open a tab for every buffer (buffer all)
+:set hidden  # lets hide buffer without saving
+:set wildmode=list,full                               # see :h wildmode for details
 :e scp://my_user@remote_hostname//path/to/remote/file # open remote file
+:bufdo {cmd} # execute {cmd} for each buffers in the buffer list
+:windo {cmd} # execute {cmd} for each windows in the current tab page
+:tabdo {cmd} # execute {cmd} for each current window of each tab page
+:argdo {cmd} # execute {cmd} for each file in the argument list
 
 6 Spelling
+
 :set spell
-z= #Suggestions
-[s #Next wrong word
-]s #Previous wrong word
-zg #Add as good 
-zw #Add as wrong
-zug #Undo adding as good
-zuw #Undo adding as wrong
+z=  # Suggestions
+1z= # Except the first suggestion
+[s  # Next wrong word
+]s  # Previous wrong word
+zg  # Add as good 
+zw  # Add as wrong
+zug # Undo adding as good
+zuw # Undo adding as wrong
 
 # Tab mappings.
 map <leader>tt :tabnew<cr>		:tabnew                " open a new tab
@@ -85,10 +97,11 @@ vividchalk.vim
 wombat.vim
 
 9 Movements
-0 g0 ^ g^ gE B ge b h gm l w W  e E g$ $
+
+0 g0 ^ g^ gE B ge b h gm | l w W e E g$ $
 Fx Tx tx Tx  ;,
 
-gg xH { ( gk - k M j + gj ) } xL G # 12gg = 12xG 
+gg xH { ( gk - k M j + gj ) } xL G # 12gg = 12G 
 
 Ctrl-b Ctrl-u Ctrl-y Ctrl-e Ctrl-d Ctrl-f
 
@@ -96,19 +109,34 @@ zt (z Enter) zz zb # set scrolloff=3 to have some extra lines for a lookup
 zH zh zl zL
 gCtrl-g # where am I? also set ruler set number set laststatus=2
 
-ma `a 'a #local marks used for navigation and block editing
-mA `A 'A #global marks can be used as short cuts to often used files
-`0-`9 #most recent exited files
-'' `` #latest jump
-'. `. #latest edit
-gi    #latest edit and insert
-`[ '[ #To the first character of the previously changed or yanked text. 
-`] '] #To the last  character of the previously changed or yanked text. 
-]'    #[count] times to next line with a lowercase mark below
-]`    #[count] times to lowercase mark after the cursor. 
-['    #[count] times to previous line with a lowercase mark
-[`    #[count] times to lowercase mark before the cursor.
+# When a motion is not of the type you would like to use, you can force another
+# type by using "v", "V" or CTRL-V just after the operator.
+
 :marks
+ma `a 'a # local marks used for navigation and block editing
+mA `A 'A # global marks can be used as short cuts to often used files
+`0-`9    # most recent exited files
+]'       # [count] times to next line with a lowercase mark below
+]`       # [count] times to lowercase mark after the cursor. 
+['       # [count] times to previous line with a lowercase mark
+[`       # [count] times to lowercase mark before the cursor.
+
+:jumps
+# A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
+# "N", "%", "(", ")", "[[", "]]", "{", "}", ":s", ":tag", "L", "M", "H" and
+# the commands that start editing a new file.
+'' `` # latest jump
+^O    # older cursor position in jump list (not a motion command)
+^I    # newer cursor position in jump list (not a motion command)
+<Tab> # newer cursor position in jump list (not a motion command)
+
+:changes
+'. `. # latest edit
+gi    # latest edit and insert
+`[ '[ # To the first character/line of the previously changed or yanked text. 
+`] '] # To the last  character/line of the previously changed or yanked text. 
+g;    # older cursor position in change list (not a motion command)
+g,    # newer cursor position in change list (not a motion command)
 
 10 Edits
 I i a A
@@ -179,6 +207,9 @@ map namp imap vmap map!
 # To avoid the abbreviation in Command-line mode: Type CTRL-V twice somewhere in
 # the abbreviation to avoid it to be replaced.  A CTRL-V in front of a normal
 # character is mostly ignored otherwise.
+# Remap CapsLock to Ctrl: in Windows just add a register key: 
+j [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+# "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00 
 
 13 Foldings
 :set foldmethod=
@@ -191,9 +222,13 @@ zM za (zc zo) zR     zk zj
 manual # select ranges to fold (default)
 
 14 Windows
-^WT    	# move window to the new tab
-^Wc	# close window
-^Wo	# only this window
+^Ww         # next window.
+^WT    	    # move window to the new tab.
+^Wc	        # close window.
+^Wo	        # only this window.
+^Wr         # rotate windows.
+:tab all    # open all args (input files) in new tabs.
+:tab ball   # open all buffers in new tabs.
 
 15 Text formating
 If in vim knows the comment style of the file than if the next line in insert mode gets comment automaticly

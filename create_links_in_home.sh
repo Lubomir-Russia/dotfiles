@@ -7,3 +7,4 @@ mv ~/.vimrc ~/.vimrc_original_backup
 ln -nfs ~/bin/dotfiles/vim/vimrc ~/.vimrc
 ln -nfs ~/bin/dotfiles/vim ~/.vim
 mkdir -p ~/.bak/swap
+mkdir -p ~/.bak/vim
