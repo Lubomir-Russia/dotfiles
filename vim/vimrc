@@ -129,11 +129,11 @@ inoremap <c-w> <c-g>u<c-w>
 autocmd! bufwritepost vimrc source $MYVIMRC
 autocmd! bufwritepost _vimrc source $MYVIMRC
 
-if has("autocmd")
-        set viewoptions=cursor,folds
-        autocmd BufWinLeave *.* silent mkview       " Save view of the window.
-        autocmd BufWinEnter *.* silent loadview     " Restore it when open.
-endif
+" if has("autocmd")
+"         set viewoptions=cursor,folds
+"         autocmd BufWinLeave *.* silent mkview       " Save view of the window.
+"         autocmd BufWinEnter *.* silent loadview     " Restore it when open.
+" endif
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.

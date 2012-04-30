@@ -8,3 +8,4 @@ ln -nfs ~/bin/dotfiles/vim/vimrc ~/.vimrc
 ln -nfs ~/bin/dotfiles/vim ~/.vim
 mkdir -p ~/.bak/swap
 mkdir -p ~/.bak/vim
+mkdir -p ~/.bak/undofiles
