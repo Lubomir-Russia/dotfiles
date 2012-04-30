@@ -1,2 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/compilers/MY_COOL/tests'
+let g:netrw_dirhist_2='/home/compilers/MY_COOL'
+let g:netrw_dirhist_3='/home/compilers'
+let g:netrw_dirhist_4='/home/compilers/bin'
+let g:netrw_dirhist_5='/home/compilers/bin/dotfiles'
+let g:netrw_dirhist_6='/home/compilers/bin/dotfiles/vim'
+let g:netrw_dirhist_7='/home/compilers/bin/dotfiles/vim/bundle'
+let g:netrw_dirhist_8='/home/compilers/bin/dotfiles/vim/bundle/vimwiki-1-2'
+let g:netrw_dirhist_9='/home/compilers/bin/dotfiles/vim/bundle/vimwiki-1-2/doc'

@@ -5,11 +5,13 @@
 
 = Installation =
 
+Install ruby and ruby-dev beforehand if needed.
+
 == Binary ==
 {{{sh
 mkdir ~/src
 cd ~/src
-wget ftp://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
+wget http://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
 tar -xaf vim-7.3.tar.bz2
 cd vim73
 ./configure --with-features=huge --enable-perlinterp --enable-rubyinterp --enable-pythoninterp
@@ -18,8 +20,6 @@ make install
 vim --version
 }}}
 --prefix={directory}  Top directory where to install Vim. Default is /usr/local
-
-Install ruby and ruby-dev beforehand if needed.
 
 == Add plugins ==
 * The NERD tree   : A tree explorer plugin for navigating the file system
