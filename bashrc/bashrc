@@ -22,8 +22,10 @@
 # your workstation password file.)
 # 
  
-alias cd706='cd /home/c4/testcases/Flare_706/'
-alias cdr706='cd /home/c4/testcases/Flare_706/test_results'
+alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
+alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'
+alias cd706d='cd /home/c4/testcases/Flare_706_Dual/'
+alias cdr706d='cd /home/c4/testcases/Flare_706_Dual/test_results'
 alias cd741='cd /home/c4/testcases/Flare_741/'
 alias cdr741='cd /home/c4/testcases/Flare_741/test_results'
 alias cd743='cd /home/c4/testcases/Flare_743/'
@@ -41,13 +43,35 @@ alias vi='vim'
 alias r='perl ./run_flare_tests_REVISED.pl '
 
 alias dot='cd ~/bin/dotfiles/'
+alias dir='ls -l | grep ^d'
 
 # Let my version of soft have priority
 export PATH=~/bin/:$PATH
 
+# Add Flare Tools to execution PATH
+export PATH=$PATH:/home/c4/testcases/Tools/
+export PATH=/home/c4/Automatos-1.5/bin:/opt/ActivePerl-5.14/site/bin:/opt/ActivePerl-5.14/bin:$PATH
+
+# Let all editing be in Vim (including command line editing be C-x C-e)
+export EDITOR=vim
+
 # Project specific
 export C4_PARAMETERS=./Neo_settings.txt
 export PERL5LIB=/home/c4/perl:$PERL5LIB
+export PERL5LIB=/home/c4/Automatos-1.5/lib:/home/c4/Automatos-1.5/Examples:/opt/ActivePerl-5.14/lib:$PERL5LIB
+
+alias pta1='ssh 10.64.74.71' 
+alias pta2='ssh 10.64.74.98' 
+alias pta3='ssh 10.64.74.83' 
+alias e741='ssh root@10.244.245.68' 
+alias e743='ssh root@10.244.242.26' 
+alias e743b='ssh root@10.244.242.96' 
+alias e706='ssh root@10.64.77.113' 
+alias e706b='ssh root@10.64.77.114' 
+alias s578='ssh root@10.109.17.72' 
+alias s578b='ssh root@10.109.17.73' 
+
+# export PERL5LIB=/home/c4/perl:/c4shares/auto/tools/LATEST/lib/perl:$PERL5LIB
 
 # Different kinds of PS1
 
@@ -109,3 +133,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 PATH=/usr/class/cs143/cool/bin:$PATH
+
+export GREP_OPTIONS='--color=auto' # by default match is read on black
+#export GREP_COLOR='5;38' # blinking
+export GREP_COLOR='1;33' # Yellow on black 
+
+find $HOME/.bak/vim/ -name "*" -type f -mtime +60 -exec rm -f {} \;
+# When you are logging in all files in the backup directory older then 60 days will be removed. Be shure to backup in shorter terms!
