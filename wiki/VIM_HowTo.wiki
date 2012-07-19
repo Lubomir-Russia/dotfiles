@@ -205,6 +205,7 @@ g,       # newer cursor position in change list (not a motion command)
 {{{
 g# # N ? / n * g*
 
+gd gD                # find local/global declaration
 /pattern/+           # next line
 /pattern/+x          # x lines after
 /pattern/e+x         # x characters after
