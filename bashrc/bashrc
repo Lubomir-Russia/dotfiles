@@ -87,28 +87,28 @@ alias gba='git branch -a'
 # A nice three line PS1
 # export PS1='\n\D{%F %T} \w\n\u@\H\$ '
 
-# Red PS1 if root
+# Red PS1 if root, light green if not
 
 if test "$UID" -eq 0  ; then
-    # _red="\e[31m"
+    # _color="\e[31m"
     # _reset="\e[0m"
-    _red=$(tput setaf 1; tput bold)
+    _color=$(tput setaf 1; tput bold)
     _reset=$(tput sgr0)
 else
-    _red=""
-    _reset=""
+    _color=$(tput setaf 2; tput bold)
+    _reset=$(tput sgr0)
 fi
 
 # Add git info
 # The argument to __git_ps1 will be displayed only if you are currently in a
 # git repository.  The %s token will be the name of the current branch.
 
-# export PS1='\[$_red\]\D{%F %T} \W $(__git_ps1 "(%s)")\$ \[$_reset\]'
+# export PS1='\[$_color\]\D{%F %T} \W $(__git_ps1 "(%s)")\$ \[$_reset\]'
 # The \[ and \] symbols allow bash to understand which parts of the prompt cause no cursor movement; without them, lines will wrap incorrectly. 
 
 # As above but in three lines
 
-export PS1='\[$_red\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
+export PS1='\[$_color\]\n\D{%F %T} \w $(__git_ps1 "(%s)")\n\u@\H\$ \[$_reset\]'
 
 # Prompt with indicator :) or :( depending on result of prev. command
 # export PS1='\u@\h `smiley` \w\n\$ '
