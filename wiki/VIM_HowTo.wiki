@@ -299,6 +299,25 @@ Remap CapsLock to Ctrl: in Windows just add a register key:
     manual  # select ranges to fold (default)
 zM za (zc zo) zR     zk zj
 }}}
+
+= Diff =
+{{{
+]c :        # next difference
+[c :        # previous difference
+Ctrl+w +w   # switch windows
+do          # diff obtain
+dp          # diff put
+zo          # open folded text
+zc          # close folded text
+:diffget x  # diff obtain from buff that matches x (number or name)
+:diffput x  # diff put into buff that matches x (number or name)
+:diffupdate # re-scan the files for differences
+:diffsplit  # Open a new window on the file {filename}.
+:diffthis	# Make the current window part of the diff windows.
+:diffoff	# Switch off diff mode for the current window.
+:diffoff!	# Switch off diff mode for the current window and in all windows.
+}}}
+
 = Text formating =
 
 If vim knows the comment style of the file then if the next line in insert mode gets comment automatically
