@@ -325,5 +325,3 @@ let wiki = {}
 let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/'}] " works both in Unix and Windows
 let wiki.auto_export = 1                   " keep html uptodate
 let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
-
-" from branch vimRC

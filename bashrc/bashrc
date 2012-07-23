@@ -149,4 +149,3 @@ export GREP_COLOR='1;33' # Yellow on black
 
 find $HOME/.bak/vim/ -name "*" -type f -mtime +60 -exec rm -f {} \;
 # When you are logging in all files in the backup directory older then 60 days will be removed. Be shure to backup in shorter terms!
-# from branch vimRC
