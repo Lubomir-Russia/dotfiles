@@ -12,4 +12,9 @@ Welcome to Tips and Hints
 * [[ini_files/vimrc|.vimrc]]
 
 
-
+<Leader>ww or <Plug>VimwikiIndex
+        Open index file of the wiki.
+<Leader>wt or <Plug>VimwikiTabIndex
+        Open index file of the [count]'s wiki in a new tab.
+<Leader>ws or <Plug>VimwikiUISelect
+        List and select available wikies.
