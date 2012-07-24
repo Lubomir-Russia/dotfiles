@@ -164,10 +164,9 @@ type by using "v", "V" or CTRL-V just after the operator.
 ma `a 'a # local marks used for navigation and block editing
 mA `A 'A # global marks can be used as short cuts to often used files
 `0-`9    # most recent exited files
-]'       # [count] times to next line with a lowercase mark below
-]`       # [count] times to lowercase mark after the cursor. 
-['       # [count] times to previous line with a lowercase mark
-[`       # [count] times to lowercase mark before the cursor.
+]'  ['   # [count] times to next/previous line with a lowercase mark below
+]`  [`   # [count] times to lowercase mark after/before the cursor. 
+`"       # [count] times to lowercase mark before the cursor.
 }}}
 == :jumps ==
 A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
@@ -180,14 +179,18 @@ the commands that start editing a new file.
 <Tab>    # newer cursor position in jump list (not a motion command)
 %        # jump to match, also see plugins
 o O      # jump in visual mode to the other end of selection
+`"       # jump to position on which we were when exited current buffer last time. 
+`0       # jump to position in last file edited (when exited Vim)
+`1       # like `0 but the previous file (also `2 etc)
 }}}
 
 == :changes ==
 {{{
 '. `.    # latest edit
 gi       # latest edit and insert
-`[ '[    # To the first character/line of the previously changed or yanked text. 
-`] ']    # To the last  character/line of the previously changed or yanked text. 
+`[ `]    # jump to the first/last character of the previously changed or yanked text. 
+'[  ']   # jump to the first/last line of the previously changed or yanked text. 
+`< `>    # jump to beginning/end of last visual selection
 g;       # older cursor position in change list (not a motion command)
 g,       # newer cursor position in change list (not a motion command)
 }}}
