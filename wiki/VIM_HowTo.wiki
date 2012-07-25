@@ -31,7 +31,6 @@ vim --version
 * ack.vim         : Plugin for the Perl module / CLI script 'ack' 
 
 = Saving =
-
 {{{
 :w
 :w!             # only if permissions allow
@@ -39,10 +38,11 @@ vim --version
 :update         # write only if changed
 ZZ              # save file, if modified, and quit (same as ":x")
 ZQ              # quit without saving (same as ":q!")
+:1,10 w outfile    # Saves lines 1 to 10 in outfile
+:1,10 w >> outfile # Appends lines 1 to 10 to outfile
 }}}
 
 = Open files and buffers =
-
 {{{
 :e filename  # open file in current window
 :e .         # browse dir
@@ -66,10 +66,11 @@ ZQ              # quit without saving (same as ":q!")
 :windo {cmd} # execute {cmd} for each windows in the current tab page
 :tabdo {cmd} # execute {cmd} for each current window of each tab page
 :argdo {cmd} # execute {cmd} for each file in the argument list
+:r infile    # insert the content of infile
+:r !{cmd}    # execute {cmd} and insert its standard output below
 }}}
 
 = Tab mappings =
-
 {{{
 map <leader>tt :tabnew<cr>        :tabnew                " open a new tab
 map <leader>te :tabedit	          :tabe[dit] {file}      " edit {file} in a new tab
@@ -83,27 +84,35 @@ map <leader>tm :tabmove	          :tabm[ove] 3           " move the current tab 
                :tabs                                     " list the tabs and their windows
 }}}
 
-= Windows =
+= Windows and Tabs =
 {{{
 ^Ww          # next window.
 ^WT          # move window to the new tab.
 ^Wc          # close window.
 ^Wo          # only this window.
 ^Wr          # rotate windows.
+^Ws          # split windows.
+^Wv          # vsplit windows.
+^Wx          # swap windows.
+^w+          # larger window
+^w-          # smaller window
+^w=          # equal window
+:sp f        # split open f
+:vsp f       # vSplit open f
+:vert h help # open help in vertical split.
 :ta b all    # open all args (input files) in new tabs.
 :ta b ball   # open all buffers in new tabs.
-:vert h help # open help in vertical split.
+:tabm [N]    # move current tab after tab N. No N: last. N=0: first.
+$vim -p file1 file2 fileN  # Open multiple files in different tabs.
 }}}
 
 = Syntax =
-
 {{{
 :syntax enable
 :set syntax=perl #force perl syntax on any file type
 }}}
 
 = Spelling =
-
 {{{
 :set spell
 z=       # Suggestions
@@ -138,6 +147,7 @@ cc = C            # change to the end of line
 xJ xgJ            # join x lines with/without spaces
 x<< x>>           # indent in normal mode
 Cntr-t -d         # indent in insert mode
+gp                # just like "p", but leave the cursor just after the new text
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -149,7 +159,7 @@ set expandtab
 == motions ==
 {{{
 0 g0 ^ g^ gE B ge b h gm | l w W e E g$ $
-Fx Tx tx Tx  ; ,
+, Fx Tx fx Tx  ;
 gg xH { ( gk - k M j + gj ) } xL G          # 12gg = 12G
 Ctrl-b Ctrl-u Ctrl-y Ctrl-e Ctrl-d Ctrl-f
 zt (z Enter) zz zb # set scrolloff=3 to have some extra lines for a lookup
@@ -168,6 +178,7 @@ mA `A 'A # global marks can be used as short cuts to often used files
 ]`  [`   # [count] times to lowercase mark after/before the cursor. 
 `"       # [count] times to lowercase mark before the cursor.
 }}}
+
 == :jumps ==
 A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
 "N", "%", "(", ")", "]]", "[[", "{", "}", ":s", ":tag", "L", "M", "H" and
@@ -208,10 +219,15 @@ g,       # newer cursor position in change list (not a motion command)
 {{{
 g# # N ? / n * g*
 
+]I                   # list lines in current and included files that contain the word under cursor, 
+[I                   # start searching at cursor position the cursor/beginning of current file.
 gd gD                # find local/global declaration
 /pattern/+           # next line
 /pattern/+x          # x lines after
 /pattern/e+x         # x characters after
+/\< the\>            # search the
+/^\n\{3}             # find 3 empty lines
+:bufdo /searchstr/   # search in all open files
 }}}
 
 == Substitutions ==
@@ -229,6 +245,12 @@ gd gD                # find local/global declaration
    #count            # only in the next x lines
    /\cpatter         # case insensitive
    /\Cpatter         # case sensitive
+}}}
+{{{
+:%s/\<./\u&/g        # Sets first letter of each word to uppercase
+:%s/\<./\l&/g        # Sets first letter of each word to lowercase
+:%s/.*/\u&           # Sets first letter of each line to uppercase
+:%s/.*/\l&           # Sets first letter of each line to lowercase
 }}}
 
 == Grep ==
@@ -301,6 +323,23 @@ Remap CapsLock to Ctrl: in Windows just add a register key:
     expr    # custom, code-driven folding
     manual  # select ranges to fold (default)
 zM za (zc zo) zR     zk zj
+zf#j        # creates a fold from the cursor down # lines.
+zf/string   # creates a fold from the cursor to string .
+zj          # moves the cursor to the next fold.
+zk          # moves the cursor to the previous fold.
+zo          # opens a fold at the cursor.
+zO          # opens all folds at the cursor.
+zc          # close fold at the cursor.
+zm          # increases the foldlevel by one.
+zM          # closes all open folds.
+zr          # decreases the foldlevel by one.
+zR          # decreases the foldlevel to zero -- all folds will be open.
+zd          # deletes the fold at the cursor.
+zE          # deletes all folds.
+[z          # move to start of open fold.
+]z          # move to end of open fold.
+:mkview     # save folds
+:loadview   # restore folds
 }}}
 
 = Diff =
@@ -321,11 +360,18 @@ zc          # close folded text
 :diffoff!	# Switch off diff mode for the current window and in all windows.
 }}}
 
+= Registers =
+{{{
+:reg        # List all registers
+"c          # Register 'c'
+".          # Last edit
+"/          # Last search
+":          # Last command
+"%          # Filepath
+}}}
+
 = Text formating =
-
 If vim knows the comment style of the file then if the next line in insert mode gets comment automatically
-
-gq  # formates selected lines to the same length, sensitive to comments. Very useful
 
 Often pasting text into vim from an external source screws up the formatting (especially tabs). To prevent this, do:
 
@@ -334,3 +380,48 @@ Often pasting text into vim from an external source screws up the formatting (es
 Keeping this setting on screws up auto indentation while in insert mode, though. So to turn off, use
 
 :set nopaste
+
+{{{
+gq        # formates selected lines to the same length, sensitive to comments. Very useful
+:%!fmt    # align all lines
+!}fmt     # align all lines at the current position
+5!!fmt    # align the next 5 lines
+:%retab   # fix spaces/tabs issues in whole file
+}}}
+
+= Command mode =
+{{{
+q/        # Command window for searches
+q:        # Command window for commands
+}}}
+
+= Help and refrences =
+{{{
+:viusage  # show a huge cheet sheet lishting every command
+}}}
+
+= Programming =
+
+== VIM-FUGITIVE (plugin) ==
+{{{
+:Git      # run a git command
+:Gstatus  # git status : - to (un)stage , p to patch, C to commit
+:Gcommit  # git commit
+:Gread    # empty the buffer and revert to the last commit
+:Gwrite   # write the current file and stage the results
+:Gmove    # git mv
+:Gremove  # git rm
+:Glog     # git log
+:Gdiff    # perform a vimdiff against the current file of a certain revision
+:Gblame   # open blame information in a scroll bound vertical splitt
+:Gbrowse  # open github
+}}}
+
+
+= TODO =
+
+Add section for Programming in VIM 
+* find functions
+* ctag
+* quick fix window and make
+* work with argdo

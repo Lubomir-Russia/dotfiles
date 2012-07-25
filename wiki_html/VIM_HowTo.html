@@ -20,7 +20,7 @@
 <li><a href="#toc_2">Saving</a>
 <li><a href="#toc_3">Open files and buffers</a>
 <li><a href="#toc_4">Tab mappings</a>
-<li><a href="#toc_5">Windows</a>
+<li><a href="#toc_5">Windows and Tabs</a>
 <li><a href="#toc_6">Syntax</a>
 <li><a href="#toc_7">Spelling</a>
 <li><a href="#toc_8">Color schema</a>
@@ -43,18 +43,31 @@
 </ul>
 <li><a href="#toc_12">Mapping and abbreviation</a>
 <li><a href="#toc_13">Foldings</a>
-<li><a href="#toc_14">Text formating</a>
+<li><a href="#toc_14">Diff</a>
+<li><a href="#toc_15">Registers</a>
+<li><a href="#toc_16">Text formating</a>
+<li><a href="#toc_17">Command mode</a>
+<li><a href="#toc_18">Help and refrences</a>
+<li><a href="#toc_19">Programming</a>
+<ul>
+<li><a href="#toc_19.1">VIM-FUGITIVE (plugin)</a>
+</ul>
+<li><a href="#toc_20">TODO</a>
 </ul>
 </div>
 </p>
 
 <h1 id="toc_1">Installation</h1>
 
+<p>
+Install ruby and ruby-dev beforehand if needed.
+</p>
+
 <h2 id="toc_1.1">Binary</h2>
 <pre sh>
 mkdir ~/src
 cd ~/src
-wget ftp://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
+wget http://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
 tar -xaf vim-7.3.tar.bz2
 cd vim73
 ./configure --with-features=huge --enable-perlinterp --enable-rubyinterp --enable-pythoninterp
@@ -64,10 +77,6 @@ vim --version
 </pre>
 <p>
 --prefix={directory}  Top directory where to install Vim. Default is /usr/local
-</p>
-
-<p>
-Install ruby and ruby-dev beforehand if needed.
 </p>
 
 <h2 id="toc_1.2">Add plugins</h2>
@@ -96,7 +105,6 @@ ack.vim         : Plugin for the Perl module / CLI script 'ack'
 </ul>
 
 <h1 id="toc_2">Saving</h1>
-
 <pre>
 :w
 :w!             # only if permissions allow
@@ -104,10 +112,11 @@ ack.vim         : Plugin for the Perl module / CLI script 'ack'
 :update         # write only if changed
 ZZ              # save file, if modified, and quit (same as ":x")
 ZQ              # quit without saving (same as ":q!")
+:1,10 w outfile    # Saves lines 1 to 10 in outfile
+:1,10 w &gt;&gt; outfile # Appends lines 1 to 10 to outfile
 </pre>
 
 <h1 id="toc_3">Open files and buffers</h1>
-
 <pre>
 :e filename  # open file in current window
 :e .         # browse dir
@@ -131,10 +140,11 @@ ZQ              # quit without saving (same as ":q!")
 :windo {cmd} # execute {cmd} for each windows in the current tab page
 :tabdo {cmd} # execute {cmd} for each current window of each tab page
 :argdo {cmd} # execute {cmd} for each file in the argument list
+:r infile    # insert the content of infile
+:r !{cmd}    # execute {cmd} and insert its standard output below
 </pre>
 
 <h1 id="toc_4">Tab mappings</h1>
-
 <pre>
 map &lt;leader&gt;tt :tabnew&lt;cr&gt;        :tabnew                " open a new tab
 map &lt;leader&gt;te :tabedit	          :tabe[dit] {file}      " edit {file} in a new tab
@@ -148,27 +158,35 @@ map &lt;leader&gt;tm :tabmove	          :tabm[ove] 3           " move the curren
                :tabs                                     " list the tabs and their windows
 </pre>
 
-<h1 id="toc_5">Windows</h1>
+<h1 id="toc_5">Windows and Tabs</h1>
 <pre>
 ^Ww          # next window.
 ^WT          # move window to the new tab.
 ^Wc          # close window.
 ^Wo          # only this window.
 ^Wr          # rotate windows.
+^Ws          # split windows.
+^Wv          # vsplit windows.
+^Wx          # swap windows.
+^w+          # larger window
+^w-          # smaller window
+^w=          # equal window
+:sp f        # split open f
+:vsp f       # vSplit open f
+:vert h help # open help in vertical split.
 :ta b all    # open all args (input files) in new tabs.
 :ta b ball   # open all buffers in new tabs.
-:vert h help # open help in vertical split.
+:tabm [N]    # move current tab after tab N. No N: last. N=0: first.
+$vim -p file1 file2 fileN  # Open multiple files in different tabs.
 </pre>
 
 <h1 id="toc_6">Syntax</h1>
-
 <pre>
 :syntax enable
 :set syntax=perl #force perl syntax on any file type
 </pre>
 
 <h1 id="toc_7">Spelling</h1>
-
 <pre>
 :set spell
 z=       # Suggestions
@@ -219,6 +237,7 @@ cc = C            # change to the end of line
 xJ xgJ            # join x lines with/without spaces
 x&lt;&lt; x&gt;&gt;           # indent in normal mode
 Cntr-t -d         # indent in insert mode
+gp                # just like "p", but leave the cursor just after the new text
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -232,7 +251,7 @@ set expandtab
 <h2 id="toc_10.1">motions</h2>
 <pre>
 0 g0 ^ g^ gE B ge b h gm | l w W e E g$ $
-Fx Tx tx Tx  ; ,
+, Fx Tx fx Tx  ;
 gg xH { ( gk - k M j + gj ) } xL G          # 12gg = 12G
 Ctrl-b Ctrl-u Ctrl-y Ctrl-e Ctrl-d Ctrl-f
 zt (z Enter) zz zb # set scrolloff=3 to have some extra lines for a lookup
@@ -249,11 +268,11 @@ type by using "v", "V" or CTRL-V just after the operator.
 ma `a 'a # local marks used for navigation and block editing
 mA `A 'A # global marks can be used as short cuts to often used files
 `0-`9    # most recent exited files
-]'       # [count] times to next line with a lowercase mark below
-]`       # [count] times to lowercase mark after the cursor. 
-['       # [count] times to previous line with a lowercase mark
-[`       # [count] times to lowercase mark before the cursor.
+]'  ['   # [count] times to next/previous line with a lowercase mark below
+]`  [`   # [count] times to lowercase mark after/before the cursor. 
+`"       # [count] times to lowercase mark before the cursor.
 </pre>
+
 <h2 id="toc_10.3">:jumps</h2>
 <p>
 A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
@@ -267,14 +286,18 @@ the commands that start editing a new file.
 &lt;Tab&gt;    # newer cursor position in jump list (not a motion command)
 %        # jump to match, also see plugins
 o O      # jump in visual mode to the other end of selection
+`"       # jump to position on which we were when exited current buffer last time. 
+`0       # jump to position in last file edited (when exited Vim)
+`1       # like `0 but the previous file (also `2 etc)
 </pre>
 
 <h2 id="toc_10.4">:changes</h2>
 <pre>
 '. `.    # latest edit
 gi       # latest edit and insert
-`[ '[    # To the first character/line of the previously changed or yanked text. 
-`] ']    # To the last  character/line of the previously changed or yanked text. 
+`[ `]    # jump to the first/last character of the previously changed or yanked text. 
+'[  ']   # jump to the first/last line of the previously changed or yanked text. 
+`&lt; `&gt;    # jump to beginning/end of last visual selection
 g;       # older cursor position in change list (not a motion command)
 g,       # newer cursor position in change list (not a motion command)
 </pre>
@@ -292,9 +315,15 @@ g,       # newer cursor position in change list (not a motion command)
 <pre>
 g# # N ? / n * g*
 
+]I                   # list lines in current and included files that contain the word under cursor, 
+[I                   # start searching at cursor position the cursor/beginning of current file.
+gd gD                # find local/global declaration
 /pattern/+           # next line
 /pattern/+x          # x lines after
 /pattern/e+x         # x characters after
+/\&lt; the\&gt;            # search the
+/^\n\{3}             # find 3 empty lines
+:bufdo /searchstr/   # search in all open files
 </pre>
 
 <h2 id="toc_11.3">Substitutions</h2>
@@ -312,6 +341,12 @@ g# # N ? / n * g*
    #count            # only in the next x lines
    /\cpatter         # case insensitive
    /\Cpatter         # case sensitive
+</pre>
+<pre>
+:%s/\&lt;./\u&amp;/g        # Sets first letter of each word to uppercase
+:%s/\&lt;./\l&amp;/g        # Sets first letter of each word to lowercase
+:%s/.*/\u&amp;           # Sets first letter of each line to uppercase
+:%s/.*/\l&amp;           # Sets first letter of each line to lowercase
 </pre>
 
 <h2 id="toc_11.4">Grep</h2>
@@ -386,15 +421,56 @@ Remap CapsLock to Ctrl: in Windows just add a register key:
     expr    # custom, code-driven folding
     manual  # select ranges to fold (default)
 zM za (zc zo) zR     zk zj
+zf#j        # creates a fold from the cursor down # lines.
+zf/string   # creates a fold from the cursor to string .
+zj          # moves the cursor to the next fold.
+zk          # moves the cursor to the previous fold.
+zo          # opens a fold at the cursor.
+zO          # opens all folds at the cursor.
+zc          # close fold at the cursor.
+zm          # increases the foldlevel by one.
+zM          # closes all open folds.
+zr          # decreases the foldlevel by one.
+zR          # decreases the foldlevel to zero -- all folds will be open.
+zd          # deletes the fold at the cursor.
+zE          # deletes all folds.
+[z          # move to start of open fold.
+]z          # move to end of open fold.
+:mkview     # save folds
+:loadview   # restore folds
 </pre>
-<h1 id="toc_14">Text formating</h1>
 
+<h1 id="toc_14">Diff</h1>
+<pre>
+]c :        # next difference
+[c :        # previous difference
+Ctrl+w +w   # switch windows
+do          # diff obtain
+dp          # diff put
+zo          # open folded text
+zc          # close folded text
+:diffget x  # diff obtain from buff that matches x (number or name)
+:diffput x  # diff put into buff that matches x (number or name)
+:diffupdate # re-scan the files for differences
+:diffsplit  # Open a new window on the file {filename}.
+:diffthis	# Make the current window part of the diff windows.
+:diffoff	# Switch off diff mode for the current window.
+:diffoff!	# Switch off diff mode for the current window and in all windows.
+</pre>
+
+<h1 id="toc_15">Registers</h1>
+<pre>
+:reg        # List all registers
+"c          # Register 'c'
+".          # Last edit
+"/          # Last search
+":          # Last command
+"%          # Filepath
+</pre>
+
+<h1 id="toc_16">Text formating</h1>
 <p>
 If vim knows the comment style of the file then if the next line in insert mode gets comment automatically
-</p>
-
-<p>
-gq  # formates selected lines to the same length, sensitive to comments. Very useful
 </p>
 
 <p>
@@ -412,6 +488,63 @@ Keeping this setting on screws up auto indentation while in insert mode, though.
 <p>
 :set nopaste
 </p>
+
+<pre>
+gq        # formates selected lines to the same length, sensitive to comments. Very useful
+:%!fmt    # align all lines
+!}fmt     # align all lines at the current position
+5!!fmt    # align the next 5 lines
+:%retab   # fix spaces/tabs issues in whole file
+</pre>
+
+<h1 id="toc_17">Command mode</h1>
+<pre>
+q/        # Command window for searches
+q:        # Command window for commands
+</pre>
+
+<h1 id="toc_18">Help and refrences</h1>
+<pre>
+:viusage  # show a huge cheet sheet lishting every command
+</pre>
+
+<h1 id="toc_19">Programming</h1>
+
+<h2 id="toc_19.1">VIM-FUGITIVE (plugin)</h2>
+<pre>
+:Git      # run a git command
+:Gstatus  # git status : - to (un)stage , p to patch, C to commit
+:Gcommit  # git commit
+:Gread    # empty the buffer and revert to the last commit
+:Gwrite   # write the current file and stage the results
+:Gmove    # git mv
+:Gremove  # git rm
+:Glog     # git log
+:Gdiff    # perform a vimdiff against the current file of a certain revision
+:Gblame   # open blame information in a scroll bound vertical splitt
+:Gbrowse  # open github
+</pre>
+
+
+<h1 id="toc_20">TODO</h1>
+
+<p>
+Add section for Programming in VIM 
+</p>
+<ul>
+<li>
+find functions
+
+<li>
+ctag
+
+<li>
+quick fix window and make
+
+<li>
+work with argdo
+
+</ul>
 
 </body>
 </html>
