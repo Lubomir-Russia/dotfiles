@@ -42,3 +42,14 @@ bind } history
 register [ "\033:se noai\015a"
 register ] "\033:se ai\015a"
 bind ^] paste [.]
+
+# Open window 0 always in dotfiles, so that this uncomfortable number will be
+# taken. It is better when all work windows numbered in order 1..9. Then chdir
+# back to Home. If after that new window is opened with ^a-c then it will start
+# in Home, but if the window is opened from shell then it will be in the same
+# dir as the shell.
+chdir $HOME/bin/dotfiles/
+screen -t "dot" 0
+chdir
+screen 1
+
