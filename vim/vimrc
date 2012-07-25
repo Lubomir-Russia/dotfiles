@@ -321,7 +321,7 @@ if !exists(":DiffOrig")
 endif
 
 let wiki = {}
-"let wiki.path = '~/bin/dotfiles/wiki/'          " vimwiki location
-let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/'}] " works both in Unix and Windows
-let wiki.auto_export = 1                   " keep html uptodate
+" let wiki.path = '~/bin/dotfiles/wiki/'   " vimwiki location
+" let wiki.auto_export = 1                 " keep html uptodate when wiki file is saved.
+let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/', 'auto_export': 1}] " works both in Unix and Windows
 let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
