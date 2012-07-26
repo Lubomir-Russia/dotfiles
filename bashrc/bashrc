@@ -44,6 +44,10 @@ alias r='perl ./run_flare_tests_REVISED.pl '
 
 alias dot='cd ~/bin/dotfiles/'
 alias dir='ls -l | grep ^d'
+alias lsf='ls -al | grep -v ^d'
+
+alias echoPath='echo -e ${PATH//:/\\n}'
+alias echoLib5='echo -e ${PERL5LIB//:/\\n}'
 
 alias cw='cd /c4_working/'
 export PATH=$PATH:/c4_working/bin/
