@@ -45,6 +45,9 @@ alias r='perl ./run_flare_tests_REVISED.pl '
 alias dot='cd ~/bin/dotfiles/'
 alias dir='ls -l | grep ^d'
 
+alias cw='cd /c4_working/'
+export PATH=$PATH:/c4_working/bin/
+
 # Let my version of soft have priority
 export PATH=~/bin/:$PATH
 
