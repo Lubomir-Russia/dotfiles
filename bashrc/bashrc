@@ -55,6 +55,9 @@ export PATH=/home/c4/Automatos-1.5/bin:/opt/ActivePerl-5.14/site/bin:/opt/Active
 # Let all editing be in Vim (including command line editing be C-x C-e)
 export EDITOR=vim
 
+# Let LESS to show color (useful for git logs) and other opions
+export LESS=-RiMX
+
 # Project specific
 export C4_PARAMETERS=./Neo_settings.txt
 export PERL5LIB=/home/c4/perl:$PERL5LIB
