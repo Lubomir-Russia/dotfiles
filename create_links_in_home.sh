@@ -9,3 +9,5 @@ ln -nfs ~/bin/dotfiles/vim ~/.vim
 mkdir -p ~/.bak/swap
 mkdir -p ~/.bak/vim
 mkdir -p ~/.bak/undofiles
+mv ~/.gitconfig ~/.gitconfig_original_backup
+cp ~/bin/dotfiles/tips/gitconfig.example ~/.gitconfig
