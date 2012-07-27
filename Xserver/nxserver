@@ -1,0 +1,78 @@
+#!/bin/sh
+############################################################################
+#                                                                          #
+#  Copyright (c) 2001, 2009 NoMachine, http://www.nomachine.com.           #
+#                                                                          #
+#  NXSERVER, NX protocol compression and NX extensions to this software    #
+#  are copyright of NoMachine. Redistribution and use of the present       #
+#  software is allowed according to terms specified in the file LICENSE    #
+#  which comes in the source distribution.                                 #
+#                                                                          #
+#  Check http://www.nomachine.com/licensing.html for applicability.        #
+#                                                                          #
+#  NX and NoMachine are trademarks of Medialogic S.p.A.                    #
+#                                                                          #
+#  All rigths reserved.                                                    #
+#                                                                          #
+############################################################################
+
+# Basic support for RedHat style chkconfig
+#
+# chkconfig: - 99 01
+# description: Starts and stops the NoMachine NX Server.
+
+NODE_ROOT='/usr/NX'
+
+[ -f $NODE_ROOT/bin/nxserver ] || { echo "ERROR: $NODE_ROOT/bin/nxserver doesn't exist" ; exit 1; }
+
+start()
+{
+  $NODE_ROOT/bin/nxserver --start
+  $NODE_ROOT/bin/nxserver --statistics start
+}
+
+stop()
+{
+  $NODE_ROOT/bin/nxserver --stop
+  $NODE_ROOT/bin/nxserver --statistics stop
+}
+
+restart()
+{
+  $NODE_ROOT/bin/nxserver --restart
+  $NODE_ROOT/bin/nxserver --statistics restart
+}
+
+case "$1" in
+'start')
+  if [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys2 ] && [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys ] ;
+  then
+    start
+  else
+    echo "Service already running"
+  fi
+  ;;
+
+'stop')
+  if [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys2 ] && [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys ];
+  then
+    echo "Service was already stopped"
+  else
+    stop
+  fi
+  ;;
+
+'restart')
+  if  [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys2 ] && [ ! -f $NODE_ROOT/home/nx/.ssh/authorized_keys ] ;
+  then
+    echo "WARNING: Service was already stopped, trying to start"
+    start
+  else
+    restart
+  fi  
+  ;;
+*)
+  echo "Usage: $0 {start|stop|restart}"
+  exit 1
+  ;;
+esac

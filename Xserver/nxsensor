@@ -1,0 +1,133 @@
+#!/bin/sh
+############################################################################
+#                                                                          #
+#  Copyright (c) 2001, 2009 NoMachine, http://www.nomachine.com.           #
+#                                                                          #
+#  NXSERVER, NX protocol compression and NX extensions to this software    #
+#  are copyright of NoMachine. Redistribution and use of the present       #
+#  software is allowed according to terms specified in the file LICENSE    #
+#  which comes in the source distribution.                                 #
+#                                                                          #
+#  Check http://www.nomachine.com/licensing.html for applicability.        #
+#                                                                          #
+#  NX and NoMachine are trademarks of Medialogic S.p.A.                    #
+#                                                                          #
+#  All rigths reserved.                                                    #
+#                                                                          #
+############################################################################
+
+# Basic support for RedHat style chkconfig
+#
+# chkconfig: - 99 01
+# description: Starts and stops the NoMachine NX Server.
+
+NODE_ROOT='/usr/NX'
+CONFIG_FILE="$NODE_ROOT/etc/node.cfg"
+COMMAND_NXSENSOR="$NODE_ROOT/bin/nxsensor"
+NXSENSOR_PATH_PID="$NODE_ROOT/var/run/nxsensor.pid"
+StatisticsHost="127.0.0.1"
+NodeSensorPort="19250"
+
+grep CONFIG_FILE_VERSION $CONFIG_FILE > /dev/null
+if [ $? -eq 0 ]
+then
+  EnableSensorStr="ENABLE_SENSOR"
+  StatisticsHostStr="NODE_SENSOR_HOST"
+  NodeSensorPortStr="NODE_SENSOR_PORT"
+else
+  EnableSensorStr="EnableSensor"
+  StatisticsHostStr="StatisticsHost"
+  NodeSensorPortStr="NodeSensorPort"
+fi
+
+[ -f $COMMAND_NXSENSOR ] || { echo "ERROR: $COMMAND_NXSENSOR doesn't exist" ; exit 1; }
+
+tmp=`/usr/bin/awk -F'"' '/^'$EnableSensorStr'/ {print $2}' $CONFIG_FILE`
+if [ "x$tmp" != "x1" ];
+then
+  echo "nxsensor is disabled in '$NODE_ROOT/etc/node.cfg'" && exit 0
+  #exit 0
+  #echo "nxsensor is disabled in '$NODE_ROOT/etc/node.cfg'" && exit 1
+fi
+
+start()
+{
+tmp=`/usr/bin/awk -F'"' '/^'$StatisticsHostStr'/ {print $2}' $CONFIG_FILE`
+if [ "x$tmp" != "x" ];
+then
+  StatisticsHost=$tmp
+fi
+
+tmp=`/usr/bin/awk -F'"' '/^'$NodeSensorPortStr'/ {print $2}' $CONFIG_FILE`
+if [ "x$tmp" != "x" ];
+then
+  NodeSensorPort=$tmp
+fi
+
+$COMMAND_NXSENSOR "-a" "$StatisticsHost" "-a" "::ffff:$StatisticsHost" "-P" "$NodeSensorPort" "-d"
+
+PID=`ps -ef| grep \/usr\/NX\/bin\/nxsensor |grep -v grep | awk '{print $2}'`;
+if [ "x$PID" = "x" ];
+then
+  echo "failed"
+  exit 1
+fi
+
+echo $PID > $NXSENSOR_PATH_PID 
+
+}
+
+stop() 
+{
+PID=`cat $NXSENSOR_PATH_PID`
+if [ "x$PID" = "x" ];
+then
+  echo "failed"
+  rm $NXSENSOR_PATH_PID
+  exit 1
+fi
+
+kill $PID
+rm $NXSENSOR_PATH_PID
+}
+
+restart()
+{
+  stop
+  sleep 1
+  start
+}
+
+case $1 in
+start)
+   if  [ ! -f $NXSENSOR_PATH_PID ] ;
+   then
+      start
+   else
+     echo "Service already running"
+   fi
+   ;;
+
+stop)
+  if [ ! -f $NXSENSOR_PATH_PID ];
+  then
+    echo "Service was already stopped"
+  else
+    stop
+  fi
+  ;;
+
+restart)
+  if  [ ! -f $NXSENSOR_PATH_PID ] ;
+  then
+    echo "WARNING: Service was already stopped, trying to start"
+    start
+  else
+    restart
+  fi  
+  ;;
+*)
+  echo "Usage: $0 {start|stop|restart}"
+  exit 1
+  ;;
+esac
