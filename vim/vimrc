@@ -72,7 +72,7 @@ nmap <F8> :set wrap!<Cr>
 " Could not make ShowFunc work in win gVIM
 nmap <F11> <Plug>ShowFunc 
 " Save, run script and show output in the scrap window
-map <F9> :w<CR>:Shell %<CR><CR>
+map <F9> :w<CR>:Shell %:p<CR><CR>
 
 " Mapping \1 to copy a line and comment it with #
 nmap <leader>1 yypI#<Esc>k
@@ -170,7 +170,8 @@ set hlsearch                      " Highlight matches.
 
 set wrap                          " Turn on line wrapping.
 set linebreak                     " Wrap at the end of words.
-" set showbreak=------>           " String to put at the start of lines that have been wrapped.
+set showbreak=->             " String to put at the start of lines that have been wrapped.
+set breakindent                   " Working only with patch retracile.net/wiki/VimBreakIndent.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 " set colorcolumn=85                " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
 " set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults. 
@@ -206,15 +207,15 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
+set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
 " colorscheme topfunky-light
 " colorscheme vividchalk
 " colorscheme zenburn             " Works best with t_Co=256
-colorscheme murphy              " Works best with t_Co=256 not set
+" colorscheme murphy              " Works best with t_Co=256 not set
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
-" colorscheme solarized             " Works best with t_Co=256
-" set background=dark
+set background=dark
+colorscheme solarized             " Works best with t_Co=256
 
 
 " Automatic fold settings for specific files. Uncomment to use.
@@ -291,7 +292,7 @@ function! s:RunShellCommand(cmdline)
   call setline(2, 'Expanded Form:  ' .expanded_cmdline)
   call setline(3,substitute(getline(2),'.','=','g'))
   execute '$read !'. expanded_cmdline
-  setlocal nomodifiable
+  " setlocal nomodifiable  " set it if you whant to have truely scrap window
   1
 endfunction
 
