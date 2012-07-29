@@ -1,33 +1,35 @@
 " Vim configuration by Lubomir-Russia
-" Settings are gathered from different books, sites, and people
+" Settings are gathered from different books, sites, and people.
 "
 " To me vi is zen. To use vi is to practice zen. Every command is a koan.
 " Profound to the user, unintelligible to the uninitiated. You discover truth
 " every time you use it. 
-"                               — Satish Reddy 
+"                               - Satish Reddy 
 "                               From O'Railly - Learning VIM
 "
 " 
-" A “Language” of Text Editing
+" A 'Language' of Text Editing
 "
-" One way to think about Vim’s normal-mode commands is like a language. You
-" have “verbs” and “nouns”. For example: the “change” command (c) would be a
-" verb and the “word” item (w) is a noun. You can combine them to form
+" One way to think about Vim's normal-mode commands is like a language. You
+" have 'verbs' and 'nouns'. For example: the 'change' command (c) would be a
+" verb and the 'word' item (w) is a noun. You can combine them to form
 " imperative sentences that talk about what you want to do with your text.
 "
 " The wonderful part about this is that whenever you learn a new verb (like
-" “delete” (d)) you can immediately apply it to all the nouns you know, and
+" 'delete' (d)) you can immediately apply it to all the nouns you know, and
 " vice versa.
 "
-" Vim also has “adjectives” like “inside” and “around” (i and a) that let you
-" craft sentences like “change inside parenthesis” (ci( or cib). Once you
+" Vim also has 'adjectives' like 'inside' and 'around' (i and a) that let you
+" craft sentences like 'change inside parenthesis' (ci( or cib). Once you
 " learn one of these you can immediately apply it to all the verbs and nouns
 " you already know.
 "                               - Steve Losh
 "                               From Coming Home to Vim 
 "                               http://stevelosh.com/blog/2010/09/coming-home-to-vim/
-"
-" Installation :
+
+
+" = Installation =  
+" ----------------  
 " Copy or symlink to ~/.vimrc or ~/_vimrc. and make dir for swap files
 " ln -nfs ~/bin/dotfiles/vim/vimrc ~/.vimrc
 " ln -nfs ~/bin/dotfiles/vim ~/.vim
@@ -38,63 +40,144 @@
 "
 " System wide settings are here: /usr/local/share/vim/vim73 
 
-set nocompatible                  " Must come first because it changes other options.
+
+" = Plugin management with tpop's pathogen =
+" ------------------------------------------
+" Install new plugin: put it's dir into ~/.vim/bundle/ dir
+" Remove an plugin:   rm -rf ~/.vim/bundle/plugin-name
+" Genrate help for all plugins:  :Helptags
+call pathogen#infect()        " Let pathogen to load all plugins
+syntax enable                 " Turn on syntax highlighting.
+filetype plugin indent on     " Turn on file type detection.
+
+
+" = Compatability =  
+" ----------------- 
+set nocompatible                      " Must come first because it changes other options.
 
 if ( has("win32") )
     " source $VIMRUNTIME/mswin.vim    " Makes gVIM behave more like a Windows
     " behave mswin                    " Makes gVIM behave more like a Windows
     set langmenu=none                 " Set gvim menue in English (must be in the beginning of _vmrc)
-    let g:showfuncctagsbin="C:\\ctags\\ctags.exe"  " Only in Windows
     set encoding=utf-8
     let $LANG='en'                    " Set messages in English
     set guioptions-=T                 " Hide toolbar.
     set background=light              " Background.
     set lines=39 columns=110          " Window dimensions.
     " set guioptions-=r                 " Don't show right scrollbar
+    let g:showfuncctagsbin="C:\\ctags\\ctags.exe"  " Only in Windows
 endif
 
-silent! call pathogen#runtime_append_all_bundles()
+" This vimrc file is incompatible with vim 7.3 that is not built with
+" patch retracile.net/wiki/VimBreakIndent.
+" if you see 'E518: Unknown option: breakindent' when start vim 7.3, then
+" comment this option :set breakindent 
 
+" = Extra key binding - mappings =
+" --------------------------------
 " Professor VIM says '87% of users prefer jj over esc', jj abrams disagrees
-imap jj <Esc> 
+" imap jj <Esc>  - this mapping jumps to the next line if called at eol.
+imap jj <Left><Right><Esc>
 
-" Mappings useful for FLARE log view
-nmap <F3> /<<< ------<CR>zz 
-nmap <F4> /START<CR>zt
+function! MapForceNormal (key, action)
+    execute 'nmap ' . a:key . ' '      . a:action
+    execute 'imap ' . a:key . ' <Esc>' . a:action
+    execute 'vmap ' . a:key . ' <Esc>' . a:action
+    execute 'omap ' . a:key . ' <Esc>' . a:action
+endfunction
 
-" Mapping F7 for spell check (use ]s, z=, zg, zb)
-nmap <F7> :set spell!<Cr>
+function! MapRestoreMode (key, action)
+    execute 'nmap ' . a:key . ' '      . a:action
+    execute 'imap ' . a:key . ' <Esc>' . a:action . 'gi'
+    execute 'vmap ' . a:key . ' <Esc>' . a:action . 'gv'
+endfunction
 
-" Mappings useful for Perl
-nmap <F5> :set number!<Cr> 
-nmap <F6> :set list!<Cr>
-nmap <F8> :set wrap!<Cr>
+function! MapToggleOption (key, option)
+    execute 'nmap '.a:key.' :set '      . a:option . '!<CR>:set '.a:option.'?<CR>'
+    execute 'imap '.a:key.' <Esc>:set ' . a:option . '!<CR>:set '.a:option.'?<CR>gi'
+    execute 'vmap '.a:key.' <Esc>:set ' . a:option . '!<CR>:set '.a:option.'?<CR>gv'
+    execute 'omap '.a:key.' <Esc>:set ' . a:option . '!<CR>:set '.a:option.'?<CR>'
+endfunction
+
+" On some terminals there is a problem with sending shift-F keys, let's help them
+set <S-F6>=[29~
+set <S-F7>=[31~
+set <S-F8>=[32~
+set <S-F9>=[33~
+set <S-F10>=[34~
+call MapToggleOption("<F5>",  "list")
+call MapToggleOption("<F6>",  "number")
+call MapToggleOption("<S-F6>","relativenumber")
+call MapToggleOption("<F7>",  "spell")            " use ]s, [s, z=, zg, zb
+call MapToggleOption("<F8>",  "hlsearch")
+call MapToggleOption("<S-F8>","wrap")
+
+" Use Ctrl-F for omni completion
+imap <C-F> <C-X><C-O>
+
+" Search & replace the word under the cursor
+nmap <C-H> :%s/\<<c-r>=expand("<cword>")<cr>\>/
+
+" In normal mode adds a new line
+" If <CR> is used for this then this mapping is incompatible with ShowFunc
+" plugin, that uses <CR> for jumps
+" nnoremap <CR> i<CR><Esc>
+nnoremap S i<CR><Esc>
+
+" < & > to indent blocks
+vmap < <gv
+vmap > >gv
+
 " Could not make ShowFunc work in win gVIM
 nmap <F11> <Plug>ShowFunc 
-" Save, run script and show output in the scrap window
-map <F9> :w<CR>:Shell %<CR><CR>
 
-" Mapping \1 to copy a line and comment it with #
-nmap <leader>1 yypI#<Esc>k
+" \1 to copy a line, comment it with tcomment, go back
+call MapRestoreMode("<leader>1","mcyyPgCc`c")
+
+" Ctrl-J to copy a line and go back - like in EditPlus
+call MapRestoreMode("<C-J>","mcyyP`c")
 
 " Use perl compiler for all *.pl and *.pm files.
 autocmd BufNewFile,BufRead *.p? compiler perl
 " Set working dir to the dir of the current file, it works better with plugins then set autochdir
 autocmd BufEnter * silent! lcd %:p:h
 
-" Tab mappings.
-map <leader>tt :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-" useless, use default gt
-" map <leader>tn :tabnext<cr>      
-" useless, use default gT
-" map <leader>tp :tabprevious<cr>  
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
+" Save, run script and show output in the scrap window
+call MapForceNormal("<F9>",":w<cr>:Shell<space>%:p<cr><cr>")
 
+" = Tab mappings.  =
+" ------------------
+" also use comand abbreviation :e -> tabedit and :n ->tabnew
+function! MoveTabLeft()
+    let current_tab = tabpagenr()
+    if current_tab > 1
+        let current_tab = current_tab - 2
+        execute 'tabmove' current_tab
+    endif
+endfunction
+
+function! MoveTabRight()
+    let current_tab = tabpagenr()
+    execute 'tabmove' current_tab
+endfunction
+
+call MapForceNormal("<leader>tt",":tabnew<cr>")
+call MapForceNormal("<leader>te",":tabedit<space>")
+call MapForceNormal("<leader>tc",":tabclose<cr>")
+call MapForceNormal("<leader>to",":tabonly<cr>")
+call MapForceNormal("<leader>tf",":tabfirst<cr>")
+call MapForceNormal("<leader>ty",":tablast<cr>")
+call MapForceNormal("<leader>tm",":tabmove<space>")
+call MapForceNormal("<leader>tl",":call MoveTabLeft()<cr>")
+call MapForceNormal("<leader>tr",":call MoveTabRight()<cr>")
+call MapForceNormal("<leader>tn",":tabnext<cr>")      " useless, use default gt
+call MapForceNormal("<leader>tp",":tabprevious<cr>")  " useless, use default gT
+
+
+" Command line abreviations
+cab l ls<cr>:b<space>
+cab e tabedit<space>
+cab n tabnew<space>
 " Vim - hjkl-ing while in insert mode
 inoremap <M-j> <C-O>gj
 inoremap <M-k> <C-O>gk
@@ -110,9 +193,7 @@ imap <CR> <CR><c-g>u
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
-" Enter in normal mode adds a new line
-" This mapping is incompatible with ShowFunc plugin, that uses <CR> for jumps
-"nnoremap <CR> i<CR><Esc>
+
 
 " Uncomment to use Jamis Buck's file opening plugin
 "map <Leader>t :FuzzyFinderTextMate<Enter>
@@ -135,8 +216,6 @@ autocmd! bufwritepost _vimrc source $MYVIMRC
 "         autocmd BufWinEnter *.* silent loadview     " Restore it when open.
 " endif
 
-syntax enable                     " Turn on syntax highlighting.
-filetype plugin indent on         " Turn on file type detection.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 " set showmatch                     " Similar built-in function.
@@ -149,7 +228,7 @@ set vb t_vb='
 " No beeping and no flash.
 
 set ruler                         " Show cursor position.
-set showtabline=2		          " Display tabs all of the time
+set showtabline=2                 " Display tabs all of the time
 " set number                        " Show (absolute) line numbers.
 set relativenumber                " Show relative line number. Useful for motion/deletion commands.
 set confirm                       " Use confirmation dialog instead of error message.
@@ -170,7 +249,8 @@ set hlsearch                      " Highlight matches.
 
 set wrap                          " Turn on line wrapping.
 set linebreak                     " Wrap at the end of words.
-" set showbreak=------>           " String to put at the start of lines that have been wrapped.
+set showbreak=->             " String to put at the start of lines that have been wrapped.
+" set breakindent                   " Working only with patch retracile.net/wiki/VimBreakIndent.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 " set colorcolumn=85                " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
 " set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults. 
@@ -206,15 +286,15 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
+set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
 " colorscheme topfunky-light
 " colorscheme vividchalk
 " colorscheme zenburn             " Works best with t_Co=256
-colorscheme murphy              " Works best with t_Co=256 not set
+" colorscheme murphy              " Works best with t_Co=256 not set
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
-" colorscheme solarized             " Works best with t_Co=256
 " set background=dark
+colorscheme solarized             " Works best with t_Co=256
 
 
 " Automatic fold settings for specific files. Uncomment to use.
@@ -291,7 +371,7 @@ function! s:RunShellCommand(cmdline)
   call setline(2, 'Expanded Form:  ' .expanded_cmdline)
   call setline(3,substitute(getline(2),'.','=','g'))
   execute '$read !'. expanded_cmdline
-  setlocal nomodifiable
+  " setlocal nomodifiable  " set it if you whant to have truely scrap window
   1
 endfunction
 
@@ -325,3 +405,8 @@ let wiki = {}
 " let wiki.auto_export = 1                 " keep html uptodate when wiki file is saved.
 let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/', 'auto_export': 1}] " works both in Unix and Windows
 let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
+
+" = Misc =
+" --------
+" Make a section header
+nmap <leader>hh gCc0wi=<space><esc>A<space>=<esc>yypwv$:s/./-/g<cr>:nohls<cr>gCcwxx

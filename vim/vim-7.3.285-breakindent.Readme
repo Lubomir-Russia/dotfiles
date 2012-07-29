@@ -1,0 +1,53 @@
+Настройка наследования отступа для длинных строк
+
+Речь пойдет о том, как vim «сворачивает» (делает то, что по английски
+называется wrap) длинные строки. Допустим, у вас есть очень длинная строка
+кода, которая начинается с некоторым отступом. Скорее всего, если вы
+используете :set wrap и :set showbreak=->, она выглядит вот так:
+
+Not-indented line 
+    Once indented line 
+        Twice indented line, which is long enough
+->to be wrapped. 
+
+
+А хотелось бы, чтобы выглядела вот так:
+
+Not-indented line 
+    Once indented line 
+        Twice indented line, which is long enough
+        ->to be wrapped. 
+
+
+К сожалению, стандартными средствами Vim добиться этого невозможно, но есть
+патч, который позволяет с этим справиться. 
+
+Патч называется breakindent patch и может быть скачан по адресу
+retracile.net/wiki/VimBreakIndent. Он патчит исходники vim, из которых
+последний придется собирать собственными руками. Исходники берутся из
+www.vim.org, секция Download. Патч следует применить в директории, куда
+распакованы исходники, командой 
+
+patch -p1 <vim-7.3.285-breakindent.patch
+
+Дальнейшее касается только сборки vim из исходников и не должно вызывать
+проблем.
+
+./configure --with-features=huge --enable-perlinterp --enable-rubyinterp
+--enable-pythoninterp --enable-gui --with-x
+
+make sudo
+make install
+
+и наслаждаться правильными отступами, отдав команду :set breakindent
+
+Если эту команду записать в vimrc, то наверняка не бдет соместим с vim7.3, так
+как breakindent в нём нет. 
+
+На всякий случай, информацию о сворачивании строк можно найти по адресу :h
+wrap; :h linebreak; :h showbreak. В прореферированном виде информацию можно
+искать на сайте vim.wikia.com, где очень много полезного, в частности
+vim.wikia.com/wiki/Word_wrap_without_line_breaks.
+
+http://habrahabr.ru/post/138857/
+

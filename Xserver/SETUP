@@ -1,0 +1,2 @@
+Copy nxsensor, nxserver, vncserver to /etc/init.d/
+Copy xstartup to ~/.vnc

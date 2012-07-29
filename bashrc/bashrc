@@ -20,7 +20,11 @@
 # abbreviations. (On single-user systems, the user database is stored in /etc/passwd.
 # However, on networked systems, this information may come from NIS, NIS+, or LDAP, not
 # your workstation password file.)
-# 
+
+# Set up terminal the same way on all machines for consistency
+export TERM=xterm-256color
+# for mc only
+# export TERM=xterm-256color mc
  
 alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
 alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'
@@ -43,7 +47,7 @@ alias vi='vim'
 alias r='perl ./run_flare_tests_REVISED.pl '
 
 alias dot='cd ~/bin/dotfiles/'
-alias dir='ls -l | grep ^d'
+alias dir='ls -lA | grep ^d'
 alias lsf='ls -al | grep -v ^d'
 
 alias echoPath='echo -e ${PATH//:/\\n}'
