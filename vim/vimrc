@@ -214,7 +214,7 @@ set t_Co=256                      " Use more colors in terminal. May effect some
 " colorscheme murphy              " Works best with t_Co=256 not set
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
-set background=dark
+" set background=dark
 colorscheme solarized             " Works best with t_Co=256
 
 
