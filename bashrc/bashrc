@@ -20,11 +20,7 @@
 # abbreviations. (On single-user systems, the user database is stored in /etc/passwd.
 # However, on networked systems, this information may come from NIS, NIS+, or LDAP, not
 # your workstation password file.)
-
-# Set up terminal the same way on all machines for consistency
-export TERM=xterm-256color
-# for mc only
-# export TERM=xterm-256color mc
+# 
  
 alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
 alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'
@@ -47,13 +43,16 @@ alias vi='vim'
 alias r='perl ./run_flare_tests_REVISED.pl '
 
 alias dot='cd ~/bin/dotfiles/'
-alias dir='ls -lA | grep ^d'
+alias dir='ls -l | grep ^d'
 alias lsf='ls -al | grep -v ^d'
 
 alias echoPath='echo -e ${PATH//:/\\n}'
 alias echoLib5='echo -e ${PERL5LIB//:/\\n}'
 
 alias cw='cd /c4_working/'
+alias cda='cd /home/c4/Automatos/'
+alias cdr='cd /home/c4/Automatos/Examples/MCR'
+alias cdc='cd /home/c4/Automatos/Examples/MCC'
 export PATH=$PATH:/c4_working/bin/
 
 # Let my version of soft have priority
@@ -61,7 +60,7 @@ export PATH=~/bin/:$PATH
 
 # Add Flare Tools to execution PATH
 export PATH=$PATH:/home/c4/testcases/Tools/
-export PATH=/home/c4/Automatos-1.5/bin:/opt/ActivePerl-5.14/site/bin:/opt/ActivePerl-5.14/bin:$PATH
+export PATH=/home/c4/Automatos/bin:/opt/ActivePerl-5.14/site/bin:/opt/ActivePerl-5.14/bin:$PATH
 
 # Let all editing be in Vim (including command line editing be C-x C-e)
 export EDITOR=vim
@@ -71,8 +70,8 @@ export LESS=-RiMX
 
 # Project specific
 export C4_PARAMETERS=./Neo_settings.txt
-export PERL5LIB=/home/c4/perl:$PERL5LIB
-export PERL5LIB=/home/c4/Automatos-1.5/lib:/home/c4/Automatos-1.5/Examples:/opt/ActivePerl-5.14/lib:$PERL5LIB
+# export PERL5LIB=/home/c4/perl:$PERL5LIB
+export PERL5LIB=/home/c4/Automatos/lib:/home/c4/Automatos/Examples:/opt/ActivePerl-5.14/lib:$PERL5LIB
 
 alias pta1='ssh 10.64.74.71' 
 alias pta2='ssh 10.64.74.98' 

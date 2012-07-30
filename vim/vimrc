@@ -143,7 +143,7 @@ let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about
 " let g:perl_compiler_force_warnings=1   " = perl -cW % -> all warnings regardless of no warnings
 " Set working dir to the dir of the current file, it works better with plugins then set autochdir
 autocmd BufEnter * silent! lcd %:p:h
-
+set tags+=/home/c4/Automatos/tags
 " Save, run script and show output in the scrap window
 call MapForceNormal("<F9>",":w<cr>:Shell<space>%:p<cr><cr>")
 
@@ -295,7 +295,7 @@ set t_Co=256                      " Use more colors in terminal. May effect some
 " colorscheme murphy              " Works best with t_Co=256 not set
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
-" set background=dark
+set background=dark
 colorscheme solarized             " Works best with t_Co=256
 
 

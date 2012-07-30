@@ -417,6 +417,27 @@ q:        # Command window for commands
 :Gbrowse  # open github
 }}}
 
+== Tags and Tag List ==
+Generate tags in the root dir of the porject:
+ctags -R .   or  ctags -R *.pm
+Add tag file to tag path;
+set tags+=/home/c4/Automatos/tags
+{{{
+^]         # go to the func definition and create the list
+^W]        # same but open in a new window
+g]         # go to the select list
+^Wg]       # same but open in a new window
+:ta name   # go to the func definition and create the list
+:ta /.*na* # go by pattern to the func definition and create the list
+^t         # go back to the function call
+:ts        # select a tag from the list.
+:tn        # go to the next tag in that list.
+:tp        # go to the previous tag in that list.
+:tf        # go to the function which is in the first of the list.
+:tl        # go to the function which is in the last of the list.
+:TlistOpen # open navigation window from Tag List plugin
+}}}
+for more information http://vim.wikia.com/wiki/Browsing_programs_with_tags
 
 = TODO =
 

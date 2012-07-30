@@ -51,6 +51,7 @@
 <li><a href="#toc_19">Programming</a>
 <ul>
 <li><a href="#toc_19.1">VIM-FUGITIVE (plugin)</a>
+<li><a href="#toc_19.2">Tags and Tag List</a>
 </ul>
 <li><a href="#toc_20">TODO</a>
 </ul>
@@ -525,6 +526,31 @@ q:        # Command window for commands
 :Gbrowse  # open github
 </pre>
 
+<h2 id="toc_19.2">Tags and Tag List</h2>
+<p>
+Generate tags in the root dir of the porject:
+ctags -R .   or  ctags -R *.pm
+Add tag file to tag path;
+set tags+=/home/c4/Automatos/tags
+</p>
+<pre>
+^]         # go to the func definition and create the list
+^W]        # same but open in a new window
+g]         # go to the select list
+^Wg]       # same but open in a new window
+:ta name   # go to the func definition and create the list
+:ta /.*na* # go by pattern to the func definition and create the list
+^t         # go back to the function call
+:ts        # select a tag from the list.
+:tn        # go to the next tag in that list.
+:tp        # go to the previous tag in that list.
+:tf        # go to the function which is in the first of the list.
+:tl        # go to the function which is in the last of the list.
+:TlistOpen # open navigation window from Tag List plugin
+</pre>
+<p>
+for more information <a href="http://vim.wikia.com/wiki/Browsing_programs_with_tags">http://vim.wikia.com/wiki/Browsing_programs_with_tags</a>
+</p>
 
 <h1 id="toc_20">TODO</h1>
 

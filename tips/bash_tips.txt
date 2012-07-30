@@ -1,8 +1,11 @@
-1 Find
+1 Find and Rename
 find foo -name bar | xargs rm -r
 find . -type f -name "*.bak" -exec rm -i {} \;
 find $HOME/.bak/vim/ -name "*" -type f -mtime +60 -exec rm -f {} \;
-
+ls zeroing* | awk '{print("mv "$1" "$1)}' | sed 's/zeroing/mcc/2' | /bin/sh
+for i in *.JPG; do mv $i ${i/JPG/jpg}; done;
+for file in $(ls *.ps); do newfile=$(echo $file | sed -e s/\.ps/\.jpg/); convert $file $newfile; done 
+ 
 2 Path in a better way
 echo -e ${PATH//:/\\n}
 
