@@ -139,6 +139,8 @@ call MapRestoreMode("<C-J>","mcyyP`c")
 
 " Use perl compiler for all *.pl and *.pm files.
 autocmd BufNewFile,BufRead *.p? compiler perl
+let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about dubious constructs
+" let g:perl_compiler_force_warnings=1   " = perl -cW % -> all warnings regardless of no warnings
 " Set working dir to the dir of the current file, it works better with plugins then set autochdir
 autocmd BufEnter * silent! lcd %:p:h
 
