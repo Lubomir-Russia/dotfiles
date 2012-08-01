@@ -27,6 +27,19 @@
 "                               From Coming Home to Vim 
 "                               http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 
+" ~~ Content ~~
+  "       = Installation =  
+  "       = Plugin management with tpop's pathogen =
+  "       = Compatibility =  
+  "       = Extra key binding - mappings =
+  "       = Tab mappings =
+  "       = Command line abbreviations =
+  "       = Undo in insert mode =
+  "       = Programming settings =
+  "       = General Settings =
+  "       = Russian keymaps =
+  "       = Plugin specific settings =
+  "       = Misc functions and autocmd =
 
 " = Installation =  
 " ----------------  
@@ -49,9 +62,10 @@
 call pathogen#infect()        " Let pathogen to load all plugins
 syntax enable                 " Turn on syntax highlighting.
 filetype plugin indent on     " Turn on file type detection.
+runtime macros/matchit.vim        " Load the matchit plugin.
 
 
-" = Compatability =  
+" = Compatibility =  
 " ----------------- 
 set nocompatible                      " Must come first because it changes other options.
 
@@ -77,6 +91,7 @@ endif
 " --------------------------------
 " Professor VIM says '87% of users prefer jj over esc', jj abrams disagrees
 " imap jj <Esc>  - this mapping jumps to the next line if called at eol.
+" This does not work in paste mode
 imap jj <Left><Right><Esc>
 
 function! MapForceNormal (key, action)
@@ -105,12 +120,19 @@ set <S-F7>=[31~
 set <S-F8>=[32~
 set <S-F9>=[33~
 set <S-F10>=[34~
+
 call MapToggleOption("<F5>",  "list")
 call MapToggleOption("<F6>",  "number")
 call MapToggleOption("<S-F6>","relativenumber")
 call MapToggleOption("<F7>",  "spell")            " use ]s, [s, z=, zg, zb
+call MapToggleOption("<S-F7>","paste")
 call MapToggleOption("<F8>",  "hlsearch")
 call MapToggleOption("<S-F8>","wrap")
+call MapForceNormal ("<F9>",  ":w<cr>:Shell<space>%:p<cr><cr>") " Save, run script and show output in the scrap window
+" Could not make ShowFunc work in win gVIM
+nmap <F11> <Plug>ShowFunc 
+:imap <S-F7> <nop>
+:set pastetoggle=<S-F7>                           " :h pastetoggle for details
 
 " Use Ctrl-F for omni completion
 imap <C-F> <C-X><C-O>
@@ -128,27 +150,29 @@ nnoremap S i<CR><Esc>
 vmap < <gv
 vmap > >gv
 
-" Could not make ShowFunc work in win gVIM
-nmap <F11> <Plug>ShowFunc 
-
 " \1 to copy a line, comment it with tcomment, go back
 call MapRestoreMode("<leader>1","mcyyPgCc`c")
 
 " Ctrl-J to copy a line and go back - like in EditPlus
 call MapRestoreMode("<C-J>","mcyyP`c")
 
-" Use perl compiler for all *.pl and *.pm files.
-autocmd BufNewFile,BufRead *.p? compiler perl
-let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about dubious constructs
-" let g:perl_compiler_force_warnings=1   " = perl -cW % -> all warnings regardless of no warnings
-" Set working dir to the dir of the current file, it works better with plugins then set autochdir
-autocmd BufEnter * silent! lcd %:p:h
-set tags+=/home/c4/Automatos/tags
-" Save, run script and show output in the scrap window
-call MapForceNormal("<F9>",":w<cr>:Shell<space>%:p<cr><cr>")
+" Jamis Buck's file opening plugin
+map <Leader>t :FuzzyFinderTextMate<Enter>
 
-" = Tab mappings.  =
-" ------------------
+" Vim - hjkl-ing while in insert mode, or use TouchCoursor in Windows
+inoremap <M-j> <C-O>gj
+inoremap <M-k> <C-O>gk
+noremap! <M-h> <Left>
+noremap! <M-l> <Right>
+
+" Controversial...swap colon and semicolon for easier commands
+"nnoremap ; :
+"nnoremap : ;
+"vnoremap ; :
+"vnoremap : ;
+
+" = Tab mappings =
+" ----------------
 " also use comand abbreviation :e -> tabedit and :n ->tabnew
 function! MoveTabLeft()
     let current_tab = tabpagenr()
@@ -175,17 +199,14 @@ call MapForceNormal("<leader>tr",":call MoveTabRight()<cr>")
 call MapForceNormal("<leader>tn",":tabnext<cr>")      " useless, use default gt
 call MapForceNormal("<leader>tp",":tabprevious<cr>")  " useless, use default gT
 
-
-" Command line abreviations
+" = Command line abbreviations =
+" -----------------------------
 cab l ls<cr>:b<space>
 cab e tabedit<space>
 cab n tabnew<space>
-" Vim - hjkl-ing while in insert mode
-inoremap <M-j> <C-O>gj
-inoremap <M-k> <C-O>gk
-noremap! <M-h> <Left>
-noremap! <M-l> <Right>
 
+" = Undo in insert mode =
+" -----------------------
 " Create an undo point after each WORD
 " inoremap looks more logical but it brakes the abbreviation, so imap is used
 imap <Space> <Space><c-g>u
@@ -195,44 +216,49 @@ imap <CR> <CR><c-g>u
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
+" = Programming settings =
+" ------------------------
+" Use perl compiler for all *.pl and *.pm files.
+autocmd BufNewFile,BufRead *.p? compiler perl
+let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about dubious constructs
+" let g:perl_compiler_force_warnings=1   " = perl -cW % -> all warnings regardless of no warnings
 
+" Set working dir to the dir of the current file, it works better with plugins then set autochdir
+autocmd BufEnter * silent! lcd %:p:h
 
-" Uncomment to use Jamis Buck's file opening plugin
-"map <Leader>t :FuzzyFinderTextMate<Enter>
+" Read the ctags of the specific project
+set tags+=/home/c4/Automatos/tags
 
-" Controversial...swap colon and semicolon for easier commands
-"nnoremap ; :
-"nnoremap : ;
-"vnoremap ; :
-"vnoremap : ;
+" To get basic Folding for Perl and PHP working
+let perl_fold=1
+let perl_fold_blocks = 1
+let php_folding=1
 
-" Reread .vimrc configuration file after it was saved.
-" autocmd! bufwritepost $MYVIMRC source $MYVIMRC
-" Same but in case the ~/.vimrc is just a link to a vimrc file in dorfiles.
-autocmd! bufwritepost vimrc source $MYVIMRC
-autocmd! bufwritepost _vimrc source $MYVIMRC
+" Automatic fold settings for specific files.
+autocmd FileType ruby setlocal foldmethod=syntax
+autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
-" if has("autocmd")
-"         set viewoptions=cursor,folds
-"         autocmd BufWinLeave *.* silent mkview       " Save view of the window.
-"         autocmd BufWinEnter *.* silent loadview     " Restore it when open.
-" endif
+" For the MakeGreen plugin and Ruby RSpec.
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
-
-runtime macros/matchit.vim        " Load the matchit plugin.
-" set showmatch                     " Similar built-in function.
-
+" = General Settings =
+" --------------------
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in. Default when not vi compatible.
 set title                         " Set the terminal's title
 " set visualbell                    " No beeping but terminal flash.
-set vb t_vb=' 
+set vb t_vb= 
 " No beeping and no flash.
 
 set ruler                         " Show cursor position.
 set showtabline=2                 " Display tabs all of the time
+set laststatus=2                  " Show the status line all the time
+" Useful status information at the bottom of screen
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
 " set number                        " Show (absolute) line numbers.
 set relativenumber                " Show relative line number. Useful for motion/deletion commands.
+set lazyredraw                    " Do not redaw screen during macros -> mach faster
 set confirm                       " Use confirmation dialog instead of error message.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
@@ -251,8 +277,8 @@ set hlsearch                      " Highlight matches.
 
 set wrap                          " Turn on line wrapping.
 set linebreak                     " Wrap at the end of words.
-set showbreak=->             " String to put at the start of lines that have been wrapped.
-" set breakindent                   " Working only with patch retracile.net/wiki/VimBreakIndent.
+set showbreak=->                  " String to put at the start of lines that have been wrapped.
+" set breakindent                   " Works only with patch retracile.net/wiki/VimBreakIndent.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 " set colorcolumn=85                " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
 " set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults. 
@@ -279,41 +305,30 @@ set expandtab                     " Use spaces instead of tabs
 set softtabstop=4                 " It feels like <Tab>s are being inserted, while in fact a mix of spaces and <Tab>s is used.
 set autoindent                    "  Copy indent from current line when starting a new line.
 " Keep tabs instead of spaces in the files: crontab, fstab and make.
-au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
+autocmd FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 " Set list listchars=tab: ,precedes:<,extends:>
 set list listchars=precedes:<,extends:>,tab:>-,trail:-
 set nolist                        " Do not show list till asked to do it
 
-set laststatus=2                  " Show the status line all the time
-" Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" set showmatch                     " built-in function replaced with matchIt plugin.
 
 set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
-" colorscheme topfunky-light
-" colorscheme vividchalk
-" colorscheme zenburn             " Works best with t_Co=256
-" colorscheme murphy              " Works best with t_Co=256 not set
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized             " Works best with t_Co=256
+" colorscheme topfunky-light
+" colorscheme vividchalk
+" colorscheme zenburn             " Works best with t_Co=256
+" colorscheme murphy              " Works best with t_Co=256 not set
 
-
-" Automatic fold settings for specific files. Uncomment to use.
-" autocmd FileType ruby setlocal foldmethod=syntax
-" autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
-
-" To get basic Folding for Perl and PHP working
-let perl_fold=1
-let perl_fold_blocks = 1
-let php_folding=1
 set nofoldenable     " Do not fold when a file is just opened
 " set foldlevel=1    " Only first level is opened if foldenable is set.
 " set foldcolumn=3   " Show control line.
 " set foldopen=all   " Open folds when entering them. Otherwise use <l> to move in.
 
-" For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
-" autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+" = Russian keymaps =
+" -------------------
 
 " Vim и русска€ раскладка клавиатуры
 "
@@ -347,14 +362,42 @@ set iskeyword=@,48-57,_,192-255      " настраиваю дл€ работы с русскими словами 
 " ≈сли у вас локаль UTF, то данный способ может не работать в старых верси€х Vim.
 " Ќеобходимо каждый символ назначить индивидуально: http://ru.wikibooks.org/wiki/Vim
 
+" = Plugin specific settings =
+" ------------------------------
+
+" Vim-Wiki
+let wiki = {}
+let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/', 'auto_export': 1}] " works both in Unix and Windows
+let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
+
+" snipMate
+" Update snippets for all buffers when snipfile is saved
+autocmd! bufwritepost *snippet* call ReloadAllSnippets()
+
+" = Misc functions and autocmd =
+" --------
+" Make a section header
+nmap <leader>hh gCc0wi=<space><esc>A<space>=<esc>yypwv$:s/./-/g<cr>:nohls<cr>gCcwxx
+
+" Reread .vimrc configuration file after it was saved.
+" autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+" Same but in case the ~/.vimrc is just a link to a vimrc file in dorfiles.
+autocmd! bufwritepost vimrc source $MYVIMRC
+autocmd! bufwritepost _vimrc source $MYVIMRC
+
+" if has("autocmd")
+"         set viewoptions=cursor,folds
+"         autocmd BufWinLeave *.* silent mkview       " Save view of the window.
+"         autocmd BufWinEnter *.* silent loadview     " Restore it when open.
+" endif
+
 " Jump to the last position of opened file.
 autocmd! bufreadpost * call LastPosition()
-    function! LastPosition()
-        if line("'\"") && line("'\"")<=line('$')
-            normal! `"
-        endif
-    endfunction
-set vb t_vb="
+function! LastPosition()
+    if line("'\"") && line("'\"")<=line('$')
+        normal! `"
+    endif
+endfunction
 
 " command :Shell will execute a shell command and put uptput to scrap window
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -398,17 +441,6 @@ endfunction
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
-let wiki = {}
-" let wiki.path = '~/bin/dotfiles/wiki/'   " vimwiki location
-" let wiki.auto_export = 1                 " keep html uptodate when wiki file is saved.
-let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/', 'auto_export': 1}] " works both in Unix and Windows
-let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
-
-" = Misc =
-" --------
-" Make a section header
-nmap <leader>hh gCc0wi=<space><esc>A<space>=<esc>yypwv$:s/./-/g<cr>:nohls<cr>gCcwxx

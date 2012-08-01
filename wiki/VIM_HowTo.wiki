@@ -123,6 +123,8 @@ zg       # Add as good
 zw       # Add as wrong
 zug      # Undo adding as good
 zuw      # Undo adding as wrong
+:spellr  # RepeatAll the replacement done by |z=| for all matches
+CTRL-X s # in insert mode to find suggestions. CTRL-N and CTRL-P
 }}}
 
 In order to spell check in comments and strings switch off the syntax

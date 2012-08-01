@@ -1,3 +1,51 @@
+# Automatos specific snippet
+#============================
+
+# logTrace
+snippet logt
+	$self->logTrace("${1:Trace message}");
+	${2}
+
+# logDebug
+snippet logd
+	$self->logDebug("${1:Debug message}");
+	${2}
+
+# logInfo
+snippet logi
+	$self->logInfo("${1:Info message}");
+	${2}
+
+# logWarning
+snippet logw
+	$self->logWarning("${1:Warning message}");
+	${2}
+
+# logError
+snippet loge
+	$self->logError("${1:Error message}");
+	${2}
+
+# logFatal
+snippet logf
+	$self->logFatal("${1:Fatal message}");
+	${2}
+
+# logStep
+snippet logs
+	$self->logStep("Step ".$stepNumber++.": ${1:Step message}");
+	# TODO $1
+	${2}
+
+# logPropertyInfo
+snippet logp
+	$self->logPropertyInfo("${1:PropertyInfo message}");
+	${2}
+
+
+# Perl general snippet
+#======================
+
 # #!/usr/bin/perl
 snippet #!
 	#!/usr/bin/perl
