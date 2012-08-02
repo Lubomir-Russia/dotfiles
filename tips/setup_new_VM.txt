@@ -1,0 +1,232 @@
+# Go to vSheper client, install VMWare tools (optional but I highly recomend),
+# make the first snapshot. Now you can play safe.
+
+# Login first time as root
+# change root password
+passwd
+
+# add a new user
+useradd -m c4dev
+passwd c4dev
+
+# setup DNS: 
+# Note: Suse screwed up networking settings. So, do not modify resolv.conf
+# file, do not even touch it, or you will be screwed up as badly as Suse
+# herself. Go the long way via yast. If yast looks weird, do not blame it on
+# yast. It is again Suse who tamped with terminal settings. Close yast and
+# start it again inside a screen session. It should help, if not then blame it
+# on yourself and fix PuTTY settings. 
+# nameserver 10.64.74.34, 10.244.182.14, 10.244.183.14
+# search sspg.lab.emc.com lss.emc.com corp.emc.com
+
+# log out, and never again login as a root, better even restrict root access to
+# console only
+
+# login to your older VM and make your lazy life easy
+sudo sh -c "echo 10.245.194.201 pta4 >> /etc/hosts"
+cat ~/.ssh/id_rsa.pub | ssh pta4 'mkdir ~/.ssh; cat - >>~/.ssh/authorized_keys2'
+# make your life even easier by repeating the same cmd with sudo
+sudo sh -c "cat ~/.ssh/id_rsa.pub | ssh pta4 'mkdir ~/.ssh; cat - >>~/.ssh/authorized_keys2'"
+
+# on Windows open your private key with PuTTY key generation tool; copy public
+# key and run the previous command modified.
+echo ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAloYGRQlnTzG2MJaXwSeQYAFG/L1wyt+OT91zrE0mNgboBYG4fRXCrTWd0+AgW/I9r2FrwHPSWXnbGp+ma7nl41cSyzEroG08wFHZ2+UD8gSoMTNPHR89Op5Wt9eCQ3bw4ymflLHsPeWHz+lCGeu5bBSoxZ3acev2WpIjFflVYcU= lubomir | ssh c4dev@pta4 'mkdir ~/.ssh; cat - >>~/.ssh/authorized_keys2'
+
+# Forget c4dev's password forever.
+
+# Copy PuTTY session, modify ip and the title. Send the setting home.
+# Log to the new VM.
+
+# Please, check if you can ssh from the new VM to the old one. If yes, then
+# "introduce" your new VM to the old as well in the similar way.
+
+# Check new fstab file, if you do not like what you see, then copy it from old VM
+sudo ssh pta4 'cp /etc/fstab /etc/fstab_original'
+sudo scp /etc/fstab/ pta4:/etc/fstab
+
+# On the new VM, modify the fstab to comment what you do not need.
+# Note, if you cannot ssh back to St.P., then most likely you can not mount
+# local cifs either. But if you can access your cifs, then take care of your
+# credentials as well
+
+# Create mount points with proper access modes.
+# Mount them all
+sudo mount -a
+
+# As root open yast.
+
+# Add repositories from local ISO from:
+# gildor.sspg.lab.emc.com:/c4shares/soft/ISOs
+# You need GM_DVD 1 and 2 and SDK Media1
+
+# Install whatever you need/like/hate with yast. And I tell you, you will need
+# all sorts of dev-libs so that you can compile modules for Automatos later.
+
+# Do not forget to install my favorite git and mc.
+
+# Setup any/all from the zoo: vnc, nx, cygwin. Either use yast or scp/mc from old VM. 
+
+# Do you love vim as much as I do? If you do then recompile vim73 with it
+# breakindent patch. If not, then be happy with provided vim72.
+
+# Copy from old VM your favorite bashrc, sreenrc, and so on. (or better
+# git-clone them all)
+
+# Enjoy )) We are half way through.
+
+# Save the snapshot of your lovely VM before capricious Automatos enslaves it.
+
+# As c4dev user install active perl 5.14 for Linux 64 to local dir.
+
+mkdir ~/src
+cd ~/src
+wget http://downloads.activestate.com/ActivePerl/releases/5.14.2.1402/ActivePerl-5.14.2.1402-x86_64-linux-glibc-2.3.5-295342.tar.gz
+tar xf ActivePerl-5.14.2.1402-x86_64-linux-glibc-2.3.5-295342.tar.gz
+cd ActivePerl-5.14.2.1402-x86_64-linux-glibc-2.3.5-295342
+less README.txt
+
+# I told you, but you forgot already, keep the camel in your LOCAL dir.
+# Otherwise it will behave like a goat in the garden.
+./install.sh
+# when prompted for location, provide: ~/bin. I believe you already have it in
+# your $PATH. Don't you?
+
+# Tell them all that from now on you have your own new and stinky camel. 
+ln -s ~/ActivePerl-5.14/bin/perl ~/bin/perl
+ln -s ~/ActivePerl-5.14/bin/ppm ~/bin/ppm
+
+# Clean up your PERL5LIB from all the past. Remember, Automatos is tender and
+# jealous. It will be deeply offended if your PERL5LIB cares about
+# /auto/tools/LATEST/lib/perl  
+
+# relogin and meet your new beast of burden.
+perl -v; perl -pe 's//I will not login as root./'
+
+# It should confess: This is perl 5, version 14, subversion 2 (v5.14.2) built
+# for x86_64-linux-thread-multi
+# If not - try again, and again, and again, and then read my instructions.
+
+# As root start yast and try to install openssl, openssl-devel, libssh2,
+# libssh2-devel. If installation fails you are busted (yeh, it literally means
+# 'caught out doing something wrong and therefore in trouble'). Reload the snapshot.
+
+# Prepare a place for Automatos
+sudo sh -c 'd=/c4_working; mkdir $d; chown c4dev $d; chgrp users $d;'
+
+# Download and unpack the latest Automatos and your tests. 
+# Or checkout it with Accurev if you already have it.
+
+# Give your fingers a present: setup paths and aliases
+export MATOS=/c4_working/Automatos
+export MyTests=$MATOS/WhereverMyTestsAre
+alias cda='cd $MATOS'
+alias cdc='cd $MyTests/MCC'
+alias cdr='cd $MyTests/MCR'
+export PATH=$MATOS/bin:$PATH
+export PERL5LIB=$MATOS/lib:$MyTests
+
+# Forget forever where you have put the gift of the Greeks, you do not need to
+# remember this any more.
+
+# Set up the Automatos libs (if you can, he-he).
+cda; cd bin
+chmod 744 automatos.pl
+
+# Automatos promised you that all your troubles fly away if only you run:
+perl ppminstall.pl
+
+# And you believed them? Ha-ha-ha. Hoped to see something like this?
+Checking for Data::Validate::IP ... ok!
+Checking for Exception::Class ... ok!
+Checking for File::Path ... ok!
+Checking for IPC::Run ... ok!
+Checking for List::MoreUtils ... ok!
+Checking for Log::Log4perl ... ok!
+Checking for Net::SSH2 ... ok!
+Checking for Params::Validate ... ok!
+Checking for Readonly ... ok!
+Checking for RPC::XML ... ok!
+Checking for Text::CSV ... ok!
+Checking for XML::Simple ... ok!
+Checking for SOAP::Lite ... ok!
+Checking for VMware::VIRuntime ... ok!
+Checking for LWP::UserAgent ... ok!
+Checking for HTTP::Request::Common ... ok!
+Checking for Net::SSLeay ... not installed ... Looking for package ... ok!
+Checking for IO::Socket::SSL ... not installed ... Looking for package ... ok!
+Checking for Net::Ping::External ... ok!
+Checking for Net::Ping ... ok!
+Checking for Net::Telnet ... ok!
+Checking for Thread::Semaphore ... ok!
+Downloading Net-SSLeay-1.48...done
+Downloading IO-Socket-SSL-1.76...done
+Unpacking Net-SSLeay-1.48...done
+Unpacking IO-Socket-SSL-1.76...done
+Relocating Net-SSLeay-1.48...done
+Relocating IO-Socket-SSL-1.76...done
+Generating HTML for Net-SSLeay-1.48...done
+Generating HTML for IO-Socket-SSL-1.76...done
+Updating files in site area...done
+
+# It almost like this? But not exactly? Some is missing, not found, not
+# suitable? Learn from history: "Never-ever trust the Greeks."
+
+# Most likely you are in trouble with SSL and SSH.
+# For SSL install all the libs openssl, openssl-devel, libssh2, libssh2-devel
+# via yast and try ppm install again. If does not help install the libs from
+# www.openssl.org and www.libssh2.org
+
+# For SSH2 first or all the same four libs are indispensable. 
+# Get Net::SSH2 from CPAN. Yes, I mean it. ActivePerl are supposed to get
+# everything from its own repos via ppm. But in case of Net::SSH2 they say that
+# it is not suitable for Perl 5.14, because they tried to compile it but failed
+# miserable. Ha, bad losers!! They just do not know how to cook it.
+
+# Do not dare to run cpan to install it - Automatos is not that stupid to be
+# fooled so easily.
+
+# As c4dev
+cd ~/src
+wget http://search.cpan.org/CPAN/authors/id/R/RK/RKITOVER/Net-SSH2-0.45.tar.gz
+tar xf Net-SSH2-0.45.tar.gz         
+cd Net-SSH2-0.45/
+less README                            
+perl Makefile.PL
+ppm install ExtUtils::MakeMaker
+make
+make test
+make install
+cda; cd bin;
+perl ppminstall.pl
+
+# Now you should see the communism. All is shared all is good.
+
+# Go to you tests, change in config files paths for log dir.
+# Make the script to run your tests:
+cp run.bat run.sh
+sed -i 's/REM/#/' run.sh
+chmod 744 run.sh
+
+# Select the simplest test in your testSetInfo.xml and hold your breath.
+./run.sh
+
+# If all is OK, then do not eat your donut - give it to me.
+
+# if Matos needs something more from you, then this must help
+yes | perl -pe 's//Is is not my day today? (yes,no) /'
+
+# Are you happy now? Really? Check the very first line of the stdout log of the
+# test you've just so happily executed. Do you see a nasty line "could not find
+# ParserDetails.ini in /home/c4dev/ActivePerl-5.14/site/lib/XML/SAX", What?!
+# You can disregard this message, no joking. It's just a warning that XML
+# parser wants a better option than just a slow pure perl parser, but it does
+# not have one.  You may leave it alone, of course, if you wish. Just be aware
+# that this little imperfection will eat you up from within and will deprive
+# you of your sanity over years. So better fix it now by forcing XML parser live
+# with what he has.
+perl -MXML::SAX -e "XML::SAX->add_parser(q(XML::SAX::PurePerl))->save_parsers()"
+
+# Good luck, and happy testing.
+
+P.S. Make a snapshot NOW!!! ... before you botch up the system. 
+
