@@ -36,8 +36,8 @@ patch -p1 <vim-7.3.285-breakindent.patch
 ./configure --with-features=huge --enable-perlinterp --enable-rubyinterp
 --enable-pythoninterp --enable-gui --with-x
 
-make sudo
-make install
+make
+sudo make install
 
 и наслаждаться правильными отступами, отдав команду :set breakindent
 
