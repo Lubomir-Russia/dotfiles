@@ -1,4 +1,10 @@
-# Go to vSheper client, install VMWare tools (optional but I highly recomend),
+# This HowTo explains all the gory details of setting Automatos framework on a
+# pristine SLES SP1 VM in a US lab from Russian COE.
+#
+# Do not copy/paste the command lines blindly, be creative! Substitute with
+# your data. For your convince all un-executable code is commented.
+#
+# Go to vSheper client, install VMWare tools (optional but I highly recommend),
 # make the first snapshot. Now you can play safe.
 
 # Login first time as root
@@ -32,9 +38,9 @@ sudo sh -c "cat ~/.ssh/id_rsa.pub | ssh pta4 'mkdir ~/.ssh; cat - >>~/.ssh/autho
 # key and run the previous command modified.
 echo ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAloYGRQlnTzG2MJaXwSeQYAFG/L1wyt+OT91zrE0mNgboBYG4fRXCrTWd0+AgW/I9r2FrwHPSWXnbGp+ma7nl41cSyzEroG08wFHZ2+UD8gSoMTNPHR89Op5Wt9eCQ3bw4ymflLHsPeWHz+lCGeu5bBSoxZ3acev2WpIjFflVYcU= lubomir | ssh c4dev@pta4 'mkdir ~/.ssh; cat - >>~/.ssh/authorized_keys2'
 
-# Forget c4dev's password forever.
+# Forget c4dev's password forever, you do not need any more.
 
-# Copy PuTTY session, modify ip and the title. Send the setting home.
+# Copy PuTTY session, modify ip and the title. Send the settings home.
 # Log to the new VM.
 
 # Please, check if you can ssh from the new VM to the old one. If yes, then
@@ -45,7 +51,7 @@ sudo ssh pta4 'cp /etc/fstab /etc/fstab_original'
 sudo scp /etc/fstab/ pta4:/etc/fstab
 
 # On the new VM, modify the fstab to comment what you do not need.
-# Note, if you cannot ssh back to St.P., then most likely you can not mount
+# Note, if you cannot ssh back to St.P., then most likely you cannot mount
 # local cifs either. But if you can access your cifs, then take care of your
 # credentials as well
 
@@ -55,7 +61,7 @@ sudo mount -a
 
 # As root open yast.
 
-# Add repositories from local ISO from:
+# Add repositories from local ISO located at: 
 # gildor.sspg.lab.emc.com:/c4shares/soft/ISOs
 # You need GM_DVD 1 and 2 and SDK Media1
 
@@ -64,9 +70,12 @@ sudo mount -a
 
 # Do not forget to install my favorite git and mc.
 
-# Setup any/all from the zoo: vnc, nx, cygwin. Either use yast or scp/mc from old VM. 
+# Setup any/all from the zoo: vnc, nx, cygwin. Either use yast or scp/mc config
+# files from old VM. After you have any of them you can us GUI yast, that might
+# be more convenient. It should work, but who knows, I did not test it. Also
+# you will it need if you would like to view html logs directly on you VM.  
 
-# Do you love vim as much as I do? If you do then recompile vim73 with it
+# Do you love vim as much as I do? If you do then recompile vim73 with its
 # breakindent patch. If not, then be happy with provided vim72.
 
 # Copy from old VM your favorite bashrc, sreenrc, and so on. (or better
@@ -108,7 +117,8 @@ perl -v; perl -pe 's//I will not login as root./'
 
 # As root start yast and try to install openssl, openssl-devel, libssh2,
 # libssh2-devel. If installation fails you are busted (yeh, it literally means
-# 'caught out doing something wrong and therefore in trouble'). Reload the snapshot.
+# 'caught out doing something wrong and therefore in trouble'). In this case
+# reload the snapshot.
 
 # Prepare a place for Automatos
 sudo sh -c 'd=/c4_working; mkdir $d; chown c4dev $d; chgrp users $d;'
@@ -118,7 +128,7 @@ sudo sh -c 'd=/c4_working; mkdir $d; chown c4dev $d; chgrp users $d;'
 
 # Give your fingers a present: setup paths and aliases
 export MATOS=/c4_working/Automatos
-export MyTests=$MATOS/WhereverMyTestsAre
+export MyTests=WhereverMyTestsAre
 alias cda='cd $MATOS'
 alias cdc='cd $MyTests/MCC'
 alias cdr='cd $MyTests/MCR'
@@ -135,45 +145,45 @@ chmod 744 automatos.pl
 # Automatos promised you that all your troubles fly away if only you run:
 perl ppminstall.pl
 
-# And you believed them? Ha-ha-ha. Hoped to see something like this?
-Checking for Data::Validate::IP ... ok!
-Checking for Exception::Class ... ok!
-Checking for File::Path ... ok!
-Checking for IPC::Run ... ok!
-Checking for List::MoreUtils ... ok!
-Checking for Log::Log4perl ... ok!
-Checking for Net::SSH2 ... ok!
-Checking for Params::Validate ... ok!
-Checking for Readonly ... ok!
-Checking for RPC::XML ... ok!
-Checking for Text::CSV ... ok!
-Checking for XML::Simple ... ok!
-Checking for SOAP::Lite ... ok!
-Checking for VMware::VIRuntime ... ok!
-Checking for LWP::UserAgent ... ok!
-Checking for HTTP::Request::Common ... ok!
-Checking for Net::SSLeay ... not installed ... Looking for package ... ok!
-Checking for IO::Socket::SSL ... not installed ... Looking for package ... ok!
-Checking for Net::Ping::External ... ok!
-Checking for Net::Ping ... ok!
-Checking for Net::Telnet ... ok!
-Checking for Thread::Semaphore ... ok!
-Downloading Net-SSLeay-1.48...done
-Downloading IO-Socket-SSL-1.76...done
-Unpacking Net-SSLeay-1.48...done
-Unpacking IO-Socket-SSL-1.76...done
-Relocating Net-SSLeay-1.48...done
-Relocating IO-Socket-SSL-1.76...done
-Generating HTML for Net-SSLeay-1.48...done
-Generating HTML for IO-Socket-SSL-1.76...done
-Updating files in site area...done
+# And you believed him? Ha-ha-ha. Hoped to see something like this?
+# Checking for Data::Validate::IP ... ok!
+# Checking for Exception::Class ... ok!
+# Checking for File::Path ... ok!
+# Checking for IPC::Run ... ok!
+# Checking for List::MoreUtils ... ok!
+# Checking for Log::Log4perl ... ok!
+# Checking for Net::SSH2 ... ok!
+# Checking for Params::Validate ... ok!
+# Checking for Readonly ... ok!
+# Checking for RPC::XML ... ok!
+# Checking for Text::CSV ... ok!
+# Checking for XML::Simple ... ok!
+# Checking for SOAP::Lite ... ok!
+# Checking for VMware::VIRuntime ... ok!
+# Checking for LWP::UserAgent ... ok!
+# Checking for HTTP::Request::Common ... ok!
+# Checking for Net::SSLeay ... not installed ... Looking for package ... ok!
+# Checking for IO::Socket::SSL ... not installed ... Looking for package ... ok!
+# Checking for Net::Ping::External ... ok!
+# Checking for Net::Ping ... ok!
+# Checking for Net::Telnet ... ok!
+# Checking for Thread::Semaphore ... ok!
+# Downloading Net-SSLeay-1.48...done
+# Downloading IO-Socket-SSL-1.76...done
+# Unpacking Net-SSLeay-1.48...done
+# Unpacking IO-Socket-SSL-1.76...done
+# Relocating Net-SSLeay-1.48...done
+# Relocating IO-Socket-SSL-1.76...done
+# Generating HTML for Net-SSLeay-1.48...done
+# Generating HTML for IO-Socket-SSL-1.76...done
+# Updating files in site area...done
 
-# It almost like this? But not exactly? Some is missing, not found, not
+# It almost like this? But not exactly? Something is missing, not found, not
 # suitable? Learn from history: "Never-ever trust the Greeks."
 
 # Most likely you are in trouble with SSL and SSH.
 # For SSL install all the libs openssl, openssl-devel, libssh2, libssh2-devel
-# via yast and try ppm install again. If does not help install the libs from
+# via yast and try ppm install again. If it does not help install the libs from
 # www.openssl.org and www.libssh2.org
 
 # For SSH2 first or all the same four libs are indispensable. 
@@ -193,13 +203,14 @@ cd Net-SSH2-0.45/
 less README                            
 perl Makefile.PL
 ppm install ExtUtils::MakeMaker
+perl Makefile.PL
 make
 make test
 make install
 cda; cd bin;
 perl ppminstall.pl
 
-# Now you should see the communism. All is shared all is good.
+# Now you should see the communism. All is shared, all is good.
 
 # Go to you tests, change in config files paths for log dir.
 # Make the script to run your tests:
@@ -212,7 +223,7 @@ chmod 744 run.sh
 
 # If all is OK, then do not eat your donut - give it to me.
 
-# if Matos needs something more from you, then this must help
+# If Matos needs something more from you, then this must help
 yes | perl -pe 's//Is is not my day today? (yes,no) /'
 
 # Are you happy now? Really? Check the very first line of the stdout log of the
@@ -228,5 +239,5 @@ perl -MXML::SAX -e "XML::SAX->add_parser(q(XML::SAX::PurePerl))->save_parsers()"
 
 # Good luck, and happy testing.
 
-P.S. Make a snapshot NOW!!! ... before you botch up the system. 
+# P.S. Make a snapshot NOW!!! ... before you botch up the system. 
 
