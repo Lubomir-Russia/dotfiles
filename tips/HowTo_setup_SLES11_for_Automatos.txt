@@ -2,7 +2,7 @@
 # pristine SLES SP1 VM in a US lab from Russian COE.
 #
 # Do not copy/paste the command lines blindly, be creative! Substitute with
-# your data. For your convince all un-executable code is commented.
+# your data. For your convenience all un-executable code is commented.
 #
 # Go to vSheper client, install VMWare tools (optional but I highly recommend),
 # make the first snapshot. Now you can play safe.
