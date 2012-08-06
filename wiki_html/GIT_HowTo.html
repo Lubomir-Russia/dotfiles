@@ -14,12 +14,13 @@
 <li><a href="#toc_1">Pull and Clone</a>
 <ul>
 <li><a href="#toc_1.1">from another locol dir</a>
-<li><a href="#toc_1.2">from remote/local ssh server</a>
-<li><a href="#toc_1.3">from remote git server</a>
-<li><a href="#toc_1.4">from remote public git server over http</a>
-<li><a href="#toc_1.5">from remote private git server or with push access over https</a>
+<li><a href="#toc_1.2">from SSH server</a>
+<li><a href="#toc_1.3">from public GIT server</a>
+<li><a href="#toc_1.4">from public HTTP server</a>
+<li><a href="#toc_1.5">from public server with push access over HTTPS</a>
 </ul>
-<li><a href="#toc_2">Nice PS1</a>
+<li><a href="#toc_2">Create shared local repo</a>
+<li><a href="#toc_3">Nice PS1</a>
 </ul>
 </div>
 </p>
@@ -28,33 +29,38 @@
 
 <h2 id="toc_1.1">from another locol dir</h2>
 <blockquote>
-bob$ git clone /home/alice/project myrepo
+git clone /home/alice/project myrepo
 </blockquote>
-<h2 id="toc_1.2">from remote/local ssh server</h2>
+<h2 id="toc_1.2">from SSH server</h2>
 <blockquote>
-bob$ git clone 10.64.74.71:/root/bin/dotfiles
+git clone 10.64.74.71:/root/bin/dotfiles
+git clone root@127.0.0.1:/root/bin/dotfiles
+git clone alice.org:/home/alice/project myrepo
 </blockquote>
+<h2 id="toc_1.3">from public GIT server</h2>
 <blockquote>
-bob$ git clone root@127.0.0.1:/root/bin/dotfiles
+git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
 </blockquote>
+<h2 id="toc_1.4">from public HTTP server</h2>
 <blockquote>
-bob$ git clone alice.org:/home/alice/project myrepo
+git clone <a href="http://github.com/schacon/grack.git">http://github.com/schacon/grack.git</a>
 </blockquote>
-<h2 id="toc_1.3">from remote git server</h2>
+<h2 id="toc_1.5">from public server with push access over HTTPS</h2>
 <blockquote>
-$ git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
-</blockquote>
-<h2 id="toc_1.4">from remote public git server over http</h2>
-<blockquote>
-$ git clone <a href="http://github.com/schacon/grack.git">http://github.com/schacon/grack.git</a>
-</blockquote>
-<h2 id="toc_1.5">from remote private git server or with push access over https</h2>
-<blockquote>
-$ git clone <a href="https://username@github.com/username/project.git">https://username@github.com/username/project.git</a>
+git clone <a href="https://username@github.com/username/project.git">https://username@github.com/username/project.git</a>
 </blockquote>
 
-<hr />
-<h1 id="toc_2">Nice PS1</h1>
+<h1 id="toc_2">Create shared local repo</h1>
+<pre>
+ git clone --bare MemStat MemStat.git
+ cp -r MemStat.git/ /mnt/ptashl/
+ cd MemStat
+ git remote add origin /mnt/ptashl/MemStat.git/
+ git remote -v
+ git push
+</pre>
+
+<h1 id="toc_3">Nice PS1</h1>
 <p>
 Consider changing your PS1 to also show the current branch:
 </p>

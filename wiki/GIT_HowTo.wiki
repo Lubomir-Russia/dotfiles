@@ -5,22 +5,28 @@
 = Pull and Clone =
 
 == from another locol dir ==
+    git clone /home/alice/project myrepo
+== from SSH server ==
+    git clone 10.64.74.71:/root/bin/dotfiles
+    git clone root@127.0.0.1:/root/bin/dotfiles
+    git clone alice.org:/home/alice/project myrepo
+== from public GIT server ==
+    git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
+== from public HTTP server ==
+    git clone http://github.com/schacon/grack.git
+== from public server with push access over HTTPS ==
+    git clone https://username@github.com/username/project.git
 
-    bob$ git clone /home/alice/project myrepo
-== from remote/local ssh server ==
-    bob$ git clone 10.64.74.71:/root/bin/dotfiles
+= Create shared local repo =
+{{{
+ git clone --bare MemStat MemStat.git
+ cp -r MemStat.git/ /mnt/ptashl/
+ cd MemStat
+ git remote add origin /mnt/ptashl/MemStat.git/
+ git remote -v
+ git push
+}}}
 
-    bob$ git clone root@127.0.0.1:/root/bin/dotfiles
-
-    bob$ git clone alice.org:/home/alice/project myrepo
-== from remote git server ==
-    $ git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
-== from remote public git server over http ==
-    $ git clone http://github.com/schacon/grack.git
-== from remote private git server or with push access over https ==
-    $ git clone https://username@github.com/username/project.git
-
-----
 = Nice PS1 =
 Consider changing your PS1 to also show the current branch:
     PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
