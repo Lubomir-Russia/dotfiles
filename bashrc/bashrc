@@ -51,11 +51,12 @@ alias gb='git branch'
 alias gba='git branch -a'
 
 export MATOS=/c4_working/Automatos 
-export MyTests=$MATOS/Examples
+export MyTests=/c4_working/MyTests
 
 alias cw='cd /c4_working/'
 alias cda='cd $MATOS'
 alias cdc='cd $MyTests/MCC'
+alias cds='cd $MyTests/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='./run_tests.sh '
 
