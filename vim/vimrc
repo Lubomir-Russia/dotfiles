@@ -227,7 +227,7 @@ let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about
 autocmd BufEnter * silent! lcd %:p:h
 
 " Read the ctags of the specific project
-set tags+=/home/c4/Automatos/tags
+set tags+=$MATOS/tags
 
 " To get basic Folding for Perl and PHP working
 let perl_fold=1
