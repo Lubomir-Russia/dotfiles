@@ -129,6 +129,7 @@ call MapToggleOption("<S-F7>","paste")
 call MapToggleOption("<F8>",  "hlsearch")
 call MapToggleOption("<S-F8>","wrap")
 call MapForceNormal ("<F9>",  ":w<cr>:Shell<space>%:p<cr><cr>") " Save, run script and show output in the scrap window
+call MapForceNormal ("<F10>",  ":w<cr>:make<cr>") " Save and run make
 " Could not make ShowFunc work in win gVIM
 nmap <F11> <Plug>ShowFunc 
 :imap <S-F7> <nop>
