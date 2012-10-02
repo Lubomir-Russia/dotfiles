@@ -3,7 +3,7 @@
 
 # $self->
 snippet s
-	$selp->${1}
+	$self->${1}
 # getProperty
 snippet get
 	getProperty('${1}');
@@ -38,6 +38,7 @@ snippet logf
 # logStep
 snippet logs
 	$self->logStep("Step ".$stepNumber++.": ${1:Step message}");
+	#====================
 	# TODO $1
 	${2}
 # logPropertyInfo

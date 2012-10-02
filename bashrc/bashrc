@@ -50,8 +50,11 @@ alias gca='git commit -v -a'
 alias gb='git branch'
 alias gba='git branch -a'
 
-export MATOS=/c4_working/Automatos 
-export MyTests=/c4_working/MyTests
+export MyWorkSpace=/c4_working/ws_testdev
+export MATOS=$MyWorkSpace/Automatos/Framework/Dev
+export MyTests=$MyWorkSpace/Automatos/Tests/Dev/Platform_EFT/Acceptance_Test
+# export MATOS=/c4_working/Automatos 
+# export MyTests=/c4_working/MyTests
 
 alias cw='cd /c4_working/'
 alias cda='cd $MATOS'
