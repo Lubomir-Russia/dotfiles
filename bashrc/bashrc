@@ -52,14 +52,18 @@ alias gba='git branch -a'
 
 export MyWorkSpace=/c4_working/ws_testdev
 export MATOS=$MyWorkSpace/Automatos/Framework/Dev
-export MyTests=$MyWorkSpace/Automatos/Tests/Dev/Platform_EFT/Acceptance_Test
-# export MATOS=/c4_working/Automatos 
-# export MyTests=/c4_working/MyTests
+export DevTests=$MyWorkSpace/Automatos/Tests/Dev/
+export MyTests=$DevTests/Platform_EFT/Acceptance_Test
+export MATOS_2=/c4_working/Automatos 
+export MyTests_2=/c4_working/MyTests
 
 alias cw='cd /c4_working/'
 alias cda='cd $MATOS'
 alias cdc='cd $MyTests/MCC'
 alias cds='cd $MyTests/MCC/Sanity'
+alias cdaa='cd $MATOS_2'
+alias cdcc='cd $MyTests_2/MCC'
+alias cdss='cd $MyTests_2/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='./run_tests.sh '
 
@@ -67,7 +71,7 @@ alias r='./run_tests.sh '
 export PATH=$MATOS/bin:$PATH
 export PATH=~/bin/:$PATH
 
-export PERL5LIB=$MATOS/lib:$MyTests:$PERL5LIB
+export PERL5LIB=$MATOS/lib:$DevTests:$MyTests:$PERL5LIB
 # Matos does not like /auto/tools/LATEST/lib/perl
 # export PERL5LIB=$PERL5LIB:/home/c4/perl:/c4shares/auto/tools/LATEST/lib/perl
 
