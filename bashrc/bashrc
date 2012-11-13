@@ -67,6 +67,33 @@ alias cdss='cd $MyTests_2/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='./run_tests.sh '
 
+# Append commands to the history file, rather than overwrite it
+shopt -s histappend
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# Force the current shell to reread the history file to synchronize with other
+export PROMPT_COMMAND="history -n; $PROMPT_COMMAND"
+
+# Allow a larger history file
+
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+
+# Don’t store lines: that start with a space and duplicate.
+# export HISTCONTROL=ignorespace
+# export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoreboth
+
+# Remove the use of certain commands
+export HISTIGNORE='bg:fg:history'
+
+# Record timestamp
+export HISTTIMEFORMAT='%F %T '
+
+# Use one command per line to make your .bash_history file easier to pars.
+shopt -s cmdhist
+
+
 # Let my version of soft have priority
 export PATH=$MATOS/bin:$PATH
 export PATH=~/bin/:$PATH
