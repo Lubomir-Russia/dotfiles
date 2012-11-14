@@ -11,6 +11,9 @@ snippet get
 # Base Exception
 snippet ex
 	Automatos::Exception::Base->throw("${1}");
+# TODO
+snippet td
+	# TODO 
 # logTrace
 snippet logt
 	$self->logTrace("${1:Trace message}");
@@ -38,8 +41,9 @@ snippet logf
 # logStep
 snippet logs
 	$self->logStep("Step ".$stepNumber++.": ${1:Step message}");
-	#====================
+	$self->logWarning("Not implemented yet!!!");
 	# TODO $1
+	#====================
 	${2}
 # logPropertyInfo
 snippet logp
