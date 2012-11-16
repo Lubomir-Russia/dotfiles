@@ -200,6 +200,11 @@ call MapForceNormal("<leader>tr",":call MoveTabRight()<cr>")
 call MapForceNormal("<leader>tn",":tabnext<cr>")      " useless, use default gt
 call MapForceNormal("<leader>tp",":tabprevious<cr>")  " useless, use default gT
 
+" toggle between the current tab and the last active tab
+let g:lasttab = 1
+nmap <Leader>= :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
 " = Command line abbreviations =
 " -----------------------------
 cab l ls<cr>:b<space>
@@ -444,4 +449,3 @@ endfunction
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
-
