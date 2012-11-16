@@ -29,8 +29,8 @@
 
 " ~~ Content ~~
   "       = Installation =  
-  "       = Plugin management with tpop's pathogen =
   "       = Compatibility =  
+  "       = Plugin management with tpop's pathogen =
   "       = Extra key binding - mappings =
   "       = Tab mappings =
   "       = Command line abbreviations =
@@ -54,22 +54,12 @@
 " System wide settings are here: /usr/local/share/vim/vim73 
 
 
-" = Plugin management with tpop's pathogen =
-" ------------------------------------------
-" Install new plugin: put it's dir into ~/.vim/bundle/ dir
-" Remove an plugin:   rm -rf ~/.vim/bundle/plugin-name
-" Genrate help for all plugins:  :Helptags
-call pathogen#infect()        " Let pathogen to load all plugins
-syntax enable                 " Turn on syntax highlighting.
-filetype plugin indent on     " Turn on file type detection.
-runtime macros/matchit.vim        " Load the matchit plugin.
-
-
 " = Compatibility =  
 " ----------------- 
 set nocompatible                      " Must come first because it changes other options.
 
 if ( has("win32") )
+    " For the sake of gvim menu fonts this section must be before plugins
     " source $VIMRUNTIME/mswin.vim    " Makes gVIM behave more like a Windows
     " behave mswin                    " Makes gVIM behave more like a Windows
     set langmenu=none                 " Set gvim menue in English (must be in the beginning of _vmrc)
@@ -86,6 +76,17 @@ endif
 " patch retracile.net/wiki/VimBreakIndent.
 " if you see 'E518: Unknown option: breakindent' when start vim 7.3, then
 " comment this option :set breakindent 
+
+
+" = Plugin management with tpop's pathogen =
+" ------------------------------------------
+" Install new plugin: put it's dir into ~/.vim/bundle/ dir
+" Remove an plugin:   rm -rf ~/.vim/bundle/plugin-name
+" Genrate help for all plugins:  :Helptags
+call pathogen#infect()        " Let pathogen to load all plugins
+syntax enable                 " Turn on syntax highlighting.
+filetype plugin indent on     " Turn on file type detection.
+runtime macros/matchit.vim        " Load the matchit plugin.
 
 " = Extra key binding - mappings =
 " --------------------------------
