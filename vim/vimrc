@@ -137,7 +137,9 @@ nmap <F11> <Plug>ShowFunc
 :set pastetoggle=<S-F7>                           " :h pastetoggle for details
 
 " Use Ctrl-F for omni completion
-imap <C-F> <C-X><C-O>
+inoremap <C-F> <C-X><C-O>
+" Use Ctrl-F for completion from words in the current file only.
+inoremap <C-L> <C-X><C-N>
 
 " Search & replace the word under the cursor
 nmap <C-H> :%s/\<<c-r>=expand("<cword>")<cr>\>/
