@@ -158,9 +158,6 @@ call MapRestoreMode("<leader>1","mcyyPgCc`c")
 " Ctrl-J to copy a line and go back - like in EditPlus
 call MapRestoreMode("<C-J>","mcyyP`c")
 
-" Jamis Buck's file opening plugin
-map <Leader>t :FuzzyFinderTextMate<Enter>
-
 " Vim - hjkl-ing while in insert mode, or use TouchCoursor in Windows
 inoremap <M-j> <C-O>gj
 inoremap <M-k> <C-O>gk
