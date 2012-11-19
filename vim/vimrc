@@ -3,11 +3,11 @@
 "
 " To me vi is zen. To use vi is to practice zen. Every command is a koan.
 " Profound to the user, unintelligible to the uninitiated. You discover truth
-" every time you use it. 
-"                               - Satish Reddy 
+" every time you use it.
+"                               - Satish Reddy
 "                               From O'Railly - Learning VIM
 "
-" 
+"
 " A 'Language' of Text Editing
 "
 " One way to think about Vim's normal-mode commands is like a language. You
@@ -24,12 +24,12 @@
 " learn one of these you can immediately apply it to all the verbs and nouns
 " you already know.
 "                               - Steve Losh
-"                               From Coming Home to Vim 
+"                               From Coming Home to Vim
 "                               http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 
 " ~~ Content ~~
-  "       = Installation =  
-  "       = Compatibility =  
+  "       = Installation =
+  "       = Compatibility =
   "       = Plugin management with tpop's pathogen =
   "       = Extra key binding - mappings =
   "       = Tab mappings =
@@ -41,8 +41,8 @@
   "       = Plugin specific settings =
   "       = Misc functions and autocmd =
 
-" = Installation =  
-" ----------------  
+" = Installation =
+" ----------------
 " Copy or symlink to ~/.vimrc or ~/_vimrc. and make dir for swap files
 " ln -nfs ~/bin/dotfiles/vim/vimrc ~/.vimrc
 " ln -nfs ~/bin/dotfiles/vim ~/.vim
@@ -51,11 +51,11 @@
 " In Windows set variable HOME=%USERPROFILE%
 " Copy ctag.exe to C:\ctags\ctags.exe and add this dir to PATH
 "
-" System wide settings are here: /usr/local/share/vim/vim73 
+" System wide settings are here: /usr/local/share/vim/vim73
 
 
-" = Compatibility =  
-" ----------------- 
+" = Compatibility =
+" -----------------
 set nocompatible                      " Must come first because it changes other options.
 
 if ( has("win32") )
@@ -75,7 +75,7 @@ endif
 " This vimrc file is incompatible with vim 7.3 that is not built with
 " patch retracile.net/wiki/VimBreakIndent.
 " if you see 'E518: Unknown option: breakindent' when start vim 7.3, then
-" comment this option :set breakindent 
+" comment this option :set breakindent
 
 
 " = Plugin management with tpop's pathogen =
@@ -132,7 +132,7 @@ call MapToggleOption("<S-F8>","wrap")
 call MapForceNormal ("<F9>",  ":w<cr>:Shell<space>%:p<cr><cr>") " Save, run script and show output in the scrap window
 call MapForceNormal ("<F10>",  ":w<cr>:make<cr>") " Save and run make
 " Could not make ShowFunc work in win gVIM
-nmap <F11> <Plug>ShowFunc 
+nmap <F11> <Plug>ShowFunc
 :imap <S-F7> <nop>
 :set pastetoggle=<S-F7>                           " :h pastetoggle for details
 
@@ -219,7 +219,7 @@ cab n tabnew<space>
 imap <Space> <Space><c-g>u
 imap <Tab> <Tab><c-g>u
 imap <CR> <CR><c-g>u
-" Recover from accidental Ctrl-U and Ctrl-W in insert mode         
+" Recover from accidental Ctrl-U and Ctrl-W in insert mode
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
@@ -254,7 +254,7 @@ set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in. Default when not vi compatible.
 set title                         " Set the terminal's title
 " set visualbell                    " No beeping but terminal flash.
-set vb t_vb= 
+set vb t_vb=
 " No beeping and no flash.
 
 set ruler                         " Show cursor position.
@@ -281,21 +281,27 @@ set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
 set incsearch                     " Highlight matches as you type.
 set hlsearch                      " Highlight matches.
+imap <c-c> <esc>
+" Clear the search buffer when hitting return
+function! MapCR()
+    nnoremap <cr> :nohlsearch<cr>
+endfunction
+call MapCR()
 
-set wrap                          " Turn on line wrapping.
+set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
 set showbreak=->                  " String to put at the start of lines that have been wrapped.
 " set breakindent                   " Works only with patch retracile.net/wiki/VimBreakIndent.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 " set colorcolumn=85                " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
-" set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults. 
+" set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults.
 
 " set browsedir=current             " Dir for file browser. Only for Win GUI and some Unix managers.
 " set nobackup                      " Don't make a backup before overwriting a file.
 " set nowritebackup                 " And again.
 " In Windows set local var HOME=%USERPROFILE%
 set backup                        " Keep a backup file
-set backupdir=$HOME/.bak/vim/     " Keep backup files in one location (it must exist).  
+set backupdir=$HOME/.bak/vim/     " Keep backup files in one location (it must exist).
 set directory=$HOME/.bak/swap//,. " Keep swap files in one location, if not possible then in working dir.
 " If a directory ends in two path separators, the swap file name will be built from the complete path to the file with all path separators. This will ensure file name uniqueness in the preserve directory.
 " Add the following line to your shell initialization file ~/.bashrc or  ~/.profile :
@@ -357,7 +363,7 @@ set iskeyword=@,48-57,_,192-255      " настраиваю дл€ работы с русскими словами 
 " ѕосле этого системную раскладку клавиатуры можно будет оставить в режиме
 " ввода латинских символов, а переключение между €зыками осуществл€ть уже
 " внутри самого редактора с помощью команды Ctrl+^ (Ctrl+6 в версии дл€
-" Windows) 
+" Windows)
 "
 " —пособ 2 : —делать так, чтобы Vim понимал, какие клавиши нажимаютс€, если включена русска€ раскладка.
 " set langmap=Єйцукенгшщзхъфывапролджэ€чсмитьбю®…÷” ≈H√Ўў«’Џ‘џ¬јѕ–ќЋƒ∆Ёя„—ћ»“№Ѕё;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
