@@ -253,7 +253,7 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in. Default when not vi compatible.
 set title                         " Set the terminal's title
-" set visualbell                    " No beeping but terminal flash.
+" set visualbell                  " No beeping but terminal flash.
 set vb t_vb=
 " No beeping and no flash.
 
@@ -263,7 +263,7 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at the bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" set number                        " Show (absolute) line numbers.
+" set number                      " Show (absolute) line numbers.
 set relativenumber                " Show relative line number. Useful for motion/deletion commands.
 set lazyredraw                    " Do not redaw screen during macros -> mach faster
 set confirm                       " Use confirmation dialog instead of error message.
@@ -271,10 +271,10 @@ set confirm                       " Use confirmation dialog instead of error mes
 set backspace=indent,eol,start    " Intuitive backspacing.
 
 set hidden                        " Handle multiple buffers better.
-" set autoread                      " Reread file automatically if it changes.
+" set autoread                    " Reread file automatically if it changes.
 
 set wildmenu                      " Enhanced command line completion.
-" set wildmode=list:longest         " Complete files like a shell.
+" set wildmode=list:longest       " Complete files like a shell.
 set wildmode=list,full            "	List all matches without completing, then each full match.
 
 set ignorecase                    " Case-insensitive searching.
@@ -291,14 +291,14 @@ call MapCR()
 set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
 set showbreak=->                  " String to put at the start of lines that have been wrapped.
-" set breakindent                   " Works only with patch retracile.net/wiki/VimBreakIndent.
+" set breakindent                 " Works only with patch retracile.net/wiki/VimBreakIndent.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
-" set colorcolumn=85                " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
-" set formatoptions=qrn1            " Different styles of text formating see fo-table for details or just use defaults.
+" set colorcolumn=85              " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
+" set formatoptions=qrn1          " Different styles of text formating see fo-table for details or just use defaults.
 
-" set browsedir=current             " Dir for file browser. Only for Win GUI and some Unix managers.
-" set nobackup                      " Don't make a backup before overwriting a file.
-" set nowritebackup                 " And again.
+" set browsedir=current           " Dir for file browser. Only for Win GUI and some Unix managers.
+" set nobackup                    " Don't make a backup before overwriting a file.
+" set nowritebackup               " And again.
 " In Windows set local var HOME=%USERPROFILE%
 set backup                        " Keep a backup file
 set backupdir=$HOME/.bak/vim/     " Keep backup files in one location (it must exist).
@@ -310,7 +310,7 @@ set directory=$HOME/.bak/swap//,. " Keep swap files in one location, if not poss
 
 set undofile                      " Create <Filename>.un~ file. These files contain undo information so you can undo previous actions even after you close and reopen a file.
 set undodir=$HOME/.bak/undofiles/
-" au FocusLost * :wa                " Save all on losing focus.
+" au FocusLost * :wa              " Save all on losing focus.
 
 set tabstop=4                     " Global tab width.
 set shiftwidth=4                  " And again, related.
@@ -323,7 +323,7 @@ autocmd FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 set list listchars=precedes:<,extends:>,tab:>-,trail:-
 set nolist                        " Do not show list till asked to do it
 
-" set showmatch                     " built-in function replaced with matchIt plugin.
+" set showmatch                   " built-in function replaced with matchIt plugin.
 
 set t_Co=256                      " Use more colors in terminal. May effect some colorshemas.
 " Solarized colorschema http://ethanschoonover.com/solarized
@@ -339,6 +339,8 @@ set nofoldenable     " Do not fold when a file is just opened
 " set foldlevel=1    " Only first level is opened if foldenable is set.
 " set foldcolumn=3   " Show control line.
 " set foldopen=all   " Open folds when entering them. Otherwise use <l> to move in.
+
+set modeline         " Allow setting extra option directly in files (default); example: vim: syntax=vim
 
 " = Russian keymaps =
 " -------------------
