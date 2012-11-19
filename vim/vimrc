@@ -482,3 +482,9 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+
+" LET IT BE AT THE END OF vimrc
+" Local extra vimrc setting if any, let it be loaded last:
+if filereadable($HOME . "/.vimrc.extra")
+    source $HOME/.vimrc.extra
+endif
