@@ -1,0 +1,23 @@
+*mytips*  Index file for my tips in Vim help format.
+
+|myvim|         |mygit|         |myperl|      |mymisc|
+|mybash|        |myaccurev|     |myruby|
+|myscreen|                    |mypython|
+|mysed|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:modifiable

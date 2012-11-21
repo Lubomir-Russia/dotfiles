@@ -1,0 +1,5 @@
+*mysed*  My tips for sed and awk.
+
+
+ vim:tw=78:ts=8:ft=help:norl:modifiable
+
