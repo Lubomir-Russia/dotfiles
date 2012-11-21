@@ -1,0 +1,33 @@
+*mybash*  My tips for bash and other shells.
+
+History                 |mybash-history|
+grep                    |mybash-grep|
+bashrc                  |mybash-bashrc|
+
+
+=================================================
+HISTORY                 *mybash-history*
+
+fc ~
+    Edit last command in editor and execute on exit.
+    To cancel without execute in vim :cq
+    fc l      list last 16 commands.
+    fc l -N   list last N coomnds.
+    fc -N     edit and execute last N coomnds.
+
+<c-x><c-e> same as fc, but edit the current command.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:modifiable
+

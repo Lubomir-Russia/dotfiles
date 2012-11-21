@@ -12,7 +12,7 @@
 # the last ~/.bashrc are read by EVERY NONLOGIN shell, so do not put here
 # anything that should not go to the not interactive shell. However, if invoked
 # as sh, Bash instead reads $ENV, for POSIX compatibility.
-# 
+#
 # So if any aliases are defined in profile or in bash_profile they will not be
 # available in screen session, since screen start a new nonlogin shell.
 #
@@ -20,8 +20,8 @@
 # abbreviations. (On single-user systems, the user database is stored in /etc/passwd.
 # However, on networked systems, this information may come from NIS, NIS+, or LDAP, not
 # your workstation password file.)
-# 
- 
+#
+
 alias v='vim'
 alias vi='vim'
 
@@ -54,7 +54,7 @@ export MyWorkSpace=/c4_working/ws_testdev
 export MATOS=$MyWorkSpace/Automatos/Framework/Dev
 export DevTests=$MyWorkSpace/Automatos/Tests/Dev/
 export MyTests=$DevTests/Platform_EFT/Acceptance_Test
-export MATOS_2=/c4_working/Automatos 
+export MATOS_2=/c4_working/Automatos
 export MyTests_2=/c4_working/MyTests
 
 alias cw='cd /c4_working/'
@@ -67,6 +67,19 @@ alias cdcc='cd $MyTests_2/MCC'
 alias cdss='cd $MyTests_2/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='./run_tests.sh '
+
+alias tips='vim ~/bin/dotfiles/vim/doc/tips.txt'
+alias mybash='vim ~/bin/dotfiles/vim/doc/mybash.txt'
+alias myvim='vim ~/bin/dotfiles/vim/doc/myvim.txt'
+alias mysed='vim ~/bin/dotfiles/vim/doc/mysed.txt'
+alias myscreen='vim ~/bin/dotfiles/vim/doc/myscreen.txt'
+alias mygit='vim ~/bin/dotfiles/vim/doc/mygit.txt'
+alias myaccurev='vim ~/bin/dotfiles/vim/doc/myaccurev.txt'
+alias myperl='vim ~/bin/dotfiles/vim/doc/myperl.txt'
+alias mypython='vim ~/bin/dotfiles/vim/doc/mypython.txt'
+alias myruby='vim ~/bin/dotfiles/vim/doc/myruby.txt'
+alias mymisc='vim ~/bin/dotfiles/vim/doc/mymisc.txt'
+
 
 # Append commands to the history file, rather than overwrite it
 shopt -s histappend
@@ -111,18 +124,18 @@ export LESS=-RiMX
 
 export GREP_OPTIONS='--color=auto' # by default match is read on black
 #export GREP_COLOR='5;38' # blinking
-export GREP_COLOR='1;33' # Yellow on black 
+export GREP_COLOR='1;33' # Yellow on black
 
-alias pta1='ssh 10.64.74.71' 
-alias pta2='ssh 10.64.74.98' 
-alias pta3='ssh 10.64.74.83' 
-alias e741='ssh root@10.244.245.68' 
-alias e743='ssh root@10.244.242.26' 
-alias e743b='ssh root@10.244.242.96' 
-alias e706='ssh root@10.64.77.113' 
-alias e706b='ssh root@10.64.77.114' 
-alias s578='ssh root@10.109.17.72' 
-alias s578b='ssh root@10.109.17.73' 
+alias pta1='ssh 10.64.74.71'
+alias pta2='ssh 10.64.74.98'
+alias pta3='ssh 10.64.74.83'
+alias e741='ssh root@10.244.245.68'
+alias e743='ssh root@10.244.242.26'
+alias e743b='ssh root@10.244.242.96'
+alias e706='ssh root@10.64.77.113'
+alias e706b='ssh root@10.64.77.114'
+alias s578='ssh root@10.109.17.72'
+alias s578b='ssh root@10.109.17.73'
 
 # Red PS1 if root, light green if not
 
@@ -142,7 +155,7 @@ fi
 
 # export PS1='\[$_color\]\D{%F %T} \W $(__git_ps1 "(%s)")\$ \[$_reset\]'
 # The \[ and \] symbols allow bash to understand which parts of the prompt
-# cause no cursor movement; without them, lines will wrap incorrectly. 
+# cause no cursor movement; without them, lines will wrap incorrectly.
 
 # As above but in three lines
 
@@ -186,7 +199,7 @@ find $HOME/.bak/vim/ -name "*" -type f -mtime +90 -exec rm -f {} \;
 # blue=$(tput setaf 4)
 # reset=$(tput sgr0)
 # PS1=’\[$red\]\u\[$reset\]@\[$green\]\h\[$reset\]:\[$blue\]\w\[$reset\]\$ ‘
-#    
+#
 
 # # Back up of Flare settings
 # alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
