@@ -5,29 +5,45 @@ grep                    |mybash-grep|
 bashrc                  |mybash-bashrc|
 
 
-=================================================
-HISTORY                 *mybash-history*
+====================================================
+HISTORY                               *mybash-history*
 
 fc ~
     Edit last command in editor and execute on exit.
     To cancel without execute in vim :cq
     fc l      list last 16 commands.
-    fc l -N   list last N coomnds.
-    fc -N     edit and execute last N coomnds.
+    fc l -N   list last N commands.
+    fc -N     edit and execute Nth command from end.
+    fc -N 0   edit and execute N last commands.
 
 <c-x><c-e> same as fc, but edit the current command.
 
 
 
 
+====================================================
+GREP AND ACK                  *mybash-grep* *mybash-ack*
+
+Delete empty lines:
+last | cut -b 22-38 | grep -vE "^[[:blank:]]*$"
+
+Recursive for pm files only.
+ack --perl  string
+grep -r --include="*.pm" simplestring *
+find . -name '*.pm' -print0 | xargs -0 grep 'string'
+
+--exclude=GLOB    Skip files whose base name matches
+                  GLOB use *, ?, and [...]
+
+--exclude-from=FILE    Take globs from FILE
+--exclude-dir=DIR      Exclude directories from recursive searches.
+
+Install ack:
+curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 !#:3
 
 
 
 
 
-
-
-
-
- vim:tw=78:ts=8:ft=help:norl:modifiable
+ vim:tw=55:ts=8:ft=help:norl:modifiable
 
