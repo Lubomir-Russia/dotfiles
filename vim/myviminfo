@@ -1,0 +1,38 @@
+# This is my persistent part for .viminfo
+
+
+# Registers:
+"0	CHAR	0
+	~/bin/ack 
+"1	LINE	0
+	= form_tag movies_path, :method => :get do
+"2	LINE	0
+	    order_by = params[:order_by]
+"3	LINE	0
+		session[:sort_by] = params[:sort_by] ? params[:sort_by] : session[:sort_by]
+"4	LINE	0
+	    @movies = Movie.order(session[:order_by]).all
+"5	LINE	0
+	    = check_box_tag "ratings[#{rating}]"
+"6	LINE	0
+	  = submit_tag 'Refresh'
+"7	LINE	0
+	    = rating
+"8	LINE	0
+	  - @all_ratings.each do |rating|
+"9	LINE	0
+	  Include: 
+"e@	CHAR	0
+	yyp
+"q	LINE	0
+	f|r<;r>l+
+"w	CHAR	0
+	f|r<;r>+
+""-	CHAR	0
+	 !#:3
+
+# File marks:
+'C  216  18  ~/.vimrc
+'0  2  80  ~/bin/dotfiles/install_ack.sh
+
+# vim:ft=viminfo
