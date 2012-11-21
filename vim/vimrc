@@ -203,6 +203,9 @@ let g:lasttab = 1
 nmap <Leader>= :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
+" Save and exit even when in insert mode. Nice with git commit messages.
+inoremap ZZ <Esc>ZZ
+
 " = Command line abbreviations =
 " -----------------------------
 cab l ls<cr>:b<space>
