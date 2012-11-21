@@ -483,6 +483,10 @@ function! AutoHighlightToggle()
 endfunction
 
 " LET IT BE AT THE END OF vimrc
+" Persistent File marks and predifined registers from myviminfo
+if filereadable($HOME . "/.myviminfo")
+    :rviminfo! $HOME/.myviminfo
+endif
 " Local extra vimrc setting if any, let it be loaded last:
 if filereadable($HOME . "/.vimrc.extra")
     source $HOME/.vimrc.extra
