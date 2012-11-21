@@ -7,7 +7,7 @@
 	__END__
 
 # File marks:
-'C  216  18  ~/.vimrc
+'C  216  18  ~/bin/dotfiles/vim/vimrc
 'A  2  80  ~/bin/dotfiles/bas/bashrc
 
 # vim:ft=viminfo

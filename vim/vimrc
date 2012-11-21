@@ -154,10 +154,12 @@ vmap < <gv
 vmap > >gv
 
 " \1 to copy a line, comment it with tcomment, go back
-call MapRestoreMode("<leader>1","mcyyPgCc`c")
+" Use :t-1 instead of yyP to preserve regisgters
+" call MapRestoreMode("<leader>1","mcyyPgCc`c")
+call MapRestoreMode("<leader>1","mc:t-1<cr>gCc`c")
 
 " Ctrl-J to copy a line and go back - like in EditPlus
-call MapRestoreMode("<C-J>","mcyyP`c")
+call MapRestoreMode("<C-J>","mc:t-1<cr>`c")
 
 " Vim - hjkl-ing while in insert mode, or use TouchCoursor in Windows
 inoremap <M-j> <C-O>gj
