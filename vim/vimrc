@@ -94,6 +94,7 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 " imap jj <Esc>  - this mapping jumps to the next line if called at eol.
 " This does not work in paste mode
 imap jj <Left><Right><Esc>
+imap <c-c> <Esc>
 
 function! MapForceNormal (key, action)
     execute 'nmap ' . a:key . ' '      . a:action
@@ -143,9 +144,6 @@ imap <C-F> <C-X><C-O>
 nmap <C-H> :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
 " In normal mode adds a new line
-" If <CR> is used for this then this mapping is incompatible with ShowFunc
-" plugin, that uses <CR> for jumps
-" nnoremap <CR> i<CR><Esc>
 nnoremap S i<CR><Esc>
 
 " < & > to indent blocks
@@ -281,12 +279,9 @@ set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
 set incsearch                     " Highlight matches as you type.
 set hlsearch                      " Highlight matches.
-imap <c-c> <esc>
 " Clear the search buffer when hitting return
-function! MapCR()
-    nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
+" Do not map in quickfix window so that ShowFunc and Ack can work.
+nnoremap <expr> <cr> (&buftype is# "quickfix" ? "<cr>" : ":nohlsearch<cr>")
 
 set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
