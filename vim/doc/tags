@@ -9,6 +9,9 @@ mybash-bashrc	mybash.txt	/*mybash-bashrc*
 mybash-grep	mybash.txt	/*mybash-grep*
 mybash-history	mybash.txt	/*mybash-history*
 mygit	mygit.txt	/*mygit*
+mygit-PS1	mygit.txt	/*mygit-PS1*
+mygit-clone	mygit.txt	/*mygit-clone*
+mygit-correct-last-commit	mygit.txt	/*mygit-correct-last-commit*
 mymisc	mymisc.txt	/*mymisc*
 myperl	myperl.txt	/*myperl*
 mypython	mypython.txt	/*mypython*

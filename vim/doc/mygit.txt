@@ -1,5 +1,62 @@
 *mygit*  My tips for git.
 
+Correct last commit             |mygit-correct-last-commit|
+Clone                                         |mygit-clone|
+PS1 with brunch name                            |mygit-PS1|
 
- vim:tw=78:ts=8:ft=help:norl:modifiable
+=========================================================
+CORRECT LAST COMMIT             *mygit-correct-last-commit*
+
+Just to correct the last message:
+git commit --amend -m "your new message"
+
+If you have committed junk but not pushed,
+
+git reset --soft HEAD~1
+
+HEAD~1 is a shorthand for the commit before head. Alternatively you can refer
+to the SHA-1 of the hash you want to reset to. --soft option will delete the
+commit but it will leave all your changed files "Changes to be committed", as
+git status would put it. If you want to get rid of any changes to tracked
+files in the working tree since the commit before head use --hard instead.
+
+Now if you already pushed and someone pulled which is usually my case, you
+can't use git reset. You can however do a git revert,
+
+git revert HEAD
+
+This will create a new commit that reverses everything introduced by the
+accidental commit.
+
+
+=========================================================
+CLONE                                         *mygit-clone*
+
+* from another locol dir
+git clone /home/alice/project myrepo
+* from remote/local ssh server
+git clone 10.64.74.71:/root/bin/dotfiles
+git clone root@127.0.0.1:/root/bin/dotfiles
+git clone alice.org:/home/alice/project myrepo
+* from git server
+git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
+* from public repo on git server over http/https
+git clone http://github.com/schacon/grack.git
+* from private repos, or to have push access on your repository
+git clone https://username@github.com/username/project.git
+
+=========================================================
+PS1                                             *mygit-PS1*
+
+PS1 to show the current branch:
+export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+The argument to __git_ps1 will be displayed only if you are currently in a git
+repository.  The %s token will be the name of the current branch.
+
+Taken from /etc/bash_completion.d/git.sh
+
+
+
+  vim:tw=78:ts=8:ft=help:norl:modifiable
 
