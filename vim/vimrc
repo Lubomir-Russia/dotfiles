@@ -32,6 +32,7 @@
   "       = Compatibility =
   "       = Plugin management with tpop's pathogen =
   "       = Extra key binding - mappings =
+  "       = Mappings from plugins =
   "       = Tab mappings =
   "       = Command line abbreviations =
   "       = Undo in insert mode =
@@ -174,6 +175,16 @@ noremap! <M-l> <Right>
 "nnoremap : ;
 "vnoremap ; :
 "vnoremap : ;
+
+" = Mappings from plugins =
+" -------------------------
+" abolish-coercion
+" csc: camelCase
+" csm: MixedCase
+" cs_: snake_case
+" css: snake_case
+" csu: SNAKE_UPPERCASE
+" cs-: dash-case (not reversible)
 
 " = Tab mappings =
 " ----------------
