@@ -8,6 +8,7 @@ mybash-ack	mybash.txt	/*mybash-ack*
 mybash-bashrc	mybash.txt	/*mybash-bashrc*
 mybash-grep	mybash.txt	/*mybash-grep*
 mybash-history	mybash.txt	/*mybash-history*
+mybash-http-server	mybash.txt	/*mybash-http-server*
 mygit	mygit.txt	/*mygit*
 mygit-PS1	mygit.txt	/*mygit-PS1*
 mygit-clone	mygit.txt	/*mygit-clone*
@@ -15,6 +16,7 @@ mygit-correct-last-commit	mygit.txt	/*mygit-correct-last-commit*
 mymisc	mymisc.txt	/*mymisc*
 myperl	myperl.txt	/*myperl*
 mypython	mypython.txt	/*mypython*
+mypython-http-server	mypython.txt	/*mypython-http-server*
 myruby	myruby.txt	/*myruby*
 myscreen	myscreen.txt	/*myscreen*
 mysed	mysed.txt	/*mysed*

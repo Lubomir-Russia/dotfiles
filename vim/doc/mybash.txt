@@ -1,8 +1,9 @@
 *mybash*  My tips for bash and other shells.
 
-History                 |mybash-history|
-grep                    |mybash-grep|
-bashrc                  |mybash-bashrc|
+History                               |mybash-history|
+grep                                     |mybash-grep|
+bashrc                                 |mybash-bashrc|
+HTTP server                       |mybash-http-server|
 
 
 ====================================================
@@ -47,6 +48,17 @@ BASHRC                               *mybash-bashrc*
 
 Error checking in aliases:
 alias gohome='cd && ls || echo "error($?) with cd to $HOME"'
+
+
+====================================================
+HTTP SERVER                       *mybash-http-server*
+
+nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
+
+
+
+
+
 
 
 

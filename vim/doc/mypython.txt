@@ -1,5 +1,19 @@
 *mypython*  My tips for Python.
 
+HTTP server                     |mypython-http-server|
 
- vim:tw=78:ts=8:ft=help:norl:modifiable
+====================================================
+SIMPLE HTTP SERVER              *mypython-http-server*
+
+nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
+
+
+
+
+
+
+
+
+
+ vim:tw=55:ts=8:ft=help:norl:modifiable
 
