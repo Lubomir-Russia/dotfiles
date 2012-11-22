@@ -1,5 +1,115 @@
 *myaccurev*  My tips for accurev.
 
+Every day tasks                             |myaccurev-tasks|
+Ducuments                     |myaccurev-doc| |myaccurev-links|
+Instalation on SuSe Sp1               |myaccurev-instalation|
 
- vim:tw=78:ts=8:ft=help:norl:modifiable
+===========================================================
+EVERY DAY TASKS                             *myaccurev-tasks*
 
+accurev help
+accurev ws help
+
+accurev login -n user
+accurev logout
+
+accurev show wspaces
+accurev stat -n
+accurev stat -x | grep -v git | grep -v logs
+accurev stat * | grep -v backed
+accurev stat DZ_TC_2_1_2_1.pm
+
+accurev update
+accurev add -x DZ_TC_2_1_2_2.pm DZ_TC_2_1_2_7.pm -c "Initial checkin for tests DZ_TC_2_1_2_2-7"
+accurev add -x directoryNmame -c "Comment"
+accurev purge path/to/file
+accurev keep DZ_TC_2_1_2_1.pm -c "Add Ktrace parsing to DZ_TC_2_1_2_1"
+accurev promote path/to/file -k
+
+===========================================================
+DUCUMENTS AND LINKS           *myaccurev-doc* *myaccurev-links*
+
+https://teamforge6.usd.lab.emc.com/sf/projects/usd_development_environment/
+
+
+===========================================================
+INSTALATION ON SUSE SP1               *myaccurev-instalation*
+
+Step-by-step instruction which probably will give you ability to compile the
+code. All the steps below were done on VM with SUSE SP1 version. The parent
+stream used in the examples are “upc-KHprep-cs”
+
+1. Update VM.
+# which update_vm
+/re/bin/update_vm
+# sudo update_vm
+This will install necessary versions of gcc and libraries.
+
+2. Update mount configuration needed for finding pre-generated rpms:
+# sudo /c4shares/auto/devutils/bin/morpheus/c4dev_update.sh
+NOTE: This step is needed if you get complains about missing Artifacts
+directory on later stages.
+
+3. Install Accurev and CmTools. Instructions here:
+https://teamforge6.usd.lab.emc.com/sf/go/wiki9520
+NOTE: recommended default path is /opt/accurev. List of the accurev servers
+are in the howto.
+
+4. Login to accurev
+# accurev login -n <your_user_name>
+NOTE: -n – creates the persistent login session with accurev and you do not
+need to login every morning. Corp credentials.
+
+5. Create a place where your workspace will be deployed on the VM.
+# mkdir /c4_working/Coding/my_first_workspace
+NOTE: this is only a placeholder for files, call it as you want
+
+6. Create a workspace
+# accurev mkws -b upc-KHprep-cs -w bugfix  -l  /c4_working/Coding/my_first_workspace -i
+NOTE: -b - the name of parent scream.
+-w - name of you workspace on server [you login will be added at the end].
+-l - location.
+-I - initialize new workspace
+The workspace on the server will be visible as “bugfix_<your_login_name>”
+
+7. Initialize your new workspace.
+#accurev update
+NOTE: you need to cd to the workspace.
+
+8. Remove all the modules you will never need.
+# modSetup -op remove all
+NOTE: this initially removes all the modules from the list - by default
+everything in included - DP, CP, platform, kernel, images, drivers EVERYTHING.
+You don’t want it all.
+
+9. Set only modules that you will work on.
+# modSetup -op set <module_name>
+NOTE: to get the list of modules, run “modSetup -op list all”. Example of
+modules: safe, cp, ECOM…
+
+10. Populate workspace.
+# modSetup -op pop
+NOTE: this will pull the files from the server for selected modules and place
+them into you local workspace.
+
+11. Update again.
+# accurev update
+NOTE: I am not sure, but this will pull the dependencies for you modules. Does
+not hurt anyway.
+
+12. Build.
+# build_all -t GNOSIS <module_name>
+NOTE: you can give list all modules to build, comma separated, if you build
+multiple. I build only “safe” module and it worked for me.
+
+13. Find binaries and RPMs.
+RPMs are placed in the output/<module_name>/GNOSIS_DEBUG/
+If you transfer selected libraries only,  search you module tree. For safe
+they can be found under safe/Targets/armada64_checked/<variation>/exec, where
+variation is kernel/user/simulation and so on.
+
+By Oleg Subbotin
+
+
+
+ vim:tw=55:ts=8:ft=help:norl:modifiable

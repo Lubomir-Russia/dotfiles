@@ -1,6 +1,11 @@
 myaccurev	myaccurev.txt	/*myaccurev*
+myaccurev-doc	myaccurev.txt	/*myaccurev-doc*
+myaccurev-instalation	myaccurev.txt	/*myaccurev-instalation*
+myaccurev-links	myaccurev.txt	/*myaccurev-links*
+myaccurev-tasks	myaccurev.txt	/*myaccurev-tasks*
 mybash	mybash.txt	/*mybash*
 mybash-ack	mybash.txt	/*mybash-ack*
+mybash-bashrc	mybash.txt	/*mybash-bashrc*
 mybash-grep	mybash.txt	/*mybash-grep*
 mybash-history	mybash.txt	/*mybash-history*
 mygit	mygit.txt	/*mygit*
