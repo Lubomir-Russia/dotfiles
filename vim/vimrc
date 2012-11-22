@@ -50,6 +50,8 @@
 " mkdir -p ~/.bak/vim
 " In Windows set variable HOME=%USERPROFILE%
 " Copy ctag.exe to C:\ctags\ctags.exe and add this dir to PATH
+" Put persistant filemarks to myviminfo if you like.
+" ln -nfs ~/bin/dotfiles/vim/myviminfo ~/.myviminfo
 "
 " System wide settings are here: /usr/local/share/vim/vim73
 
@@ -248,6 +250,14 @@ let php_folding=1
 autocmd FileType ruby setlocal foldmethod=syntax
 autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
+"For ruby, autoindent with two spaces, always expand tabs
+autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+
+"For python, autoindent with four paces, always expand tabs
+autocmd FileType python set sw=4 sts=4 et
+
+autocmd! BufRead,BufNewFile *.sass setfiletype sass
+
 " For the MakeGreen plugin and Ruby RSpec.
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
@@ -256,15 +266,26 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in. Default when not vi compatible.
 set title                         " Set the terminal's title
+set shortmess=filnxtToOI          " Show information in an abbreviated way.
 " set visualbell                  " No beeping but terminal flash.
 set vb t_vb=
 " No beeping and no flash.
+" set t_ti= t_te=
+" Vim does not clear screen on exit. Not sure if I like it.
 
 set ruler                         " Show cursor position.
 set showtabline=2                 " Display tabs all of the time
 set laststatus=2                  " Show the status line all the time
 " Useful status information at the bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
+" Make the current window big, but leave others context
+set winwidth=84
+" We want to have a winheight bigger than winminheight. But if we set
+" winheight to be huge before winminheight, the winminheight set will fail.
+set winheight=5
+set winminheight=5
+set winheight=999
 
 " set number                      " Show (absolute) line numbers.
 set relativenumber                " Show relative line number. Useful for motion/deletion commands.
@@ -274,6 +295,7 @@ set confirm                       " Use confirmation dialog instead of error mes
 set backspace=indent,eol,start    " Intuitive backspacing.
 
 set hidden                        " Handle multiple buffers better.
+set switchbuf=useopen,split       " How buffers open from quickfix (useopen, usetab, split, newtab)
 " set autoread                    " Reread file automatically if it changes.
 
 set wildmenu                      " Enhanced command line completion.
@@ -295,6 +317,7 @@ set showbreak=->                  " String to put at the start of lines that hav
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 " set colorcolumn=85              " Show a colored column at 85 characters (so I can see when I write a too-long line of code).
 " set formatoptions=qrn1          " Different styles of text formating see fo-table for details or just use defaults.
+set formatoptions=crqwan1         " Different styles of text formating see fo-table for details or just use defaults.
 
 " set browsedir=current           " Dir for file browser. Only for Win GUI and some Unix managers.
 " set nobackup                    " Don't make a backup before overwriting a file.
@@ -311,6 +334,7 @@ set directory=$HOME/.bak/swap//,. " Keep swap files in one location, if not poss
 set undofile                      " Create <Filename>.un~ file. These files contain undo information so you can undo previous actions even after you close and reopen a file.
 set undodir=$HOME/.bak/undofiles/
 " au FocusLost * :wa              " Save all on losing focus.
+set history=1000                  " Remember more commands and search history, default is 20.
 
 set tabstop=4                     " Global tab width.
 set shiftwidth=4                  " And again, related.
@@ -406,11 +430,11 @@ autocmd! bufwritepost _vimrc source $MYVIMRC
 "         autocmd BufWinEnter *.* silent loadview     " Restore it when open.
 " endif
 
-" Jump to the last position of opened file.
-autocmd! bufreadpost * call LastPosition()
+" Jump to the last position of opened file. Do not change jumplist.
+autocmd! BufReadPost * call LastPosition()
 function! LastPosition()
     if line("'\"") && line("'\"")<=line('$')
-        normal! `"
+        normal! g`"
     endif
 endfunction
 
