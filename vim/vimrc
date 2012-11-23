@@ -95,8 +95,9 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 " --------------------------------
 " Professor VIM says '87% of users prefer jj over esc', jj abrams disagrees
 " imap jj <Esc>  - this mapping jumps to the next line if called at eol.
+" fix - g`^  jumps back to the exit place from insert mode.
 " This does not work in paste mode
-imap jj <Left><Right><Esc>
+imap jj <Esc>g`^
 imap <c-c> <Esc>
 
 function! MapForceNormal (key, action)
@@ -151,6 +152,7 @@ nmap <C-H> :%s/\<<c-r>=expand("<cword>")<cr>\>/
 
 " In normal mode adds a new line
 nnoremap S i<CR><Esc>
+" ] and [<space> add [count] blank lines above/below the cursor (unimpaired)
 
 " < & > to indent blocks
 vmap < <gv
@@ -162,13 +164,29 @@ vmap > >gv
 call MapRestoreMode("<leader>1","mc:t-1<cr>gCc`c")
 
 " Ctrl-J to copy a line and go back - like in EditPlus
-call MapRestoreMode("<C-J>","mc:t-1<cr>`c")
+" used <c-j> for switching split windows.
+" call MapRestoreMode("<C-J>","mc:t-1<cr>`c")
 
 " Vim - hjkl-ing while in insert mode, or use TouchCoursor in Windows
 inoremap <M-j> <C-O>gj
 inoremap <M-k> <C-O>gk
 noremap! <M-h> <Left>
 noremap! <M-l> <Right>
+
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" the j and k keys operate on display lines rather than on real lines
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+" Make Y work as C or D
+nnoremap Y y$
 
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
@@ -197,6 +215,7 @@ noremap! <M-l> <Right>
 " *gundo*
 call MapForceNormal("<leader>uu",":GundoToggle<cr>")
 " inside gUndo - p to preview diff with current state.
+" TODO surround and other plugins
 
 " = Tab mappings =
 " ----------------
