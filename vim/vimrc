@@ -178,19 +178,31 @@ noremap! <M-l> <Right>
 
 " = Mappings from plugins =
 " -------------------------
-" abolish-coercion
-" csc: camelCase
-" csm: MixedCase
-" cs_: snake_case
-" css: snake_case
-" csu: SNAKE_UPPERCASE
-" cs-: dash-case (not reversible)
+" *abolish-coercion*
+" crc camelCase
+" crm MixedCase
+" cr_ snake_case
+" crs snake_case
+" cru SNAKE_UPPERCASE
+" cr- dash-case (not reversible)
+" *surround*
+" ds  Delete surroundings
+" cs  Change surroundings
+" ys  you surround
+" yss operates on the current line
+" yS  indent the surrounded text and place it on a line of its own
+" ySS same for the line
+" line visual mode S - surround block and indent
+" blockwise visual mode S each line is surrounded.
+" *gundo*
+call MapForceNormal("<leader>uu",":GundoToggle<cr>")
+" inside gUndo - p to preview diff with current state.
 
 " = Tab mappings =
 " ----------------
 " also use comand abbreviation :e -> tabedit and :n ->tabnew
 function! MoveTabLeft()
-    let current_tab = tabpagenr()
+    let curent_tab = tabpagenr()
     if current_tab > 1
         let current_tab = current_tab - 2
         execute 'tabmove' current_tab
@@ -247,7 +259,7 @@ let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about
 " let g:perl_compiler_force_warnings=1   " = perl -cW % -> all warnings regardless of no warnings
 
 " Set working dir to the dir of the current file, it works better with plugins then set autochdir
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 " Read the ctags of the specific project
 set tags+=$MATOS/tags,$MyTests/tags;
