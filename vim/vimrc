@@ -185,6 +185,9 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
+" Toggle 'keep current line in the center of the screen' mode
+nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
+
 " Make Y work as C or D
 nnoremap Y y$
 
@@ -349,8 +352,9 @@ set smartcase                     " But case-sensitive if expression contains a 
 set incsearch                     " Highlight matches as you type.
 set hlsearch                      " Highlight matches.
 " Clear the search buffer when hitting return
-" Do not map in quickfix window so that ShowFunc and Ack can work.
+" Do not map in quickfix end cmdline window so that ShowFunc and Ack can work.
 nnoremap <expr> <cr> (&buftype is# "quickfix" ? "<cr>" : ":nohlsearch<cr>")
+nnoremap <expr> <cr> (&buftype is# "nofile" ? "<cr>" : ":nohlsearch<cr>")
 
 set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
