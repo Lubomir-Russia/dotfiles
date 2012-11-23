@@ -199,6 +199,18 @@ nnoremap Y y$
 
 " = Mappings from plugins =
 " -------------------------
+" *tComment*
+" gcc un/comment line
+" gc  un/comment visual, often confused with gcc, so remap:
+vmap gcc gc
+" yank visul before un/commenting
+vmap gy ygvgc
+" yank and past visul before un/commenting
+vmap gyy ygvgc'>gp'.
+" yank line before un/commenting
+nmap gy yygcc
+" yank and past line before un/commenting
+nmap gyy yygccp
 " *abolish-coercion*
 " crc camelCase
 " crm MixedCase
@@ -312,6 +324,7 @@ set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in. Default when not vi compatible.
 set title                         " Set the terminal's title
 set shortmess=filnxtToOI          " Show information in an abbreviated way.
+set more                          " Lets 'g<' to see last command output.
 " set visualbell                  " No beeping but terminal flash.
 set vb t_vb=
 " No beeping and no flash.
@@ -353,8 +366,8 @@ set incsearch                     " Highlight matches as you type.
 set hlsearch                      " Highlight matches.
 " Clear the search buffer when hitting return
 " Do not map in quickfix end cmdline window so that ShowFunc and Ack can work.
-nnoremap <expr> <cr> (&buftype is# "quickfix" ? "<cr>" : ":nohlsearch<cr>")
-nnoremap <expr> <cr> (&buftype is# "nofile" ? "<cr>" : ":nohlsearch<cr>")
+nnoremap <expr> <cr> (&buftype is# "quickfix"  ? "<cr>" 
+            \: &buftype is# "nofile" ? "<cr>" : ":nohlsearch<cr>")
 
 set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
