@@ -158,10 +158,6 @@ nnoremap S i<CR><Esc>
 vmap < <gv
 vmap > >gv
 
-" \1 to copy a line, comment it with tcomment, go back
-" Use :t-1 instead of yyP to preserve regisgters
-" call MapRestoreMode("<leader>1","mcyyPgCc`c")
-call MapRestoreMode("<leader>1","mc:t-1<cr>gCc`c")
 
 " Ctrl-J to copy a line and go back - like in EditPlus
 " used <c-j> for switching split windows.
@@ -200,17 +196,20 @@ nnoremap Y y$
 " = Mappings from plugins =
 " -------------------------
 " *tComment*
-" gcc un/comment line
-" gc  un/comment visual, often confused with gcc, so remap:
+" gcc toggle comment line but gc toggle comment visual, often confused with 
+" gcc, so remap:
 vmap gcc gc
-" yank visul before un/commenting
+" yank visual before toggle commenting
 vmap gy ygvgc
-" yank and past visul before un/commenting
+" yank and paste visual before toggle commenting
 vmap gyy ygvgc'>gp'.
-" yank line before un/commenting
+" yank line before toggle commenting
 nmap gy yygcc
-" yank and past line before un/commenting
-nmap gyy yygccp
+" yank and past line before toggle commenting and remember position
+" it works both in normal and insert mode
+" Use :t-1 instead of yyP to preserve registers
+nmap gyy mz:t-1<cr>gCc`zmz
+imap gyy <esc>:t-1<cr>gCcgi
 " *abolish-coercion*
 " crc camelCase
 " crm MixedCase
