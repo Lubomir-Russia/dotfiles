@@ -11,8 +11,10 @@ mybash-history	mybash.txt	/*mybash-history*
 mybash-http-server	mybash.txt	/*mybash-http-server*
 mygit	mygit.txt	/*mygit*
 mygit-PS1	mygit.txt	/*mygit-PS1*
+mygit-bare-repo	mygit.txt	/*mygit-bare-repo*
 mygit-clone	mygit.txt	/*mygit-clone*
 mygit-correct-last-commit	mygit.txt	/*mygit-correct-last-commit*
+mygit-shared-repo	mygit.txt	/*mygit-shared-repo*
 mymisc	mymisc.txt	/*mymisc*
 myperl	myperl.txt	/*myperl*
 mypython	mypython.txt	/*mypython*

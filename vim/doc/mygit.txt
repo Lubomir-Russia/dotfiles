@@ -1,11 +1,13 @@
-*mygit*  My tips for git.
+*mygit*      My tips for git.
 
-Correct last commit             |mygit-correct-last-commit|
-Clone                                         |mygit-clone|
-PS1 with brunch name                            |mygit-PS1|
+Correct last commit                               |mygit-correct-last-commit|
+Clone                                                           |mygit-clone|
+PS1 with brunch name                                              |mygit-PS1|
+Create bare shared repo                                     |mygit-bare-repo|
 
-=========================================================
-CORRECT LAST COMMIT             *mygit-correct-last-commit*
+
+===========================================================================
+CORRECT LAST COMMIT                               *mygit-correct-last-commit*
 
 Just to correct the last message:
 git commit --amend -m "your new message"
@@ -29,8 +31,8 @@ This will create a new commit that reverses everything introduced by the
 accidental commit.
 
 
-=========================================================
-CLONE                                         *mygit-clone*
+===========================================================================
+CLONE                                                           *mygit-clone*
 
 * from another locol dir
 git clone /home/alice/project myrepo
@@ -45,8 +47,9 @@ git clone http://github.com/schacon/grack.git
 * from private repos, or to have push access on your repository
 git clone https://username@github.com/username/project.git
 
-=========================================================
-PS1                                             *mygit-PS1*
+
+===========================================================================
+PS1                                                               *mygit-PS1*
 
 PS1 to show the current branch:
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
@@ -57,6 +60,16 @@ repository.  The %s token will be the name of the current branch.
 Taken from /etc/bash_completion.d/git.sh
 
 
+===========================================================================
+CREATE BARE REPO                          *mygit-bare-repo* *mygit-shared-repo*
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable
+git clone --bare MemStat MemStat.git
+cp -r MemStat.git/ /mnt/ptashl/
+cd MemStat
+git remote add origin /mnt/ptashl/MemStat.git/
+git remote -v
+git push
+
+
+  vim:tw=79:ts=8:ft=help:norl:modifiable
 
