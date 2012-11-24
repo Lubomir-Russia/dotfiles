@@ -1,13 +1,13 @@
-*mybash*  My tips for bash and other shells.
+*mybash*     My tips for Bash and other shells.
 
-History                               |mybash-history|
-grep                                     |mybash-grep|
-bashrc                                 |mybash-bashrc|
-HTTP server                       |mybash-http-server|
+History                                                      |mybash-history|
+grep                                                            |mybash-grep|
+bashrc                                                        |mybash-bashrc|
+HTTP server                                              |mybash-http-server|
 
 
-====================================================
-HISTORY                               *mybash-history*
+===========================================================================
+HISTORY                                                      *mybash-history*
 
 fc ~
     Edit last command in editor and execute on exit.
@@ -22,8 +22,8 @@ fc ~
 
 
 
-====================================================
-GREP AND ACK                  *mybash-grep* *mybash-ack*
+===========================================================================
+GREP AND ACK                                        *mybash-grep* *mybash-ack*
 
 Delete empty lines:
 last | cut -b 22-38 | grep -vE "^[[:blank:]]*$"
@@ -43,15 +43,15 @@ Install ack:
 curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 !#:3
 
 
-====================================================
-BASHRC                               *mybash-bashrc*
+===========================================================================
+BASHRC                                                        *mybash-bashrc*
 
 Error checking in aliases:
 alias gohome='cd && ls || echo "error($?) with cd to $HOME"'
 
 
-====================================================
-HTTP SERVER                       *mybash-http-server*
+===========================================================================
+HTTP SERVER                                              *mybash-http-server*
 
 nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
@@ -63,5 +63,4 @@ nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
 
 
- vim:tw=55:ts=8:ft=help:norl:modifiable
-
+  vim:tw=79:ts=8:ft=help:norl:modifiable

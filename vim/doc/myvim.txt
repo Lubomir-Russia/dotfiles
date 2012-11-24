@@ -1,4 +1,4 @@
-*myvim*  My tips for Vim and gVim.
+*myvim*      My tips for Vim and gVim.
 
 Installation                                  |myvim-installation|
 Saving                                        |myvim-saving|
@@ -484,4 +484,4 @@ Add section for Programming in VIM
 - quick fix window and make
 - work with argdo
 
- vim:tw=78:ts=8:ft=help:norl:modifiable
+  vim:tw=79:ts=8:ft=help:norl:modifiable

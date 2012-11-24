@@ -1,9 +1,9 @@
-*mypython*  My tips for Python.
+*mypython*   My tips for Python.
 
-HTTP server                     |mypython-http-server|
+HTTP server                                            |mypython-http-server|
 
-====================================================
-SIMPLE HTTP SERVER              *mypython-http-server*
+===========================================================================
+SIMPLE HTTP SERVER                                     *mypython-http-server*
 
 nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
@@ -15,5 +15,5 @@ nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
 
 
- vim:tw=55:ts=8:ft=help:norl:modifiable
 
+  vim:tw=79:ts=8:ft=help:norl:modifiable

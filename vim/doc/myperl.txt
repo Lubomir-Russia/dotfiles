@@ -1,5 +1,7 @@
-*myperl*  My tips for Perl.
+*myperl*     My tips for Perl.
 
 
- vim:tw=78:ts=8:ft=help:norl:modifiable
+===========================================================================
 
+
+  vim:tw=79:ts=8:ft=help:norl:modifiable

@@ -1,4 +1,4 @@
-*mygit*      My tips for git.
+*mygit*      My tips for Git.
 
 Correct last commit                               |mygit-correct-last-commit|
 Clone                                                           |mygit-clone|
@@ -72,4 +72,3 @@ git push
 
 
   vim:tw=79:ts=8:ft=help:norl:modifiable
-

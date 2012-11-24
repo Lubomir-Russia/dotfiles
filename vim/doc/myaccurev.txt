@@ -1,11 +1,11 @@
-*myaccurev*  My tips for accurev.
+*myaccurev*  My tips for Accurev.
 
-Every day tasks                             |myaccurev-tasks|
-Ducuments                     |myaccurev-doc| |myaccurev-links|
-Instalation on SuSe Sp1               |myaccurev-instalation|
+Every day tasks                                             |myaccurev-tasks|
+Ducuments                                     |myaccurev-doc| |myaccurev-links|
+Instalation on SuSe Sp1                               |myaccurev-instalation|
 
-===========================================================
-EVERY DAY TASKS                             *myaccurev-tasks*
+===========================================================================
+EVERY DAY TASKS                                             *myaccurev-tasks*
 
 accurev help
 accurev ws help
@@ -26,14 +26,14 @@ accurev purge path/to/file
 accurev keep DZ_TC_2_1_2_1.pm -c "Add Ktrace parsing to DZ_TC_2_1_2_1"
 accurev promote path/to/file -k
 
-===========================================================
-DUCUMENTS AND LINKS           *myaccurev-doc* *myaccurev-links*
+===========================================================================
+DUCUMENTS AND LINKS                          *myaccurev-doc* *myaccurev-links*
 
 https://teamforge6.usd.lab.emc.com/sf/projects/usd_development_environment/
 
 
-===========================================================
-INSTALATION ON SUSE SP1               *myaccurev-instalation*
+===========================================================================
+INSTALATION ON SUSE SP                                *myaccurev-instalation*
 
 Step-by-step instruction which probably will give you ability to compile the
 code. All the steps below were done on VM with SUSE SP1 version. The parent
@@ -112,4 +112,4 @@ By Oleg Subbotin
 
 
 
- vim:tw=55:ts=8:ft=help:norl:modifiable
+  vim:tw=79:ts=8:ft=help:norl:modifiable
