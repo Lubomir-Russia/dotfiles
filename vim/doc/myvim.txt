@@ -32,6 +32,8 @@ Help and references                           |myvim-help-and-refrences|
 Programming                                   |myvim-programming|
   VIM-FUGITIVE (plugin)                       |myvim-vim-fugitive-(plugin)|
   Tags and Tag List                           |myvim-tags-and-tag-list|
+  Quickfix window                             |myvim-quickfix-window|
+  Perl                                        |myvim-perl|
 TODO                                          |myvim-todo|
 
 
@@ -92,6 +94,7 @@ OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
 :argdo {cmd} # execute {cmd} for each file in the argument list
 :r infile    # insert the content of infile
 :r !{cmd}    # execute {cmd} and insert its standard output below
+:argdo %s/old/new/gc | wq  # replace in all and savee
 
 find . | vim -
 
@@ -316,6 +319,7 @@ gd gD                # find local/global declaration
 :%s/\<./\l&/g        # sets first letter of each word to lowercase
 :%s/.*/\u&           # sets first letter of each line to uppercase
 :%s/.*/\l&           # sets first letter of each line to lowercase
+:%s/^\(.*\)\n\1$/\1/ # delete duplicate lines
 
 ===========================================================================
   GREP                                                           *myvim-grep*
@@ -590,6 +594,48 @@ CTRL-W i - открыть новое окно с курсором на стро�
 
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 Это позволит увидеть все вхождение тега, выбрать нужное и отрыть его в новом окне по нажатию F4
+
+===========================================================================
+QUICKFIX WINDOW                                       *myvim-quickfix-window*
+
+:copen      # open quickfix window
+:cclose     # close quickfix window
+:cc [nr]    # display error [nr]
+:cfirst     # display the first error
+:clast      # display the last error
+:[count]cn  # display [count] next error
+:[count]cp  # display [count] previous error
+
+With plugin unimpaied
+[q          # jump to previous quickfix item
+]q          # jump to next quickfix item
+[Q          # jump to first quickfix item
+]Q          # jump to last quickfix item
+
+===========================================================================
+PERL                                                             *myvim-perl*
+
+Check perl code with :make
+    autocmd FileType perl set makeprg=perl\ -c\ %\ $*
+    autocmd FileType perl set errorformat=%f:%l:%m
+    autocmd FileType perl set autowrite
+
+Perl includes pod
+    let perl_include_pod = 1
+
+Syntax color complex things like @{${"foo"}}
+    let perl_extended_vars = 1
+
+Tidy selected lines (or entire file) with _t:
+    nnoremap <silent> _t :%!perltidy -q<Enter>
+    vnoremap <silent> _t :!perltidy -q<Enter>
+
+Deparse obfuscated code
+    nnoremap <silent> _d :.!perl -MO=Deparse 2>/dev/null<cr>
+    vnoremap <silent> _d :!perl -MO=Deparse 2>/dev/null<cr>
+
+Dumper lets you type '@myarraydumper' and you'll get 'warn Data::Dumper->Dump([\@myarray], ['myarray']);'
+:imap dumper <ESC>^iwarn Data::Dumper->Dump([\<ESC>llyw$a], ['<ESC>pa']);<ESC>
 
 ===========================================================================
 TODO                                                             *myvim-todo*

@@ -46,6 +46,7 @@ myvim-motions	myvim.txt	/*myvim-motions*
 myvim-movements	myvim.txt	/*myvim-movements*
 myvim-open-files-and-buffers	myvim.txt	/*myvim-open-files-and-buffers*
 myvim-programming	myvim.txt	/*myvim-programming*
+myvim-quickfix-window	myvim.txt	/*myvim-quickfix-window*
 myvim-registers	myvim.txt	/*myvim-registers*
 myvim-regular-expression-syntax-style	myvim.txt	/*myvim-regular-expression-syntax-style*
 myvim-saving	myvim.txt	/*myvim-saving*
