@@ -168,12 +168,21 @@ inoremap <M-j> <C-O>gj
 inoremap <M-k> <C-O>gk
 noremap! <M-h> <Left>
 noremap! <M-l> <Right>
+" Emacs-like beginning and end of line.
+imap <c-e> <c-o>$
+imap <c-a> <c-o>^
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" open files in directory of current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
+map <Leader>s :split %%
 
 " the j and k keys operate on display lines rather than on real lines
 nnoremap k gk
@@ -186,6 +195,13 @@ nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
 
 " Make Y work as C or D
 nnoremap Y y$
+
+" Bind :Q to :q
+command! Q q
+command! Qall qall
+
+" Disable Ex mode
+map Q <Nop>
 
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
@@ -247,6 +263,23 @@ function! MoveTabRight()
     execute 'tabmove' current_tab
 endfunction
 
+" Merge a tab into a split in the previous window
+" to move a split inot tab - built-in <cr>W-T
+function! MoveTabToSplit()
+  if tabpagenr() == 1
+    return
+  endif
+  let bufferName = bufname("%")
+  if tabpagenr("$") == tabpagenr()
+    close!
+  else
+    close!
+    tabprev
+  endif
+  vsplit
+  execute "buffer " . bufferName
+endfunction
+
 call MapForceNormal("<leader>tt",":tabnew<cr>")
 call MapForceNormal("<leader>te",":tabedit<space>")
 call MapForceNormal("<leader>tc",":tabclose<cr>")
@@ -256,6 +289,7 @@ call MapForceNormal("<leader>ty",":tablast<cr>")
 call MapForceNormal("<leader>tm",":tabmove<space>")
 call MapForceNormal("<leader>tl",":call MoveTabLeft()<cr>")
 call MapForceNormal("<leader>tr",":call MoveTabRight()<cr>")
+call MapForceNormal("<leader>ts",":call MoveTabToSplit()<cr>")
 call MapForceNormal("<leader>tn",":tabnext<cr>")      " useless, use default gt
 call MapForceNormal("<leader>tp",":tabprevious<cr>")  " useless, use default gT
 
@@ -263,6 +297,9 @@ call MapForceNormal("<leader>tp",":tabprevious<cr>")  " useless, use default gT
 let g:lasttab = 1
 nmap <Leader>= :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+" toggle between the current tab and the last active buffer
+nnoremap <leader><leader> <c-^>
 
 " Save and exit even when in insert mode. Nice with git commit messages.
 inoremap ZZ <Esc>ZZ
@@ -334,7 +371,13 @@ set ruler                         " Show cursor position.
 set showtabline=2                 " Display tabs all of the time
 set laststatus=2                  " Show the status line all the time
 " Useful status information at the bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}[CWD:\ %<%.99{CWD()}]%=%-16(\ %l,%c-%v\ %)%P
+
+function! CWD()
+    let curdir = substitute(getcwd(), '/home/c4dev/', "~/", "g")
+    return curdir
+endfunction
 
 " Make the current window big, but leave others context
 set winwidth=84
@@ -358,6 +401,7 @@ set switchbuf=useopen,split       " How buffers open from quickfix (useopen, use
 set wildmenu                      " Enhanced command line completion.
 " set wildmode=list:longest       " Complete files like a shell.
 set wildmode=list,full            "	List all matches without completing, then each full match.
+set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
@@ -462,11 +506,6 @@ set iskeyword=@,48-57,_,192-255      " настраиваю для работы с русскими словами 
 " = Plugin specific settings =
 " ------------------------------
 
-" Vim-Wiki
-let wiki = {}
-let g:vimwiki_list = [{'path': '~/bin/dotfiles/wiki/', 'auto_export': 1}] " works both in Unix and Windows
-let wiki.nested_syntaxes = {'perl': 'perl', 'bash': 'sh', 'python': 'python', 'c++': 'cpp'} " highlight code syntax
-
 " snipMate
 " Update snippets for all buffers when snipfile is saved
 autocmd! bufwritepost *snippet* call ReloadAllSnippets()
@@ -566,6 +605,53 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+
+" Rename current file
+" I do not use it often so there is no mapping. Use Gmove if possible.
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+command! RenameFile :call RenameFile()
+
+" Open a split for each dirty file in git
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+" Show the current Ruby on Rails routes in the split
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . _ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+command! ShowRoutes :call ShowRoutes()<cr>
+
+" Insert the current time
+command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 " LET IT BE AT THE END OF vimrc
 " Persistent File marks and predifined registers from myviminfo

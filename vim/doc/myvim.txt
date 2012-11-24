@@ -93,16 +93,20 @@ OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
 ===========================================================================
 TABS                                                             *myvim-tabs*
 
-map <leader>=   # go to previously selected tab (a function used)
+map <leader>=  :exe "tabn ".g:lasttab<CR>                # go to previously selected tab
 map <leader>tt :tabnew<cr>        :tabnew                # open a new tab
 map <leader>te :tabedit           :tabe[dit] {file}      # edit {file} in a new tab
 map <leader>tc :tabclose<cr>      :tabc[lose]            # close the current tab
 map <leader>to :tabonly<cr>       :tabo[nly]             # close the other tabs
-map <leader>tn :tabnext<cr>       :tabn[ext]             # go to the next tab
-map <leader>tp :tabprevious<cr>   :tabp[revious]         # go to the previous tab
+map <leader>tn :tabnext<cr>       :tabn[ext]             # go to next tab = gt
+map <leader>tp :tabprevious<cr>   :tabp[revious]         # go to previous = gT
 map <leader>tf :tabfirst<cr>      :tabfir[st]            # go to the first tab
-map <leader>tl :tablast<cr>       :tabl[ast]             # go to the last tab
+map <leader>ty :tablast<cr>       :tabl[ast]             # go to the last tab
 map <leader>tm :tabmove           :tabm[ove] 3           # move the current tab to after tab 3, or the end if no number is given
+map <leader>tl :call MoveTabLeft()                       # move tab to the left
+map <leader>tr :call MoveTabRight()                      # move tab to the right
+map <leader>ts :call MoveTabToSplit()                    # merge tab to the window split
+               <c-W>T                                    # move a split into a new tab
                :tabs                                     # list the tabs and their windows
 $vim -p file1 file2 fileN  # Open multiple files in different tabs.
 
