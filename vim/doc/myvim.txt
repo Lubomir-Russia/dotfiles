@@ -94,7 +94,7 @@ OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
 :argdo {cmd} # execute {cmd} for each file in the argument list
 :r infile    # insert the content of infile
 :r !{cmd}    # execute {cmd} and insert its standard output below
-:argdo %s/old/new/gc | wq  # replace in all and savee
+:argdo %s/old/new/gc | w  # replace in all and save
 
 find . | vim -
 
@@ -646,4 +646,4 @@ Add section for Programming in VIM
 - quick fix window and make
 - work with argdo
 
-  vim:tw=79:ts=8:ft=help:norl:modifiable
+  vim:tw=78:ts=8:ft=help:norl:modifiable

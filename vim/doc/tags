@@ -45,6 +45,7 @@ myvim-marks	myvim.txt	/*myvim-marks*
 myvim-motions	myvim.txt	/*myvim-motions*
 myvim-movements	myvim.txt	/*myvim-movements*
 myvim-open-files-and-buffers	myvim.txt	/*myvim-open-files-and-buffers*
+myvim-perl	myvim.txt	/*myvim-perl*
 myvim-programming	myvim.txt	/*myvim-programming*
 myvim-quickfix-window	myvim.txt	/*myvim-quickfix-window*
 myvim-registers	myvim.txt	/*myvim-registers*

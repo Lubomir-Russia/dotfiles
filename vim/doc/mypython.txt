@@ -16,4 +16,4 @@ nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
 
 
-  vim:tw=79:ts=8:ft=help:norl:modifiable
+  vim:tw=78:ts=8:ft=help:norl:modifiable

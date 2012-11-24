@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>VIM: myvim</title>
+<link rel="stylesheet" href="vim-stylesheet.css" type="text/css">
+</head>
+<body>
+<h2>MYVIM</h2>
+<pre>
+<b class="vimtag">*<a name="myvim">myvim</a>*</b>      My tips for Vim and gVim.
+
+Installation                                  |<a href="myvim.html#myvim-installation">myvim-installation</a>|
+Saving                                        |<a href="myvim.html#myvim-saving">myvim-saving</a>|
+Open files and buffers                        |<a href="myvim.html#myvim-open-files-and-buffers">myvim-open-files-and-buffers</a>|
+Tabs                                          |<a href="myvim.html#myvim-tabs">myvim-tabs</a>|
+Windows                                       |<a href="myvim.html#myvim-windows">myvim-windows</a>|
+Syntax                                        |<a href="myvim.html#myvim-syntax">myvim-syntax</a>|
+Spelling                                      |<a href="myvim.html#myvim-spelling">myvim-spelling</a>|
+Color schema                                  |<a href="myvim.html#myvim-color-schema">myvim-color-schema</a>|
+Insert mode                                   |<a href="myvim.html#myvim-insert-mode">myvim-insert-mode</a>|
+Movements                                     |<a href="myvim.html#myvim-movements">myvim-movements</a>|
+  motions                                     |<a href="myvim.html#myvim-motions">myvim-motions</a>|
+  marks                                       |<a href="myvim.html#myvim-marks">myvim-marks</a>|
+  jumps                                       |<a href="myvim.html#myvim-jumps">myvim-jumps</a>|
+  changes                                     |<a href="myvim.html#myvim-changes">myvim-changes</a>|
+Searching and Substitutions                   |<a href="myvim.html#myvim-searching-and-substitutions">myvim-searching-and-substitutions</a>|
+  Search settings                             |<a href="myvim.html#myvim-search-settings">myvim-search-settings</a>|
+  Searching                                   |<a href="myvim.html#myvim-searching">myvim-searching</a>|
+  Substitutions                               |<a href="myvim.html#myvim-substitutions">myvim-substitutions</a>|
+  Grep                                        |<a href="myvim.html#myvim-grep">myvim-grep</a>|
+  Regular expression syntax style             |<a href="myvim.html#myvim-regular-expression-syntax-style">myvim-regular-expression-syntax-style</a>|
+  Action with searching                       |<a href="myvim.html#myvim-action-with-searching">myvim-action-with-searching</a>|
+Mapping and abbreviation                      |<a href="myvim.html#myvim-mapping-and-abbreviation">myvim-mapping-and-abbreviation</a>|
+Foldings                                      |<a href="myvim.html#myvim-foldings">myvim-foldings</a>|
+Diff                                          |<a href="myvim.html#myvim-diff">myvim-diff</a>|
+Registers                                     |<a href="myvim.html#myvim-registers">myvim-registers</a>|
+Text formating                                |<a href="myvim.html#myvim-text-formating">myvim-text-formating</a>|
+Date and time                                 |<a href="myvim.html#myvim-date">myvim-date</a>| |<a href="myvim.html#myvim-time">myvim-time</a>|
+Command mode                                  |<a href="myvim.html#myvim-command-mode">myvim-command-mode</a>|
+Help and references                           |<a href="myvim.html#myvim-help-and-refrences">myvim-help-and-refrences</a>|
+Programming                                   |<a href="myvim.html#myvim-programming">myvim-programming</a>|
+  VIM-FUGITIVE (plugin)                       |<a href="myvim.html#myvim-vim-fugitive-(plugin)">myvim-vim-fugitive-(plugin)</a>|
+  Tags and Tag List                           |<a href="myvim.html#myvim-tags-and-tag-list">myvim-tags-and-tag-list</a>|
+  Quickfix window                             |<a href="myvim.html#myvim-quickfix-window">myvim-quickfix-window</a>|
+  Perl                                        |<a href="myvim.html#myvim-perl">myvim-perl</a>|
+TODO                                          |<a href="myvim.html#myvim-todo">myvim-todo</a>|
+
+
+</pre><hr><pre>INSTALLATION                                             <b class="vimtag">*<a name="myvim-installation">myvim-installation</a>*</b>
+
+Install ruby and ruby-dev beforehand if needed.
+
+mkdir ~/src
+cd ~/src
+wget http://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
+tar -xaf vim-7.3.tar.bz2
+cd vim73
+./configure --with-features=huge --enable-perlinterp --enable-rubyinterp --enable-pythoninterp
+make
+make install
+vim --version
+--prefix=<code class="special">{directory}</code>  Top directory where to install Vim. Default is /usr/local
+
+</pre><hr><pre>SAVING                                                         <b class="vimtag">*<a name="myvim-saving">myvim-saving</a>*</b>
+
+:w
+:w!                # only if permissions allow
+:w !sudo tee %     # write as a root
+:update            # write only if changed
+ZZ                 # save file, if modified, and quit (same as ":x")
+ZQ                 # quit without saving (same as ":q!")
+:1,10 w outfile    # Saves lines 1 to 10 in outfile
+:1,10 w &gt;&gt; outfile # Appends lines 1 to 10 to outfile
+
+</pre><hr><pre>OPEN FILES AND BUFFERS                         <b class="vimtag">*<a name="myvim-open-files-and-buffers">myvim-open-files-and-buffers</a>*</b>
+
+:e filename  # open file in current window
+:e .         # browse dir
+:ls          # buffers
+:bd          # delete (close) buffer
+<code class="special">&lt;Ctr&gt;</code>^       # alternative buffer (previous or useful file from plugin)
+:b name      # switch to buffer (try TAB and arrows as well)
+:b3          # switch to buffer number 3
+:bp  ]b      # previous buffer
+:bn  [b      # next buffer
+:bf  [B      # first buffer
+:bl  ]B      # last buffer
+:ba          # open a window for every buffer (buffer all)
+:tab ba      # open a tab for every buffer (buffer all)
+:set hidden  # lets hide buffer without saving
+
+:set wildmode=list,full                               # see :h wildmode for details
+:e scp://my_user@remote_hostname//path/to/remote/file # open remote file
+:e <code class="special">&lt;ftp|ftps&gt;</code>://user@host/path/to/the/file.txt
+
+
+:bufdo <code class="special">{cmd}</code> # execute <code class="special">{cmd}</code> for each buffers in the buffer list
+:windo <code class="special">{cmd}</code> # execute <code class="special">{cmd}</code> for each windows in the current tab page
+:tabdo <code class="special">{cmd}</code> # execute <code class="special">{cmd}</code> for each current window of each tab page
+:argdo <code class="special">{cmd}</code> # execute <code class="special">{cmd}</code> for each file in the argument list
+:r infile    # insert the content of infile
+:r !<code class="special">{cmd}</code>    # execute <code class="special">{cmd}</code> and insert its standard output below
+:argdo %s/old/new/gc | w  # replace in all and save
+
+find . | vim -
+
+
+</pre><hr><pre>TABS                                                             <b class="vimtag">*<a name="myvim-tabs">myvim-tabs</a>*</b>
+
+map <code class="special">&lt;leader&gt;</code>=  :exe "tabn ".g:lasttab<code class="special">&lt;CR&gt;</code>                # go to previously selected tab
+map <code class="special">&lt;leader&gt;</code>tt :tabnew<code class="special">&lt;cr&gt;</code>        :tabnew                # open a new tab
+map <code class="special">&lt;leader&gt;</code>te :tabedit           :tabe[dit] <code class="special">{file}</code>      # edit <code class="special">{file}</code> in a new tab
+map <code class="special">&lt;leader&gt;</code>tc :tabclose<code class="special">&lt;cr&gt;</code>      :tabc[lose]            # close the current tab
+map <code class="special">&lt;leader&gt;</code>to :tabonly<code class="special">&lt;cr&gt;</code>       :tabo[nly]             # close the other tabs
+map <code class="special">&lt;leader&gt;</code>tn :tabnext<code class="special">&lt;cr&gt;</code>       :tabn[ext]             # go to next tab = gt
+map <code class="special">&lt;leader&gt;</code>tp :tabprevious<code class="special">&lt;cr&gt;</code>   :tabp[revious]         # go to previous = gT
+map <code class="special">&lt;leader&gt;</code>tf :tabfirst<code class="special">&lt;cr&gt;</code>      :tabfir[st]            # go to the first tab
+map <code class="special">&lt;leader&gt;</code>ty :tablast<code class="special">&lt;cr&gt;</code>       :tabl[ast]             # go to the last tab
+map <code class="special">&lt;leader&gt;</code>tm :tabmove           :tabm[ove] 3           # move the current tab to after tab 3, or the end if no number is given
+map <code class="special">&lt;leader&gt;</code>tl :call MoveTabLeft()                       # move tab to the left
+map <code class="special">&lt;leader&gt;</code>tr :call MoveTabRight()                      # move tab to the right
+map <code class="special">&lt;leader&gt;</code>ts :call MoveTabToSplit()                    # merge tab to the window split
+               <code class="special">&lt;c-W&gt;</code>T                                    # move a split into a new tab
+               :tabs                                     # list the tabs and their windows
+$vim -p file1 file2 fileN  # Open multiple files in different tabs.
+
+</pre><hr><pre>WINDOWS                                                        <b class="vimtag">*<a name="myvim-windows">myvim-windows</a>*</b>
+
+^Ww          # next window.
+^WT          # move window to the new tab.
+^Wc          # close window.
+^Wo          # only this window.
+^Wr          # rotate windows.
+^Ws          # split windows.
+^Wv          # vsplit windows.
+^Wx          # swap windows.
+^w+          # larger window
+^w-          # smaller window
+^w=          # equal window
+:sp f        # split open f
+:vsp f       # vSplit open f
+:vert h help # open help in vertical split.
+
+</pre><hr><pre>SYNTAX                                                         <b class="vimtag">*<a name="myvim-syntax">myvim-syntax</a>*</b>
+
+:syntax enable
+:set syntax=perl # force perl syntax on any file type
+:set syntax=     # force no syntax for the buffer
+
+</pre><hr><pre>SPELLING                                                     <b class="vimtag">*<a name="myvim-spelling">myvim-spelling</a>*</b>
+
+:set spell
+z=       # suggestions
+1z=      # except the first suggestion
+[s       # next wrong word
+]s       # previous wrong word
+zg       # add as good
+zw       # add as wrong
+zug      # undo adding as good
+zuw      # undo adding as wrong
+:spellr  # repeatAll the replacement done by |<code class="badlink">z=</code>| for all matches
+<code class="keystroke">CTRL-X</code> s # in insert mode to find suggestions. <code class="keystroke">CTRL-N</code> and <code class="keystroke">CTRL-P</code>
+
+In order to spell check in comments and strings switch off the syntax
+:syntax off
+:syntax on
+
+Personal wordlist, make a directory called ~/.vim/spell
+manually add things into your personal wordlist (~/.vim/spell/en.latin1.add):
+        printf(              (so printf is invalid, but printf( is ok)
+        nextLine()
+        ArrayList/=          (the /= means always match case)
+        focussed/!           (the /! says treat this as a misspelling)
+If you manually add to your wordlist, you need to regenerate it:
+        :mkspell! ~/.vim/spell/en.latin1.add
+
+        cd ~/.vim/spell
+        wget http://ftp.vim.org/vim/runtime/spell/ru.koi8-r.sug
+        wget http://ftp.vim.org/vim/runtime/spell/ru.koi8-r.spl
+        wget http://ftp.vim.org/vim/runtime/spell/en.ascii.sug
+        wget http://ftp.vim.org/vim/runtime/spell/en.ascii.spl
+
+        setlocal spell spelllang=ru,en
+
+</pre><hr><pre>COLOR SCHEMA                                             <b class="vimtag">*<a name="myvim-color-schema">myvim-color-schema</a>*</b>
+
+- solarized
+- emacs
+- far
+- murphy
+- topfunky-light
+- vividchalk
+- wombat
+
+</pre><hr><pre>INSERT MODE                                               <b class="vimtag">*<a name="myvim-insert-mode">myvim-insert-mode</a>*</b>
+
+I i a A
+r R               # backspace will restore the original
+cc = C            # change to the end of line
+xJ xgJ            # join x lines with/without spaces
+x<code class="special">&lt;&lt; x&gt;</code>&gt;           # indent in normal mode
+Cntr-t -d         # indent in insert mode
+gp                # just like 'p', but leave the cursor just after the new text
+set tabstop=4
+set shiftwidth=4
+set expandtab
+:retab
+<code class="special">{change, delete, yank, visual}</code> + <code class="special">{all, inner}</code> +
+<code class="special">{word, Word, sentence, paragraph, tag, ", ', [, {, (}</code>
+
+Insertion mode Completion:
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-L&gt;</code> # whole line
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-N&gt;</code> # keywords using current file, map <code class="special">&lt;c-L&gt;</code>
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-K&gt;</code> # keywords using dictionary
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-T&gt;</code> # keywords using thesaurus
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-I&gt;</code> # keywords in current and included files
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-]&gt;</code> # tags
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-F&gt;</code> # file names
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-D&gt;</code> # definitions or macros
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-V&gt;</code> # vim command line
+<code class="special">&lt;c-x&gt;</code><code class="special">&lt;c-O&gt;</code> # omni completion, map <code class="special">&lt;c-F&gt;</code>
+
+:set dictionary=/usr/share/dict/words
+
+</pre><hr><pre>MOVEMENTS                                                   <b class="vimtag">*<a name="myvim-movements">myvim-movements</a>*</b>
+</pre><hr><pre>  MOTIONS                                                     <b class="vimtag">*<a name="myvim-motions">myvim-motions</a>*</b>
+
+0 g0 ^ g^ gE B ge b h gm | l w W e E g$ $
+, Fx Tx fx Tx  ;
+gg xH <code class="special">{ ( gk - k M j + gj ) }</code> xL G          # 12gg = 12G
+Ctrl-b Ctrl-u Ctrl-y Ctrl-e Ctrl-d Ctrl-f
+zt (z Enter) zz zb # set scrolloff=3 to have some extra lines for a lookup
+zH zh zl zL
+gCtrl-g # where am I? also set ruler set number set laststatus=2
+When a select motion is not of the type you would like to use, you can force
+another type by using "v", "V" or <code class="keystroke">CTRL-V</code> just after the operator.
+
+</pre><hr><pre>  MARKS                                                         <b class="vimtag">*<a name="myvim-marks">myvim-marks</a>*</b>
+
+ma `a 'a # local marks used for navigation and block editing
+mA `A 'A # global marks can be used as short cuts to often used files
+`0-`9    # most recent exited files
+]'  ['   # <code class="special">[count]</code> times to next/previous line with a lowercase mark below
+]`  [`   # <code class="special">[count]</code> times to lowercase mark after/before the cursor
+`"       # <code class="special">[count]</code> times to lowercase mark before the cursor
+m,       # add mark with next letter (from signature plagin)
+
+</pre><hr><pre>  JUMPS                                                         <b class="vimtag">*<a name="myvim-jumps">myvim-jumps</a>*</b>
+
+A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
+"N", "%", "(", ")", "]]", "[[", "<code class="special">{", "}</code>", ":s", ":tag", "L", "M", "H" and
+the commands that start editing a new file.
+'' ``    # latest jump
+^O       # older cursor position in jump list (not a motion command)
+^I       # newer cursor position in jump list (not a motion command)
+<code class="special">&lt;Tab&gt;</code>    # newer cursor position in jump list (not a motion command)
+%        # jump to match, also see plugins
+o O      # jump in visual mode to the other end of selection
+`"       # jump to position on which we were when exited current buffer last time.
+`0       # jump to position in last file edited (when exited Vim)
+`1       # like `0 but the previous file (also `2 etc)
+
+</pre><hr><pre>  CHANGES                                                     <b class="vimtag">*<a name="myvim-changes">myvim-changes</a>*</b>
+
+'. `.    # latest edit
+gi       # latest edit and insert
+`[ `]    # jump to the first/last character of the previously changed or yanked text.
+'[  ']   # jump to the first/last line of the previously changed or yanked text.
+`<code class="special">&lt; `&gt;</code>    # jump to beginning/end of last visual selection
+g;       # older cursor position in change list (not a motion command)
+g,       # newer cursor position in change list (not a motion command)
+
+</pre><hr><pre>SEARCHING AND SUBSTITUTIONS               <b class="vimtag">*<a name="myvim-searching-and-substitutions">myvim-searching-and-substitutions</a>*</b>
+  SEARCH SETTINGS                                     <b class="vimtag">*<a name="myvim-search-settings">myvim-search-settings</a>*</b>
+
+:set hlsearch
+:set incsearch
+:set number
+<code class="special">&lt;cr&gt;</code>  # switch highlight off (custom mapping)
+
+</pre><hr><pre>  SEARCHING                                                 <b class="vimtag">*<a name="myvim-searching">myvim-searching</a>*</b>
+
+g# # N ? / n <b class="vimtag">*<a name=" g"> g</a>*</b>
+
+]I                   # list lines in current and included files that contain the word under cursor,
+[I                   # start searching at cursor position the cursor/beginning of current file.
+gd gD                # find local/global declaration
+/pattern/+           # next line
+/pattern/+x          # x lines after
+/pattern/e+x         # x characters after
+/\<code class="special">&lt; the\&gt;</code>            # search the
+/^\n\<code class="special">{3}</code>             # find 3 empty lines
+:bufdo /searchstr/   # search in all open files
+
+</pre><hr><pre>  SUBSTITUTIONS                                         <b class="vimtag">*<a name="myvim-substitutions">myvim-substitutions</a>*</b>
+
+:<code class="special">[range]</code> s/pattern/string/[flags] <code class="special">[count]</code>  # substitute
+   #flags g, c, i, I
+   #ranges: ',' joins ';' separates, also use visual
+   empty             # current line
+   %                 # all buffer
+   +x -x             # x lines up/down
+   1                 # first line
+   $                 # last line
+   't                # mark 't
+   /pat/             # pattern
+   #count            # only in the next x lines
+   /\cpatter         # case insensitive
+   /\Cpatter         # case sensitive
+:%s/\&lt;./\u&amp;/g        # sets first letter of each word to uppercase
+:%s/\&lt;./\l&amp;/g        # sets first letter of each word to lowercase
+:%s/.*/\u&amp;           # sets first letter of each line to uppercase
+:%s/.*/\l&amp;           # sets first letter of each line to lowercase
+:%s/^\(.*\)\n\1$/\1/ # delete duplicate lines
+
+</pre><hr><pre>  GREP                                                           <b class="vimtag">*<a name="myvim-grep">myvim-grep</a>*</b>
+
+:<code class="special">[range]</code> g/pattern/<code class="special">[cmd]</code> #search and execute
+   #                 # show lines with numbers
+   d                 # delete lines
+   y                 # yank lined
+   t                 # copy lined (transfer)
+   m                 # move lined
+   normal <code class="special">{command}</code>  # execute an extended sequence, examples:
+          :g/^$/d                               delete empty lines
+          :v/./,/./-j                           join empty lines into one
+          :g/pat/+ y                            copy one single line after match
+          :g/pat/+ y A                          copy lines into register A
+          :g/pat/t$                             copy lines to the end of file
+          :g/pat/t0                             copy lines revesely to start
+          :.,+10g/pat/d                         delete lines with pat within next 10 lines
+          :.,'f+2g/pat/#                        show lines with pat from here to mark f +2 lines
+          :.,/pat1/g/pat2/d                     delete lines with pat1 from here to line with pat2
+          :g/^sub /normal O# This sub is for    adds this line before all sub definitions
+          :g/pat/normal Ojj75=                  adds 55 '=' before pat (jj = <code class="special">&lt;esc&gt;</code>)
+          :g/pat                                list all lines that have pat
+Tip: last search is in register /. To copy it into command: <code class="special">&lt;Ctrl-r&gt;</code>/.
+So firstly tune your search with inc-search and then copy it to g/&lt;Ctrl-r/d
+v/pat/<code class="special">[cmd]</code> # execute on lines that do not match.
+
+</pre><hr><pre>  REEXPRESSION SYNTAX STYLE           <b class="vimtag">*<a name="myvim-regular-expression-syntax-style">myvim-regular-expression-syntax-style</a>*</b>
+
+\v      # very magic =~ Perl = Unix Egrep, but '=' is 0 or 1 match (in Perl it is '?')  /\v(.y)<code class="special">{3}</code>
+\m      # magic = default = Unix grep =&gt; \( \) \+ \= *   /\(.y\)\<code class="special">{3}</code>
+
+</pre><hr><pre>  ACTION WITH SEARCHING                         <b class="vimtag">*<a name="myvim-action-with-searching">myvim-action-with-searching</a>*</b>
+
+<code class="special">{change, delete, yank, visual}</code> + <code class="special">{?pat,/pat}</code> + <code class="special">{?+,?+x,?-,?-x,/+,... }</code>
+# does not work with shearch-complete plugin what remaps '/'
+
+:%perldo s/this/that/ # execs that perl s///
+
+</pre><hr><pre>MAPPING AND ABBREVIATION                     <b class="vimtag">*<a name="myvim-mapping-and-abbreviation">myvim-mapping-and-abbreviation</a>*</b>
+
+map namp imap vmap map!
+:map :vmap :map &gt;               # show current mappings all/ for &gt; only
+:redir @A                       # copy all mappings to register A
+:map
+:redir END
+:vumap &gt; :unmap &gt;               # unmap
+:vmap &gt; &gt;gv                     # indent block without losing selection
+:vmap &lt; &lt;gv
+:vmap <code class="special">&lt;Tab&gt;</code> &gt;gv
+:vmap <code class="special">&lt;S-Tab&gt;</code> &lt;gv
+:imap <code class="special">&lt;Tab&gt;</code> <code class="special">&lt;C-N&gt;</code>
+:imap <code class="special">&lt;S-Tab&gt;</code> <code class="special">&lt;C-P&gt;</code>
+:nnoremap ; :                   # swapping keys
+:nnoremap : ;
+:let mapleader=","              # change the personal hotkey
+:imap <code class="special">&lt;Leader&gt;</code>f <code class="special">&lt;Esc&gt;</code>gUiw`]a    # capitalize current word in insert mode
+
+:ab ff FireFox                  # insert, command and replace mode
+To avoid the abbreviation in insert mode: Type part of the abbreviation, exit
+insert mode with <code class="special">&lt;Esc&gt;</code>, re-enter insert mode with "a" and type the rest.  Or
+type <code class="keystroke">CTRL-V</code> before the character after the abbreviation.
+To avoid the abbreviation in Command-line mode: Type <code class="keystroke">CTRL-V</code> twice somewhere in
+the abbreviation to avoid it to be replaced.  A <code class="keystroke">CTRL-V</code> in front of a normal
+character is mostly ignored otherwise.
+Remap CapsLock to Ctrl: in Windows just add a register key:
+  [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+    "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00
+
+</pre><hr><pre>FOLDINGS                                                     <b class="vimtag">*<a name="myvim-foldings">myvim-foldings</a>*</b>
+
+zM za (zc zo) zR     zk zj
+zf#j        # creates a fold from the cursor down # lines.
+zf/string   # creates a fold from the cursor to string .
+zj          # moves the cursor to the next fold.
+zk          # moves the cursor to the previous fold.
+zo          # opens a fold at the cursor.
+zO          # opens all folds at the cursor.
+zc          # close fold at the cursor.
+zm          # increases the foldlevel by one.
+zM          # closes all open folds.
+zr          # decreases the foldlevel by one.
+zR          # decreases the foldlevel to zero -- all folds will be open.
+zd          # deletes the fold at the cursor.
+zE          # deletes all folds.
+[z          # move to start of open fold.
+]z          # move to end of open fold.
+:mkview     # save folds
+:loadview   # restore folds
+
+:set foldmethod=
+    indent  # indent
+    syntax  # syntax highlighting rules
+    marker  # markers in the text
+    diff    # unchanged text (used in diff views)
+    expr    # custom, code-driven folding
+    manual  # select ranges to fold (default)
+
+Moving up/down by function, unfolding current function but folding all else
+noremap [[  [[zMzvz.
+noremap ]]  ]]zMzvz.
+
+</pre><hr><pre>DIFF                                                             <b class="vimtag">*<a name="myvim-diff">myvim-diff</a>*</b>
+
+]c          # next difference
+[c          # previous difference
+do          # diff obtain
+dp          # diff put
+zo          # open folded text
+zc          # close folded text
+:diffget x  # diff obtain from buff that matches x (number or name)
+:diffput x  # diff put into buff that matches x (number or name)
+:diffupdate # re-scan the files for differences
+:diffsplit  # open a new window on the file <code class="special">{filename}</code>.
+:diffthis   # make the current window part of the diff windows.
+:diffoff    # switch off diff mode for the current window.
+:diffoff!   # switch off diff mode for the current window and in all windows.
+
+</pre><hr><pre>REGISTERS                                                   <b class="vimtag">*<a name="myvim-registers">myvim-registers</a>*</b>
+
+:reg        # list all registers
+"c          # register 'c'
+"C          # append to register 'c'
+".          # last edit
+"/          # last search
+":          # last command
+"%          # filepath
+"=          # expression   <code class="special">&lt;c-r&gt;</code>=system("date")
+
+A cool trick is to use "1p to paste the last delete/change and then use . to
+repeatedly paste the subsequent deletes. In other words, "1p... is
+basically equivalent to "1p"2p"3p"4p. You can use this to reverse-order a
+handful of lines: dddddddddd"1p....
+
+In X11, "* and "+ are diffrent: "+ pastes the last text copied with ctrl+c
+(copy buffer), or what ever shortcut you use (or right-click&gt;copy). "* pastes
+the last text highlighted with the mouse (selection buffer). So if you copy
+something with ctrl+c, and then highlight something else with the mouse, you
+can choose which one to paste. This doesn't work in Windows, where these two
+registers are synonymous.
+
+set clipboard=unnamedplus to alias unnamed register to the + register, which
+is the X Window clipboard.
+
+We can also use this <b class="vimtag">*<a name=" register with the ex yank command, so :%y "> register with the ex yank command, so :%y </a>*</b> will
+accomplish the same goal as gg"*yG (copy all text into the system clipboard so
+it can be pasted into an X or MS Windows application)
+
+:let @*=@"       # to send to clipboard
+:let @/="word"   # will highlight word
+
+</pre><hr><pre>TEXT FORMATING                                         <b class="vimtag">*<a name="myvim-text-formating">myvim-text-formating</a>*</b>
+
+Depending on 'formatoptions' vim next line in insert mode gets comment automatically
+
+Often pasting text into vim from an external source screws up the formatting
+(especially tabs). To prevent this, do:
+
+:set paste
+
+Keeping this setting on screws up auto indentation while in insert mode,
+though. So to turn off, use
+
+:set nopaste
+
+gq        # formates selected lines to the same length, sensitive to comments
+gqq       # format current line
+:%!fmt    # align all lines
+!}fmt     # align all lines at the current position
+5!!fmt    # align the next 5 lines
+:%retab   # fix spaces/tabs issues in whole file
+
+e ++enc=<code class="special">&lt;код&gt;</code>        Редактирование файла в кодировке, не соответствующей терминалу
+w ++enc=<code class="special">&lt;код&gt;</code>        Сохранить файл в новой кодировке
+set fileencodings=utf-8,koi8-r Список автоматически определяемых кодировок в
+порядке убывания приоритета
+
+</pre><hr><pre>DATE AND TIME                                          <b class="vimtag">*<a name="myvim-date">myvim-date</a>*</b> <b class="vimtag">*<a name="myvim-time">myvim-time</a>*</b>
+
+Date maps (year-month-day, month-day-year, etc)
+    imap <code class="special">&lt;Leader&gt;</code>ymd   <code class="special">&lt;C-R&gt;</code>=strftime("%y%m%d")<code class="special">&lt;CR&gt;</code>
+    imap <code class="special">&lt;Leader&gt;</code>mdy   <code class="special">&lt;C-R&gt;</code>=strftime("%m/%d/%y")<code class="special">&lt;CR&gt;</code>
+    imap <code class="special">&lt;Leader&gt;</code>ndy   <code class="special">&lt;C-R&gt;</code>=strftime("%b %d, %Y")<code class="special">&lt;CR&gt;</code>
+    imap <code class="special">&lt;Leader&gt;</code>hms   <code class="special">&lt;C-R&gt;</code>=strftime("%T")<code class="special">&lt;CR&gt;</code>
+    imap <code class="special">&lt;Leader&gt;</code>ynd   <code class="special">&lt;C-R&gt;</code>=strftime("%Y %b %d")<code class="special">&lt;CR&gt;</code>
+    com! YMD :norm! i<code class="special">&lt;C-R&gt;</code>=strftime("%y%m%d")<code class="special">&lt;CR&gt;</code>
+    com! MDY :norm! i<code class="special">&lt;C-R&gt;</code>=strftime("%m/%d/%y")<code class="special">&lt;CR&gt;</code>
+    com! NDY :norm! i<code class="special">&lt;C-R&gt;</code>=strftime("%b %d, %Y")<code class="special">&lt;CR&gt;</code>
+    com! HMS :norm! i<code class="special">&lt;C-R&gt;</code>=strftime("%T")<code class="special">&lt;CR&gt;</code>
+
+Insert the current time
+command! InsertTime :normal a<code class="special">&lt;c-r&gt;</code>=strftime('%F %H:%M:%S.0 %z')<code class="special">&lt;cr&gt;</code>
+:inoremap  \d The current date <code class="special">&lt;c-r&gt;</code>=system("date")<code class="special">&lt;cr&gt;</code>
+
+</pre><hr><pre>COMMAND MODE                                             <b class="vimtag">*<a name="myvim-command-mode">myvim-command-mode</a>*</b>
+
+q/        # command window for searches
+q:        # command window for commands
+
+</pre><hr><pre>HELP AND REFRENCES                                 <b class="vimtag">*<a name="myvim-help-and-refrences">myvim-help-and-refrences</a>*</b>
+
+:viusage  # show a huge cheet sheet lishting every command
+:helpgrep command
+  :cnext :cprev to move to the next and previous part of the documentation
+  :clist list of all the occurrences of the phrase.
+
+</pre><hr><pre>PROGRAMMING                                               <b class="vimtag">*<a name="myvim-programming">myvim-programming</a>*</b>
+
+  VIM-FUGITIVE (PLUGIN)                         <b class="vimtag">*<a name="myvim-vim-fugitive-(plugin)">myvim-vim-fugitive-(plugin)</a>*</b>
+
+:Git      # run a git command
+:Gstatus  # git status : - to (un)stage , p to patch, C to commit
+:Gcommit  # git commit
+:Gread    # empty the buffer and revert to the last commit
+:Gwrite   # write the current file and stage the results
+:Gmove    # git mv
+:Gremove  # git rm
+:Glog     # git log
+:Gdiff    # perform a vimdiff against the current file of a certain revision
+:Gblame   # open blame information in a scroll bound vertical splitt
+:Gbrowse  # open github
+
+</pre><hr><pre>  TAGS AND TAG LIST                                 <b class="vimtag">*<a name="myvim-tags-and-tag-list">myvim-tags-and-tag-list</a>*</b>
+
+Generate tags in the root dir of the porject:
+ctags -R .   or  ctags -R *.pm
+Add tag file to tag path;
+set tags+=/home/c4/Automatos/tags
+^]         # go to the func definition and create the list
+^W]        # same but open in a new window
+g]         # go to the select list
+^Wg]       # same but open in a new window
+:ta name   # go to the func definition and create the list
+:ta /pat   # go by pattern to the func definition and create the list
+:tag TAB   # list the known tags
+^t         # go back to the function call
+:ts        # select a tag from the list.
+:tn        # go to the next tag in that list.
+:tp        # go to the previous tag in that list.
+:tf        # go to the function which is in the first of the list.
+:tl        # go to the function which is in the last of the list.
+:ptag      # open tag in preview window (also ctrl-w })
+:pclose    # close preview window
+:TlistOpen # open navigation window from Tag List plugin
+
+" Open tag under cursor in new tab
+map <code class="special">&lt;C-W&gt;</code>] <code class="special">&lt;C-W&gt;</code>]:tab split<code class="special">&lt;CR&gt;</code>gT:q<code class="special">&lt;CR&gt;</code>gt
+
+for more information http://vim.wikia.com/wiki/Browsing_programs_with_tags
+
+nmap <code class="special">&lt;f4&gt;</code> :!find . -type f -name "*.p[ml]" -print0 \| xargs -0 ctags --fields=+iaS --extra=+q .
+
+[i - показать первую строку содержащую слово под курсором, поиск с начала файла.
+]i - показать первую строку содержащую слово под курсором, поиск с текущей позиции.
+[I - показать все вхождения данного тега
+]I - показать все вхождения данного тега с текущей позиции курсора
+[ <code class="keystroke">CTRL-I</code> - перейти на определение тега(в новом буфере)
+] <code class="keystroke">CTRL-I</code> - перейти на определение тега(в новом буфере) с текущей позиции курсора
+<code class="keystroke">CTRL-W</code> i - открыть новое окно с курсором на строке ключевого слова.
+
+map <code class="special">&lt;F4&gt;</code> [I:let nr = input("Which one: ")<code class="special">&lt;Bar&gt;</code>exe "normal " . nr ."[\t"<code class="special">&lt;CR&gt;</code>
+Это позволит увидеть все вхождение тега, выбрать нужное и отрыть его в новом окне по нажатию F4
+
+</pre><hr><pre>QUICKFIX WINDOW                                       <b class="vimtag">*<a name="myvim-quickfix-window">myvim-quickfix-window</a>*</b>
+
+:copen      # open quickfix window
+:cclose     # close quickfix window
+:cc [nr]    # display error [nr]
+:cfirst     # display the first error
+:clast      # display the last error
+:<code class="special">[count]</code>cn  # display <code class="special">[count]</code> next error
+:<code class="special">[count]</code>cp  # display <code class="special">[count]</code> previous error
+
+With plugin unimpaied
+[q          # jump to previous quickfix item
+]q          # jump to next quickfix item
+[Q          # jump to first quickfix item
+]Q          # jump to last quickfix item
+
+</pre><hr><pre>PERL                                                             <b class="vimtag">*<a name="myvim-perl">myvim-perl</a>*</b>
+
+Check perl code with :make
+    autocmd FileType perl set makeprg=perl\ -c\ %\ $*
+    autocmd FileType perl set errorformat=%f:%l:%m
+    autocmd FileType perl set autowrite
+
+Perl includes pod
+    let perl_include_pod = 1
+
+Syntax color complex things like @<code class="special">{${"foo"}</code>}
+    let perl_extended_vars = 1
+
+Tidy selected lines (or entire file) with _t:
+    nnoremap <code class="special">&lt;silent&gt;</code> _t :%!perltidy -q<code class="special">&lt;Enter&gt;</code>
+    vnoremap <code class="special">&lt;silent&gt;</code> _t :!perltidy -q<code class="special">&lt;Enter&gt;</code>
+
+Deparse obfuscated code
+    nnoremap <code class="special">&lt;silent&gt;</code> _d :.!perl -MO=Deparse 2&gt;/dev/null<code class="special">&lt;cr&gt;</code>
+    vnoremap <code class="special">&lt;silent&gt;</code> _d :!perl -MO=Deparse 2&gt;/dev/null<code class="special">&lt;cr&gt;</code>
+
+Dumper lets you type '@myarraydumper' and you'll get 'warn Data::Dumper-&gt;Dump([\@myarray], ['myarray']);'
+:imap dumper <code class="special">&lt;ESC&gt;</code>^iwarn Data::Dumper-&gt;Dump([\<code class="special">&lt;ESC&gt;</code>llyw$a], ['<code class="special">&lt;ESC&gt;</code>pa']);<code class="special">&lt;ESC&gt;</code>
+
+</pre><hr><pre>TODO                                                             <b class="vimtag">*<a name="myvim-todo">myvim-todo</a>*</b>
+
+Add section for Programming in VIM
+- find functions
+- ctag
+- quick fix window and make
+- work with argdo
+
+  vim:tw=78:ts=8:ft=help:norl:modifiable
+</pre>
+<p><i>Generated by vim2html on Sat Nov 24 13:56:05 EST 2012</i></p>
+</body>
+</html>
