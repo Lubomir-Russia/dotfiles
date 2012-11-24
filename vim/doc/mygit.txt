@@ -1,10 +1,17 @@
 *mygit*      My tips for Git.
 
+Every day tasks                                                 |mygit-tasks|
 Correct last commit                               |mygit-correct-last-commit|
 Clone                                                           |mygit-clone|
 PS1 with brunch name                                              |mygit-PS1|
 Create bare shared repo                                     |mygit-bare-repo|
+Ducuments                                             |mygit-doc| |mygit-links|
 
+
+===========================================================================
+EVERY DAY TASKS                                                 *mygit-tasks*
+
+git diff > fix.patch
 
 ===========================================================================
 CORRECT LAST COMMIT                               *mygit-correct-last-commit*
@@ -69,6 +76,13 @@ cd MemStat
 git remote add origin /mnt/ptashl/MemStat.git/
 git remote -v
 git push
+
+===========================================================================
+DUCUMENTS AND LINKS                                   *mygit-doc* *mygit-links*
+
+Simple but practical book in English and Russian:
+http://www-cs-students.stanford.edu/~blynn/gitmagic/
+http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/ru/
 
 
   vim:tw=79:ts=8:ft=help:norl:modifiable

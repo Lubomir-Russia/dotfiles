@@ -144,7 +144,7 @@ nmap <F11> <Plug>ShowFunc
 
 " Use Ctrl-F for omni completion
 inoremap <C-F> <C-X><C-O>
-" Use Ctrl-F for completion from words in the current file only.
+" Use Ctrl-L for completion from words in the current file only.
 inoremap <C-L> <C-X><C-N>
 
 " Search & replace the word under the cursor
@@ -178,6 +178,12 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" Resizing windows (does not work on some terminals)
+nnoremap <s-down> <c-w>+
+nnoremap <s-up> <c-w>-
+nnoremap <s-left> <c-w><
+nnoremap <s-right> <c-w>>
+
 " open files in directory of current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
@@ -196,12 +202,19 @@ nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
 " Make Y work as C or D
 nnoremap Y y$
 
+" Non-vim-like paste for repetitive pastes
+nnoremap <leader>p = "0p
+nnoremap <leader>P = "0P
+
 " Bind :Q to :q
 command! Q q
 command! Qall qall
 
 " Disable Ex mode
 map Q <Nop>
+
+" Save and exit even when in insert mode. Nice with git commit messages.
+inoremap ZZ <Esc>ZZ
 
 " Controversial...swap colon and semicolon for easier commands
 "nnoremap ; :
@@ -301,8 +314,8 @@ au TabLeave * let g:lasttab = tabpagenr()
 " toggle between the current tab and the last active buffer
 nnoremap <leader><leader> <c-^>
 
-" Save and exit even when in insert mode. Nice with git commit messages.
-inoremap ZZ <Esc>ZZ
+" Open tag under cursor in new tab
+nnoremap <C-W>] <C-W>]:tab split<CR>gT:q<CR>gt
 
 " = Command line abbreviations =
 " -----------------------------
@@ -412,6 +425,7 @@ set hlsearch                      " Highlight matches.
 nnoremap <expr> <cr> (&buftype is# "quickfix"  ? "<cr>" 
             \: &buftype is# "nofile" ? "<cr>" : ":nohlsearch<cr>")
 
+set spellsuggest=best,15          " limit list of spell suggest, don't hide the main window.
 set nowrap                        " Turn off line wrapping.
 set linebreak                     " Wrap at the end of words.
 set showbreak=->                  " String to put at the start of lines that have been wrapped.
@@ -467,6 +481,10 @@ set nofoldenable     " Do not fold when a file is just opened
 " set foldopen=all   " Open folds when entering them. Otherwise use <l> to move in.
 
 set modeline         " Allow setting extra option directly in files (default); example: vim: syntax=vim
+
+" Default encoding
+set termencoding=utf-8
+set fileencodings=utf-8,cp1251,cp866,koi8-r
 
 " = Russian keymaps =
 " -------------------

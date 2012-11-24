@@ -26,6 +26,7 @@ Foldings                                      |myvim-foldings|
 Diff                                          |myvim-diff|
 Registers                                     |myvim-registers|
 Text formating                                |myvim-text-formating|
+Date and time                                 |myvim-date| |myvim-time|
 Command mode                                  |myvim-command-mode|
 Help and references                           |myvim-help-and-refrences|
 Programming                                   |myvim-programming|
@@ -82,6 +83,8 @@ OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
 
 :set wildmode=list,full                               # see :h wildmode for details
 :e scp://my_user@remote_hostname//path/to/remote/file # open remote file
+:e <ftp|ftps>://user@host/path/to/the/file.txt
+
 
 :bufdo {cmd} # execute {cmd} for each buffers in the buffer list
 :windo {cmd} # execute {cmd} for each windows in the current tab page
@@ -89,6 +92,9 @@ OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
 :argdo {cmd} # execute {cmd} for each file in the argument list
 :r infile    # insert the content of infile
 :r !{cmd}    # execute {cmd} and insert its standard output below
+
+find . | vim -
+
 
 ===========================================================================
 TABS                                                             *myvim-tabs*
@@ -154,6 +160,23 @@ In order to spell check in comments and strings switch off the syntax
 :syntax off
 :syntax on
 
+Personal wordlist, make a directory called ~/.vim/spell
+manually add things into your personal wordlist (~/.vim/spell/en.latin1.add):
+        printf(              (so printf is invalid, but printf( is ok)
+        nextLine()
+        ArrayList/=          (the /= means always match case)
+        focussed/!           (the /! says treat this as a misspelling)
+If you manually add to your wordlist, you need to regenerate it:
+        :mkspell! ~/.vim/spell/en.latin1.add
+
+        cd ~/.vim/spell
+        wget http://ftp.vim.org/vim/runtime/spell/ru.koi8-r.sug
+        wget http://ftp.vim.org/vim/runtime/spell/ru.koi8-r.spl
+        wget http://ftp.vim.org/vim/runtime/spell/en.ascii.sug
+        wget http://ftp.vim.org/vim/runtime/spell/en.ascii.spl
+
+        setlocal spell spelllang=ru,en
+
 ===========================================================================
 COLOR SCHEMA                                             *myvim-color-schema*
 
@@ -181,6 +204,20 @@ set expandtab
 :retab
 {change, delete, yank, visual} + {all, inner} +
 {word, Word, sentence, paragraph, tag, ", ', [, {, (}
+
+Insertion mode Completion:
+<c-x><c-L> # whole line
+<c-x><c-N> # keywords using current file, map <c-L>
+<c-x><c-K> # keywords using dictionary
+<c-x><c-T> # keywords using thesaurus
+<c-x><c-I> # keywords in current and included files
+<c-x><c-]> # tags
+<c-x><c-F> # file names
+<c-x><c-D> # definitions or macros
+<c-x><c-V> # vim command line
+<c-x><c-O> # omni completion, map <c-F>
+
+:set dictionary=/usr/share/dict/words
 
 ===========================================================================
 MOVEMENTS                                                   *myvim-movements*
@@ -291,6 +328,7 @@ gd gD                # find local/global declaration
    m                 # move lined
    normal {command}  # execute an extended sequence, examples:
           :g/^$/d                               delete empty lines
+          :v/./,/./-j                           join empty lines into one
           :g/pat/+ y                            copy one single line after match
           :g/pat/+ y A                          copy lines into register A
           :g/pat/t$                             copy lines to the end of file
@@ -303,6 +341,7 @@ gd gD                # find local/global declaration
           :g/pat                                list all lines that have pat
 Tip: last search is in register /. To copy it into command: <Ctrl-r>/.
 So firstly tune your search with inc-search and then copy it to g/<Ctrl-r/d
+v/pat/[cmd] # execute on lines that do not match.
 
 ===========================================================================
   REEXPRESSION SYNTAX STYLE           *myvim-regular-expression-syntax-style*
@@ -379,6 +418,10 @@ zE          # deletes all folds.
     expr    # custom, code-driven folding
     manual  # select ranges to fold (default)
 
+Moving up/down by function, unfolding current function but folding all else
+noremap [[  [[zMzvz.
+noremap ]]  ]]zMzvz.
+
 ===========================================================================
 DIFF                                                             *myvim-diff*
 
@@ -406,6 +449,29 @@ REGISTERS                                                   *myvim-registers*
 "/          # last search
 ":          # last command
 "%          # filepath
+"=          # expression   <c-r>=system("date")
+
+A cool trick is to use "1p to paste the last delete/change and then use . to
+repeatedly paste the subsequent deletes. In other words, "1p... is
+basically equivalent to "1p"2p"3p"4p. You can use this to reverse-order a
+handful of lines: dddddddddd"1p....
+
+In X11, "* and "+ are diffrent: "+ pastes the last text copied with ctrl+c
+(copy buffer), or what ever shortcut you use (or right-click>copy). "* pastes
+the last text highlighted with the mouse (selection buffer). So if you copy
+something with ctrl+c, and then highlight something else with the mouse, you
+can choose which one to paste. This doesn't work in Windows, where these two
+registers are synonymous.
+
+set clipboard=unnamedplus to alias unnamed register to the + register, which
+is the X Window clipboard.
+
+We can also use this * register with the ex yank command, so :%y * will
+accomplish the same goal as gg"*yG (copy all text into the system clipboard so
+it can be pasted into an X or MS Windows application)
+
+:let @*=@"       # to send to clipboard
+:let @/="word"   # will highlight word
 
 ===========================================================================
 TEXT FORMATING                                         *myvim-text-formating*
@@ -429,6 +495,29 @@ gqq       # format current line
 5!!fmt    # align the next 5 lines
 :%retab   # fix spaces/tabs issues in whole file
 
+e ++enc=<код>        Редактирование файла в кодировке, не соответствующей терминалу
+w ++enc=<код>        Сохранить файл в новой кодировке
+set fileencodings=utf-8,koi8-r Список автоматически определяемых кодировок в
+порядке убывания приоритета
+
+===========================================================================
+DATE AND TIME                                          *myvim-date* *myvim-time*
+
+Date maps (year-month-day, month-day-year, etc)
+    imap <Leader>ymd   <C-R>=strftime("%y%m%d")<CR>
+    imap <Leader>mdy   <C-R>=strftime("%m/%d/%y")<CR>
+    imap <Leader>ndy   <C-R>=strftime("%b %d, %Y")<CR>
+    imap <Leader>hms   <C-R>=strftime("%T")<CR>
+    imap <Leader>ynd   <C-R>=strftime("%Y %b %d")<CR>
+    com! YMD :norm! i<C-R>=strftime("%y%m%d")<CR>
+    com! MDY :norm! i<C-R>=strftime("%m/%d/%y")<CR>
+    com! NDY :norm! i<C-R>=strftime("%b %d, %Y")<CR>
+    com! HMS :norm! i<C-R>=strftime("%T")<CR>
+
+Insert the current time
+command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+:inoremap  \d The current date <c-r>=system("date")<cr>
+
 ===========================================================================
 COMMAND MODE                                             *myvim-command-mode*
 
@@ -439,6 +528,9 @@ q:        # command window for commands
 HELP AND REFRENCES                                 *myvim-help-and-refrences*
 
 :viusage  # show a huge cheet sheet lishting every command
+:helpgrep command
+  :cnext :cprev to move to the next and previous part of the documentation
+  :clist list of all the occurrences of the phrase.
 
 ===========================================================================
 PROGRAMMING                                               *myvim-programming*
@@ -469,15 +561,35 @@ set tags+=/home/c4/Automatos/tags
 g]         # go to the select list
 ^Wg]       # same but open in a new window
 :ta name   # go to the func definition and create the list
-:ta /.*na* # go by pattern to the func definition and create the list
+:ta /pat   # go by pattern to the func definition and create the list
+:tag TAB   # list the known tags
 ^t         # go back to the function call
 :ts        # select a tag from the list.
 :tn        # go to the next tag in that list.
 :tp        # go to the previous tag in that list.
 :tf        # go to the function which is in the first of the list.
 :tl        # go to the function which is in the last of the list.
+:ptag      # open tag in preview window (also ctrl-w })
+:pclose    # close preview window
 :TlistOpen # open navigation window from Tag List plugin
+
+" Open tag under cursor in new tab
+map <C-W>] <C-W>]:tab split<CR>gT:q<CR>gt
+
 for more information http://vim.wikia.com/wiki/Browsing_programs_with_tags
+
+nmap <f4> :!find . -type f -name "*.p[ml]" -print0 \| xargs -0 ctags --fields=+iaS --extra=+q .
+
+[i - показать первую строку содержащую слово под курсором, поиск с начала файла.
+]i - показать первую строку содержащую слово под курсором, поиск с текущей позиции.
+[I - показать все вхождения данного тега
+]I - показать все вхождения данного тега с текущей позиции курсора
+[ CTRL-I - перейти на определение тега(в новом буфере)
+] CTRL-I - перейти на определение тега(в новом буфере) с текущей позиции курсора
+CTRL-W i - открыть новое окно с курсором на строке ключевого слова.
+
+map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+Это позволит увидеть все вхождение тега, выбрать нужное и отрыть его в новом окне по нажатию F4
 
 ===========================================================================
 TODO                                                             *myvim-todo*

@@ -2,6 +2,7 @@
 
 History                                                      |mybash-history|
 grep                                                            |mybash-grep|
+Tags                                                            |mybash-tags|
 bashrc                                                        |mybash-bashrc|
 HTTP server                                              |mybash-http-server|
 
@@ -42,6 +43,12 @@ find . -name '*.pm' -print0 | xargs -0 grep 'string'
 Install ack:
 curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 !#:3
 
+
+===========================================================================
+TAGS                                                            *mybash-tags*
+
+ctags -R *
+find . -type f -name "*.p[ml]" -print0 | xargs -0 ctags --fields=+iaS --extra=+q .
 
 ===========================================================================
 BASHRC                                                        *mybash-bashrc*
