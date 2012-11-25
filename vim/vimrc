@@ -86,7 +86,8 @@ endif
 " Install new plugin: put it's dir into ~/.vim/bundle/ dir
 " Remove an plugin:   rm -rf ~/.vim/bundle/plugin-name
 " Genrate help for all plugins:  :Helptags
-call pathogen#infect()        " Let pathogen to load all plugins
+call pathogen#infect()        " Let pathogen to load all plugins.
+Helptags                      " Regenerate tags for myTips in doc dir.
 syntax enable                 " Turn on syntax highlighting.
 filetype plugin indent on     " Turn on file type detection.
 
