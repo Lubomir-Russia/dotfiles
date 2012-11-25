@@ -1,44 +1,44 @@
 *myvim*      My tips for Vim and gVim.
 
-Installation                                  |myvim-installation|
-Saving                                        |myvim-saving|
-Open files and buffers                        |myvim-open-files-and-buffers|
-Tabs                                          |myvim-tabs|
-Windows                                       |myvim-windows|
-Syntax                                        |myvim-syntax|
-Spelling                                      |myvim-spelling|
-Color schema                                  |myvim-color-schema|
-Insert mode                                   |myvim-insert-mode|
-Movements                                     |myvim-movements|
-  motions                                     |myvim-motions|
-  marks                                       |myvim-marks|
-  jumps                                       |myvim-jumps|
-  changes                                     |myvim-changes|
-Searching and Substitutions                   |myvim-searching-and-substitutions|
-  Search settings                             |myvim-search-settings|
-  Searching                                   |myvim-searching|
-  Substitutions                               |myvim-substitutions|
-  Grep                                        |myvim-grep|
-  Regular expression syntax style             |myvim-regular-expression-syntax-style|
-  Action with searching                       |myvim-action-with-searching|
-Mapping and abbreviation                      |myvim-mapping-and-abbreviation|
-Foldings                                      |myvim-foldings|
-Diff                                          |myvim-diff|
-Registers                                     |myvim-registers|
-Text formating                                |myvim-text-formating|
-Date and time                                 |myvim-date| |myvim-time|
-Command mode                                  |myvim-command-mode|
-Help and references                           |myvim-help-and-refrences|
-Programming                                   |myvim-programming|
-  VIM-FUGITIVE (plugin)                       |myvim-vim-fugitive-(plugin)|
-  Tags and Tag List                           |myvim-tags-and-tag-list|
-  Quickfix window                             |myvim-quickfix-window|
-  Perl                                        |myvim-perl|
-TODO                                          |myvim-todo|
+Installation                                  |myvim_installation|
+Saving                                        |myvim_saving|
+Open files and buffers                        |myvim_open_files_and_buffers|
+Tabs                                          |myvim_tabs|
+Windows                                       |myvim_windows|
+Syntax                                        |myvim_syntax|
+Spelling                                      |myvim_spelling|
+Color schema                                  |myvim_color_schema|
+Insert mode                                   |myvim_insert_mode|
+Movements                                     |myvim_movements|
+  motions                                     |myvim_motions|
+  marks                                       |myvim_marks|
+  jumps                                       |myvim_jumps|
+  changes                                     |myvim_changes|
+Searching and Substitutions                   |myvim_searching_and_substitutions|
+  Search settings                             |myvim_search_settings|
+  Searching                                   |myvim_searching|
+  Substitutions                               |myvim_substitutions|
+  Global (like grep)                          |myvim_global|
+  Regular expression syntax style             |myvim_regular_expression_syntax_style|
+  Action with searching                       |myvim_action_with_searching|
+Mapping and abbreviation                      |myvim_mapping_and_abbreviation|
+Foldings                                      |myvim_foldings|
+Diff                                          |myvim_diff|
+Registers                                     |myvim_registers|
+Text formating                                |myvim_text_formating|
+Date and time                                 |myvim_date| |myvim_time|
+Command mode                                  |myvim_command_mode|
+Help and references                           |myvim_help_and_refrences|
+Programming                                   |myvim_programming|
+  VIM_FUGITIVE (plugin)                       |myvim_vim_fugitive_(plugin)|
+  Tags and Tag List                           |myvim_tags_and_tag_list|
+  Quickfix window                             |myvim_quickfix_window|
+  Perl                                        |myvim_perl|
+TODO                                          |myvim_todo|
 
 
 ===========================================================================
-INSTALLATION                                             *myvim-installation*
+INSTALLATION                                             *myvim_installation*   {{{1
 
 Install ruby and ruby-dev beforehand if needed.
 
@@ -54,7 +54,7 @@ vim --version
 --prefix={directory}  Top directory where to install Vim. Default is /usr/local
 
 ===========================================================================
-SAVING                                                         *myvim-saving*
+SAVING                                                         *myvim_saving*   {{{1
 
 :w
 :w!                # only if permissions allow
@@ -66,7 +66,7 @@ ZQ                 # quit without saving (same as ":q!")
 :1,10 w >> outfile # Appends lines 1 to 10 to outfile
 
 ===========================================================================
-OPEN FILES AND BUFFERS                         *myvim-open-files-and-buffers*
+OPEN FILES AND BUFFERS                         *myvim_open_files_and_buffers*   {{{1
 
 :e filename  # open file in current window
 :e .         # browse dir
@@ -100,7 +100,7 @@ find . | vim -
 
 
 ===========================================================================
-TABS                                                             *myvim-tabs*
+TABS                                                             *myvim_tabs*   {{{1
 
 map <leader>=  :exe "tabn ".g:lasttab<CR>                # go to previously selected tab
 map <leader>tt :tabnew<cr>        :tabnew                # open a new tab
@@ -120,7 +120,7 @@ map <leader>ts :call MoveTabToSplit()                    # merge tab to the wind
 $vim -p file1 file2 fileN  # Open multiple files in different tabs.
 
 ===========================================================================
-WINDOWS                                                        *myvim-windows*
+WINDOWS                                                       *myvim_windows*   {{{1
 
 ^Ww          # next window.
 ^WT          # move window to the new tab.
@@ -138,14 +138,14 @@ WINDOWS                                                        *myvim-windows*
 :vert h help # open help in vertical split.
 
 ===========================================================================
-SYNTAX                                                         *myvim-syntax*
+SYNTAX                                                         *myvim_syntax*   {{{1
 
 :syntax enable
 :set syntax=perl # force perl syntax on any file type
 :set syntax=     # force no syntax for the buffer
 
 ===========================================================================
-SPELLING                                                     *myvim-spelling*
+SPELLING                                                     *myvim_spelling*   {{{1
 
 :set spell
 z=       # suggestions
@@ -181,7 +181,7 @@ If you manually add to your wordlist, you need to regenerate it:
         setlocal spell spelllang=ru,en
 
 ===========================================================================
-COLOR SCHEMA                                             *myvim-color-schema*
+COLOR SCHEMA                                             *myvim_color_schema*   {{{1
 
 - solarized
 - emacs
@@ -192,7 +192,7 @@ COLOR SCHEMA                                             *myvim-color-schema*
 - wombat
 
 ===========================================================================
-INSERT MODE                                               *myvim-insert-mode*
+INSERT MODE                                               *myvim_insert_mode*   {{{1
 
 I i a A
 r R               # backspace will restore the original
@@ -223,9 +223,9 @@ Insertion mode Completion:
 :set dictionary=/usr/share/dict/words
 
 ===========================================================================
-MOVEMENTS                                                   *myvim-movements*
-===========================================================================
-  MOTIONS                                                     *myvim-motions*
+MOVEMENTS                                                   *myvim_movements*   {{{1
+
+  MOTIONS                                                     *myvim_motions*
 
 0 g0 ^ g^ gE B ge b h gm | l w W e E g$ $
 , Fx Tx fx Tx  ;
@@ -238,7 +238,7 @@ When a select motion is not of the type you would like to use, you can force
 another type by using "v", "V" or CTRL-V just after the operator.
 
 ===========================================================================
-  MARKS                                                         *myvim-marks*
+  MARKS                                                         *myvim_marks*   {{{1
 
 ma `a 'a # local marks used for navigation and block editing
 mA `A 'A # global marks can be used as short cuts to often used files
@@ -249,7 +249,7 @@ mA `A 'A # global marks can be used as short cuts to often used files
 m,       # add mark with next letter (from signature plagin)
 
 ===========================================================================
-  JUMPS                                                         *myvim-jumps*
+  JUMPS                                                         *myvim_jumps*   {{{1
 
 A "jump" is one of the following commands: "'", "`", "G", "/", "?", "n",
 "N", "%", "(", ")", "]]", "[[", "{", "}", ":s", ":tag", "L", "M", "H" and
@@ -265,7 +265,7 @@ o O      # jump in visual mode to the other end of selection
 `1       # like `0 but the previous file (also `2 etc)
 
 ===========================================================================
-  CHANGES                                                     *myvim-changes*
+  CHANGES                                                     *myvim_changes*   {{{1
 
 '. `.    # latest edit
 gi       # latest edit and insert
@@ -276,8 +276,8 @@ g;       # older cursor position in change list (not a motion command)
 g,       # newer cursor position in change list (not a motion command)
 
 ===========================================================================
-SEARCHING AND SUBSTITUTIONS               *myvim-searching-and-substitutions*
-  SEARCH SETTINGS                                     *myvim-search-settings*
+SEARCHING AND SUBSTITUTIONS               *myvim_searching_and_substitutions*   {{{1
+  SEARCH SETTINGS                                     *myvim_search_settings*
 
 :set hlsearch
 :set incsearch
@@ -285,7 +285,7 @@ SEARCHING AND SUBSTITUTIONS               *myvim-searching-and-substitutions*
 <cr>  # switch highlight off (custom mapping)
 
 ===========================================================================
-  SEARCHING                                                 *myvim-searching*
+  SEARCHING                                                 *myvim_searching*   {{{1
 
 g# # N ? / n * g*
 
@@ -300,7 +300,7 @@ gd gD                # find local/global declaration
 :bufdo /searchstr/   # search in all open files
 
 ===========================================================================
-  SUBSTITUTIONS                                         *myvim-substitutions*
+  SUBSTITUTIONS                                         *myvim_substitutions*   {{{1
 
 :[range] s/pattern/string/[flags] [count]  # substitute
    #flags g, c, i, I
@@ -322,15 +322,15 @@ gd gD                # find local/global declaration
 :%s/^\(.*\)\n\1$/\1/ # delete duplicate lines
 
 ===========================================================================
-  GREP                                                           *myvim-grep*
+  GLOBAL (LIKE GREP)                                           *myvim_global*   {{{1
 
-:[range] g/pattern/[cmd] #search and execute
-   #                 # show lines with numbers
-   d                 # delete lines
-   y                 # yank lined
-   t                 # copy lined (transfer)
-   m                 # move lined
-   normal {command}  # execute an extended sequence, examples:
+:[range] g/pattern/[cmd] # search and execute
+   #                     # show lines with numbers
+   d                     # delete lines
+   y                     # yank lines
+   t                     # copy lines (transfer)
+   m                     # move lines
+   normal {command}      # execute an extended sequence, examples:
           :g/^$/d                               delete empty lines
           :v/./,/./-j                           join empty lines into one
           :g/pat/+ y                            copy one single line after match
@@ -348,13 +348,13 @@ So firstly tune your search with inc-search and then copy it to g/<Ctrl-r/d
 v/pat/[cmd] # execute on lines that do not match.
 
 ===========================================================================
-  REEXPRESSION SYNTAX STYLE           *myvim-regular-expression-syntax-style*
+  REGEXPRESSION SYNTAX STYLE          *myvim_regular_expression_syntax_style*   {{{1
 
 \v      # very magic =~ Perl = Unix Egrep, but '=' is 0 or 1 match (in Perl it is '?')  /\v(.y){3}
 \m      # magic = default = Unix grep => \( \) \+ \= *   /\(.y\)\{3}
 
 ===========================================================================
-  ACTION WITH SEARCHING                         *myvim-action-with-searching*
+  ACTION WITH SEARCHING                         *myvim_action_with_searching*   {{{1
 
 {change, delete, yank, visual} + {?pat,/pat} + {?+,?+x,?-,?-x,/+,... }
 # does not work with shearch-complete plugin what remaps '/'
@@ -362,7 +362,7 @@ v/pat/[cmd] # execute on lines that do not match.
 :%perldo s/this/that/ # execs that perl s///
 
 ===========================================================================
-MAPPING AND ABBREVIATION                     *myvim-mapping-and-abbreviation*
+MAPPING AND ABBREVIATION                     *myvim_mapping_and_abbreviation*   {{{1
 
 map namp imap vmap map!
 :map :vmap :map >               # show current mappings all/ for > only
@@ -393,11 +393,13 @@ Remap CapsLock to Ctrl: in Windows just add a register key:
     "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00
 
 ===========================================================================
-FOLDINGS                                                     *myvim-foldings*
+FOLDINGS                                                     *myvim_foldings*   {{{1
 
-zM za (zc zo) zR     zk zj
+zM zm zc za zo zr zR
+za          # taggles open/close current fold.
+h and l     # open folder
 zf#j        # creates a fold from the cursor down # lines.
-zf/string   # creates a fold from the cursor to string .
+zf/string   # creates a fold from the cursor to string.
 zj          # moves the cursor to the next fold.
 zk          # moves the cursor to the previous fold.
 zo          # opens a fold at the cursor.
@@ -411,8 +413,8 @@ zd          # deletes the fold at the cursor.
 zE          # deletes all folds.
 [z          # move to start of open fold.
 ]z          # move to end of open fold.
-:mkview     # save folds
-:loadview   # restore folds
+:mkview     # save folds.
+:loadview   # restore folds.
 
 :set foldmethod=
     indent  # indent
@@ -426,8 +428,13 @@ Moving up/down by function, unfolding current function but folding all else
 noremap [[  [[zMzvz.
 noremap ]]  ]]zMzvz.
 
+To set folding in mytips files:
+    modeline should include "fdm=marker:fen:fdl=0"
+    execute "g/^======/+normal A   <<<1jjkJ"
+    note < must be {, I used < in the example to avoid folding in this text.
+
 ===========================================================================
-DIFF                                                             *myvim-diff*
+DIFF                                                             *myvim_diff*   {{{1
 
 ]c          # next difference
 [c          # previous difference
@@ -444,7 +451,7 @@ zc          # close folded text
 :diffoff!   # switch off diff mode for the current window and in all windows.
 
 ===========================================================================
-REGISTERS                                                   *myvim-registers*
+REGISTERS                                                   *myvim_registers*   {{{1
 
 :reg        # list all registers
 "c          # register 'c'
@@ -478,7 +485,7 @@ it can be pasted into an X or MS Windows application)
 :let @/="word"   # will highlight word
 
 ===========================================================================
-TEXT FORMATING                                         *myvim-text-formating*
+TEXT FORMATING                                         *myvim_text_formating*   {{{1
 
 Depending on 'formatoptions' vim next line in insert mode gets comment automatically
 
@@ -505,7 +512,7 @@ set fileencodings=utf-8,koi8-r Список автоматически опре�
 порядке убывания приоритета
 
 ===========================================================================
-DATE AND TIME                                          *myvim-date* *myvim-time*
+DATE AND TIME                                         *myvim_date* *myvim_time*   {{{1
 
 Date maps (year-month-day, month-day-year, etc)
     imap <Leader>ymd   <C-R>=strftime("%y%m%d")<CR>
@@ -523,13 +530,13 @@ command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 :inoremap  \d The current date <c-r>=system("date")<cr>
 
 ===========================================================================
-COMMAND MODE                                             *myvim-command-mode*
+COMMAND MODE                                             *myvim_command_mode*   {{{1
 
 q/        # command window for searches
 q:        # command window for commands
 
 ===========================================================================
-HELP AND REFRENCES                                 *myvim-help-and-refrences*
+HELP AND REFRENCES                                 *myvim_help_and_refrences*   {{{1
 
 :viusage  # show a huge cheet sheet lishting every command
 :helpgrep command
@@ -537,9 +544,9 @@ HELP AND REFRENCES                                 *myvim-help-and-refrences*
   :clist list of all the occurrences of the phrase.
 
 ===========================================================================
-PROGRAMMING                                               *myvim-programming*
+PROGRAMMING                                               *myvim_programming*   {{{1
 
-  VIM-FUGITIVE (PLUGIN)                         *myvim-vim-fugitive-(plugin)*
+  VIM_FUGITIVE (PLUGIN)                         *myvim_vim_fugitive_(plugin)*
 
 :Git      # run a git command
 :Gstatus  # git status : - to (un)stage , p to patch, C to commit
@@ -554,7 +561,7 @@ PROGRAMMING                                               *myvim-programming*
 :Gbrowse  # open github
 
 ===========================================================================
-  TAGS AND TAG LIST                                 *myvim-tags-and-tag-list*
+  TAGS AND TAG LIST                                 *myvim_tags_and_tag_list*   {{{1
 
 Generate tags in the root dir of the porject:
 ctags -R .   or  ctags -R *.pm
@@ -596,7 +603,7 @@ map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 Это позволит увидеть все вхождение тега, выбрать нужное и отрыть его в новом окне по нажатию F4
 
 ===========================================================================
-QUICKFIX WINDOW                                       *myvim-quickfix-window*
+QUICKFIX WINDOW                                       *myvim_quickfix_window*   {{{1
 
 :copen      # open quickfix window
 :cclose     # close quickfix window
@@ -613,7 +620,7 @@ With plugin unimpaied
 ]Q          # jump to last quickfix item
 
 ===========================================================================
-PERL                                                             *myvim-perl*
+PERL                                                             *myvim_perl*   {{{1
 
 Check perl code with :make
     autocmd FileType perl set makeprg=perl\ -c\ %\ $*
@@ -638,7 +645,7 @@ Dumper lets you type '@myarraydumper' and you'll get 'warn Data::Dumper->Dump([\
 :imap dumper <ESC>^iwarn Data::Dumper->Dump([\<ESC>llyw$a], ['<ESC>pa']);<ESC>
 
 ===========================================================================
-TODO                                                             *myvim-todo*
+TODO                                                             *myvim_todo*   {{{1
 
 Add section for Programming in VIM
 - find functions
@@ -646,4 +653,4 @@ Add section for Programming in VIM
 - quick fix window and make
 - work with argdo
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable
+  vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:

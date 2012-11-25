@@ -45,7 +45,7 @@ alias cdss='cd $MyTests_2/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='./run_tests.sh '
 
-alias tips='vim ~/bin/dotfiles/vim/doc/tips.txt'
+alias mytips='vim ~/bin/dotfiles/vim/doc/mytips.txt'
 alias mybash='vim ~/bin/dotfiles/vim/doc/mybash.txt'
 alias myvim='vim ~/bin/dotfiles/vim/doc/myvim.txt'
 alias mysed='vim ~/bin/dotfiles/vim/doc/mysed.txt'

@@ -3,5 +3,5 @@
 
 ===========================================================================
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable
+  vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:
 

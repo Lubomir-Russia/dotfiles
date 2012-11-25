@@ -1,20 +1,20 @@
 *mygit*      My tips for Git.
 
-Every day tasks                                                 |mygit-tasks|
-Correct last commit                               |mygit-correct-last-commit|
-Clone                                                           |mygit-clone|
-PS1 with brunch name                                              |mygit-PS1|
-Create bare shared repo                                     |mygit-bare-repo|
-Ducuments                                             |mygit-doc| |mygit-links|
+Every day tasks                                                 |mygit_tasks|
+Correct last commit                               |mygit_correct_last_commit|
+Clone                                                           |mygit_clone|
+PS1 with brunch name                                              |mygit_PS1|
+Create bare shared repo                                     |mygit_bare_repo|
+Ducuments                                             |mygit_doc| |mygit_links|
 
 
 ===========================================================================
-EVERY DAY TASKS                                                 *mygit-tasks*
+EVERY DAY TASKS                                                 *mygit_tasks*   {{{1
 
 git diff > fix.patch
 
 ===========================================================================
-CORRECT LAST COMMIT                               *mygit-correct-last-commit*
+CORRECT LAST COMMIT                               *mygit_correct_last_commit*   {{{1
 
 Just to correct the last message:
 git commit --amend -m "your new message"
@@ -39,7 +39,7 @@ accidental commit.
 
 
 ===========================================================================
-CLONE                                                           *mygit-clone*
+CLONE                                                           *mygit_clone*   {{{1
 
 * from another locol dir
 git clone /home/alice/project myrepo
@@ -56,7 +56,7 @@ git clone https://username@github.com/username/project.git
 
 
 ===========================================================================
-PS1                                                               *mygit-PS1*
+PS1                                                               *mygit_PS1*   {{{1
 
 PS1 to show the current branch:
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
@@ -68,7 +68,7 @@ Taken from /etc/bash_completion.d/git.sh
 
 
 ===========================================================================
-CREATE BARE REPO                          *mygit-bare-repo* *mygit-shared-repo*
+CREATE BARE REPO                          *mygit_bare_repo* *mygit_shared_repo*   {{{1
 
 git clone --bare MemStat MemStat.git
 cp -r MemStat.git/ /mnt/ptashl/
@@ -78,11 +78,11 @@ git remote -v
 git push
 
 ===========================================================================
-DUCUMENTS AND LINKS                                   *mygit-doc* *mygit-links*
+DUCUMENTS AND LINKS                                   *mygit_doc* *mygit_links*   {{{1
 
 Simple but practical book in English and Russian:
 http://www-cs-students.stanford.edu/~blynn/gitmagic/
 http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/ru/
 
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable
+  vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:

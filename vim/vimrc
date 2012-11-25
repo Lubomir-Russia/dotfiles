@@ -325,6 +325,18 @@ cab l ls<cr>:b<space>
 cab e tabedit<space>
 cab n tabnew<space>
 
+cab myvim split ~/bin/dotfiles/vim/doc/myvim.txt<cr>
+cab myaccurev split ~/bin/dotfiles/vim/doc/myaccurev.txt<cr>
+cab mybash split ~/bin/dotfiles/vim/doc/mybash.txt<cr>
+cab mygit split ~/bin/dotfiles/vim/doc/mygit.txt<cr>
+cab mymisc split ~/bin/dotfiles/vim/doc/mymisc.txt<cr>
+cab myperl split ~/bin/dotfiles/vim/doc/myperl.txt<cr>
+cab mypython split ~/bin/dotfiles/vim/doc/mypython.txt<cr>
+cab myruby split ~/bin/dotfiles/vim/doc/myruby.txt<cr>
+cab myscreen split ~/bin/dotfiles/vim/doc/myscreen.txt<cr>
+cab mysed split ~/bin/dotfiles/vim/doc/mysed.txt<cr>
+cab mytips split ~/bin/dotfiles/vim/doc/mytips.txt<cr>
+
 " = Undo in insert mode =
 " -----------------------
 " Create an undo point after each WORD
