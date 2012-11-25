@@ -395,8 +395,9 @@ Remap CapsLock to Ctrl: in Windows just add a register key:
 ===========================================================================
 FOLDINGS                                                     *myvim_foldings*
 
-zM zm zc za zo zr zR
+zM zm zc za zi zo zr zR
 za          # taggles open/close current fold.
+zi          # taggles foldenable, open all or close all except that were open
 h and l     # open folder
 zf#j        # creates a fold from the cursor down # lines.
 zf/string   # creates a fold from the cursor to string.
@@ -449,6 +450,14 @@ To set folding in mytips files:
             return ">2"
         endif
         return "="
+    endfunction
+    Or a more "automatic" function:
+    function! downLevel()
+        let h = matchstr(getline(v:lnum), '^#\+')
+        if empty(h)
+            return "="
+        else return ">" . len(h)
+        endif
     endfunction
     Instead of modeline autocmd can be used:
     au BufEnter my*.txt setlocal foldexpr=downLevel()
