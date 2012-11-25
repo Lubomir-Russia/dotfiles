@@ -1,4 +1,4 @@
-" Vim configuration by Lubomir-Russia
+" = Vim configuration by Lubomir-Russia
 " Settings are gathered from different books, sites, and people.
 "
 " To me vi is zen. To use vi is to practice zen. Every command is a koan.
@@ -707,3 +707,6 @@ endif
 if filereadable($HOME . "/.vimrc.extra")
     source $HOME/.vimrc.extra
 endif
+
+
+"  vim:fdm=expr:fen:fdl=0:foldexpr=getline(v\:lnum)=~'^\"\\s='?'>1'\:'=':
