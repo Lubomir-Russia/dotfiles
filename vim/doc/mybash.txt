@@ -8,7 +8,7 @@ HTTP server                                              |mybash_http_server|
 
 
 ===========================================================================
-HISTORY                                                      *mybash_history*   {{{1
+HISTORY                                                      *mybash_history*
 
 fc ~
     Edit last command in editor and execute on exit.
@@ -24,7 +24,7 @@ fc ~
 
 
 ===========================================================================
-GREP AND ACK                                        *mybash_grep* *mybash_ack*   {{{1
+GREP AND ACK                                        *mybash_grep* *mybash_ack*
 
 Delete empty lines:
 last | cut -b 22-38 | grep -vE "^[[:blank:]]*$"
@@ -45,20 +45,20 @@ curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 !#:3
 
 
 ===========================================================================
-TAGS                                                            *mybash_tags*   {{{1
+TAGS                                                            *mybash_tags*
 
 ctags -R *
 find . -type f -name "*.p[ml]" -print0 | xargs -0 ctags --fields=+iaS --extra=+q .
 
 ===========================================================================
-BASHRC                                                        *mybash_bashrc*   {{{1
+BASHRC                                                        *mybash_bashrc*
 
 Error checking in aliases:
 alias gohome='cd && ls || echo "error($?) with cd to $HOME"'
 
 
 ===========================================================================
-HTTP SERVER                                              *mybash_http_server*   {{{1
+HTTP SERVER                                              *mybash_http_server*
 
 nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
@@ -70,4 +70,5 @@ nohup python -m SimpleHTTPServer 1>/dev/null 2>&1 &
 
 
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:
+  vim:tw=78:ts=8:ft=help:norl:modifiable:
+  vim:fdm=expr:fen:fdl=0:foldexpr=getline(v\:lnum)=~'^===='?'<1'\:'1':

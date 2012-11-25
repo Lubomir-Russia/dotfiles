@@ -9,12 +9,12 @@ Ducuments                                             |mygit_doc| |mygit_links|
 
 
 ===========================================================================
-EVERY DAY TASKS                                                 *mygit_tasks*   {{{1
+EVERY DAY TASKS                                                 *mygit_tasks*
 
 git diff > fix.patch
 
 ===========================================================================
-CORRECT LAST COMMIT                               *mygit_correct_last_commit*   {{{1
+CORRECT LAST COMMIT                               *mygit_correct_last_commit*
 
 Just to correct the last message:
 git commit --amend -m "your new message"
@@ -39,7 +39,7 @@ accidental commit.
 
 
 ===========================================================================
-CLONE                                                           *mygit_clone*   {{{1
+CLONE                                                           *mygit_clone*
 
 * from another locol dir
 git clone /home/alice/project myrepo
@@ -56,7 +56,7 @@ git clone https://username@github.com/username/project.git
 
 
 ===========================================================================
-PS1                                                               *mygit_PS1*   {{{1
+PS1                                                               *mygit_PS1*
 
 PS1 to show the current branch:
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
@@ -68,7 +68,7 @@ Taken from /etc/bash_completion.d/git.sh
 
 
 ===========================================================================
-CREATE BARE REPO                          *mygit_bare_repo* *mygit_shared_repo*   {{{1
+CREATE BARE REPO                          *mygit_bare_repo* *mygit_shared_repo*
 
 git clone --bare MemStat MemStat.git
 cp -r MemStat.git/ /mnt/ptashl/
@@ -78,11 +78,12 @@ git remote -v
 git push
 
 ===========================================================================
-DUCUMENTS AND LINKS                                   *mygit_doc* *mygit_links*   {{{1
+DUCUMENTS AND LINKS                                   *mygit_doc* *mygit_links*
 
 Simple but practical book in English and Russian:
 http://www-cs-students.stanford.edu/~blynn/gitmagic/
 http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/ru/
 
 
-  vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:
+  vim:tw=78:ts=8:ft=help:norl:modifiable:
+  vim:fdm=expr:fen:fdl=0:foldexpr=getline(v\:lnum)=~'^===='?'<1'\:'1':
