@@ -34,7 +34,7 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Force the current shell to reread the history file to synchronize with other
-export PROMPT_COMMAND="history -n; $PROMPT_COMMAND"
+# export PROMPT_COMMAND="history -n; $PROMPT_COMMAND"
 
 # Allow a larger history file
 
