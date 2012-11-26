@@ -362,8 +362,8 @@ let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about
 set tags+=$MATOS/tags,$MyTests/tags;
 
 " To get basic Folding for Perl and PHP working
-let perl_fold=1
-let perl_fold_blocks = 1
+" let perl_fold=1
+" let perl_fold_blocks = 1
 let php_folding=1
 
 " Automatic fold settings for specific files.
@@ -697,6 +697,21 @@ endfunction
 
 " Insert the current time
 command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+
+" My folding for logSteps
+function! LogStepFold()
+    let line =getline(v:foldstart)
+    let s:count = v:foldend - v:foldstart
+    let line = substitute(line,'$self->logStep.*:', '', 'g')
+    let line = substitute(line,'^\s*', '', 'g')
+    let line = printf("at %3d+%3d: %s", v:foldstart, s:count, line)
+    return line
+endfunction
+
+" TODO Make it work only in my project files;
+autocmd FileType perl setlocal foldmethod=expr
+set foldexpr=getline(v\:lnum)=~'logStep'?'>1'\:'1'
+set foldtext=LogStepFold()
 
 " LET IT BE AT THE END OF vimrc
 " Persistent File marks and predifined registers from myviminfo
