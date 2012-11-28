@@ -699,19 +699,126 @@ endfunction
 command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 " My folding for logSteps
-function! LogStepFold()
+function! LogStepFoldText()
     let line =getline(v:foldstart)
-    let s:count = v:foldend - v:foldstart
-    let line = substitute(line,'$self->logStep.*:', '', 'g')
-    let line = substitute(line,'^\s*', '', 'g')
-    let line = printf("at %3d+%3d: %s", v:foldstart, s:count, line)
-    return line
+    let s:foldstart  = v:foldstart
+    let s:foldend    = v:foldend
+    let s:lineNumber = s:foldstart
+    let s:count = s:foldend - s:foldstart
+    while s:lineNumber <= s:foldend
+        if line =~ '^\s*package'
+            let line = substitute(line,'^\s*package\s*','','')
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ '^=head1'
+            let line = substitute(line,'^=head1\s*','','')
+            let line = substitute(line,'$', '                                                                    ', '')
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ '^Method'
+            let line = substitute(line,'$', '                                                                    ', '')
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ '^\*'
+            let line = substitute(line,'=\s*sub.*$', '                                                                    ', '')
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ 'logStep'
+            let line = substitute(line,'$self->logStep.*:', '', 'g')
+            let line = substitute(line,'^\s*', '', 'g')
+            let line = substitute(line,'"*);$', '                                                                    ', '')
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ '^sub main'
+            let line = substitute(line,'sub main', '~~ START of MAIN ~~                                                                                  ','')
+            let line = printf("at %3d+%3d:       %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~ '^sub'
+            let line = substitute(line,'^\sub', 'SUB','')
+            let line = substitute(line,'{*\s*$', '                                                                    ', '')
+            let line = printf("at %3d+%3d:   %s", s:foldstart, s:count, line)
+            return line
+        endif
+        if line =~# '^\s*return'
+            let line = substitute(line,'^\s*return.*', '~~~ END of MAIN ~~~                                                                                ','')
+            " let line = printf("at %3d+%3d:       %s", s:foldstart, s:count, line)
+            let line = printf("at %3d+%3d:       %s", s:lineNumber, s:count, line)
+            return line
+        endif
+        let s:lineNumber = s:lineNumber + 1
+        let line = getline(s:lineNumber)
+    endwhile
+    let s:lineDefault = printf("at %3d+%3d: %s", s:foldstart, s:count, getline(s:foldstart))
+    return s:lineDefault
 endfunction
 
-" TODO Make it work only in my project files;
-autocmd FileType perl setlocal foldmethod=expr
-set foldexpr=getline(v\:lnum)=~'logStep'?'>1'\:'1'
-set foldtext=LogStepFold()
+function! LogStepFoldExpr(lnum,request)
+    " s:levelStaters = '\(^sub\)\|\(logStep\)'
+    let s:currentLine = getline(a:lnum)
+
+    " first line = fold from start
+    if a:lnum == 1
+        return '>1'
+    endif
+
+    " last line = end of iteration
+    if a:lnum == line($)
+        return '='
+    endif
+
+    " ignore empty lines
+    if s:currentLine =~ '^\s*$'
+        return '='
+    endif
+
+    if a:request =~ 'original'
+        let s:lineAbove = getline(a:lnum-1)
+        if s:lineAbove !~ '^\s*$'
+            return '='
+        endif
+    endif
+
+    " start level with keyword
+    if s:currentLine =~# '\(^sub\)\|\(logStep\)\|\(^=head1\)\|\(^=begin nd\)\|\(^\*.*= sub\)'
+        return '>1'
+    endif
+
+    if s:currentLine =~# '^\_s\+return;'
+        let s:lnum = a:lnum
+        while s:lnum > 0
+            let s:lnum = s:lnum-1
+            let s:subLine = getline(s:lnum)
+            if s:subLine =~# '^\_s*sub'
+                if s:subLine =~# '^\_s*sub main'
+                    return '>1'
+                else
+                    return '='
+                endif
+            endif
+        endwhile
+        return '='
+    endif
+
+    " if s:currentLine =~ '^sub'
+    "     return '>1'
+    " endif
+
+    return LogStepFoldExpr(a:lnum+1,'recurcive')
+
+endfunction
+
+
+" autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr
+autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr
+" set foldexpr=getline(v\:lnum)=~'logStep'?'>1'\:'1'
+set foldexpr=LogStepFoldExpr(v\:lnum,'original')
+set foldtext=LogStepFoldText()
 
 " LET IT BE AT THE END OF vimrc
 " Persistent File marks and predifined registers from myviminfo
