@@ -41,6 +41,8 @@
   "       = Russian keymaps =
   "       = Plugin specific settings =
   "       = Misc functions and autocmd =
+  "       = Custom functions =
+  "       = Load extra local setting and viminfo =
 
 " = Installation =
 " ----------------
@@ -362,6 +364,7 @@ let g:perl_compiler_force_warnings=0     " = perl -cw % -> prints warnings about
 set tags+=$MATOS/tags,$MyTests/tags;
 
 " To get basic Folding for Perl and PHP working
+" use my custom folding for Perl instead
 " let perl_fold=1
 " let perl_fold_blocks = 1
 let php_folding=1
@@ -369,11 +372,12 @@ let php_folding=1
 " Automatic fold settings for specific files.
 autocmd FileType ruby setlocal foldmethod=syntax
 autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
+autocmd FileType perl setlocal foldmethod=expr foldexpr=LogStepFoldExpr(v\:lnum,'original') foldtext=LogStepFoldText()
 
-"For ruby, autoindent with two spaces, always expand tabs
+" For ruby, autoindent with two spaces, always expand tabs
 autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
 
-"For python, autoindent with four paces, always expand tabs
+" For python, autoindent with four paces, always expand tabs
 autocmd FileType python set sw=4 sts=4 et
 
 autocmd! BufRead,BufNewFile *.sass setfiletype sass
@@ -492,7 +496,11 @@ colorscheme solarized             " Works best with t_Co=256
 set nofoldenable     " Do not fold when a file is just opened
 " set foldlevel=1    " Only first level is opened if foldenable is set.
 " set foldcolumn=3   " Show control line.
-" set foldopen=all   " Open folds when entering them. Otherwise use <l> to move in.
+" set foldopen=all     " Open folds when entering them. Otherwise use <l> to move in.
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+" set foldclose=all  " Close folds when leaving them. Otherwise use za, zc...
+" Do not add --- at the end of fold text, note a spase at the end of the line
+set fillchars=fold:\ 
 
 set modeline         " Allow setting extra option directly in files (default); example: vim: syntax=vim
 
@@ -536,14 +544,15 @@ set iskeyword=@,48-57,_,192-255      " настраиваю для работы с русскими словами 
 " Необходимо каждый символ назначить индивидуально: http://ru.wikibooks.org/wiki/Vim
 
 " = Plugin specific settings =
-" ------------------------------
+" ----------------------------
 
 " snipMate
 " Update snippets for all buffers when snipfile is saved
 autocmd! bufwritepost *snippet* call ReloadAllSnippets()
 
 " = Misc functions and autocmd =
-" --------
+" ------------------------------
+
 " Make a section header
 nmap <leader>hh gCc0wi=<space><esc>A<space>=<esc>yypwv$:s/./-/g<cr>:nohls<cr>gCcwxx
 
@@ -566,6 +575,9 @@ function! LastPosition()
         normal! g`"
     endif
 endfunction
+
+" = Custom functions =
+" --------------------
 
 " command :Shell will execute a shell command and put uptput to scrap window
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -713,40 +725,42 @@ function! LogStepFoldText()
         endif
         if line =~ '^=head1'
             let line = substitute(line,'^=head1\s*','','')
-            let line = substitute(line,'$', '                                                                    ', '')
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
         if line =~ '^Method'
-            let line = substitute(line,'$', '                                                                    ', '')
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
+        if line =~ '\(^__END__\)\|\(^__DATA__\)'
+            let line = printf("at %3d+%3d:             %s", s:foldstart, s:count, line)
+            return line
+        endif
         if line =~ '^\*'
-            let line = substitute(line,'=\s*sub.*$', '                                                                    ', '')
+            let line = substitute(line,'=\s*sub.*$', '', '')
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
         if line =~ 'logStep'
             let line = substitute(line,'$self->logStep.*:', '', 'g')
             let line = substitute(line,'^\s*', '', 'g')
-            let line = substitute(line,'"*);$', '                                                                    ', '')
+            let line = substitute(line,'"*);$', '', '')
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
         if line =~ '^sub main'
-            let line = substitute(line,'sub main', '~~ START of MAIN ~~                                                                                  ','')
+            let line = substitute(line,'sub main', '~~ START of MAIN ~~','')
             let line = printf("at %3d+%3d:       %s", s:foldstart, s:count, line)
             return line
         endif
         if line =~ '^sub'
             let line = substitute(line,'^\sub', 'SUB','')
-            let line = substitute(line,'{*\s*$', '                                                                    ', '')
+            let line = substitute(line,'{*\s*$', '', '')
             let line = printf("at %3d+%3d:   %s", s:foldstart, s:count, line)
             return line
         endif
         if line =~# '^\s*return'
-            let line = substitute(line,'^\s*return.*', '~~~ END of MAIN ~~~                                                                                ','')
+            let line = substitute(line,'^\s*return.*', '~~~ END of MAIN ~~~','')
             " let line = printf("at %3d+%3d:       %s", s:foldstart, s:count, line)
             let line = printf("at %3d+%3d:       %s", s:lineNumber, s:count, line)
             return line
@@ -759,7 +773,6 @@ function! LogStepFoldText()
 endfunction
 
 function! LogStepFoldExpr(lnum,request)
-    " s:levelStaters = '\(^sub\)\|\(logStep\)'
     let s:currentLine = getline(a:lnum)
 
     " first line = fold from start
@@ -772,12 +785,18 @@ function! LogStepFoldExpr(lnum,request)
         return '='
     endif
 
+    " Fold everything after END
+    if s:currentLine =~ '\(^__END__\)\|\(^__DATA__\)'
+        return '>1'
+    endif
+
     " ignore empty lines
     if s:currentLine =~ '^\s*$'
         return '='
     endif
 
     if a:request =~ 'original'
+        " if there is a line above use its level
         let s:lineAbove = getline(a:lnum-1)
         if s:lineAbove !~ '^\s*$'
             return '='
@@ -785,10 +804,11 @@ function! LogStepFoldExpr(lnum,request)
     endif
 
     " start level with keyword
-    if s:currentLine =~# '\(^sub\)\|\(logStep\)\|\(^=head1\)\|\(^=begin nd\)\|\(^\*.*= sub\)'
+    if s:currentLine =~# '\(^=head1\)\|\(^=begin nd\)\|\(logStep\)\|\(^sub\)\|\(^\*.*= sub\)'
         return '>1'
     endif
 
+    " Make a new level only for the return from main sub
     if s:currentLine =~# '^\_s\+return;'
         let s:lnum = a:lnum
         while s:lnum > 0
@@ -805,20 +825,14 @@ function! LogStepFoldExpr(lnum,request)
         return '='
     endif
 
-    " if s:currentLine =~ '^sub'
-    "     return '>1'
-    " endif
-
     return LogStepFoldExpr(a:lnum+1,'recurcive')
 
 endfunction
 
+" autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr foldexpr=LogStepFoldExpr(v\:lnum,'original') foldtext=LogStepFoldText()
 
-" autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr
-autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr
-" set foldexpr=getline(v\:lnum)=~'logStep'?'>1'\:'1'
-set foldexpr=LogStepFoldExpr(v\:lnum,'original')
-set foldtext=LogStepFoldText()
+" = Load extra local setting and viminfo =
+" ----------------------------------------
 
 " LET IT BE AT THE END OF vimrc
 " Persistent File marks and predifined registers from myviminfo
