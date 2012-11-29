@@ -7,6 +7,8 @@ Instalation on SuSe Sp1                               |myaccurev_instalation|
 ===========================================================================
 EVERY DAY TASKS                                             *myaccurev_tasks*
 
+issue number 522986 DZ new tests.
+
 accurev help
 accurev ws help
 
@@ -24,6 +26,9 @@ accurev add -x DZ_TC_2_1_2_2.pm DZ_TC_2_1_2_7.pm -c "Initial checkin for tests D
 accurev add -x directoryNmame -c "Comment"
 accurev purge path/to/file
 accurev keep DZ_TC_2_1_2_1.pm -c "Add Ktrace parsing to DZ_TC_2_1_2_1"
+accurev diff DZ_Utilities.pm
+accurev diff -1 DZ_Utilities.pm
+accurev promote DZ_Utilities.pm -c "Add recover from all faults to PostTest."
 accurev promote path/to/file -k
 
 ===========================================================================
