@@ -2,6 +2,7 @@
 
 History                                                      |mybash_history|
 grep                                                            |mybash_grep|
+at and cron                                           |mybash_at| |mybash_cron|
 Tags                                                            |mybash_tags|
 bashrc                                                        |mybash_bashrc|
 HTTP server                                              |mybash_http_server|
@@ -43,6 +44,24 @@ find . -name '*.pm' -print0 | xargs -0 grep 'string'
 Install ack:
 curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 !#:3
 
+
+===========================================================================
+AT AND CRON                                           *mybash_at* *mybash_cron*
+
+Start atd deamon as root: atd
+echo "./run_tests.sh" | at now + 5 minutes
+echo "./run_tests.sh" | at now + 8 hours
+at -l
+3       2012-11-29 09:29 a c4dev
+2       2012-11-29 07:30 a c4dev
+4       2012-11-29 15:29 a c4dev
+Other time formates: at 5 pm 3/1/11, at now + 1 day,
+Friday (means at the same time on Friday), at now + 1 hour
+<<! diff file1 file2 2>&1 >outfile | mailx mygroup !
+
+atrm - remove tasks from list
+
+The results could be found in your Linux mailbox. Use mutt to view.
 
 ===========================================================================
 TAGS                                                            *mybash_tags*
