@@ -402,8 +402,8 @@ set ruler                         " Show cursor position.
 set showtabline=2                 " Display tabs all of the time
 set laststatus=2                  " Show the status line all the time
 " Useful status information at the bottom of screen
-" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}[CWD:\ %<%.99{CWD()}]%=%-16(\ %l,%c-%v\ %)%P
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}[CWD:\ %<%.99{CWD()}]%=%-16(\ %l,%c-%v\ %)%P
 
 function! CWD()
     let curdir = substitute(getcwd(), '/home/c4dev/', "~/", "g")
@@ -487,6 +487,7 @@ set t_Co=256                      " Use more colors in terminal. May effect some
 " Solarized colorschema http://ethanschoonover.com/solarized
 " let g:solarized_termcolors=256
 set background=dark
+" set background=light
 colorscheme solarized             " Works best with t_Co=256
 " colorscheme topfunky-light
 " colorscheme vividchalk
@@ -549,6 +550,10 @@ set iskeyword=@,48-57,_,192-255      " настраиваю для работы с русскими словами 
 " snipMate
 " Update snippets for all buffers when snipfile is saved
 autocmd! bufwritepost *snippet* call ReloadAllSnippets()
+
+" Bad-whitespace (modified)
+" Do not show trailing white spaces by defoult.
+let g:bad_whitespace_show_global=0
 
 " = Misc functions and autocmd =
 " ------------------------------
@@ -732,6 +737,10 @@ function! LogStepFoldText()
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
+        if line =~ '^Class'
+            let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
+            return line
+        endif
         if line =~ '\(^__END__\)\|\(^__DATA__\)'
             let line = printf("at %3d+%3d:             %s", s:foldstart, s:count, line)
             return line
@@ -830,6 +839,11 @@ function! LogStepFoldExpr(lnum,request)
 endfunction
 
 " autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr foldexpr=LogStepFoldExpr(v\:lnum,'original') foldtext=LogStepFoldText()
+
+" Switch to another git tag
+nnoremap [g :!gtag.pl -p<CR><CR>
+nnoremap ]g :!gtag.pl -n<CR><CR>
+set autoread
 
 " = Load extra local setting and viminfo =
 " ----------------------------------------

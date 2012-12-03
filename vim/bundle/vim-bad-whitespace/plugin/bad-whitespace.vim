@@ -45,7 +45,13 @@ function! s:ToggleBadWhitespace()
   endif
 endfunction
 
-autocmd BufWinEnter,WinEnter,FileType * call <SID>EnableShowBadWhitespace()
+if !exists("b:bad_whitespace_show")
+    let g:bad_whitespace_show_global = 1
+endif
+
+if g:bad_whitespace_show_global
+  autocmd BufWinEnter,WinEnter,FileType * call <SID>EnableShowBadWhitespace()
+endif
 
 function! s:EraseBadWhitespace(line1,line2)
   let l:save_cursor = getpos(".")
