@@ -30,6 +30,9 @@ chmod 511 ~/bin/ack && echo "Set ack executable - Ok."
 ln -nfs ~/bin/dotfiles/scripts/gtag.pl ~/bin/gtag.pl && echo "Link ~/bin/gtag.pl - Ok."
 chmod 711 ~/bin/gtag.pl && echo "Set gtag.pl executable - Ok."
 
+ln -nfs ~/bin/dotfiles/scripts/beautifyAutomatosLogs.sh ~/bin/beautifyAutomatosLogs.sh && echo "Link beautifyAutomatosLogs.sh - Ok."
+chmod 711 ~/bin/beautifyAutomatosLogs.sh && echo "Set beautifyAutomatosLogs.sh executable - Ok."
+
 # Use it for testing the script.
 # [ -e ~/.mytest ] && mv ~/.mytest ~/.mytest_-_$timestamp.backup
 # ln -nfs ~/bin/dotfiles/mytest ~/.mytest
