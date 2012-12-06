@@ -841,8 +841,8 @@ endfunction
 " autocmd BufNewFile,BufRead *_TC_*.pm setlocal foldmethod=expr foldexpr=LogStepFoldExpr(v\:lnum,'original') foldtext=LogStepFoldText()
 
 " Switch to another git tag
-nnoremap [g :!gtag.pl -p<CR><CR>
-nnoremap ]g :!gtag.pl -n<CR><CR>
+nnoremap [g :!gtag.pl -p -f<CR><CR>
+nnoremap ]g :!gtag.pl -n -f<CR><CR>
 set autoread
 
 " = Load extra local setting and viminfo =

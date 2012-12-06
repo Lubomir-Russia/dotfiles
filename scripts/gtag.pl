@@ -7,17 +7,19 @@ use 5.010;
 use Getopt::Long;
 
 my $direction = 1;
-my $opN = 1;
-my $opP = 0;
-my $help = 0;
+my $opN       = 1;
+my $opP       = 0;
+my $force     = 0;
+my $help      = 0;
 
 GetOptions(
-        'n'    => \$opN,
-        'p'    => \$opP,
-        'help!'     => \$help,
+        'n'     => \$opN,
+        'p'     => \$opP,
+        'f'     => \$force,
+        'help!' => \$help,
 ) or die "Incorrect usage!\n";
 
-say "Options: n = $opN; p = $opP";
+say "Options: n = $opN; p = $opP, force hard reset = $force.";
 
 my @tags = split("\n", `git tag`);
 say "@tags";
@@ -39,7 +41,10 @@ if ($opP) {
     $direction = 0;
 }
 
-system ("git reset --hard HEAD");
+if ($force){
+    system ("git reset --hard HEAD");
+}
+
 if ($direction) {
     system("git co $nextTag");
 } else {
@@ -47,5 +52,5 @@ if ($direction) {
 }
 
 # Add to vimrc;
-# :nnoremap [g :!./gtag.pl -p<CR><CR>
-# :nnoremap ]g :!./gtag.pl -n<CR><CR>
+# :nnoremap [g :!./gtag.pl -p -f<CR><CR>
+# :nnoremap ]g :!./gtag.pl -n -f<CR><CR>
