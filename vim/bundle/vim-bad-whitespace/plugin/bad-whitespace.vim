@@ -45,7 +45,7 @@ function! s:ToggleBadWhitespace()
   endif
 endfunction
 
-if !exists("b:bad_whitespace_show")
+if !exists("g:bad_whitespace_show_global")
     let g:bad_whitespace_show_global = 1
 endif
 
