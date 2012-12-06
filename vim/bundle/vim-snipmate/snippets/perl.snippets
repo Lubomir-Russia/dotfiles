@@ -44,10 +44,9 @@ snippet logf
 # logStep
 snippet logs
 	$self->logStep("Step ".$stepNumber++.": ${1:Step message}");
-	$self->logWarning("Not implemented yet!!!");
+	$self->logWarning("Not implemented yet!!!");${2}
 	# TODO $1
 	#====================
-	${2}
 # logPropertyInfo
 snippet logp
 	$self->logPropertyInfo("${1:PropertyInfo message}");
