@@ -42,6 +42,7 @@ while [ $? -eq 0 ] ; do
         s/TC_STEP\]/& /;
         s/WARN\]/&    /;
         s/INFO\]/&    /;
+        s/DEBUG\]/&   /;
         s/FAIL\]/&    /;
         s/PASS\]/&    /;
         s/.*\[TC_START\].*/\\\\\033[${green}m&\\\\\033[0m/;
