@@ -97,12 +97,12 @@ less README.txt
 # I told you, but you forgot already, keep the camel in your LOCAL dir.
 # Otherwise it will behave like a goat in the garden.
 ./install.sh
-# when prompted for location, provide: ~/bin. I believe you already have it in
-# your $PATH. Don't you?
+# when prompted for location, provide: ~/ActivePerl-5.14
 
 # Tell them all that from now on you have your own new and stinky camel. 
 ln -s ~/ActivePerl-5.14/bin/perl ~/bin/perl
 ln -s ~/ActivePerl-5.14/bin/ppm ~/bin/ppm
+# I believe you already have ~/bin in your $PATH. Don't you?
 
 # Clean up your PERL5LIB from all the past. Remember, Automatos is tender and
 # jealous. It will be deeply offended if your PERL5LIB cares about

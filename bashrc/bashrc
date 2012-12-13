@@ -60,7 +60,7 @@ shopt -s cmdhist
 export PATH=$MATOS/bin:$PATH
 export PATH=~/bin/:$PATH
 
-export PERL5LIB=$MATOS/lib:$DevTests:$MyTests:$PERL5LIB
+export PERL5LIB=$MATOS/lib:$DevTests:$MyTests
 # Matos does not like /auto/tools/LATEST/lib/perl
 # export PERL5LIB=$PERL5LIB:/home/c4/perl:/c4shares/auto/tools/LATEST/lib/perl
 
