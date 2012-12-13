@@ -184,7 +184,8 @@ perl ppminstall.pl
 # Most likely you are in trouble with SSL and SSH.
 # For SSL install all the libs openssl, openssl-devel, libssh2, libssh2-devel
 # via yast and try ppm install again. If it does not help install the libs from
-# www.openssl.org and www.libssh2.org
+# www.openssl.org and www.libssh2.org. Tested versions of libssh2/libssh2-devel 
+# are 1.2.2 (from openSuse-11.3) and 1.2.9 (from sles11sp1_x86_64)
 
 # For SSH2 first or all the same four libs are indispensable. 
 # Get Net::SSH2 from CPAN. Yes, I mean it. ActivePerl are supposed to get
