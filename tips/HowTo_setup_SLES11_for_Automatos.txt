@@ -224,7 +224,7 @@ chmod 744 run.sh
 # If all is OK, then do not eat your donut - give it to me.
 
 # If Matos needs something more from you, then this must help
-yes | perl -pe 's//Is is not my day today? (yes,no) /'
+yes | perl -pe 's//Is it not my day today? (yes,no) /'
 
 # Are you happy now? Really? Check the very first line of the stdout log of the
 # test you've just so happily executed. Do you see a nasty line "could not find

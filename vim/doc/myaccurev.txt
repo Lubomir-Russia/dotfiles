@@ -1,13 +1,14 @@
 *myaccurev*  My tips for Accurev.
 
 Every day tasks                                             |myaccurev_tasks|
-Ducuments                                     |myaccurev_doc| |myaccurev_links|
-Instalation on SuSe Sp1                               |myaccurev_instalation|
+Documents                                     |myaccurev_doc| |myaccurev_links|
+Installation for Automatos                              |myaccurev_automatos|
+Installation on SuSe for Gnosis                      |myaccurev_installation|
 
 ===========================================================================
 EVERY DAY TASKS                                             *myaccurev_tasks*
 
-issue number 522986 DZ new tests.
+Issue number 522986 DZ new tests.
 
 accurev help
 accurev ws help
@@ -31,14 +32,120 @@ accurev diff -1 DZ_Utilities.pm
 accurev promote DZ_Utilities.pm -c "Add recover from all faults to PostTest."
 accurev promote path/to/file -k
 
+accurev chws -w MCC1 -l /c4_working/ws_testdev/
+accurev pop -R .
+
 ===========================================================================
-DUCUMENTS AND LINKS                          *myaccurev_doc* *myaccurev_links*
+DOCUMENTS AND LINKS                          *myaccurev_doc* *myaccurev_links*
 
 https://teamforge6.usd.lab.emc.com/sf/projects/usd_development_environment/
 
+===========================================================================
+INSTALLATION FOR AUTOMATOS                               *myaccurev_automatos*
+
+Step-by-step instruction based on instructions for Gnosis by Oleg Subbotin.
+Do all from c4dev account.
+
+1. Check if you already have Accurev and CmTools.
+accurev login -n <your_user_name>
+If you do not have Accurev account then get it first. See wiki:
+https://teamforge6.usd.lab.emc.com/sf/wiki/do/viewPage/projects.usd_development_environment/wiki/HowToRequestAnAccurevAccount
+
+If your login is successful go to 5.
+If Accurev is found but you got the error:
+    The AccuRev client you are using is too old.
+    You must install a newer version before proceeding.
+    AccuRev Error: 9
+Then remove old Accurev, else skip next step.
+
+2. Remove old Accurev and CmTools, most likely they are in /opt/.
+Move /etc/profile.d/accurev.csh and /etc/profile.d/accurev.sh to backup.
+
+3. Install Accurev and CmTools. Instructions here:
+https://teamforge6.usd.lab.emc.com/sf/go/wiki9520
+NOTE: recommended default path is /opt/accurev. List of the accurev servers
+are in the howto.
+
+4. Login to accurev
+accurev login -n <your_user_name>
+NOTE: -n – creates the persistent login session with accurev and you do not
+need to login every morning. Corp credentials.
+
+5. Create places where your workspace will be deployed on the VM.
+sudo sh -c 'd=/c4_working/ws_automatos; mkdir -p $d; chown c4dev $d; chgrp users $d;'
+sudo sh -c 'd=/c4_working/ws_testdev; mkdir -p $d; chown c4dev $d; chgrp users $d;'
+NOTE: this is only placeholders for files, call it as you want
+
+6. If you use several machines (for example Windows, VM local and VM in US) 
+   then I suggest to create separate workspaces for Automatos stream on each 
+   machines but have only one workspace for your testdev stream and move it 
+   when you switch a machine. In this way you will have access to your kept 
+   but not promoted files.
+
+7. Create Automatos workspace
+cd /c4_working/
+accurev mkws -b ctt-mApollo-cs -w mApollo -l /c4_working/ws_automatos/ -i
+NOTE: -b - the name of parent stream.
+      -w - name of you workspace on server (your login will be added at the end).
+      -l - location.
+      -i - initialize new workspace
+The workspace on the server will be visible as "mApollo_<your_login_name>"
+
+8. Initialize your new workspace.
+cd /c4_working/ws_automatos/
+accurev update
+
+9. Remove all the modules you will never need, or skip this step if you like 
+   to get Conductor and so on.
+modSetup -op remove all
+
+10. Set only modules that you will work on.
+modSetup -op set <module_name>
+Or get then all.
+modSetup -op set all
+NOTE: to get the list of modules, run "modSetup -op list all".
+
+11. Populate workspace.
+modSetup -op pop
+NOTE: this will pull the files from the server for selected modules and place
+them into you local workspace.
+
+12. Update again.
+accurev update
+NOTE: I am not sure, but this will pull the dependencies for you modules. Does
+not hurt anyway.
+
+13. Create or move your testdev workspace.
+If you do not have testdev workspace on other machines then create a new one 
+same way as Automatos workspace above. Stream = ctt-tesdev-cs location 
+= ws_testdev
+
+If you want to move your existing workspace:
+accurev chws -w <your-existing_ws> -l /c4_working/ws_testdev/
+Use workspace name without your login suffix.
+cd ws_testdev/
+accurev pop -R .
+accurev update
+The update should show that all is up to date.
+
+14. Link testdev tree with Automatos/Framwork
+ln -nfs /c4_working/ws_automatos/Automatos/Framework/ /c4_working/ws_testdev/Automatos/Framework
+
+15. Make Automatos scripts executable
+chmod 755 /c4_working/ws_testdev/Automatos/Framework/Dev/bin/*
+
+16. Setup perl paths:
+export MyWorkSpace=/c4_working/ws_testdev
+export MATOS=$MyWorkSpace/Automatos/Framework/Dev
+export DevTests=$MyWorkSpace/Automatos/Tests/Dev/
+export PATH=$MATOS/bin:$PATH
+export PERL5LIB=$MATOS/lib:$DevTests:$PERL5LIB
+
+17. Read Automatos wiki for further steps of Automatos setup. Depending on 
+    your VM you might need to update Perl, install latest SSH and so on.
 
 ===========================================================================
-INSTALATION ON SUSE SP                                *myaccurev_instalation*
+INSTALLATION ON SUSE FOR GNOSIS                      *myaccurev_installation*
 
 Step-by-step instruction which probably will give you ability to compile the
 code. All the steps below were done on VM with SUSE SP1 version. The parent
@@ -74,7 +181,7 @@ NOTE: this is only a placeholder for files, call it as you want
 NOTE: -b - the name of parent scream.
 -w - name of you workspace on server [you login will be added at the end].
 -l - location.
--I - initialize new workspace
+-i - initialize new workspace
 The workspace on the server will be visible as “bugfix_<your_login_name>”
 
 7. Initialize your new workspace.
