@@ -35,6 +35,12 @@ accurev promote path/to/file -k
 accurev chws -w MCC1 -l /c4_working/ws_testdev/
 accurev pop -R .
 
+cd tmp
+mkdir tests
+accurev pop -R -v ctt-testdev-cs -L tests Automatos/Tests/Dev/Platform_EFT/Engineering_Functional_Test/DZ/.
+cd tests/
+ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/' 
+ 
 ===========================================================================
 DOCUMENTS AND LINKS                          *myaccurev_doc* *myaccurev_links*
 
