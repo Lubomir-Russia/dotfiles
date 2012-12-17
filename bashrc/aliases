@@ -9,6 +9,7 @@ alias ...='cd ../..'
 alias l='ls -l'
 alias la='ls -la'
 alias ls='ls $LS_OPTIONS'
+alias lt='list_tree'
 alias dir='ls -l | grep ^d'
 alias lsf='ls -al | grep -v ^d'
 alias md='mkdir -p'
@@ -72,6 +73,11 @@ alias e706b='ssh root@10.64.77.114'
 alias s578='ssh root@10.109.17.72'
 alias s578b='ssh root@10.109.17.73'
 
+list_tree()
+{
+    # A custome version of command tree.
+    ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+}
 # # Back up of Flare settings
 # alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
 # alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'
