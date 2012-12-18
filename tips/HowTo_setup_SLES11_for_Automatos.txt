@@ -56,24 +56,34 @@ sudo scp /etc/fstab/ pta4:/etc/fstab
 # credentials as well
 
 # Create mount points with proper access modes.
+# I recomend to add to fstab at least these two shares:
+# c4shares.sspg.lab.emc.com:/c4shares/          /c4shares-sobo   nfs 
+# rsize=8192,wsize=8192,timeo=14,intr
+# vnxe3100-alpha-nfs.sspg.lab.emc.com:/Common/  /c4site/common/  nfs rsize=8192,wsize=8192,timeo=14,intr
 # Mount them all
 sudo mount -a
 
-# As root open yast.
+# As root open yast (instead of yast one can always use zypper)
 
-# Add repositories from local ISO located at: 
-# gildor.sspg.lab.emc.com:/c4shares/soft/ISOs
-# You need GM_DVD 1 and 2 and SDK Media1
+# Add repositories from local ISO and local dir: 
+
+#  Name                       | URI                                                                      
+# ----------------------------+--------------------------------------------------------------------------
+#  SLES-11-DVD-x86_64-GM-DVD2 | iso:///?iso=SLES-11-DVD-x86_64-GM-DVD2.iso&url=file:///c4site/common/iso/
+#  SLES-11-DVD-x86_64-GM-DVD1 | iso:///?iso=SLES-11-DVD-x86_64-GM-DVD1.iso&url=file:///c4site/common/iso/
+#  sles11sp1_x86_64_rpm       | dir:///c4shares-sobo/re/c4global/rpms/sles11sp1/x86_64                   
+
 
 # Install whatever you need/like/hate with yast. And I tell you, you will need
-# all sorts of dev-libs so that you can compile modules for Automatos later.
+# all sorts of dev-libs and gcc so that you can compile modules for Automatos 
+# later.
 
 # Do not forget to install my favorite git and mc.
 
 # Setup any/all from the zoo: vnc, nx, cygwin. Either use yast or scp/mc config
 # files from old VM. After you have any of them you can us GUI yast, that might
 # be more convenient. It should work, but who knows, I did not test it. Also
-# you will it need if you would like to view html logs directly on you VM.  
+# you will need if you would like to view html logs directly on you VM.  
 
 # Do you love vim as much as I do? If you do then recompile vim73 with its
 # breakindent patch. If not, then be happy with provided vim72.
@@ -125,6 +135,7 @@ sudo sh -c 'd=/c4_working; mkdir $d; chown c4dev $d; chgrp users $d;'
 
 # Download and unpack the latest Automatos and your tests. 
 # Or checkout it with Accurev if you already have it.
+# (see separate HowTo for Accurev installation).
 
 # Give your fingers a present: setup paths and aliases
 export MATOS=/c4_working/Automatos
