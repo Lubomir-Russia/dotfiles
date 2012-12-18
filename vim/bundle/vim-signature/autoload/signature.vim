@@ -496,10 +496,10 @@ function! s:BufferMaps( mode ) "                      {{{2
         exec 'nmap <buffer> ' . g:SignatureMarkerLeader . '<BS> <Plug>SIG_PurgeMarkers'
       endif
 
-      if !hasmapto( '<Plug>SIG_NextLineByAlpha'  ) | nmap <buffer> '] <Plug>SIG_NextLineByAlpha| endif
-      if !hasmapto( '<Plug>SIG_PrevLineByAlpha'  ) | nmap <buffer> '[ <Plug>SIG_PrevLineByAlpha| endif
-      if !hasmapto( '<Plug>SIG_NextSpotByAlpha'  ) | nmap <buffer> `] <Plug>SIG_NextSpotByAlpha| endif
-      if !hasmapto( '<Plug>SIG_PrevSpotByAlpha'  ) | nmap <buffer> `[ <Plug>SIG_PrevSpotByAlpha| endif
+      " if !hasmapto( '<Plug>SIG_NextLineByAlpha'  ) | nmap <buffer> '] <Plug>SIG_NextLineByAlpha| endif
+      " if !hasmapto( '<Plug>SIG_PrevLineByAlpha'  ) | nmap <buffer> '[ <Plug>SIG_PrevLineByAlpha| endif
+      " if !hasmapto( '<Plug>SIG_NextSpotByAlpha'  ) | nmap <buffer> `] <Plug>SIG_NextSpotByAlpha| endif
+      " if !hasmapto( '<Plug>SIG_PrevSpotByAlpha'  ) | nmap <buffer> `[ <Plug>SIG_PrevSpotByAlpha| endif
       if !hasmapto( '<Plug>SIG_NextLineByPos'    ) | nmap <buffer> ]' <Plug>SIG_NextLineByPos| endif
       if !hasmapto( '<Plug>SIG_PrevLineByPos'    ) | nmap <buffer> [' <Plug>SIG_PrevLineByPos| endif
       if !hasmapto( '<Plug>SIG_NextSpotByPos'    ) | nmap <buffer> ]` <Plug>SIG_NextSpotByPos| endif
