@@ -97,6 +97,10 @@ OPEN FILES AND BUFFERS                         *myvim_open_files_and_buffers*
 :argdo %s/old/new/gc | w  # replace in all and save
 
 find . | vim -
+history | vim -
+:r!echo "history" | bash -i 2>/dev/null | sed -e 's/\x1b\[.//g'
+Forces interactive shell, and removes lines which aren't output of history, 
+removes escape character the shell might output.
 
 
 ===========================================================================

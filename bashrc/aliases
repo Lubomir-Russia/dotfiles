@@ -61,6 +61,8 @@ alias cdcc='cd $MyTests_2/MCC'
 alias cdss='cd $MyTests_2/MCC/Sanity'
 alias cdr='cd $MyTests/MCR'
 alias r='unbuffer ./run_tests.sh | beautifyAutomatosLogs.sh'
+alias tag='generate_ctag_for_Automatos'
+alias tags='generate_ctag_for_Automatos'
 
 alias mytips='vim ~/bin/dotfiles/vim/doc/mytips.txt'
 alias mybash='vim ~/bin/dotfiles/vim/doc/mybash.txt'
@@ -90,6 +92,14 @@ list_tree()
     # A custome version of command tree.
     ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
+
+generate_ctag_for_Automatos()
+{
+    cd $MATOS/../..
+    ctags -f tags --recurse --totals --exclude=blib --exclude='*~' --languages=Perl
+    cd -
+}
+
 # # Back up of Flare settings
 # alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
 # alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'

@@ -33,6 +33,9 @@ chmod 711 ~/bin/gtag.pl && echo "Set gtag.pl executable - Ok."
 ln -nfs ~/bin/dotfiles/scripts/beautifyAutomatosLogs.sh ~/bin/beautifyAutomatosLogs.sh && echo "Link beautifyAutomatosLogs.sh - Ok."
 chmod 711 ~/bin/beautifyAutomatosLogs.sh && echo "Set beautifyAutomatosLogs.sh executable - Ok."
 
+ln -nfs ~/bin/dotfiles/bashrc/aliases ~/bin/alupdate && echo "Link alupdate - Ok."
+chmod 711 ~/bin/alupdate && echo "Set alupdate executable - Ok."
+
 # Use it for testing the script.
 # [ -e ~/.mytest ] && mv ~/.mytest ~/.mytest_-_$timestamp.backup
 # ln -nfs ~/bin/dotfiles/mytest ~/.mytest

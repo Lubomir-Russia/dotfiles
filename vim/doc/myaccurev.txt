@@ -32,7 +32,9 @@ accurev diff -1 DZ_Utilities.pm
 accurev promote DZ_Utilities.pm -c "Add recover from all faults to PostTest."
 accurev promote path/to/file -k
 
+accurev show wspaces
 accurev chws -w MCC1 -l /c4_working/ws_testdev/
+accurev chws -w mApollo_ptashl -l /c4_working/ws_automatos
 accurev pop -R .
 
 cd tmp
