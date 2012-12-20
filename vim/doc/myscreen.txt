@@ -2,6 +2,522 @@
 
 ===========================================================================
 
+From man screen
+
+== Most useful start options ==
+    
+    One can start a screen buffer from:
+        bash shell
+        bash shell from within screen session
+        screen cmd (^a:)
+       
+       -c file  override  the default configuration file from "$HOME/.screenrc" to
+                file.
+
+       -d -r   Reattach a session and if necessary detach it first.
+
+       -D -R   Attach here and now. In detail this means: If a session is run-
+               ning,  then  reattach.  If necessary detach and logout remotely
+               first.  If it was not running create it and  notify  the  user.
+               This is the author's favorite.
+
+       -ls and -list
+            does  not  start screen, but prints a list of pid.tty.host strings
+            identifying your screen sessions. 
+
+       -p number_or_name
+            Preselect a window. This is usefull when you want to reattach to a
+            specific windor or you want to send a command via the "-X"  option
+            to a specific window. As with screen's select commant, "-" selects
+            the blank window. As a special case for reattach,  "="  brings  up
+            the windowlist on the blank window.
+
+       -S sessionname
+            When  creating a new session, this option can be used to specify a
+            meaningful name for the session. This name identifies the  session
+            for  "screen  -list"  and  "screen -r" actions. It substitutes the
+            default [tty.host] suffix.
+
+       -t name
+            sets the title (a.k.a.) for the default shell  or  specified  pro-
+            gram.  See also the "shelltitle" .screenrc command.
+
+       -x   Attach to a not detached screen session. (Multi display mode).
+
+Examples:
+screen vim prog.pm
+screen mc
+screen top
+
+== DEFAULT KEY BINDINGS ==
+       As mentioned, each screen command consists of a "C-a" followed  by  one
+       other  character.  For your convenience, all commands that are bound to
+       lower-case letters are also bound to their control  character  counter-
+       parts (with the exception of "C-a a"; see below), thus, "C-a c" as well
+       as "C-a C-c" can be used to create a window.  See  section  "CUSTOMIZA-
+       TION" for a description of the command.
+
+       C-a '       (select)      Prompt  for a window name or number to switch
+                                 to.
+
+       C-a "       (windowlist -b)
+                                 Present a list of all windows for  selection.
+
+       C-a 0       (select 0)
+        ...           ...
+       C-a 9       (select 9)
+       C-a -       (select -)    Switch  to  window  number  0  - 9, or to the
+                                 blank window.
+
+       C-a tab     (focus)       Switch the input focus to the next region.
+
+       C-a C-a     (other)       Toggle to the  window  displayed  previously.
+                                 Note  that  this binding defaults to the com-
+                                 mand character typed twice,  unless  overrid-
+                                 den.   For  instance,  if  you use the option
+                                 "-e]x", this command becomes "]]".
+
+       C-a a       (meta)        Send the command character (C-a)  to  window.
+                                 See escape command.
+
+       C-a A       (title)       Allow  the  user to enter a name for the cur-
+                                 rent window.
+
+       C-a b
+       C-a C-b     (break)       Send a break to window.
+
+       C-a B       (pow_break)   Reopen the terminal line and send a break.
+
+       C-a c
+       C-a C-c     (screen)      Create a new window with a shell  and  switch
+                                 to that window.
+
+       C-a C       (clear)       Clear the screen.
+
+       C-a d
+       C-a C-d     (detach)      Detach screen from this terminal.
+
+       C-a D D     (pow_detach)  Detach and logout.
+
+       C-a f
+       C-a C-f     (flow)        Toggle flow on, off or auto.
+
+       C-a F       (fit)         Resize the window to the current region size.
+
+       C-a C-g     (vbell)       Toggles screen's visual bell mode.
+
+       C-a h       (hardcopy)    Write a hardcopy of the current window to the
+                                 file "hardcopy.n".
+
+       C-a H       (log)         Begins/ends  logging of the current window to
+                                 the file "screenlog.n".
+
+       C-a i
+       C-a C-i     (info)        Show info about this window.
+
+       C-a l
+       C-a C-l     (redisplay)   Fully refresh current window.
+
+       C-a L       (login)       Toggle this  windows  login  slot.  Available
+                                 only  if  screen  is configured to update the
+                                 utmp database.
+
+       C-a m
+       C-a C-m     (lastmsg)     Repeat the last message displayed in the mes-
+                                 sage line.
+
+       C-a M       (monitor)     Toggles monitoring of the current window.
+
+       C-a space
+       C-a n
+       C-a C-n     (next)        Switch to the next window.
+
+       C-a N       (number)      Show  the  number  (and title) of the current
+                                 window.
+
+       C-a backspace
+       C-a p
+       C-a C-p     (prev)        Switch to the previous window (opposite of C-
+                                 a n).
+
+       C-a q
+       C-a C-q     (xon)         Send a control-q to the current window.
+
+       C-a Q       (only)        Delete all regions but the current one.
+
+       C-a r
+       C-a C-r     (wrap)        Toggle the current window's line-wrap setting
+                                 (turn the current window's automatic  margins
+                                 on and off).
+
+       C-a s
+       C-a C-s     (xoff)        Send a control-s to the current window.
+
+       C-a S       (split)       Split the current region into two new ones.
+
+       C-a t
+       C-a C-t     (time)        Show system information.
+
+       C-a v       (version)     Display the version and compilation date.
+
+       C-a C-v     (digraph)     Enter digraph.
+
+       C-a w
+       C-a C-w     (windows)     Show a list of window.
+
+       C-a W       (width)       Toggle 80/132 columns.
+
+       C-a x
+       C-a C-x     (lockscreen)  Lock this terminal.
+
+       C-a X       (remove)      Kill the current region.
+
+       C-a z
+       C-a C-z     (suspend)     Suspend  screen.   Your  system  must support
+                                 BSD-style job-control.
+
+       C-a Z       (reset)       Reset the virtual terminal to its  "power-on"
+                                 values.
+
+       C-a .       (dumptermcap) Write out a ".termcap" file.
+
+       C-a ?       (help)        Show key bindings.
+
+       C-a C-\     (quit)        Kill all windows and terminate screen.
+
+       C-a :       (colon)       Enter command line mode.
+
+       C-a [
+       C-a C-[
+       C-a esc     (copy)        Enter copy/scrollback mode.
+
+       C-a ]       (paste .)     Write the contents of the paste buffer to the
+                                 stdin queue of the current window.
+
+       C-a {
+       C-a }       (history)     Copy and paste a previous (command) line.
+
+       C-a >       (writebuf)    Write paste buffer to a file.
+
+       C-a <       (readbuf)     Reads the screen-exchange file into the paste
+                                 buffer.
+
+       C-a =       (removebuf)   Removes the file used by C-a < and C-a >.
+
+       C-a ,       (license)     Shows  where screen comes from, where it went
+                                 to and why you can use it.
+
+       C-a _       (silence)     Start/stop monitoring the current window  for
+                                 inactivity.
+
+       C-a *       (displays)    Show a listing of all currently attached dis-
+                                 plays.
+
+
+       chdir [directory]
+
+       Change the current directory of screen to the specified  directory  or,
+       if called without an argument, to your home directory (the value of the
+       environment variable $HOME).  All windows that are created by means  of
+       the  "screen"  command  from  within  ".screenrc" or by means of "C-a :
+       screen ..." or "C-a c" use this as their default directory.  Without  a
+       chdir  command,  this  would  be  the  directory  from which screen was
+       invoked.  Hardcopy and log files are always  written  to  the  window's
+       default  directory, not the current directory of the process running in
+       the window.  You can use this command multiple times in your  .screenrc
+       to start various windows in different default directories, but the last
+       chdir value will affect all the windows you create interactively.
+
+       copy
+
+       Enter copy/scrollback mode. This allows you to copy text from the  cur-
+       rent  window  and its history into the paste buffer. In this mode a vi-
+       like `full screen editor' is active:
+       Movement keys:
+         h, j, k, l move the cursor line by line or column by column.
+         0, ^ and $ move to the leftmost column, to the  first  or  last  non-
+           whitespace character on the line.
+         H,  M and L move the cursor to the leftmost column of the top, center
+           or bottom line of the window.
+         + and - positions one line up and down.
+         G moves to the specified absolute line (default: end of buffer).
+         | moves to the specified absolute column.
+         w, b, e move the cursor word by word.
+         B, E move the cursor WORD by WORD (as in vi).
+         C-u and C-d scroll the display up/down by  the  specified  amount  of
+           lines  while preserving the cursor position. (Default: half screen-
+           full).
+         C-b and C-f scroll the display up/down a full screen.
+         g moves to the beginning of the buffer.
+         % jumps to the specified percentage of the buffer.
+
+
+       Marking:
+           The copy range is specified by setting two marks. The text  between
+           these marks will be highlighted. Press
+         space to set the first or second mark respectively.
+         Y and y used to mark one whole line or to mark from start of line.
+         W marks exactly one word.
+       Repeat count:
+           Any of these commands can be prefixed with a repeat count number by
+           pressing digits
+         0..9 which is taken as a repeat count.
+           Example: "C-a C-[ H 10 j 5 Y" will copy lines 11  to  15  into  the
+           paste buffer.
+       Searching:
+         / Vi-like search forward.
+         ? Vi-like search backward.
+         C-a s Emacs style incremental search forward.
+         C-r Emacs style reverse i-search.
+       Specials:
+           There  are  however  some keys that act differently than in vi.  Vi
+           does not allow one to yank rectangular blocks of text,  but  screen
+           does. Press
+         c  or  C  to  set the left or right margin respectively. If no repeat
+           count is given, both default to the current cursor position.
+           Example: Try this on a rather full text screen: "C-a [ M 20 l SPACE
+           c 10 l 5 j C SPACE".
+
+           This  moves  one  to  the  middle  line  of the screen, moves in 20
+           columns left, marks the beginning of the  paste  buffer,  sets  the
+           left  column, moves 5 columns down, sets the right column, and then
+           marks the end of the paste buffer. Now try:
+           "C-a [ M 20 l SPACE 10 l 5 j SPACE"
+
+           and notice the difference in the amount of text copied.
+         J joins lines. It toggles between 4 modes: lines separated by a  new-
+           line  character  (012),  lines glued seamless, lines separated by a
+           single whitespace and comma separated  lines.  Note  that  you  can
+           prepend  the newline character with a carriage return character, by
+           issuing a "crlf on".
+         v is for all the vi users with ":set numbers" - it toggles  the  left
+           margin between column 9 and 1. Press
+         a  before the final space key to toggle in append mode. Thus the con-
+           tents of the paste buffer will not be overwritten, but is  appended
+           to.
+         A toggles in append mode and sets a (second) mark.
+         >  sets the (second) mark and writes the contents of the paste buffer
+           to the screen-exchange file (/tmp/screen-exchange per default) once
+           copy-mode is finished.
+           This  example  demonstrates how to dump the whole scrollback buffer
+           to that file: "C-A [ g SPACE G $ >".
+         C-g gives information about the current line and column.
+         x exchanges the first mark and the current cursor position.  You  can
+           use this to adjust an already placed mark.
+         @ does nothing. Does not even exit copy mode.
+         All keys not described here exit copy mode.
+
+== Commands (^a:) ==
+
+       number [n]
+
+       Change the current windows number. If the given  number  n  is  already
+       used  by  another  window,  both  windows exchange their numbers. If no
+       argument is specified, the current window number (and title) is  shown.
+
+
+       password [crypted_pw]
+
+       Present a crypted password in your ".screenrc" file and screen will ask
+       for it, whenever someone attempts to resume a detached. This is  useful
+       if  you  have  privileged programs running under screen and you want to
+       protect your session from reattach attempts by another user  masquerad-
+       ing as your uid (i.e. any superuser.)  If no crypted password is speci-
+       fied, screen prompts twice for typing a password and places its encryp-
+       tion  in  the  paste buffer.  Default is `none', this disables password
+       checking.
+
+
+       hardcopy [-h] [file]
+
+       Writes out the currently displayed image to the file file, or, if no
+       filename  is  specified,  to hardcopy.n  in  the  default directory,
+       where n is the number of the current window.  This either appends or
+       overwrites the file if it exists. See below.  If the option -h is
+       specified, dump also the contents of the scrollback buffer.
+       VIM, less and some other use there own temp window. So only this window
+       will be copied to hardcopy file if this command called when VIM is
+       opened. To get a copy of shell history you must leave the VIM first.
+
+       hardcopy_append on|off
+
+       If set to "on", screen will append to the "hardcopy.n" files created by
+       the command "C-a h", oth- erwise these files are overwritten each time.
+       Default is `off'.
+
+       hardcopydir directory
+
+       Defines a directory where hardcopy files will be  placed.  If  unset,
+       hardcopys  are  dumped  in screen's current working directory.
+
+
+       resize
+
+       Resize  the  current region. The space will be removed from or added to
+       the region below or if there's not enough space from the region  above.
+
+              resize +N   increase current region height by N
+
+              resize -N   decrease current region height by N
+
+              resize  N   set current region height to N
+
+              resize  =   make all windows equally high
+
+              resize  max maximize current region height
+
+              resize  min minimize current region height
+
+
+       screen [-opts] [n] [cmd [args]]
+
+       Establish  a  new  window.  The flow-control options (-f, -fn and -fa),
+       title (a.k.a.) option (-t), login options (-l and -ln) , terminal  type
+       option  (-T <term>), the all-capability-flag (-a) and scrollback option
+       (-h <num>) may be specified with each command.  The option  (-M)  turns
+       monitoring on for this window.  The option (-L) turns output logging on
+       for this window.  If an optional number n in the range 0..9  is  given,
+       the  window  number  n  is assigned to the newly created window (or, if
+       this number is already in-use, the next available number).  If  a  com-
+       mand  is  specified  after "screen", this command (with the given argu-
+       ments) is started in the window; otherwise, a shell is created.   Thus,
+       if your ".screenrc" contains the lines
+
+                   # example for .screenrc:
+                   screen 1
+                   screen -fn -t foobar -L 2 telnet foobar
+
+       screen creates a shell window (in window #1) and a window with a TELNET
+       connection to the machine foobar (with no flow-control using the  title
+       "foobar"  in window #2) and will write a logfile ("screenlog.2") of the
+       telnet session.  Note, that unlike previous versions of screen no addi-
+       tional default window is created when "screen" commands are included in
+       your ".screenrc" file. When the  initialization  is  completed,  screen
+       switches  to  the  last  window specified in your .screenrc file or, if
+       none, opens a default window #0.
+       Screen has built in some functionality of "cu" and "telnet".  See  also
+       chapter "WINDOW TYPES".
+
+
+       sessionname [name]
+
+       Rename  the  current  session.  Note,  that for "screen -list" the name
+       shows up with the process-id prepended. If the argument "name" is omit-
+       ted,  the name of this session is displayed. Caution: The $STY environ-
+       ment variables still reflects the old name. This may result  in  confu-
+       sion.  The default is constructed from the tty and host names.
+
+       setenv [var [string]]
+
+       Set the environment variable var to value string.  If only var is spec-
+       ified, the user will be prompted to enter a value.   If  no  parameters
+       are  specified,  the user will be prompted for both variable and value.
+       The environment is inherited by all subsequently forked shells.
+
+
+       split
+
+       Split  the current region into two new ones. All regions on the display
+       are resized to make room for  the  new  region.  The  blank  window  is
+       displayed  on the new region. Use the "remove" or the "only" command to
+       delete regions.
+
+
+       unsetenv var
+
+       Unset an environment variable.
+
+
+
+
+              screen -t top 2 nice top
+
+       Adding  this line to your .screenrc would start a nice-d version of the
+       "top" command in window 2 named "top" rather than "nice".
+
+                   shelltitle '> |csh'
+                   screen 1
+
+       These commands would start a shell  with  the  given  shelltitle.   The
+       title  specified  is an auto-title that would expect the prompt and the
+       typed command to look something like the following:
+
+              /usr/joe/src/dir> trn
+
+       (it looks after the '> ' for the  command  name).   The  window  status
+       would  show the name "trn" while the command was running, and revert to
+       "csh" upon completion.
+
+              bind R screen -t '% |root:' su
+
+       Having this command in your .screenrc would bind the key sequence  "C-a
+       R"  to the "su" command and give it an auto-title name of "root:".  For
+       this auto-title to work, the screen could look something like this:
+
+                   % !em
+                   emacs file.c
+
+       Here the user typed the csh history command "!em" which ran the  previ-
+       ously   entered   "emacs"   command.   The  window  status  would  show
+       "root:emacs" during the execution of the command, and revert to  simply
+       "root:" at its completion.
+
+                   bind o title
+                   bind E title ""
+                   bind u title (unknown)
+
+       The  first  binding  doesn't have any arguments, so it would prompt you
+       for a title. when you type "C-a o".  The second binding would clear  an
+       auto-title's  current setting (C-a E).  The third binding would set the
+       current window's title to "(unknown)" (C-a u).
+
+       One thing to keep in mind when adding a null  title-escape-sequence  to
+       your  prompt  is that some shells (like the csh) count all the non-con-
+       trol characters as part of the prompt's  length.   If  these  invisible
+       characters  aren't  a  multiple  of  8 then backspacing over a tab will
+       result in an incorrect display.  One way to get around this is to use a
+       prompt like this:
+
+              set prompt='^[[0000m^[k^[\% '
+
+       The  escape-sequence  "<esc>[0000m"  not  only normalizes the character
+       attributes, but all the zeros round the length of the invisible charac-
+       ters  up  to  8.   Bash  users  will  probably  want to echo the escape
+       sequence in the PROMPT_COMMAND:
+
+              PROMPT_COMMAND='echo -n -e "\033k\033\134"'
+
+       (I used "134" to output a `\' because of a bug in bash v1.04).
+
+
+
+
+FILES
+       .../screen-4.?.??/etc/screenrc
+       .../screen-4.?.??/etc/etcscreenrc Examples  in  the screen distribution
+                                         package for private and  global  ini-
+                                         tialization files.
+       $SYSSCREENRC
+       /usr/local/etc/screenrc           screen initialization commands
+       $SCREENRC
+       $HOME/.screenrc                   Read in after /usr/local/etc/screenrc
+       $SCREENDIR/S-<login>
+       /local/screens/S-<login>          Socket directories (default)
+       /usr/tmp/screens/S-<login>        Alternate socket directories.
+       <socket directory>/.termcap       Written by the "termcap" output func-
+                                         tion
+       /usr/tmp/screens/screen-exchange  or
+       /tmp/screen-exchange              screen   `interprocess  communication
+                                         buffer'
+       hardcopy.[0-9]                    Screen images created by the hardcopy
+                                         function
+       screenlog.[0-9]                   Output  log  files created by the log
+                                         function
+       /usr/lib/terminfo/?/*             or
+       /etc/termcap                      Terminal capability databases
+       /etc/utmp                         Login records
+       $LOCKPRG                          Program that locks a terminal.
+
 
   vim:tw=78:ts=8:ft=help:norl:modifiable:fdm=marker:fen:fdl=0:
 
