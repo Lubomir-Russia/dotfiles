@@ -51,6 +51,28 @@ snippet logs
 snippet logp
 	$self->logPropertyInfo("${1:PropertyInfo message}");
 	${2}
+# step
+snippet step
+	$self->step('${1:step name}');
+# prototype for Step function
+snippet proto
+	sub ${1:stepFunction} {
+		my ($self, $arg_ref) = @_;
+		my %DEFAULTS = (
+			msg => "${2:This is a prototype of test step.}",
+		);
+
+		my %arg = ref $arg_ref eq 'HASH' ? (%DEFAULTS, %{$arg_ref}) : %DEFAULTS;
+		
+		_logMsg($self,\%arg);
+
+		$self->logWarning("Not implemented yet!!!");
+		# TODO Step
+		#====================
+		
+		return 1;
+	}
+
 # Perl general snippet
 #======================
 

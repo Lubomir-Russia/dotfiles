@@ -100,6 +100,9 @@ filetype plugin indent on     " Turn on file type detection.
 " fix - g`^  jumps back to the exit place from insert mode.
 " This does not work in paste mode
 imap jj <Esc>g`^
+imap kk <Esc>g`^
+imap hh <Esc>g`^
+imap lll <Esc>g`^
 imap <c-c> <Esc>
 
 function! MapForceNormal (key, action)
@@ -757,6 +760,15 @@ function! LogStepFoldText()
             let line = printf("at %3d+%3d: %s", s:foldstart, s:count, line)
             return line
         endif
+        if line =~ 'self->step'
+            let line = substitute(line,'.*$self->step.*(', '', 'g')
+            let line = substitute(line,'^\s*', '', 'g')
+            let line = substitute(line,');$', '', '')
+            let line = substitute(line,'''', '', 'g')
+            let line = substitute(line,'"', '', 'g')
+            let line = printf("at %3d+%3d: %s *NEW*", s:foldstart, s:count, line)
+            return line
+        endif
         if line =~ '^sub main'
             let line = substitute(line,'sub main', '~~ START of MAIN ~~','')
             let line = printf("at %3d+%3d:       %s", s:foldstart, s:count, line)
@@ -813,8 +825,10 @@ function! LogStepFoldExpr(lnum,request)
     endif
 
     " start level with keyword
-    if s:currentLine =~# '\(^=head1\)\|\(^=begin nd\)\|\(logStep\)\|\(^sub\)\|\(^\*.*= sub\)'
-        return '>1'
+    if s:currentLine =~# '\(^=head1\)\|\(^=begin nd\)\|\(logStep(\)\|\($self->step\)\|\(^sub\)\|\(^\*.*= sub\)'
+        if s:currentLine !~# '$arg{msg}'
+            return '>1'
+        endif
     endif
 
     " Make a new level only for the return from main sub
