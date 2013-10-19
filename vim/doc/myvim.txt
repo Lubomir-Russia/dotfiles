@@ -44,14 +44,18 @@ Install ruby and ruby-dev beforehand if needed.
 
 mkdir ~/src
 cd ~/src
-wget http://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2
-tar -xaf vim-7.3.tar.bz2
-cd vim73
+wget http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+tar -xaf vim-7.4.tar.bz2
+cd vim74
 ./configure --with-features=huge --enable-perlinterp --enable-rubyinterp --enable-pythoninterp
 make
 make install
+# sudo make install
 vim --version
 --prefix={directory}  Top directory where to install Vim. Default is /usr/local
+# install ruby and ruby-dev beforehand if needed.
+# in Ubuntu you may need to: sudo apt-get install ncurses-dev
+
 
 ===========================================================================
 SAVING                                                         *myvim_saving*
