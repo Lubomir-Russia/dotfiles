@@ -155,11 +155,11 @@ SYNTAX                                                         *myvim_syntax*
 ===========================================================================
 SPELLING                                                     *myvim_spelling*
 
-:set spell
+:set spell # or use mapping like F7
 z=       # suggestions
 1z=      # except the first suggestion
-[s       # next wrong word
-]s       # previous wrong word
+]s       # next wrong word
+[s       # previous wrong word
 zg       # add as good
 zw       # add as wrong
 zug      # undo adding as good
