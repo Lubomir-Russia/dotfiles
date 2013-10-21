@@ -36,6 +36,9 @@ bind I login on
 bind O login off
 bind } history
 
+# Per default, vbell is off, thus the audible bell is used.
+vbell off
+
 # Yet another hack (from screencr example):
 # Prepend/append register [/] to the paste if ^a^] is pressed.
 # This lets me have autoindent mode in vi.
