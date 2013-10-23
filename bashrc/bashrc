@@ -145,3 +145,6 @@ source $HOME/bin/dotfiles/bashrc/aliases
 # export PATH=$PATH:/home/c4/testcases/Tools/
 # export C4_PARAMETERS=./Neo_settings.txt
 
+if [ -f $HOME/.bachrc_local ]; then
+    source $HOME/.bachrc_local
+fi

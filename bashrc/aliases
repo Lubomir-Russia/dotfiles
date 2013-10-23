@@ -102,6 +102,11 @@ generate_ctag_for_Automatos()
     cd -
 }
 
+if [ -f $HOME/.aliases_local ]; then
+    source $HOME/.aliases_local
+fi
+
+
 # # Back up of Flare settings
 # alias cd706s='cd /home/c4/testcases/Flare_706_Single/'
 # alias cdr706s='cd /home/c4/testcases/Flare_706_Single/test_results'
