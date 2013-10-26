@@ -1,0 +1,4 @@
+alias cdc='cd $HOME/Coursera/Play_with_C'
+alias cds='cd $HOME/T-Systems/sim'
+
+# vim:ft=sh
