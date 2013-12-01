@@ -15,6 +15,7 @@ alias lsf='ls -al | grep -v ^d'
 alias md='mkdir -p'
 alias o='less'
 alias g='grep'
+alias s='screen'
 
 alias dot='cd ~/bin/dotfiles/'
 alias al='vim ~/bin/dotfiles/bashrc/aliases'
